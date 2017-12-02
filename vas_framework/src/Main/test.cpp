@@ -1,0 +1,1 @@
+﻿const wchar_t* assetsFolder = L"assets/测试";
