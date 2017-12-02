@@ -4,7 +4,7 @@
 
 namespace vas
 {
-	MapRenderer::MapRenderer(const std::shared_ptr<TMXPraser>& praser, uint32_t drawlayer):
+	MapRenderer::MapRenderer(const std::shared_ptr<TMXParser>& praser, uint32_t drawlayer):
 		praser(praser), drawLayer(drawlayer), tileAnimations(praser->getTileAnimations())
 	{
 		if (praser == nullptr) return;

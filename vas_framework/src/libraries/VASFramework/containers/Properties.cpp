@@ -1,6 +1,6 @@
 #include "Properties.hpp"
 #include <algorithm>
-#include "../../VASFramework/util/TextTools.hpp"
+#include "../util/TextTools.hpp"
 
 namespace vas
 {

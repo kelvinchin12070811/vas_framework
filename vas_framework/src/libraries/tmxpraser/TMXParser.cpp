@@ -1,4 +1,4 @@
-﻿#include "TMXPraser.hpp"
+﻿#include "TMXParser.hpp"
 
 #include <zlib.h>
 #include <boost/algorithm/string.hpp>
@@ -8,22 +8,22 @@
 
 namespace vas
 {
-	TMXPraser::TMXPraser()
+	TMXParser::TMXParser()
 	{
 	}
 
-	TMXPraser::TMXPraser(const std::wstring& path):
+	TMXParser::TMXParser(const std::wstring& path):
 		path(path)
 	{
 		initMap();
 		praseMap();
 	}
 
-	TMXPraser::~TMXPraser()
+	TMXParser::~TMXParser()
 	{
 	}
 
-	void TMXPraser::initMap(const std::wstring & path)
+	void TMXParser::initMap(const std::wstring & path)
 	{
 		if (!path.empty())
 			if (this->path != path)
@@ -45,7 +45,7 @@ namespace vas
 			throw std::runtime_error(u8"This praser only support right-down render order"s);
 	}
 
-	void TMXPraser::praseMap()
+	void TMXParser::praseMap()
 	{
 		mapWidth = map.attribute(L"width").as_uint();
 		mapHeight = map.attribute(L"height").as_uint();
@@ -65,52 +65,52 @@ namespace vas
 		}
 	}
 
-	const std::vector<LayerData>& TMXPraser::getMapData()
+	const std::vector<LayerData>& TMXParser::getMapData()
 	{
 		return mapData;
 	}
 
-	const std::vector<TilesetHolder>& TMXPraser::getTilesets()
+	const std::vector<TilesetHolder>& TMXParser::getTilesets()
 	{
 		return tilesets;
 	}
 
-	const Properties & TMXPraser::getMapProperties()
+	const Properties & TMXParser::getMapProperties()
 	{
 		return mapProperties;
 	}
 
-	std::map<std::wstring, Objectgroup>& TMXPraser::getObjectgroups()
+	std::map<std::wstring, Objectgroup>& TMXParser::getObjectgroups()
 	{
 		return objectgroups;
 	}
 
-	std::map<uint32_t, TileAnimation>& TMXPraser::getTileAnimations()
+	std::map<uint32_t, TileAnimation>& TMXParser::getTileAnimations()
 	{
 		return tileAnimations;
 	}
 
-	uint32_t TMXPraser::getMapWidth()
+	uint32_t TMXParser::getMapWidth()
 	{
 		return mapWidth;
 	}
 
-	uint32_t TMXPraser::getMapHeight()
+	uint32_t TMXParser::getMapHeight()
 	{
 		return mapHeight;
 	}
 
-	uint32_t TMXPraser::getTileWidth()
+	uint32_t TMXParser::getTileWidth()
 	{
 		return tileWidth;
 	}
 
-	uint32_t TMXPraser::getTileHeight()
+	uint32_t TMXParser::getTileHeight()
 	{
 		return tileHeight;
 	}
 
-	void TMXPraser::tick()
+	void TMXParser::tick()
 	{
 #ifdef USE_MASTER_TILEANIAMTION_RENDERER
 		for (auto tileAnimationsItr = tileAnimations.begin(); tileAnimationsItr != tileAnimations.end(); tileAnimationsItr++) //Tick all tile animation
@@ -119,7 +119,7 @@ namespace vas
 
 	}
 
-	void TMXPraser::tilesetsPraser(pugi::xml_node_iterator & itr)
+	void TMXParser::tilesetsPraser(pugi::xml_node_iterator & itr)
 	{
 		TilesetHolder holder;
 		holder.firstgid = itr->attribute(L"firstgid").as_uint();
@@ -138,7 +138,7 @@ namespace vas
 		}
 	}
 
-	void TMXPraser::layerPraser(pugi::xml_node_iterator & itr)
+	void TMXParser::layerPraser(pugi::xml_node_iterator & itr)
 	{
 		if (itr->attribute(L"visible").as_int(1) == 0) return; //skip if layer is not visible
 
@@ -162,13 +162,13 @@ namespace vas
 		mapData.push_back(std::move(data));
 	}
 
-	void TMXPraser::propertiesPraser(pugi::xml_node_iterator & itr)
+	void TMXParser::propertiesPraser(pugi::xml_node_iterator & itr)
 	{
 		for (auto propertyNode = itr->begin(); propertyNode != itr->end(); propertyNode++)
 			mapProperties.push_back(Property(propertyNode->attribute(L"name").as_string(), static_cast<std::wstring>(propertyNode->attribute(L"value").as_string())));
 	}
 
-	void TMXPraser::objectgroupPraser(pugi::xml_node_iterator & itr)
+	void TMXParser::objectgroupPraser(pugi::xml_node_iterator & itr)
 	{
 		Objectgroup objectgroup;
 		for (auto objItr = itr->begin(); objItr != itr->end(); objItr++)
@@ -203,7 +203,7 @@ namespace vas
 		objectgroups[objgName] = std::move(objectgroup);
 	}
 
-	void TMXPraser::animationPraser(pugi::xml_object_range<pugi::xml_named_node_iterator>& object, uint32_t firstgid)
+	void TMXParser::animationPraser(pugi::xml_object_range<pugi::xml_named_node_iterator>& object, uint32_t firstgid)
 	{
 		for (auto itr = object.begin(); itr != object.end(); itr++)
 		{

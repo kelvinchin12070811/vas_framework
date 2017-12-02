@@ -4,7 +4,7 @@
 #include "../VASFramework/containers/ByteArray.hpp"
 #include "containeres/LayerData.hpp"
 #include "containeres/TilesetHolder.h"
-#include "containeres/Properties.hpp"
+#include "../VASFramework/containers/Properties.hpp"
 #include "containeres/Objectgroup.hpp"
 #include "containeres/TileAnimation.hpp"
 
@@ -14,12 +14,12 @@ using namespace std::string_literals;
 
 namespace vas
 {
-	class TMXPraser
+	class TMXParser
 	{
 	public:
-		TMXPraser();
-		TMXPraser(const std::wstring& path);
-		~TMXPraser();
+		TMXParser();
+		TMXParser(const std::wstring& path);
+		~TMXParser();
 
 		void initMap(const std::wstring& path = L""s);
 		void praseMap();

@@ -16,7 +16,7 @@ namespace scene
 	{
 		CallRenderAssistance;
 		vas::CommonToolsAPI().messenger(L"已加载场景"s + VAS_TEXTTOOLS_GETVARNAME(scene::TiledMapTest));
-		map = std::make_shared<vas::TMXPraser>(L"assets/maps/animated map.tmx"s);
+		map = std::make_shared<vas::TMXParser>(L"assets/maps/animated map.tmx"s);
 
 		size_t layerCount = map->getMapData().size() - 1;
 		auto colisionDataRaw = map->getMapData().back().get();

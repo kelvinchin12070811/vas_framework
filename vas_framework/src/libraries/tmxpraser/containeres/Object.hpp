@@ -3,7 +3,7 @@
 #include <map>
 #include "../../VASFramework/math/Vector2.hpp"
 #include "../../VASFramework/math/Angle.hpp"
-#include "Properties.hpp"
+#include "../../VASFramework/containers/Properties.hpp"
 
 namespace vas
 {

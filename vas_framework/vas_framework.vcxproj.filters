@@ -30,16 +30,7 @@
     <ClCompile Include="src\libraries\tmxpraser\containeres\Objectgroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libraries\tmxpraser\containeres\Properties.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\libraries\tmxpraser\containeres\Property.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\libraries\tmxpraser\containeres\TileAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\libraries\tmxpraser\TMXPraser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\libraries\VASFramework\base\Base.cpp">
@@ -126,6 +117,15 @@
     <ClCompile Include="src\scene\TiledMapTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\libraries\VASFramework\containers\Properties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\VASFramework\containers\Property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\tmxpraser\TMXParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\base64\base64.hpp">
@@ -149,19 +149,10 @@
     <ClInclude Include="src\libraries\tmxpraser\containeres\Objectgroup.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libraries\tmxpraser\containeres\Properties.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\libraries\tmxpraser\containeres\Property.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\libraries\tmxpraser\containeres\TileAnimation.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\libraries\tmxpraser\containeres\TilesetHolder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\libraries\tmxpraser\TMXPraser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\libraries\VASFramework\base\Base.hpp">
@@ -249,6 +240,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\scene\TiledMapTest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\VASFramework\containers\Properties.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\VASFramework\containers\Property.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\tmxpraser\TMXParser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

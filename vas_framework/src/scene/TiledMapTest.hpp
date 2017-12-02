@@ -4,7 +4,7 @@
 #include "../libraries/VASFramework/graphics/scene/SceneBase.hpp"
 #include "../libraries/VASFramework/base/EventHandler.hpp"
 #include "../libraries/VASFramework/manager/FadingManager.hpp"
-#include "../libraries/tmxpraser/TMXPraser.hpp"
+#include "../libraries/tmxpraser/TMXParser.hpp"
 #include "../libraries/tmxpraser/containeres/MapRenderer.hpp"
 #include "../libraries/VASFramework/containers/Boolean.hpp"
 
@@ -23,7 +23,7 @@ namespace scene
 
 		void eventSlot(SDL_Event& eventBus) override;
 	private:
-		std::shared_ptr<vas::TMXPraser> map = nullptr;
+		std::shared_ptr<vas::TMXParser> map = nullptr;
 		std::vector<vas::Boolean> colisionData;
 	};
 }
