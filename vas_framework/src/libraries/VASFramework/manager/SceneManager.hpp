@@ -20,6 +20,9 @@ namespace vas
 		std::shared_ptr<SceneBase> get();
 		std::shared_ptr<SceneBase> getPrev();
 		size_t callCount();
+
+		inline SceneBase* currentScene() { return get().get(); };
+		inline SceneBase* prevScene() { return getPrev().get(); };
 	private:
 		SceneManager();
 		~SceneManager();

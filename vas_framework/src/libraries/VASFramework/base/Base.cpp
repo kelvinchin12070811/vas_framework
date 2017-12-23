@@ -98,17 +98,14 @@ namespace vas
 			{
 				if (__ignoreQuitEvent) __ignoreQuitEvent = false;
 				// scene event handaller
-				if (!SceneManager::getInstance().isEmpty())
-				{
-					EventHandler* eventHandler = dynamic_cast<EventHandler*>(SceneManager::getInstance().get().get());
-					if (eventHandler != nullptr) eventHandler->eventSlot(mainEventBus);
-				}
+				EventHandlerAPI().emitSignal(EventPulseSignalType::PreEventLoop, mainEventBus);
 				//main event loop
 				if (mainEventBus.type == SDL_EventType::SDL_QUIT && !__ignoreQuitEvent)
 				{
 					isRunning = false;
 					return;
 				}
+				EventHandlerAPI().emitSignal(EventPulseSignalType::PostEventLoop, mainEventBus);
 			}
 
 			//tick and draw

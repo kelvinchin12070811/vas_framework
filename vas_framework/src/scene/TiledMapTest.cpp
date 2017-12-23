@@ -14,6 +14,7 @@ namespace scene
 {
 	TiledMapTest::TiledMapTest()
 	{
+		VAS_CONNECT_PRE_EVENT(&scene::TiledMapTest::eventSlot);
 		CallRenderAssistance;
 		vas::CommonToolsAPI().messenger(L"已加载场景"s + VAS_TEXTTOOLS_GETVARNAME(scene::TiledMapTest));
 		map = std::make_shared<vas::TMXParser>(L"assets/maps/animated map.tmx"s);
@@ -55,6 +56,7 @@ namespace scene
 
 	TiledMapTest::~TiledMapTest()
 	{
+		VAS_DISCONNECT_PRE_EVENT(&scene::TiledMapTest::eventSlot);
 	}
 
 	void TiledMapTest::tick()

@@ -11,7 +11,7 @@
 
 namespace scene
 {
-	class MainMenu : public vas::SceneBase, public vas::EventHandler
+	class MainMenu : public vas::SceneBase
 	{
 	public:
 		MainMenu();
