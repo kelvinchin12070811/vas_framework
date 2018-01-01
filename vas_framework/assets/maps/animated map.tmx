@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="32" tileheight="32" nextobjectid="4">
+ <properties>
+  <property name="fadein duration" type="float" value="5"/>
+  <property name="startup bgm" type="file" value="../audios/bgm/聞こえていますか僕らの声が.mp3"/>
+ </properties>
+ <tileset firstgid="1" name="sand" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/sand.png" width="96" height="192"/>
+  <terraintypes>
+   <terrain name="sand 1" tile="3"/>
+  </terraintypes>
+  <tile id="1" terrain="0,0,0,"/>
+  <tile id="2" terrain="0,0,,0"/>
+  <tile id="4" terrain="0,,0,0"/>
+  <tile id="5" terrain=",0,0,0"/>
+  <tile id="6" terrain=",,,0"/>
+  <tile id="7" terrain=",,0,0"/>
+  <tile id="8" terrain=",,0,"/>
+  <tile id="9" terrain=",0,,0"/>
+  <tile id="10" terrain="0,0,0,0"/>
+  <tile id="11" terrain="0,,0,"/>
+  <tile id="12" terrain=",0,,"/>
+  <tile id="13" terrain="0,0,,"/>
+  <tile id="14" terrain="0,,,"/>
+  <tile id="15" terrain="0,0,0,0"/>
+  <tile id="16" terrain="0,0,0,0"/>
+  <tile id="17" terrain="0,0,0,0"/>
+ </tileset>
+ <tileset firstgid="19" name="sandwater" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/sandwater.png" width="96" height="192"/>
+  <terraintypes>
+   <terrain name="Water with sand 1" tile="3"/>
+  </terraintypes>
+  <tile id="1" terrain="0,0,0,"/>
+  <tile id="2" terrain="0,0,,0"/>
+  <tile id="4" terrain="0,,0,0"/>
+  <tile id="5" terrain=",0,0,0"/>
+  <tile id="6" terrain=",,,0"/>
+  <tile id="7" terrain=",,0,0"/>
+  <tile id="8" terrain=",,0,"/>
+  <tile id="9" terrain=",0,,0"/>
+  <tile id="10" terrain="0,0,0,0"/>
+  <tile id="11" terrain="0,,0,"/>
+  <tile id="12" terrain=",0,,"/>
+  <tile id="13" terrain="0,0,,"/>
+  <tile id="14" terrain="0,,,"/>
+ </tileset>
+ <tileset firstgid="37" name="tallgrass" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/tallgrass.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="55" name="terrain_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="../textures/tilesets/terrain_atlas.png" width="1024" height="1024"/>
+  <terraintypes>
+   <terrain name="dirt path 1" tile="15"/>
+  </terraintypes>
+  <tile id="16" terrain="0,0,0,"/>
+  <tile id="17" terrain="0,0,,0"/>
+  <tile id="48" terrain="0,,0,0"/>
+  <tile id="49" terrain=",0,0,0"/>
+  <tile id="79" terrain=",,,0"/>
+  <tile id="80" terrain=",,0,0"/>
+  <tile id="81" terrain=",,0,"/>
+  <tile id="111" terrain=",0,,0"/>
+  <tile id="112" terrain="0,0,0,0"/>
+  <tile id="113" terrain="0,,0,"/>
+  <tile id="143" terrain=",0,,"/>
+  <tile id="144" terrain="0,0,,"/>
+  <tile id="145" terrain="0,,,"/>
+ </tileset>
+ <tileset firstgid="1079" name="wheat" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/wheat.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="1097" name="youngwheat" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/youngwheat.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="1115" name="farming_fishing" tilewidth="32" tileheight="32" tilecount="400" columns="20">
+  <image source="../textures/tilesets/farming_fishing.png" width="640" height="640"/>
+ </tileset>
+ <tileset firstgid="1515" name="fence" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/fence.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="1533" name="fence_alt" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/fence_alt.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="1551" name="plants" tilewidth="32" tileheight="32" tilecount="108" columns="9">
+  <image source="../textures/tilesets/plants.png" width="288" height="384"/>
+ </tileset>
+ <tileset firstgid="1659" name="plowed_soil" tilewidth="32" tileheight="32" tilecount="18" columns="3">
+  <image source="../textures/tilesets/plowed_soil.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="1677" name="reed" tilewidth="32" tileheight="32" tilecount="30" columns="3">
+  <image source="../textures/tilesets/reed.png" width="96" height="320"/>
+ </tileset>
+ <tileset firstgid="1707" name="WaterAndFire_2" tilewidth="32" tileheight="32" tilecount="48" columns="6">
+  <image source="../textures/tilesets/WaterAndFire_2.png" width="192" height="256"/>
+  <terraintypes>
+   <terrain name="animated water 1" tile="0"/>
+  </terraintypes>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="250"/>
+    <frame tileid="3" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="1" terrain="0,0,0,">
+   <animation>
+    <frame tileid="1" duration="250"/>
+    <frame tileid="4" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="2" terrain="0,0,,0">
+   <animation>
+    <frame tileid="2" duration="250"/>
+    <frame tileid="5" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="6">
+   <animation>
+    <frame tileid="6" duration="250"/>
+    <frame tileid="9" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="7" terrain="0,,0,0">
+   <animation>
+    <frame tileid="7" duration="250"/>
+    <frame tileid="10" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="8" terrain=",0,0,0">
+   <animation>
+    <frame tileid="8" duration="250"/>
+    <frame tileid="11" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="12" terrain=",,,0">
+   <animation>
+    <frame tileid="12" duration="250"/>
+    <frame tileid="15" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="13" terrain=",,0,0">
+   <animation>
+    <frame tileid="13" duration="250"/>
+    <frame tileid="16" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="14" terrain=",,0,">
+   <animation>
+    <frame tileid="14" duration="250"/>
+    <frame tileid="17" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="18" terrain=",0,,0">
+   <animation>
+    <frame tileid="18" duration="250"/>
+    <frame tileid="21" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="19" terrain="0,0,0,0"/>
+  <tile id="20" terrain="0,,0,">
+   <animation>
+    <frame tileid="20" duration="250"/>
+    <frame tileid="23" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="24" terrain=",0,,">
+   <animation>
+    <frame tileid="24" duration="250"/>
+    <frame tileid="27" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="25" terrain="0,0,,">
+   <animation>
+    <frame tileid="25" duration="250"/>
+    <frame tileid="28" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="26" terrain="0,,,">
+   <animation>
+    <frame tileid="26" duration="250"/>
+    <frame tileid="29" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="31">
+   <animation>
+    <frame tileid="31" duration="100"/>
+    <frame tileid="32" duration="100"/>
+    <frame tileid="33" duration="100"/>
+    <frame tileid="34" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="1755" name="$collision-box" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../textures/tilesets/collision-box.png" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index">
+    <object id="1" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <tileset firstgid="1756" name="$player" tilewidth="32" tileheight="32" tilecount="4" columns="1">
+  <image source="../animations/entity/player/idle.png" width="32" height="128"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJyNlUESwyAMA/P/twJvaA89MDu7Tg9MCI2xLUvqep7nXGt91/4tnq3f+44zW7zjXM91rXM9j+RayHuQY0UM113Tlu8Li3u/h9gtZ+yT9bIuzoD4TDiyP+LHmVn8/Q3zW68nchYXrDa7m3O63w3TqrdqY48be+uj5lycNM7W/azV4ogH6yv9sIfiQunKejIeWM+lT87U+rH8Ey7UitVufdbd5EvxyXyDmpryTdiwbvOd8puqkTyghoyv5kGsn/OnVs3X6GfGn/Jb8yl+Z35pz8kHyL/y6fJ6u9PwM88rTpfWDN8pljWbJ5cHkD/V56RXYmUcK73avjRis2TMNF/j56SN6oe91L2szbQ9+cjEs5pn+Q45Yr4xzbL80v6TDBvjAWOLuzVX/vbvHEsD9DvD8s0fyouZx+6wONMJ51j+wTvM04vnG/s3LZsnmWcYZ0xDFU8MzbOqF+OL7Q1D1mP7mnH5rnGP55NXTD5kecwPzbvu+A/hG1Pp
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJzFlDtOAzEQhk3Bgtgma9GC4DThJuEkgZMABdtAQRqgCK9bgS082l+/7LE3+8hIn/zI2P40a8eYdLxUxjw73gJPjk0A56eEfTZ7cGAeHR+BVK1S+UI7kY/nk+rm43VAfum5KWL7c2x3zG/JpYV+yT65uFG4LVi/DU7vVTcWr3WPPWO5nnuFVaF/yula2VPWrpVcz3eEq4y35s/nLBN7rjL5Qiy+Et6l/njGD+2ZWruk/CGR89fOYM8xvcaMO/Pv97BvkUTE/I4cx8TcIQ7+udeOQ3Dxc02YF+Z0EodF8PCtJScZC3N4VeFcGxzEbUFzdZir4bepnLBW6CJ99kGnBnLGdsM7hB6x+mGLfQvrx3DCetUEnoV+DfTPFHZ14TcnWGr5m2kunlPHBdDHS+6TNfr3ytWFHZBLx+9BR6kX3ie8X3j3U07sww4aWpyY7s3hncIa8X9ZrDZ9fPr6oYu4ohe+TT8+H+AS4w+0ug32
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAtWMTKwLAYiJcA8VJWGltGBtgGdNN2IN4BxDsHoftGAW1AGwsDQzvLQLsCN5gFdNvsQey+UTAKhhKIJjIvxQDVxSKpjQOy46mUDz8C65c3aBgG8sm0owior5gEvTA3/ALi30D8B8ktP0ms/wpoEC6kuoGW4OMgdtNgcxcIfBykbhqo8CpFyx/Y8v9gCK/BmM5BYLC6CwbeD1J3wcBgcB8AYoI2Xw==
+  </data>
+ </layer>
+ <layer name="Tile Layer 4" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJzt1sENABAQRFEH/XeBGnDRAFoyNRCykf+SOe8/rnNvNP/o0Iagtqglo41ZXUWrRvu6uoY2jfYBAAD8gr/1DH/rfQuBKA4h
+  </data>
+ </layer>
+ <layer name="Tile Layer 5" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJztzr0NgCAAROErYP8t/El0AYQtdB+vtzGQAMX7kqvvSX0cQTpDp7MKt9ueifsAAAAAtFmitHqbt8fRNV/JTZeXvTJh3x8vykEIxw==
+  </data>
+ </layer>
+ <layer name="Tile Layer 6" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqGLjjFNjLsHAWjYBSMglFAHdDMwsAwg2WgXYEbTB/EbiMGAAAJygNf
+  </data>
+ </layer>
+ <objectgroup name="entities">
+  <object id="2" name="player" gid="1757" x="510" y="284" width="32" height="32">
+   <properties>
+    <property name="facing" type="int" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="$!collisions" width="40" height="23" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJztl0EKwDAIBHPq///Xz5QeCkWi2Y2aSslCDwF1p0FM0pqt8xgEkLmeek/++/NK1kBq9vwtHsnMsCN8SN0eq5XD7IPFwvwnkyNjWd+o/kE047WSb2vr72LnkLb2MmgzataD5RvNTdY7QtFnepSqM1XiulWZ6Qs25G5UYb+yWOSMkV7oHS2DK+JtknkuaL2zgg/tUSTmAiuPeUs=
+  </data>
+ </layer>
+ <objectgroup name="$debug" visible="0">
+  <object id="3" name="npc path" type="path" x="96" y="192">
+   <polyline points="0,0 128,0 128,64 384,64 384,96 544,96 576,64 672,64 672,0 768,0 768,64 832,64"/>
+  </object>
+ </objectgroup>
+</map>
