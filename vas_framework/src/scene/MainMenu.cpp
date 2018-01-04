@@ -5,8 +5,11 @@
 
 namespace scene
 {
+	const sreflex::IObjectAutoRegister<scene::MainMenu> MainMenu::__auto_register(SREFLEX_VAR_NAME(scene::MainMenu));
+
 	MainMenu::MainMenu()
 	{
+		VAS_CONNECT_PRE_EVENT(&MainMenu::eventSlot);
 		CallRenderAssistance;
 		vas::FadingManager::getInstance().fadeOutScreen();
 		vas::CommonTools::getInstance().messenger(L"场景: " + VAS_TEXTTOOLS_GETVARNAME(scene::MainMenu) + L"已被加载");
@@ -28,6 +31,7 @@ namespace scene
 
 	MainMenu::~MainMenu()
 	{
+		VAS_DISCONNECT_PRE_EVENT(&MainMenu::eventSlot);
 	}
 
 	void MainMenu::tick()

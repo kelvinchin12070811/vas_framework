@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <memory>
+#include "../../../sreflex/IObjectAutoRegister.hpp"
 #include "../../containers/Layer.hpp"
 
 #define RenderAssistance this->_renderAssistance
@@ -8,7 +9,7 @@
 
 namespace vas
 {
-	class SceneBase
+	class SceneBase : public sreflex::IObject
 	{
 	public:
 		SceneBase();

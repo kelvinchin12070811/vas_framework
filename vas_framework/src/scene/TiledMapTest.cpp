@@ -12,6 +12,8 @@ using namespace vas::operator_plugins;
 
 namespace scene
 {
+	const sreflex::IObjectAutoRegister<scene::TiledMapTest> TiledMapTest::__auto_register(SREFLEX_VAR_NAME(scene::TiledMapTest));
+
 	TiledMapTest::TiledMapTest()
 	{
 		VAS_CONNECT_PRE_EVENT(&scene::TiledMapTest::eventSlot);
@@ -38,7 +40,7 @@ namespace scene
 
 		int facing = vas::defExcep<int>([&]()->int
 		{
-			return map->getObjectgroups().at(L"entitiess"s)[L"player"s].customProperties[L"facing"s].get<int>(0);
+			return map->getObjectgroups().at(L"entities"s)[L"player"s].customProperties[L"facing"s].get<int>(0);
 		});
 
 		std::wstring startupBGM = vas::defExcep<std::wstring>([&]()->std::wstring
@@ -53,7 +55,7 @@ namespace scene
 		}
 		vas::CameraAPI().setPosition(map->getObjectgroups().at(L"entities"s)[L"player"s].position);
 	}
-
+	 
 	TiledMapTest::~TiledMapTest()
 	{
 		VAS_DISCONNECT_PRE_EVENT(&scene::TiledMapTest::eventSlot);

@@ -10,30 +10,12 @@ namespace vas
 
 	EventPulseSignal & EventHandler::getSignal(EventPulseSignalType type)
 	{
-		switch (type)
-		{
-		case EventPulseSignalType::PreEventLoop:
-			return this->preEventLoop;
-			break;
-		case EventPulseSignalType::PostEventLoop:
-			return this->postEvnetLoop;
-			break;
-		default:
-			return this->preEventLoop;
-		}
+		return this->eventLoop[type];
 	}
 
 	void EventHandler::emitSignal(EventPulseSignalType type, SDL_Event & eventBus)
 	{
-		switch (type)
-		{
-		case EventPulseSignalType::PreEventLoop:
-			this->preEventLoop(eventBus);
-			break;
-		case EventPulseSignalType::PostEventLoop:
-			this->postEvnetLoop(eventBus);
-			break;
-		}
+		this->eventLoop[type](eventBus);
 	}
 
 	EventHandler::EventHandler()

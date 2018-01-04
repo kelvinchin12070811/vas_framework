@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="src\libraries\base64\base64.cpp" />
     <ClCompile Include="src\libraries\pugixml\pugixml.cpp" />
+    <ClCompile Include="src\libraries\sreflex\IObjectFactory.cpp" />
     <ClCompile Include="src\libraries\tmxpraser\containeres\LayerData.cpp" />
     <ClCompile Include="src\libraries\tmxpraser\containeres\MapRenderer.cpp" />
     <ClCompile Include="src\libraries\tmxpraser\containeres\Objectgroup.cpp" />
@@ -196,6 +197,9 @@
     <ClInclude Include="src\libraries\base64\base64.hpp" />
     <ClInclude Include="src\libraries\pugixml\pugiconfig.hpp" />
     <ClInclude Include="src\libraries\pugixml\pugixml.hpp" />
+    <ClInclude Include="src\libraries\sreflex\IObject.hpp" />
+    <ClInclude Include="src\libraries\sreflex\IObjectAutoRegister.hpp" />
+    <ClInclude Include="src\libraries\sreflex\IObjectFactory.hpp" />
     <ClInclude Include="src\libraries\tmxpraser\containeres\LayerData.hpp" />
     <ClInclude Include="src\libraries\tmxpraser\containeres\MapRenderer.hpp" />
     <ClInclude Include="src\libraries\tmxpraser\containeres\Object.hpp" />

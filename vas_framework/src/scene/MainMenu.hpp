@@ -27,5 +27,7 @@ namespace scene
 		std::shared_ptr<vas::Sprite> background = nullptr;
 		std::shared_ptr<vas::Text> someText = nullptr;
 		bool dash = false;
+
+		static const sreflex::IObjectAutoRegister<scene::MainMenu> __auto_register;
 	};
 }

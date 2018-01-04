@@ -3,8 +3,7 @@
 #include "../libraries/VASFramework/util/CommonTools.hpp"
 #include "../libraries/VASFramework/util/TextTools.hpp"
 #include "../libraries/VASFramework/manager/SceneManager.hpp"
-#include "../scene/TiledMapTest.hpp"
-#include "../scene/MainMenu.hpp"
+#include "../libraries/sreflex/IObjectFactory.hpp"
 
 using namespace  std::string_literals;
 
@@ -37,8 +36,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 		vas::BaseAPI().setMainRenderer(std::move(renderer));
 		vas::BaseAPI().setRenderLogicSize(windowsize);
 		vas::CommonToolsAPI().messenger(L"初始化完毕，正在启动框架"s);
-		vas::SceneManagerAPI().call(std::make_shared<scene::TiledMapTest>());
-		//vas::SceneManagerAPI().call(std::make_shared<scene::MainMenu>());
+
+		std::shared_ptr<sreflex::IObjectFactory> objectFactory = std::make_shared<sreflex::IObjectFactory>();
+		vas::SceneManagerAPI().call(std::dynamic_pointer_cast<vas::SceneBase>(objectFactory->createObject("scene::TiledMapTest")));
+		
 		vas::BaseAPI().startGameLoop();
 		vas::CommonToolsAPI().messenger(L"执行完毕，退出\n拜拜"s);
 		vas::BaseAPI().exitFramework();

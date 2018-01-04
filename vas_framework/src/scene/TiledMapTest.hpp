@@ -26,5 +26,7 @@ namespace scene
 	private:
 		std::shared_ptr<vas::TMXParser> map = nullptr;
 		std::vector<vas::Boolean> colisionData;
+
+		static const sreflex::IObjectAutoRegister<scene::TiledMapTest> __auto_register;
 	};
 }
