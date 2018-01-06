@@ -129,6 +129,9 @@
     <ClCompile Include="src\libraries\sreflex\IObjectFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\libraries\sreflex\IObjectEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\base64\base64.hpp">
@@ -261,6 +264,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\libraries\sreflex\IObjectFactory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\sreflex\IObjectEntry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

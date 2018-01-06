@@ -3,8 +3,6 @@
 
 namespace sreflex
 {
-	std::map<std::string, IObjectCreatefunction>* IObjectFactory::instanceMap = nullptr;
-
 	IObjectFactory::IObjectFactory()
 	{
 	}
@@ -18,7 +16,7 @@ namespace sreflex
 	{
 		try
 		{
-			return instanceMap->at(objectName)();
+			return IObjectEntryAPI().getMap()->at(objectName)();
 		}
 		catch (const std::exception&)
 		{
@@ -31,15 +29,9 @@ namespace sreflex
 		return std::shared_ptr<IObject>(createObjectPointer(objectName));
 	}
 
-	std::map<std::string, IObjectCreatefunction>* IObjectFactory::getMap()
-	{
-		if (instanceMap == nullptr) instanceMap = new std::map<std::string, IObjectCreatefunction>;
-		return instanceMap;
-	}
-
 	bool __registerInstance(const std::string & name, IObjectCreatefunction function)
 	{
-		auto result = sreflex::IObjectFactory::getMap()->insert(std::make_pair(name, function));
+		auto result = sreflex::IObjectEntryAPI().getMap()->insert(std::make_pair(name, function));
 		return result.second;
 	}
 }

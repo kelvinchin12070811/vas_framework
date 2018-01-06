@@ -153,7 +153,7 @@ namespace vas
 		bufferBeforeUncompress = vas::base64::decode(rawData);
 
 		uLongf destLength = static_cast<uLongf>(bufferAfterUncompress.size());
-		uncompress(bufferAfterUncompress.data(), &destLength, bufferBeforeUncompress.data(), bufferBeforeUncompress.size());
+		uncompress(bufferAfterUncompress.data(), &destLength, bufferBeforeUncompress.data(), static_cast<uLong>(bufferBeforeUncompress.size()));
 		LayerData data;
 		data->resize(mapWidth * mapHeight);
 		memcpy(data->data(), bufferAfterUncompress.data(), bufferAfterUncompress.size());
