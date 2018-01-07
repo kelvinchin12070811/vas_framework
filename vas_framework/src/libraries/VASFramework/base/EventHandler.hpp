@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <array>
 #include <boost/signals2.hpp>
+#include "../config.hpp"
 
 #define VAS_CONNECT_PRE_EVENT(slot) vas::EventHandlerAPI().getSignal(vas::EventPulseSignalType::PreEventLoop).connect(boost::bind(slot, this, boost::placeholders::_1))
 #define VAS_DISCONNECT_PRE_EVENT(slot) vas::EventHandlerAPI().getSignal(vas::EventPulseSignalType::PreEventLoop).disconnect(boost::bind(slot, this, boost::placeholders::_1))
@@ -18,7 +19,7 @@ namespace vas
 	Give ability for object to recive event
 	Connect object's function to recieve event
 	*/
-	class EventHandler
+	class VAS_FRAMEWORK_DLLEXPORT EventHandler
 	{
 	public:
 		static EventHandler& getInstance();

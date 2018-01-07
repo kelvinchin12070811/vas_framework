@@ -13,7 +13,7 @@ namespace sreflex
 		return new IObjectType();
 	}
 
-	class IObjectEntry
+	class SREFLEX_DLLEXPORT IObjectEntry
 	{
 	public:
 		static IObjectEntry& getInstance();

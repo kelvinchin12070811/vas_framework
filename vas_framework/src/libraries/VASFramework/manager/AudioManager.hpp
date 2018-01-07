@@ -3,12 +3,13 @@
 #include <SDL_mixer.h>
 #include <memory>
 #include <array>
+#include "../config.hpp"
 #include "../util/TextTools.hpp"
 #include "../util/SDLFunctionBridge.hpp"
 
 namespace vas
 {
-	class AudioManager
+	class VAS_FRAMEWORK_DLLEXPORT AudioManager
 	{
 	public:
 		static AudioManager& getInstance();

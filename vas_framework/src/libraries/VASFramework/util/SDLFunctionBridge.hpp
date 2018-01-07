@@ -4,10 +4,11 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <memory>
+#include "../config.hpp"
 
 namespace vas
 {
-	class SDLFunctionBridge
+	class VAS_FRAMEWORK_DLLEXPORT SDLFunctionBridge
 	{
 	public:
 		static std::shared_ptr<SDL_Window> newSDLWindow(SDL_Window* instance);

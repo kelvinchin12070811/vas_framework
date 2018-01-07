@@ -10,7 +10,7 @@ namespace sreflex
 {
 
 
-	class IObjectFactory
+	class SREFLEX_DLLEXPORT IObjectFactory
 	{
 	public:
 		IObjectFactory();
@@ -20,7 +20,7 @@ namespace sreflex
 		std::shared_ptr<IObject> createObject(const std::string& objectName);
 	};
 
-	bool __registerInstance(const std::string& name, IObjectCreatefunction function);
+	bool SREFLEX_DLLEXPORT __registerInstance(const std::string& name, IObjectCreatefunction function);
 }
 
 #define SREFLEX_REGISTER_INSTANCE(instance) sreflex::__registerInstance(#instance, &sreflex::createObjectBase<instance>)

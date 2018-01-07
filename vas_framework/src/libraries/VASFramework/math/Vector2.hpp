@@ -1,8 +1,9 @@
 #pragma once
+#include "../config.hpp"
 
 namespace vas
 {
-	class Vector2
+	class VAS_FRAMEWORK_DLLEXPORT Vector2
 	{
 	public:
 		Vector2();

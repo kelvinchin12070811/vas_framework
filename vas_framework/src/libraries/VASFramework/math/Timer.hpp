@@ -1,9 +1,10 @@
 #pragma once
 #include <cstdint>
+#include "../config.hpp"
 
 namespace vas
 {
-	class Timer
+	class VAS_FRAMEWORK_DLLEXPORT Timer
 	{
 	public:
 		Timer();

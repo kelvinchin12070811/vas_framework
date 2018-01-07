@@ -1,10 +1,11 @@
 #pragma once
 #include <cstdint>
 #include <SDL.h>
+#include "../config.hpp"
 
 namespace vas
 {
-	class Colour
+	class VAS_FRAMEWORK_DLLEXPORT Colour
 	{
 	public:
 		Colour();

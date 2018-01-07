@@ -1,14 +1,16 @@
 #pragma once
 #include <string>
 #include <boost/lexical_cast.hpp>
+#include "../config.hpp"
 
 using namespace std::literals::string_literals;
 
 namespace vas
 {
-	class Property
+	class VAS_FRAMEWORK_DLLEXPORT Property
 	{
 	public:
+		Property();
 		Property(const std::wstring& name, const std::wstring& value = L""s);
 		template <typename ValueType>
 		Property(const std::wstring& name, const ValueType& value = L""s);

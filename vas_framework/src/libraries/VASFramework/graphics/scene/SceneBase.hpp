@@ -9,7 +9,7 @@
 
 namespace vas
 {
-	class SceneBase : public sreflex::IObject
+	class VAS_FRAMEWORK_DLLEXPORT SceneBase : public sreflex::IObject
 	{
 	public:
 		SceneBase();

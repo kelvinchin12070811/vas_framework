@@ -269,5 +269,11 @@
     <ClInclude Include="src\libraries\sreflex\IObjectEntry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\libraries\sreflex\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\VASFramework\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

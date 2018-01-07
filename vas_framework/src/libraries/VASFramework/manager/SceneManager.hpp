@@ -1,11 +1,12 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include "../config.hpp"
 #include "../graphics/scene/SceneBase.hpp"
 
 namespace vas
 {
-	class SceneManager
+	class VAS_FRAMEWORK_DLLEXPORT SceneManager
 	{
 	public:
 		static SceneManager& getInstance();

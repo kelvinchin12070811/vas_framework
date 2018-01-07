@@ -1,0 +1,8 @@
+#pragma once
+
+#define VAS_FRAMEWORK_CONFIG_GENDLL
+#ifdef VAS_FRAMEWORK_CONFIG_GENDLL
+#define VAS_FRAMEWORK_DLLEXPORT __declspec(dllexport)
+#else
+#define VAS_FRAMEWORK_DLLEXPORT
+#endif // !VAS_FRAMEWORK_CONFIG_GENDLL

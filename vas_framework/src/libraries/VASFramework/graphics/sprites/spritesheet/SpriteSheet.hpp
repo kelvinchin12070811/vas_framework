@@ -3,7 +3,7 @@
 
 namespace vas
 {
-	class SpriteSheet : public Sprite
+	class VAS_FRAMEWORK_DLLEXPORT SpriteSheet : public Sprite
 	{
 	public:
 		SpriteSheet();

@@ -2,11 +2,12 @@
 #include <memory>
 #include <map>
 #include <string>
+#include "../config.hpp"
 #include "../util/SDLFunctionBridge.hpp"
 
 namespace vas
 {
-	class TextureManager
+	class VAS_FRAMEWORK_DLLEXPORT TextureManager
 	{
 	public:
 		static TextureManager& getInstance();

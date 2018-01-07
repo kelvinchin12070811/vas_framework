@@ -1,11 +1,12 @@
 #pragma once
 #include <SDL.h>
 #include <memory>
+#include "../config.hpp"
 #include "../math/Colour.hpp"
 
 namespace vas
 {
-	class FadingManager
+	class VAS_FRAMEWORK_DLLEXPORT FadingManager
 	{
 	public:
 		enum class FadingType : uint8_t { nofading, fadeIn, fadeOut };

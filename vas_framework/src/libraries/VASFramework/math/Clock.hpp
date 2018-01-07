@@ -1,9 +1,10 @@
 #pragma once
 #include <SDL.h>
+#include "../config.hpp"
 
 namespace vas
 {
-	class Clock
+	class VAS_FRAMEWORK_DLLEXPORT Clock
 	{
 	public:
 		Clock();

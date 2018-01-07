@@ -38,9 +38,16 @@ misrepresented as being the original software.
 #define VAS_TEXTTOOLS_SETLOCAL(object) object.imbue(std::locale(object.getloc(), new std::codecvt_utf8<wchar_t>))
 #define VAS_TEXTTOOLS_SETLOCALU8U16(object) object.imbue(std::locale(object.getloc(), new std::codecvt_utf8_utf16<wchar_t>))
 
+#define VAS_TEXTTOOL_GENDLL
+
 namespace vas
 {
+#ifdef VAS_TEXTTOOL_GENDLL
+	class __declspec(dllexport) TextTools
+#else
 	class TextTools
+#endif // VAS_TEXTTOOL_GENDLL
+
 	{
 	public:
 		static std::string wstos(const std::wstring& value, bool unicode = true);	//This function only work on Windows

@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <string>
 #include <thread>
+#include "../config.hpp"
 #include "../util/SDLFunctionBridge.hpp"
 
 #ifndef SDL_MAIN_HANDLED
@@ -34,7 +35,7 @@
 
 namespace vas
 {
-	class Base
+	class VAS_FRAMEWORK_DLLEXPORT Base
 	{
 	public:
 		static inline std::wstring frameworkVersion() { return L"0.11 Beta"; }

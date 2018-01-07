@@ -4,7 +4,7 @@
 namespace sreflex
 {
 	template <typename IObjectType>
-	class IObjectAutoRegister
+	class SREFLEX_DLLEXPORT IObjectAutoRegister
 	{
 	public:
 		IObjectAutoRegister(const std::string& name)

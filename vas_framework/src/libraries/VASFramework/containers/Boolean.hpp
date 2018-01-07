@@ -24,9 +24,16 @@ misrepresented as being the original software.
 
 #ifndef COM_BLOGSPOT_KELVINCHIN12070811_VAS_BOOLEAN_H
 #define COM_BLOGSPOT_KELVINCHIN12070811_VAS_BOOLEAN_H
+
+#define VAS_BOOLEAN_GENDLL
+
 namespace vas
 {
+#ifdef VAS_BOOLEAN_GENDLL
+	class __declspec(dllexport) Boolean
+#else
 	class Boolean
+#endif // VAS_BOOLEAN_GENDLL
 	{
 	public:
 		Boolean();

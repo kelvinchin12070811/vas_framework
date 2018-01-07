@@ -2,13 +2,14 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include "../config.hpp"
 #include "../graphics/irender_able/iRenderAble.hpp"
 
 #define VAS_ITEM_VAR(varaible) std::wstring(L#varaible), varaible
 
 namespace vas
 {
-	class Layer : public iRenderAble
+	class VAS_FRAMEWORK_DLLEXPORT Layer : public iRenderAble
 	{
 	public:
 		struct RenderAbleHolder

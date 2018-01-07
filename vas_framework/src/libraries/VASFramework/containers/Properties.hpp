@@ -4,7 +4,7 @@
 
 namespace vas
 {
-	class Properties : public std::vector<Property>
+	class VAS_FRAMEWORK_DLLEXPORT Properties : public std::vector<Property>
 	{
 	public:
 		Properties();

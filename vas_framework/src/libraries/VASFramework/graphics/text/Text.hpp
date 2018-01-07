@@ -9,7 +9,7 @@
 
 namespace vas
 {
-	class Text : public RenderAbleBase, public MoveAble
+	class VAS_FRAMEWORK_DLLEXPORT Text : public RenderAbleBase, public MoveAble
 	{
 	public:
 		Text();

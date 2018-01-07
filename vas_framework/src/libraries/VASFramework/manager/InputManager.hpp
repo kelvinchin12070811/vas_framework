@@ -1,9 +1,10 @@
 #pragma once
 #include <SDL.h>
+#include "../config.hpp"
 
 namespace vas
 {
-	class InputManager
+	class VAS_FRAMEWORK_DLLEXPORT InputManager
 	{
 	public:
 		static InputManager& getInstance();

@@ -8,7 +8,7 @@
 
 namespace vas
 {
-	class Sprite : public RenderAbleBase, public MoveAble
+	class VAS_FRAMEWORK_DLLEXPORT Sprite : public RenderAbleBase, public MoveAble
 	{
 	public:
 		Sprite();

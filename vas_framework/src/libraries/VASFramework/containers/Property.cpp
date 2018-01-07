@@ -2,6 +2,11 @@
 
 namespace vas
 {
+	Property::Property() :
+		name(L""), value(L"")
+	{
+	}
+
 	Property::Property(const std::wstring& name, const std::wstring & value):
 		name(name), value(value)
 	{

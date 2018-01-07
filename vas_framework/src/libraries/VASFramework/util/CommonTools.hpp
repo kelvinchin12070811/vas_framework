@@ -4,10 +4,11 @@
 #include <fcntl.h>
 #include <string>
 #include <vector>
+#include "../config.hpp"
 
 namespace vas
 {
-	class CommonTools
+	class VAS_FRAMEWORK_DLLEXPORT CommonTools
 	{
 	public:
 		static CommonTools& getInstance();

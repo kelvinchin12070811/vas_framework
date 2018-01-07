@@ -6,7 +6,7 @@
 
 namespace vas
 {
-	class RenderAbleBase : public iRenderAble
+	class VAS_FRAMEWORK_DLLEXPORT RenderAbleBase : public iRenderAble
 	{
 	public:
 		RenderAbleBase();

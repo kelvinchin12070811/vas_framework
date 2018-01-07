@@ -1,10 +1,11 @@
 #pragma once
 #include <SDL.h>
+#include "../../config.hpp"
 #include "../../math/Vector2.hpp"
 
 namespace vas
 {
-	class MoveAble
+	class VAS_FRAMEWORK_DLLEXPORT MoveAble
 	{
 	public:
 		MoveAble();

@@ -1,8 +1,9 @@
 #pragma once
+#include "../config.hpp"
 
 namespace vas
 {
-	class Angle
+	class VAS_FRAMEWORK_DLLEXPORT Angle
 	{
 	public:
 		Angle();
