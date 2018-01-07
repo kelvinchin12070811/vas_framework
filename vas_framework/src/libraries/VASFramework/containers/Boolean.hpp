@@ -25,7 +25,7 @@ misrepresented as being the original software.
 #ifndef COM_BLOGSPOT_KELVINCHIN12070811_VAS_BOOLEAN_H
 #define COM_BLOGSPOT_KELVINCHIN12070811_VAS_BOOLEAN_H
 
-#define VAS_BOOLEAN_GENDLL
+//#define VAS_BOOLEAN_GENDLL
 
 namespace vas
 {
