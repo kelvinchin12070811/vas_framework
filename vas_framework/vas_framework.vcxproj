@@ -28,7 +28,7 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\Math.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\math\Point.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\SDLCore.hpp" />
-    <ClInclude Include="src\libraries\vasframework\sdlcore\SDLInitFlags.h" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\SDLInitFlags.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\Video.hpp" />
     <ClInclude Include="src\libraries\vasframework\VASConfig.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Window.hpp" />
@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\sdlcore\Events.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\SDLInitFlags.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Renderer.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Rect.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Point.cpp" />
@@ -100,7 +101,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_62_0;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_65_0;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

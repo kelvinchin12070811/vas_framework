@@ -1,5 +1,6 @@
 #include "../libraries/vasframework/sdlcore/SDLCore.hpp"
 #include <exception>
+#include <SDL_image.h>
 
 int main(int argc, char** argv)
 {
@@ -15,6 +16,16 @@ int main(int argc, char** argv)
 		throw std::runtime_error(sdl::getError());
 
 	mainWindow.show();
+
+	sdl::Surface tempSurface = sdl::createComponent<sdl::Surface>(IMG_Load(u8"assets/textures/639111.jpg"));
+	if (tempSurface == nullptr) throw std::runtime_error(sdl::getError());
+
+	sdl::Texture testTexture(mainRenderer, tempSurface);
+	if (testTexture == nullptr) throw std::runtime_error(sdl::getError());
+	tempSurface.destroy();
+
+	sdl::Rect testRect;
+	testTexture.queryTexture(nullptr, nullptr, &testRect.w, &testRect.h);
 
 	bool exec = true;
 	sdl::Event ev;
@@ -34,11 +45,8 @@ int main(int argc, char** argv)
 			}
 		}
 		if (exec == false) break;
-
-		mainRenderer.setRenderDrawColor(255, 255, 255, 255);
-		//mainRenderer.drawLines(std::vector<sdl::Point>({ sdl::Point(0, 0), sdl::Point(100, 100), sdl::Point(100, 200), sdl::Point(200, 100) }));
-		sdl::Rect rect(100, 100, 100, 100);
-		mainRenderer.fillRect(&rect);
+		mainRenderer.clear();
+		mainRenderer.copy(testTexture, &testRect, &testRect);
 		mainRenderer.present();
 	}
 

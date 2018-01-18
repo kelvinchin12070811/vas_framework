@@ -4,7 +4,7 @@
 #include "../VASConfig.hpp"
 #include "boolean_cast.hpp"
 #include "Math.hpp"
-#include "SDLInitFlags.h"
+#include "SDLInitFlags.hpp"
 #include "Video.hpp"
 #include "Events.hpp"
 

@@ -15,7 +15,7 @@ namespace sdl
 		Texture(Renderer& renderer, Surface& surface);
 		Texture(const Texture& other);
 		Texture(Texture&& other);
-		explicit Texture(SDL_Texture* other, SDLComponentBase::DeleterType deleter = &Texture::defDeleter);
+		explicit Texture(SDL_Texture* other, SDLComponentBase::DeleterType deleter = &Texture::notDeleteDeleter);
 		~Texture();
 
 		bool getAlphaMod(uint8_t* alpha);
