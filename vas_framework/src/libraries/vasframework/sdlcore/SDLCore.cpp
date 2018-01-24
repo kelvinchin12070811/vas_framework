@@ -7,7 +7,7 @@ namespace sdl
 		return SDL_GetError();
 	}
 
-	void VAS_DECLSPEC delay(uint32_t ms)
+	void delay(uint32_t ms)
 	{
 		SDL_Delay(ms);
 	}
@@ -17,23 +17,33 @@ namespace sdl
 		return SDL_Init(flags) == 0 ? true : false;
 	}
 
-	bool VAS_DECLSPEC initSubSystem(uint32_t flags)
+	bool initSubSystem(uint32_t flags)
 	{
 		return SDL_InitSubSystem(flags) == 0 ? true : false;
 	}
 
-	void VAS_DECLSPEC quit()
+	void quit()
 	{
 		SDL_Quit();
 	}
 
-	void VAS_DECLSPEC quitSubSystem(uint32_t flags)
+	void quitSubSystem(uint32_t flags)
 	{
 		return SDL_QuitSubSystem(flags);
 	}
 
-	uint32_t VAS_DECLSPEC wasInit(uint32_t flags)
+	uint32_t wasInit(uint32_t flags)
 	{
 		return SDL_WasInit(flags);
 	}
+}
+
+int sdl::image::init(int flags)
+{
+	return IMG_Init(flags);
+}
+
+void sdl::image::quit()
+{
+	IMG_Quit();
 }

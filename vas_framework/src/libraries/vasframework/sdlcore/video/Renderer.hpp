@@ -10,7 +10,7 @@
 namespace sdl
 {
 	class Texture;
-	class VAS_DECLSPEC Renderer : public SDLComponentBase<SDL_Renderer>
+	class VAS_DECLSPEC Renderer : public SDLComponentBase<SDL_Renderer, Renderer>
 	{
 	public:
 		static const int defIndex;
@@ -97,7 +97,6 @@ namespace sdl
 
 		static SDL_Renderer* getRendererFromWindow(SDL_Window* window);
 		static SDL_Renderer* getRendererFromWindow(Window& window);
-		static void defDeleter(SDL_Renderer* instance);
-		static void notDeleteDeleter(SDL_Renderer* instance);
+		static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Renderer);
 	};
 }

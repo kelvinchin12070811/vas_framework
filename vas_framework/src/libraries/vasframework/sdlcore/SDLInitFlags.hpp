@@ -1,9 +1,10 @@
 #pragma once
 #include <SDL.h>
+#include "../VASConfig.hpp"
 
 namespace sdl
 {
-	struct InitFlags
+	struct VAS_DECLSPEC InitFlags
 	{
 		static const uint32_t everything;
 		static const uint32_t timer;

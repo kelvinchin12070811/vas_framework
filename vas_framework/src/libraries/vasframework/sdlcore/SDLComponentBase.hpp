@@ -2,9 +2,12 @@
 #include <memory>
 #include <functional>
 
+//Prototype of static void defDeleter(SDLComponent* instance)
+#define VAS_PROTOTYPE_DEFINE_DEF_DELETER(type) defDeleter(type *instance)
+
 namespace sdl
 {
-	template <typename SDLComponent>
+	template <typename SDLComponent, typename SDLWrapedComponent>
 	class SDLComponentBase
 	{
 	public:
@@ -26,7 +29,7 @@ namespace sdl
 			this->componentInstance == nullptr;
 		}
 
-		bool isEmpty()
+		bool isEmpty() const
 		{
 			return this->componentInstance == nullptr;
 		}
@@ -36,14 +39,24 @@ namespace sdl
 			return !isEmpty();
 		}
 
-		bool operator==(std::nullptr_t ptr) const
+		bool operator==(std::nullptr_t) const
 		{
-			return this->componentInstance == ptr;
+			return this->componentInstance == nullptr;
 		}
 
-		bool operator!=(std::nullptr_t ptr) const
+		bool operator==(const SDLWrapedComponent& rhs) const
 		{
-			return this->componentInstance != ptr;
+			return this->componentInstance == rhs.componentInstance;
+		}
+
+		bool operator!=(std::nullptr_t) const
+		{
+			return this->componentInstance != nullptr;
+		}
+
+		bool operator!=(const SDLWrapedComponent& rhs) const
+		{
+			return this->componentInstance != rhs.componentInstance;
 		}
 
 		explicit operator std::shared_ptr<SDLComponent>()
@@ -70,6 +83,11 @@ namespace sdl
 		{
 			return this->componentInstance;
 		}
+
+		static void notDeleteDeleter(SDLComponent* instance)
+		{
+			return;
+		}
 	protected:
 		std::shared_ptr<SDLComponent> componentInstance = nullptr;
 	};
@@ -78,5 +96,11 @@ namespace sdl
 	SDLComponentType createComponent(SDLComponentRawType* instance, std::function<void(SDLComponentRawType*)> deleter = &SDLComponentType::defDeleter)
 	{
 		return SDLComponentType(instance, deleter);
+	}
+
+	template<typename SDLComponentRawType>
+	std::shared_ptr<SDLComponentRawType> createRawComponent(SDLComponentRawType* instance, std::function<void(SDLComponentRawType*)> deleter)
+	{
+		return std::shared_ptr<SDLComponentRawType>(instance, deleter);
 	}
 }

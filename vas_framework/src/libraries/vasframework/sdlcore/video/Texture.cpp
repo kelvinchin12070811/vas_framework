@@ -2,6 +2,9 @@
 
 namespace sdl
 {
+	Texture::Texture()
+	{
+	}
 	Texture::Texture(Renderer & renderer, uint32_t format, int access, const Point & size):
 		SDLComponentBase(SDL_CreateTexture(static_cast<SDL_Renderer*>(renderer), format, access, size.x, size.y), &defDeleter)
 	{
@@ -46,6 +49,21 @@ namespace sdl
 		return SDL_GetTextureColorMod(&*this->componentInstance, red, green, bule) == 0 ? true : false;
 	}
 
+	void Texture::loadImage(Renderer & renderer, const std::string & file)
+	{
+		this->componentInstance = createRawComponent<SDL_Texture>(IMG_LoadTexture(static_cast<SDL_Renderer*>(renderer), file.c_str()), &defDeleter);
+	}
+
+	void Texture::loadImageRaw(Renderer & renderer, rwops::RWops * src, bool freeSrc)
+	{
+		this->componentInstance = createRawComponent<SDL_Texture>(IMG_LoadTexture_RW(static_cast<SDL_Renderer*>(renderer), src, freeSrc ? 1 : 0), &defDeleter);
+	}
+
+	void Texture::loadImageTypedRaw(Renderer & renderer, rwops::RWops * src, const std::string & type, bool freeSrc)
+	{
+		this->componentInstance = createRawComponent<SDL_Texture>(IMG_LoadTextureTyped_RW(static_cast<SDL_Renderer*>(renderer), src, freeSrc ? 1 : 0, type.c_str()), &defDeleter);
+	}
+
 	bool Texture::lockTexture(const Rect & rect, void ** pixels, int * pitch)
 	{
 		SDL_Rect temp = static_cast<SDL_Rect>(rect);
@@ -84,6 +102,11 @@ namespace sdl
 		return SDL_UpdateYUVTexture(&*this->componentInstance, &temp, Yplane, Ypitch, Uplane, Upitch, Vplane, Vpitch) == 0 ? true : false;
 	}
 
+	bool Texture::queryTexture(int * w, int * h)
+	{
+		return queryTexture(nullptr, nullptr, w, h);
+	}
+
 	bool Texture::queryTexture(uint32_t * format, int * access, int * w, int * h)
 	{
 		return SDL_QueryTexture(&*this->componentInstance, format, access, w, h) == 0 ? true : false;
@@ -107,13 +130,8 @@ namespace sdl
 		return *this;
 	}
 
-	void Texture::defDeleter(SDL_Texture * instance)
+	void Texture::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Texture)
 	{
 		SDL_DestroyTexture(instance);
-	}
-
-	void Texture::notDeleteDeleter(SDL_Texture * instance)
-	{
-		return;
 	}
 }

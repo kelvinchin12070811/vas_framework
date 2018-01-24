@@ -4,7 +4,7 @@
 
 namespace sdl
 {
-	class Point
+	class VAS_DECLSPEC Point
 	{
 	public:
 		Point();

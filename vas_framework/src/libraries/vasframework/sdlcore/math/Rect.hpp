@@ -5,7 +5,7 @@
 
 namespace sdl
 {
-	class Rect
+	class VAS_DECLSPEC Rect
 	{
 	public:
 		Rect();

@@ -19,6 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Chunk.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Fading.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\SDLCoreException.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Flags.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\audio\MixCore.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Music.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\ImageInitFlags.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\RWops.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\SDLComponentBase.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\Events.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\BlendMode.hpp" />
@@ -36,7 +44,13 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Texture.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\sdlcore\audio\Chunk.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCoreException.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\audio\MixCore.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\audio\Music.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\Events.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\ImageInitFlags.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\RWops.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLInitFlags.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Renderer.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Rect.cpp" />

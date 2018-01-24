@@ -41,20 +41,44 @@ namespace sdl
 		loadBMPRw(SDL_RWFromFile(file.c_str(), "rb"));
 	}
 
-	void Surface::loadBMPRw(SDL_RWops * src, bool freeSrc)
+	void Surface::loadBMPRw(sdl::rwops::RWops * src, bool freeSrc)
 	{
-		SDL_Surface* temp = &*this->componentInstance;
-		temp = SDL_LoadBMP_RW(src, freeSrc);
+		this->componentInstance = createRawComponent<SDL_Surface>(SDL_LoadBMP_RW(src, (freeSrc ? 1 : 0)), &defDeleter);
 	}
 
-	bool Surface::saveBMP(std::string file)
+	void Surface::loadImage(const std::string & file)
 	{
-		return saveBMPRw(SDL_RWFromFile(file.c_str(), "rb"));
+		this->componentInstance = createRawComponent<SDL_Surface>(IMG_Load(file.c_str()), &defDeleter);
 	}
 
-	bool Surface::saveBMPRw(SDL_RWops * dest, bool freeSrc)
+	void Surface::loadImageRaw(sdl::rwops::RWops * src, bool freeSrc)
+	{
+		this->componentInstance = createRawComponent<SDL_Surface>(IMG_Load_RW(src, (freeSrc ? 1 : 0)), &defDeleter);
+	}
+
+	void Surface::loadIMGTypedRW(sdl::rwops::RWops * src, const std::string & type, bool freeSrc)
+	{
+		this->componentInstance = createRawComponent<SDL_Surface>(IMG_LoadTyped_RW(src, (freeSrc ? 1 : 0), type.c_str()), &defDeleter);
+	}
+
+	bool Surface::saveBMP(const std::string& file)
+	{
+		return saveBMPRw(SDL_RWFromFile(file.c_str(), "wb"));
+	}
+
+	bool Surface::saveBMPRw(sdl::rwops::RWops * dest, bool freeSrc)
 	{
 		return SDL_SaveBMP_RW(&*this->componentInstance, dest, freeSrc ? 1 : 0) == 0;
+	}
+
+	bool Surface::savePNG(const std::string & file)
+	{
+		return IMG_SavePNG(&*this->componentInstance, file.c_str()) == 0;
+	}
+
+	bool Surface::savePNGRaw(sdl::rwops::RWops * dest, bool freeDst)
+	{
+		return IMG_SavePNG_RW(&*this->componentInstance, dest, (freeDst ? 1 : 0)) == 0;
 	}
 
 	bool Surface::setPalette(SDL_Palette * palette)
@@ -104,13 +128,8 @@ namespace sdl
 		return *this;
 	}
 
-	void Surface::defDeleter(SDL_Surface * instance)
+	void Surface::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Surface)
 	{
 		SDL_FreeSurface(instance);
-	}
-
-	void Surface::notDeleteDeleter(SDL_Surface * instance)
-	{
-		return;
 	}
 }

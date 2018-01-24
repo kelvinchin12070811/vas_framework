@@ -307,13 +307,8 @@ namespace sdl
 		return getRendererFromWindow(static_cast<SDL_Window*>(window));
 	}
 
-	void Renderer::defDeleter(SDL_Renderer * instance)
+	void Renderer::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Renderer)
 	{
 		SDL_DestroyRenderer(instance);
-	}
-
-	void Renderer::notDeleteDeleter(SDL_Renderer * instance)
-	{
-		return;
 	}
 }

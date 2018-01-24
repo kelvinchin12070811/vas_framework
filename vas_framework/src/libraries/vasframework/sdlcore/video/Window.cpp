@@ -3,8 +3,6 @@
 
 namespace sdl
 {
-	const int Window::windowPosCentred = SDL_WINDOWPOS_CENTERED;
-
 	const uint32_t Window::Flags::fullscreen = 0x00000001;
 	const uint32_t Window::Flags::opengl = 0x00000002;
 	const uint32_t Window::Flags::shown = 0x00000004;
@@ -26,8 +24,17 @@ namespace sdl
 	const uint32_t Window::Flags::tooltip = 0x00040000;
 	const uint32_t Window::Flags::popup_menu = 0x00080000;
 
+	Window::Window()
+	{
+	}
+
 	Window::Window(const std::string & title, const Point & position, const Point & size, uint32_t flags) :
 		SDLComponentBase(SDL_CreateWindow(title.c_str(), position.x, position.y, size.x, size.y, flags), &defDeleter)
+	{
+	}
+
+	Window::Window(const std::string & title, const Point & size, uint32_t flags) :
+		Window(title, Point(sdl::Window::DefultValues::posCentered, sdl::Window::DefultValues::posCentered), size, flags)
 	{
 	}
 
@@ -305,13 +312,8 @@ namespace sdl
 		return SDL_SetWindowModalFor(modalWindow, parentWindow) == 0 ? true : false;
 	}
 
-	void Window::defDeleter(SDL_Window * instance)
+	void Window::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Window)
 	{
 		SDL_DestroyWindow(instance);
-	}
-
-	void Window::notDeleteDeleter(SDL_Window * instance)
-	{
-		return;
 	}
 }

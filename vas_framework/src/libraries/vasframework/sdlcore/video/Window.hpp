@@ -8,11 +8,12 @@
 
 namespace sdl
 {
-	class VAS_DECLSPEC Window : public SDLComponentBase<SDL_Window>
+	class VAS_DECLSPEC Window : public SDLComponentBase<SDL_Window, Window>
 	{
 	public:
-		Window() {}
+		Window();
 		Window(const std::string& title, const Point& position, const Point& size, uint32_t flags);
+		Window(const std::string& title, const Point& size, uint32_t flags);
 		explicit Window(SDL_Window* refInstance, SDLComponentBase::DeleterType deleter = &Window::notDeleteDeleter);
 		explicit Window(const void* data);
 		Window(const Window& other);
@@ -76,7 +77,11 @@ namespace sdl
 		static SDL_Window* getWindowFromId(uint32_t id);
 		static bool setWindowModalFor(SDL_Window* modalWindow, SDL_Window* parentWindow);
 		
-		static const int windowPosCentred;
+		struct DefultValues
+		{
+			static const int posCentered = SDL_WINDOWPOS_CENTERED;
+			static const int posUndefine = SDL_WINDOWPOS_UNDEFINED;
+		};
 		struct Flags
 		{
 			/* !!! FIXME: change this to name = (1<<x). */
@@ -121,7 +126,6 @@ namespace sdl
 			static const uint32_t popup_menu;
 		};
 
-		static void defDeleter(SDL_Window* instance);
-		static void notDeleteDeleter(SDL_Window* instance);
+		static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Window);
 	};
 }
