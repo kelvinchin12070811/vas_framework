@@ -9,6 +9,7 @@
 #include "Events.hpp"
 #include "RWops.hpp"
 #include "audio/MixCore.hpp"
+#include "keyboard/Keycode.hpp"
 
 namespace sdl
 {

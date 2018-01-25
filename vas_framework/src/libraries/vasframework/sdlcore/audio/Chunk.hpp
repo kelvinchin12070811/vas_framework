@@ -21,12 +21,24 @@ namespace sdl
 
 			void load(const std::string& file);
 			void loadRaw(rwops::RWops* src, bool freeSrc = true);
+			void setChannel(int channel);
+			int getChannel();
+			Fading fading();
 
 			//int terminateDuration = -1, this varaible tells the api to terminate the channel at duration in milisecond
 			void fadeIn(int channel, int duration, int loops = 1, int terminateDuration = -1);
+			void fadeIn(int duration, int loops = 1, int terminateDuration = -1);
+			void fadeOut(int duration);
 
 			//int terminateDuration = -1, this varaible tells the api to terminate the channel at duration in milisecond
 			void play(int channel, int loops = 1, int terminateDuration = -1);
+			void play(int loops = 1, int terminateDuration = -1);
+
+			void pause();
+			void resume();
+			bool isPaused();
+			bool isPlaying();
+			void stop();
 
 			/* Load a wave file of the mixer format from a memory buffer */
 			void quickLoadWAV(uint8_t* mem);
@@ -58,6 +70,8 @@ namespace sdl
 			Chunk& operator=(std::nullptr_t);
 
 			static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(Mix_Chunk);
+		private:
+			int channel = -1;
 		};
 	}
 }

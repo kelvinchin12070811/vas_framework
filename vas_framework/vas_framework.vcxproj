@@ -19,8 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\Flags.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\Font.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Chunk.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Fading.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\keyboard\Keycode.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\SDLCoreException.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Flags.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\audio\MixCore.hpp" />
@@ -29,6 +32,7 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\RWops.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\SDLComponentBase.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\Events.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\TTFCore.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\BlendMode.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Renderer.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\math\Rect.hpp" />
@@ -42,9 +46,12 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Window.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Surface.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Texture.hpp" />
+    <ClInclude Include="src\libraries\vasframework\container\Switch.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\sdlcore\ttf\Font.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\audio\Chunk.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\keyboard\Keycode.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCoreException.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\audio\MixCore.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\audio\Music.cpp" />
@@ -52,6 +59,7 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\ImageInitFlags.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\RWops.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLInitFlags.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\ttf\TTFCore.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Renderer.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Rect.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Point.cpp" />
@@ -61,6 +69,7 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Window.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Surface.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Texture.cpp" />
+    <ClCompile Include="src\libraries\vasframework\container\Switch.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>

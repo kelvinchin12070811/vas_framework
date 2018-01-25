@@ -42,16 +42,71 @@ namespace sdl
 			this->componentInstance = createRawComponent<Mix_Chunk>(Mix_LoadWAV_RW(src, freeSrc ? 1 : 0), &defDeleter);
 		}
 
+		void Chunk::setChannel(int channel)
+		{
+			this->channel = channel;
+		}
+
+		int Chunk::getChannel()
+		{
+			return channel;
+		}
+
+		Fading Chunk::fading()
+		{
+			return static_cast<Fading>(Mix_FadingChannel(channel));
+		}
+
 		void Chunk::fadeIn(int channel, int duration, int loops, int terminateDuration)
 		{
 			if (loops > 0) loops--;
 			Mix_FadeInChannelTimed(channel, &*this->componentInstance, loops, duration, terminateDuration);
 		}
 
+		void Chunk::fadeIn(int duration, int loops, int terminateDuration)
+		{
+			fadeIn(channel, duration, loops, terminateDuration);
+		}
+
+		void Chunk::fadeOut(int duration)
+		{
+			fadeOut(channel, duration);
+		}
+
 		void Chunk::play(int channel, int loops, int terminateDuration)
 		{
 			if (loops > 0) loops--;
 			Mix_PlayChannelTimed(channel, &*this->componentInstance, loops, terminateDuration);
+		}
+
+		void Chunk::play(int loops, int terminateDuration)
+		{
+			play(channel, loops, terminateDuration);
+		}
+
+		void Chunk::pause()
+		{
+			pause(channel);
+		}
+
+		void Chunk::resume()
+		{
+			resume(channel);
+		}
+
+		bool Chunk::isPaused()
+		{
+			return isPaused(channel);
+		}
+
+		bool Chunk::isPlaying()
+		{
+			return isPlaying(channel);
+		}
+
+		void Chunk::stop()
+		{
+			stop(channel);
 		}
 
 		void Chunk::quickLoadWAV(uint8_t * mem)

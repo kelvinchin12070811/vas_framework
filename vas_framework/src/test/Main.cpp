@@ -34,6 +34,7 @@ int main(int argc, char** argv)
 
 		sdl::mixer::Music bgm(u8"assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 		sdl::mixer::Chunk me(u8"assets/audios/me/rain1.ogg");
+		me.setChannel(1);
 		if (bgm == nullptr) throw sdl::SDLCoreException();
 		if (me == nullptr) throw sdl::SDLCoreException();
 		bgm.play();
@@ -51,19 +52,24 @@ int main(int argc, char** argv)
 					exec = false;
 					break;
 				case sdl::EventType::keydown:
-					if (ev.key().keysym.sym == SDLK_ESCAPE)
+					switch (static_cast<sdl::Keycode>(ev.key().keysym.sym))
+					{
+					case sdl::Keycode::escape:
 						ev.pushEvent(sdl::EventType::quit);
-					else if (ev.key().keysym.sym == SDLK_r)
+						break;
+					case sdl::Keycode::m:
+						me.play();
+						break;
+					case sdl::Keycode::r:
 						bgm.rewind();
-					else if (ev.key().keysym.sym == SDLK_m)
-						me.play(0);
-					break;
+						break;
+					}
 				}
 				if (exec == false) break;
 			}
 			if (exec == false) break;
 
-			if (me.isPlaying(0))
+			if (me.isPlaying())
 			{
 				if (bgm.isPlaying())
 					bgm.pause();
