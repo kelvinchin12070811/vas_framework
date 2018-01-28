@@ -2,15 +2,34 @@
 #include <exception>
 #include <SDL_image.h>
 #include <Windows.h>
+#include "../libraries/vasframework/container/Switch.hpp"
+#include "../libraries/vasframework/math/Timer.hpp"
+
+void timeOutCallback()
+{
+	auto time = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now().time_since_epoch());
+	OutputDebugString((std::to_wstring(time.count()) + L": Timer timed out\n").c_str());
+}
 
 int main(int argc, char** argv)
 {
+	using namespace std::chrono_literals;
+	vas::Switch test(off);
+	test(on);
+
+	vas::Timer testTimer;
+	testTimer.setInterval(10s);
+	testTimer.TimedOutSignal().connect(&timeOutCallback);
+	testTimer.start();
+
+	if (test.is(on))
+		MessageBox(nullptr, L"test is on", L"test", MB_ICONINFORMATION);
 	try
 	{
 		sdl::init();
 		sdl::image::init();
 		sdl::mixer::init();
-		sdl::mixer::openAudio(sdl::mixer::DefaultValues::frequency, sdl::mixer::DefaultValues::format, sdl::mixer::DefaultValues::channelCount, sdl::mixer::DefaultValues::chunkSize);
+		sdl::mixer::openAudio();
 		sdl::Window mainWindow("hello world", sdl::Point(640, 480), sdl::Window::Flags::shown);
 		if (mainWindow == nullptr)
 			throw sdl::SDLCoreException();
@@ -39,7 +58,6 @@ int main(int argc, char** argv)
 		if (me == nullptr) throw sdl::SDLCoreException();
 		bgm.play();
 
-
 		bool exec = true;
 		sdl::Event ev;
 		while (exec)
@@ -62,6 +80,18 @@ int main(int argc, char** argv)
 						break;
 					case sdl::Keycode::r:
 						bgm.rewind();
+						break;
+					case sdl::Keycode::t:
+						if (testTimer.started())
+						{
+							testTimer.stop();
+							OutputDebugString(L"Timer stoped");
+						}
+						else
+						{
+							testTimer.start();
+							OutputDebugString(L"Timer started");
+						}
 						break;
 					}
 				}

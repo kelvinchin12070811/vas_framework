@@ -1,30 +1,28 @@
 #pragma once
 #include "../VASConfig.hpp"
 
-#ifndef on
 #define on true
-#endif // !on
-#ifndef off
 #define off false
-#endif // !off
 
 namespace vas
 {
+	using SwitchState = bool;
 	class VAS_DECLSPEC Switch
 	{
 	public:
 		Switch();
-		Switch(bool state);
+		explicit Switch(SwitchState state);
 		~Switch();
 
-		operator bool() const;
-		explicit operator std::string() const;
+		void setState(SwitchState value);
 
-		bool operator==(const Switch& rhs) const;
-		bool operator==(bool rhs) const;
-		bool operator!=(const Switch& rhs) const;
-		bool operator!=(bool rhs) const;
+		bool is(SwitchState state) const;
+		bool not(SwitchState state) const;
+
+		explicit operator bool() const;
+
+		Switch& operator()(SwitchState newState);
 	private:
-		bool value = false;
+		SwitchState value = false;
 	};
 }

@@ -10,12 +10,14 @@
 #include "RWops.hpp"
 #include "audio/MixCore.hpp"
 #include "keyboard/Keycode.hpp"
+#include "ttf/TTFCore.hpp"
 
 namespace sdl
 {
 	std::string VAS_DECLSPEC getError();
 
 	void VAS_DECLSPEC delay(uint32_t ms);
+	uint32_t VAS_DECLSPEC getTicks();
 
 	/*return true if success, use sdl::getError() to get last error string
 	origin: SDL_Init(uint32_t)*/

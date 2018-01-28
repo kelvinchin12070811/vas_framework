@@ -21,11 +21,11 @@ namespace sdl
 
 		struct DefaultValues
 		{
-			static const uint8_t maxVolume = 128;
 			static const int frequency = 44100;
 			static const int channelCount = 2;
 			static const int chunkSize = 1024;
 			static const int format = MIX_DEFAULT_FORMAT;
+			static const uint8_t maxVolume = 128;
 		};
 
 		enum class MusicType{

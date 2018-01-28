@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\base\Base.hpp" />
+    <ClInclude Include="src\libraries\vasframework\math\Counter.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\math\Colour.hpp" />
+    <ClInclude Include="src\libraries\vasframework\container\Boolean.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\Flags.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\Font.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Chunk.hpp" />
@@ -47,8 +51,13 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Surface.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Texture.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\Switch.hpp" />
+    <ClInclude Include="src\libraries\vasframework\math\Timer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\base\Base.cpp" />
+    <ClCompile Include="src\libraries\vasframework\math\Counter.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\math\Colour.cpp" />
+    <ClCompile Include="src\libraries\vasframework\container\Boolean.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\ttf\Font.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\audio\Chunk.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\keyboard\Keycode.cpp" />
@@ -70,6 +79,7 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Surface.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Texture.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\Switch.cpp" />
+    <ClCompile Include="src\libraries\vasframework\math\Timer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>
@@ -124,7 +134,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_65_0;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_65_1;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -12,6 +12,11 @@ namespace sdl
 		SDL_Delay(ms);
 	}
 
+	uint32_t VAS_DECLSPEC getTicks()
+	{
+		return SDL_GetTicks();
+	}
+
 	bool init(uint32_t flags)
 	{
 		return SDL_Init(flags) == 0 ? true : false;

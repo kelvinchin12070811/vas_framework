@@ -6,7 +6,7 @@ namespace vas
 	{
 	}
 
-	Switch::Switch(bool state) :
+	Switch::Switch(SwitchState state) :
 		value(state)
 	{
 	}
@@ -16,34 +16,29 @@ namespace vas
 	{
 	}
 
+	void Switch::setState(SwitchState value)
+	{
+		this->value = value;
+	}
+
+	bool Switch::is(SwitchState state) const
+	{
+		return value == state;
+	}
+
+	bool Switch::not(SwitchState state) const
+	{
+		return value != state;
+	}
+
 	Switch::operator bool() const
 	{
 		return value;
 	}
 
-	Switch::operator std::string() const
+	Switch & Switch::operator()(SwitchState newState)
 	{
-		return value ? "on" : "false";
+		setState(newState);
+		return *this;
 	}
-
-	bool Switch::operator==(const Switch & rhs) const
-	{
-		return this->value == rhs.value;
-	}
-
-	bool Switch::operator==(bool rhs) const
-	{
-		return this->value == rhs;
-	}
-
-	bool Switch::operator!=(const Switch & rhs) const
-	{
-		return this->value != rhs.value;
-	}
-
-	bool Switch::operator!=(bool rhs) const
-	{
-		return this->value != rhs;
-	}
-
 }

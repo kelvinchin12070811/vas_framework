@@ -11,7 +11,8 @@ namespace sdl
 	{
 		int VAS_DECLSPEC init(int flags =MixInitFlags::commonType);
 		void VAS_DECLSPEC quit();
-		bool VAS_DECLSPEC openAudio(int frequency, uint16_t format, int channels, int chunckSize);
+		bool VAS_DECLSPEC openAudio(int frequency = DefaultValues::frequency, uint16_t format = DefaultValues::format,
+																int channels = DefaultValues::channelCount, int chunckSize = DefaultValues::chunkSize);
 		void VAS_DECLSPEC closeAudio();
 		int VAS_DECLSPEC allocateChannels(int numChannels);
 		bool VAS_DECLSPEC querySpec(int *frequency, uint16_t *format, int* channels);
