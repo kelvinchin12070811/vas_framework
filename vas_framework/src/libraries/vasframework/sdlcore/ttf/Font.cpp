@@ -79,12 +79,12 @@ namespace sdl
 
 		vas::Switch Font::getFontKerning()
 		{
-			return static_cast<vas::Switch>(TTF_GetFontKerning(&*this->componentInstance) == 1);
+			return (TTF_GetFontKerning(&*this->componentInstance) == 1) ? vas::Switch(vas::on) : vas::Switch(vas::off);
 		}
 
 		void Font::setFontKerning(vas::Switch value)
 		{
-			TTF_SetFontKerning(&*this->componentInstance, value.is(on) ? 1 : 0);
+			TTF_SetFontKerning(&*this->componentInstance, value.is(vas::on) ? 1 : 0);
 		}
 
 		int Font::fontHeight()

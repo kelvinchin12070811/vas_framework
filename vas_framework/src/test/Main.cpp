@@ -4,18 +4,24 @@
 #include <Windows.h>
 #include "../libraries/vasframework/container/Switch.hpp"
 #include "../libraries/vasframework/math/Timer.hpp"
+#include "../libraries/vasframework/util/TextTools.hpp"
+
+using namespace std::chrono_literals;
+using namespace vas::switch_state;
 
 void timeOutCallback()
 {
 	auto time = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now().time_since_epoch());
-	OutputDebugString((std::to_wstring(time.count()) + L": Timer timed out\n").c_str());
+	vas::TextTools::printfln(boost::format("%i: 时间到") % time.count());
 }
 
 int main(int argc, char** argv)
 {
-	using namespace std::chrono_literals;
-	vas::Switch test(off);
-	test(on);
+	AllocConsole();
+	freopen("CONIN$", "r+t", stdin);
+	freopen("CONIN$", "w+t", stdout);
+	vas::Switch test(vas::off);
+	test(vas::on);
 
 	vas::Timer testTimer;
 	testTimer.setInterval(10s);
@@ -23,7 +29,7 @@ int main(int argc, char** argv)
 	testTimer.start();
 
 	if (test.is(on))
-		MessageBox(nullptr, L"test is on", L"test", MB_ICONINFORMATION);
+		vas::TextTools::println("test is on");
 	try
 	{
 		sdl::init();
@@ -58,16 +64,16 @@ int main(int argc, char** argv)
 		if (me == nullptr) throw sdl::SDLCoreException();
 		bgm.play();
 
-		bool exec = true;
+		vas::Switch exec(on);
 		sdl::Event ev;
-		while (exec)
+		while (exec.is(on))
 		{
 			while (ev.pollEvent())
 			{
 				switch (ev)
 				{
 				case sdl::EventType::quit:
-					exec = false;
+					exec(off);
 					break;
 				case sdl::EventType::keydown:
 					switch (static_cast<sdl::Keycode>(ev.key().keysym.sym))
@@ -95,9 +101,9 @@ int main(int argc, char** argv)
 						break;
 					}
 				}
-				if (exec == false) break;
+				if (exec.is(off)) break;
 			}
-			if (exec == false) break;
+			if (exec.is(off)) break;
 
 			if (me.isPlaying())
 			{
@@ -126,7 +132,7 @@ int main(int argc, char** argv)
 	catch (const std::exception& e)
 	{
 		MessageBeep(MB_ICONERROR);
-		MessageBoxA(nullptr, e.what(), u8"Unhandled Exception Occur", MB_ICONERROR);
+		MessageBox(nullptr, vas::TextTools::stows(e.what()).c_str(), L"Unhandled Exception Occur", MB_ICONERROR);
 		return -1;
 	}
 

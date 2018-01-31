@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\manager\SceneManager.hpp" />
+    <ClInclude Include="src\libraries\vasframework\util\CommonTools.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\IRenderAble.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\scene\SceneBase.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sreflex\IObjectAutoRegistrar.h" />
+    <ClInclude Include="src\libraries\vasframework\sreflex\IObjectFactory.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sreflex\IObjectEntries.hpp" />
     <ClInclude Include="src\libraries\vasframework\base\Base.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Counter.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\math\Colour.hpp" />
@@ -46,6 +53,8 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\SDLCore.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\SDLInitFlags.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\Video.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sreflex\IObject.hpp" />
+    <ClInclude Include="src\libraries\vasframework\util\TextTools.hpp" />
     <ClInclude Include="src\libraries\vasframework\VASConfig.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Window.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Surface.hpp" />
@@ -54,6 +63,11 @@
     <ClInclude Include="src\libraries\vasframework\math\Timer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\manager\SceneManager.cpp" />
+    <ClCompile Include="src\libraries\vasframework\util\CommonTools.cpp" />
+    <ClCompile Include="src\libraries\vasframework\graphics\scene\SceneBase.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sreflex\IObjectFactory.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sreflex\IObjectEntries.cpp" />
     <ClCompile Include="src\libraries\vasframework\base\Base.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Counter.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Colour.cpp" />
@@ -80,6 +94,7 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Texture.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\Switch.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Timer.cpp" />
+    <ClCompile Include="src\libraries\vasframework\util\TextTools.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>
@@ -159,6 +174,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

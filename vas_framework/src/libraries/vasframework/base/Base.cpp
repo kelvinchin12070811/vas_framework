@@ -1,4 +1,5 @@
 #include "Base.hpp"
+#include "../manager/SceneManager.hpp"
 
 namespace vas
 {
@@ -41,10 +42,31 @@ namespace vas
 
 	void Base::clean()
 	{
+		sdl::mixer::closeAudio();
 		sdl::mixer::quit();
 		sdl::ttf::quit();
 		sdl::image::quit();
 		sdl::quit();
+	}
+
+	void Base::setWindow(const sdl::Window & instance)
+	{
+		mainWindow = instance;
+	}
+
+	void Base::setWindow(sdl::Window && instance)
+	{
+		mainWindow = std::move(instance);
+	}
+
+	void Base::setRenderer(const sdl::Renderer & instance)
+	{
+		mainRenderer = instance;
+	}
+
+	void Base::setRenderer(sdl::Renderer && instance)
+	{
+		mainRenderer = std::move(instance);
 	}
 
 	Base::Base()
@@ -57,9 +79,19 @@ namespace vas
 
 	void Base::tick()
 	{
+		if (!SceneManager::getInstance().isEmpty())
+		{
+			SceneManager::getInstance().current()->tick();
+		}
 	}
 
 	void Base::draw()
 	{
+		if (!SceneManager::getInstance().isEmpty)
+		{
+			if (doubleSceneRendering.is(on) && SceneManager::getInstance().atleast2Scene())
+				SceneManager::getInstance().previous()->draw();
+			SceneManager::getInstance().current()->draw();
+		}
 	}
 }

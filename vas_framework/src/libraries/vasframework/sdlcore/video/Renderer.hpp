@@ -35,6 +35,7 @@ namespace sdl
 															rendering to texture */
 		};
 
+		Renderer();
 		Renderer(Window& window, int index, uint32_t flags);
 		Renderer(SDL_Surface* surface, SDLComponentBase::DeleterType deleter = &Renderer::notDeleteDeleter);
 		Renderer(Surface& surface);

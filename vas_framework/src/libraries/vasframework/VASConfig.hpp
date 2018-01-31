@@ -4,7 +4,7 @@
 /*Configuration of framework*/
 
 //#define VAS_GEN_DLL
-#define VAS_USE_UTF16
+//#define VAS_USE_UTF16
 
 /*Configuration end*/
 

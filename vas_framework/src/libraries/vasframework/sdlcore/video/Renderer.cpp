@@ -11,6 +11,10 @@ namespace sdl
 	const uint32_t Renderer::RendererFlags::presentvsync = 0x00000004;
 	const uint32_t Renderer::RendererFlags::targettexture = 0x00000008;
 
+	Renderer::Renderer()
+	{
+	}
+
 	Renderer::Renderer(Window & window, int index, uint32_t flags):
 		SDLComponentBase(SDL_CreateRenderer(static_cast<SDL_Window*>(window), index, flags), &defDeleter)
 	{
