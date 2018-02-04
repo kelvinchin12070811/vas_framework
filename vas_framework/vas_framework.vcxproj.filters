@@ -141,6 +141,9 @@
     <ClInclude Include="src\libraries\vasframework\manager\SceneManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\test\scenes\MainScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCore.cpp">
@@ -237,6 +240,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\libraries\vasframework\manager\SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test\scenes\MainScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
