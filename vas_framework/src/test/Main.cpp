@@ -31,6 +31,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 	}
 	catch (const std::exception& e)
 	{
+		vas::Base::getInstance().cleanAndQuit();
 		MessageBeep(MB_ICONERROR);
 		MessageBox(nullptr, vas::TextTools::stows(e.what()).c_str(), L"Unhandled Exception Occur", MB_ICONERROR);
 		return -1;

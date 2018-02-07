@@ -1,5 +1,8 @@
+#include <thread>
 #include "Base.hpp"
+#include "../util/TextTools.hpp"
 #include "../manager/SceneManager.hpp"
+#include "../manager/TextureManager.hpp"
 
 namespace vas
 {
@@ -11,12 +14,25 @@ namespace vas
 
 	void Base::init()
 	{
+		using namespace std::chrono_literals;
 		if (!sdl::init()) throw sdl::SDLCoreException();
 		if (!sdl::ttf::init()) throw sdl::SDLCoreException();
 		if (!sdl::image::init()) throw sdl::SDLCoreException();
 		if (!sdl::mixer::init()) throw sdl::SDLCoreException();
 
 		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException();
+
+		frameStayTime = 1000ms / fps;
+		frameIndex.setAutoResetLimit(fps);
+
+		frameCounterUpdater.TimedOutSignal().connect(boost::bind(&Base::frameCounter, this));
+		frameCounterUpdater.setInterval(1s);
+	}
+
+	void Base::init(size_t fps)
+	{
+		this->fps = fps;
+		init();
 	}
 
 	void Base::startGameLoop()
@@ -25,9 +41,12 @@ namespace vas
 			throw std::runtime_error("Unable to start game loop scene window instance is nullptr");
 		mainWindow.show();
 
+		frameCounterUpdater.start();
+
 		sdl::Event ev;
 		while (exec)
 		{
+			gameLoopClock.justReset();
 			while (ev.pollEvent())
 			{
 				eventProcessorSignals[0](ev);
@@ -51,7 +70,9 @@ namespace vas
 
 			tick();
 			draw();
+			delay();
 		}
+
 		mainWindow.destroy();
 		sdl::mixer::closeAudio();
 		SceneManager::getInstance().clear();
@@ -59,6 +80,9 @@ namespace vas
 
 	void Base::cleanAndQuit()
 	{
+		frameCounterUpdater.stop();
+		frameCounterUpdater.TimedOutSignal().disconnect_all_slots();
+		TextureManager::getInstance().clear();
 		sdl::mixer::quit();
 		sdl::ttf::quit();
 		sdl::image::quit();
@@ -95,6 +119,16 @@ namespace vas
 		return eventProcessorSignals[static_cast<uint8_t>(type)];
 	}
 
+	const Counter & Base::FrameIndex()
+	{
+		return frameIndex;
+	}
+
+	size_t Base::getLastFpsCount()
+	{
+		return lastFpsCount;
+	}
+
 	Base::Base()
 	{
 	}
@@ -121,5 +155,26 @@ namespace vas
 			SceneManager::getInstance().current()->draw();
 			mainRenderer.present();
 		}
+	}
+
+	void Base::delay()
+	{
+		using namespace std::chrono_literals;
+		//current loop's used time
+		auto crLoopDuration = std::chrono::duration_cast<std::chrono::milliseconds>(gameLoopClock.currentTick());
+
+		frameIndex++;
+		fpsCounter++;
+
+		if (crLoopDuration < frameStayTime)
+		{
+			std::this_thread::sleep_for(frameStayTime - crLoopDuration - 1ms);
+		}
+	}
+
+	void Base::frameCounter()
+	{
+		lastFpsCount = fpsCounter;
+		fpsCounter.reset();
 	}
 }

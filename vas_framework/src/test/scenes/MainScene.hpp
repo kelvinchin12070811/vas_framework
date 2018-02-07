@@ -25,5 +25,7 @@ namespace scene
 		sdl::mixer::Chunk me{ 1 };
 		sdl::Texture testTexture;
 		sdl::Rect testRect;
+		sdl::Point center;
+		double angle = 0;
 	};
 }

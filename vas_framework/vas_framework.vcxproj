@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\math\Clock.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\Property.hpp" />
     <ClInclude Include="src\test\scenes\MainScene.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\SceneManager.hpp" />
@@ -61,8 +62,10 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Surface.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Texture.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Timer.hpp" />
+    <ClInclude Include="src\libraries\vasframework\manager\TextureManager.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\math\Clock.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\Property.cpp" />
     <ClCompile Include="src\test\scenes\MainScene.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\SceneManager.cpp" />
@@ -95,6 +98,7 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Texture.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Timer.cpp" />
     <ClCompile Include="src\libraries\vasframework\util\TextTools.cpp" />
+    <ClCompile Include="src\libraries\vasframework\manager\TextureManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>
