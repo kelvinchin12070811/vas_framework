@@ -77,14 +77,14 @@ namespace sdl
 			TTF_SetFontHinting(&*this->componentInstance, hintingType);
 		}
 
-		vas::Switch Font::getFontKerning()
+		bool Font::getFontKerning()
 		{
-			return (TTF_GetFontKerning(&*this->componentInstance) == 1) ? vas::Switch(vas::on) : vas::Switch(vas::off);
+			return TTF_GetFontKerning(&*this->componentInstance) == 1;
 		}
 
-		void Font::setFontKerning(vas::Switch value)
+		void Font::setFontKerning(bool value)
 		{
-			TTF_SetFontKerning(&*this->componentInstance, value.is(vas::on) ? 1 : 0);
+			TTF_SetFontKerning(&*this->componentInstance, value ? 1 : 0);
 		}
 
 		int Font::fontHeight()

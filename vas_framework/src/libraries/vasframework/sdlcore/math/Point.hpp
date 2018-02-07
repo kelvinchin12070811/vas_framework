@@ -12,8 +12,8 @@ namespace sdl
 		explicit Point(const SDL_Point& point);
 		~Point();
 
-		int x = 0;
-		int y = 0;
+		int x{ 0 };
+		int y{ 0 };
 
 		explicit operator SDL_Point();
 		explicit operator const SDL_Point() const;

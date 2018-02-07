@@ -13,7 +13,8 @@ namespace sdl
 		{
 		public:
 			Chunk();
-			Chunk(const std::string& file);
+			Chunk(int channel);
+			Chunk(const std::string& file, int channel = -1);
 			Chunk(const Chunk& rhs);
 			Chunk(Chunk&& rhs);
 			explicit Chunk(Mix_Chunk* instance, SDLComponentBase::DeleterType deleter = &notDeleteDeleter);
@@ -71,7 +72,7 @@ namespace sdl
 
 			static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(Mix_Chunk);
 		private:
-			int channel = -1;
+			int channel{ -1 };
 		};
 	}
 }

@@ -20,6 +20,7 @@ namespace vas
 		std::shared_ptr<SceneBase> current();
 		std::shared_ptr<SceneBase> previous();
 		std::shared_ptr<SceneBase> getWithIndex(size_t index);
+		std::shared_ptr<SceneBase> findWithThisPtr(SceneBase* instance);
 		size_t instanceCount();
 	private:
 		SceneManager();

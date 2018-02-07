@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\container\Property.hpp" />
     <ClInclude Include="src\test\scenes\MainScene.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\SceneManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\util\CommonTools.hpp" />
@@ -30,7 +31,6 @@
     <ClInclude Include="src\libraries\vasframework\base\Base.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Counter.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\math\Colour.hpp" />
-    <ClInclude Include="src\libraries\vasframework\container\Boolean.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\Flags.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\Font.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\audio\Chunk.hpp" />
@@ -60,10 +60,10 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Window.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Surface.hpp" />
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Texture.hpp" />
-    <ClInclude Include="src\libraries\vasframework\container\Switch.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Timer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\container\Property.cpp" />
     <ClCompile Include="src\test\scenes\MainScene.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\SceneManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\util\CommonTools.cpp" />
@@ -73,7 +73,6 @@
     <ClCompile Include="src\libraries\vasframework\base\Base.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Counter.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Colour.cpp" />
-    <ClCompile Include="src\libraries\vasframework\container\Boolean.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\ttf\Font.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\audio\Chunk.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\keyboard\Keycode.cpp" />
@@ -94,7 +93,6 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Window.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Surface.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Texture.cpp" />
-    <ClCompile Include="src\libraries\vasframework\container\Switch.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Timer.cpp" />
     <ClCompile Include="src\libraries\vasframework\util\TextTools.cpp" />
   </ItemGroup>

@@ -9,6 +9,11 @@ namespace sdl
 			return Mix_Init(flags);
 		}
 
+		bool VAS_DECLSPEC init()
+		{
+			return init(MixInitFlags::commonType) == MixInitFlags::commonType;
+		}
+
 		void quit()
 		{
 			Mix_Quit();

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "SceneManager.hpp"
 
 namespace vas
@@ -20,6 +21,9 @@ namespace vas
 
 	void SceneManager::clear(bool keepLast)
 	{
+		if (callStack.empty()) return;
+
+		callStack.back()->Signal_beforeTerminate();
 		if (!keepLast)
 		{
 			callStack.clear();
@@ -28,6 +32,9 @@ namespace vas
 		auto lastInstance = callStack.back();
 		callStack.clear();
 		callStack.push_back(std::move(lastInstance));
+
+		if (!callStack.empty())
+			callStack.back()->Signal_afterTerminate();
 	}
 
 	void SceneManager::call(const std::shared_ptr<SceneBase>& instance)
@@ -68,8 +75,19 @@ namespace vas
 
 	std::shared_ptr<SceneBase> SceneManager::getWithIndex(size_t index)
 	{
-		if (callStack.empty() || index >= callStack.size())
+		if (callStack.empty() || index >= callStack.size()) return nullptr;
 		return callStack[index];
+	}
+
+	std::shared_ptr<SceneBase> SceneManager::findWithThisPtr(SceneBase * instance)
+	{
+		auto result = std::find_if(callStack.begin(), callStack.end(), [&](const std::shared_ptr<SceneBase>& value)-> bool
+		{
+			return value.get() == instance;
+		});
+		if (result == callStack.end())
+			return nullptr;
+		return *result;
 	}
 
 	size_t SceneManager::instanceCount()

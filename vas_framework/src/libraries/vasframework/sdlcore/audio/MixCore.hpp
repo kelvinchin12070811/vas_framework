@@ -9,7 +9,8 @@ namespace sdl
 {
 	namespace mixer
 	{
-		int VAS_DECLSPEC init(int flags =MixInitFlags::commonType);
+		int VAS_DECLSPEC init(int flags);
+		bool VAS_DECLSPEC init();
 		void VAS_DECLSPEC quit();
 		bool VAS_DECLSPEC openAudio(int frequency = DefaultValues::frequency, uint16_t format = DefaultValues::format,
 																int channels = DefaultValues::channelCount, int chunckSize = DefaultValues::chunkSize);

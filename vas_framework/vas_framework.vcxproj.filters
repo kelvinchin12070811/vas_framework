@@ -96,12 +96,6 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\ttf\Flags.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libraries\vasframework\container\Switch.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\libraries\vasframework\container\Boolean.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\libraries\vasframework\sdlcore\math\Colour.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -142,6 +136,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\test\scenes\MainScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\Property.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,12 +203,6 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\ttf\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libraries\vasframework\container\Switch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\libraries\vasframework\container\Boolean.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Colour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -243,6 +234,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\test\scenes\MainScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\container\Property.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

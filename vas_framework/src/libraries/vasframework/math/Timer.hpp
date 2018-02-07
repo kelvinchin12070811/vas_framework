@@ -4,7 +4,6 @@
 #include <thread>
 #include <chrono>
 #include "../VASConfig.hpp"
-#include "../container/Switch.hpp"
 
 namespace vas
 {
@@ -28,7 +27,7 @@ namespace vas
 	private:
 		void threadRuner();
 
-		Switch countingState;
+		bool countingState{ false };
 		std::chrono::time_point<std::chrono::steady_clock> startTime;
 		std::chrono::milliseconds duration{ 0 };
 		std::thread timerThread;

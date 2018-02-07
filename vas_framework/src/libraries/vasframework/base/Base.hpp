@@ -1,8 +1,8 @@
 #pragma once
+#include <array>
 #include <boost/signals2.hpp>
 #include "../VASConfig.hpp"
 #include "../sdlcore/SDLCore.hpp"
-#include "../container/Switch.hpp"
 
 #ifdef main
 #undef main
@@ -13,17 +13,24 @@ namespace vas
 	class VAS_DECLSPEC Base
 	{
 	public:
+		struct SignalsType
+		{
+			enum class EventProcessor : uint8_t { preEventLoop = 0, PostEventLoop = 1 };
+		};
+
 		static Base& getInstance();
 
 		void init();
 		void startGameLoop();
-		void clean();
+		//clean and exit framework;
+		void cleanAndQuit();
 
-		void setWindow(const sdl::Window& instance);
-		void setWindow(sdl::Window&& instance);
-		
-		void setRenderer(const sdl::Renderer& instance);
-		void setRenderer(sdl::Renderer&& instance);
+		const bool& Exec();
+		bool& IgnoreCloseEventOnce();
+		bool& DoubleSceneRendering();
+		sdl::Window& Window();
+		sdl::Renderer& Renderer();
+		boost::signals2::signal<void(sdl::Event&)>& EventProcessorSignal(Base::SignalsType::EventProcessor type);
 	private:
 		Base();
 		~Base();
@@ -31,8 +38,10 @@ namespace vas
 		void tick();
 		void draw();
 
-		Switch exec{ on };
-		Switch doubleSceneRendering{ off };
+		bool exec{ true };
+		bool ignoreCloseEventOnce{ false };
+		bool doubleSceneRendering{ false };
+		std::array<boost::signals2::signal<void(sdl::Event&)>, 2> eventProcessorSignals;
 		sdl::Window mainWindow;
 		sdl::Renderer mainRenderer;
 	};

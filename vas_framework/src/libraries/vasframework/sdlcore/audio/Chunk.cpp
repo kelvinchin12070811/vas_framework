@@ -8,7 +8,13 @@ namespace sdl
 		{
 		}
 
-		Chunk::Chunk(const std::string & file)
+		Chunk::Chunk(int channel):
+			channel(channel)
+		{
+		}
+
+		Chunk::Chunk(const std::string & file, int channel):
+			channel(channel)
 		{
 			load(file);
 		}

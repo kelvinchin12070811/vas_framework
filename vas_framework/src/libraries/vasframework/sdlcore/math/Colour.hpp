@@ -17,10 +17,10 @@ namespace sdl
 
 		explicit operator SDL_Colour() const;
 
-		uint8_t red = 0;
-		uint8_t green = 0;
-		uint8_t bule = 0;
-		uint8_t alpha = 255;
+		uint8_t red{ 0 };
+		uint8_t green{ 0 };
+		uint8_t bule{ 0 };
+		uint8_t alpha{ 255 };
 	};
 
 	using Color = Colour;

@@ -22,7 +22,7 @@ namespace vas
 
 		operator size_t&();
 	private:
-		size_t ticks = 0;
-		size_t autoResetLimit = SIZE_MAX;
+		size_t ticks{ 0 };
+		size_t autoResetLimit{ SIZE_MAX };
 	};
 }

@@ -13,7 +13,7 @@ namespace vas
 		template <typename IObjectType>
 		IObject* createObjectBase()
 		{
-			return new IOBjectType();
+			return new IObjectType();
 		}
 
 		class VAS_DECLSPEC IObjectEntries
@@ -29,7 +29,7 @@ namespace vas
 			IObjectEntries();
 			~IObjectEntries();
 
-			std::unique_ptr<ObjectMap> registry = nullptr;
+			std::unique_ptr<ObjectMap> registry{ nullptr };
 		};
 	}
 }

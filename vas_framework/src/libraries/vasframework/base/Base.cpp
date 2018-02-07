@@ -11,62 +11,88 @@ namespace vas
 
 	void Base::init()
 	{
-		sdl::init();
-		sdl::ttf::init();
-		sdl::image::init();
-		sdl::mixer::init();
+		if (!sdl::init()) throw sdl::SDLCoreException();
+		if (!sdl::ttf::init()) throw sdl::SDLCoreException();
+		if (!sdl::image::init()) throw sdl::SDLCoreException();
+		if (!sdl::mixer::init()) throw sdl::SDLCoreException();
 
-		sdl::mixer::openAudio();
+		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException();
 	}
 
 	void Base::startGameLoop()
 	{
+		if (!mainWindow)
+			throw std::runtime_error("Unable to start game loop scene window instance is nullptr");
+		mainWindow.show();
+
 		sdl::Event ev;
-		while (exec.is(on))
+		while (exec)
 		{
 			while (ev.pollEvent())
 			{
+				eventProcessorSignals[0](ev);
 				switch (ev)
 				{
 				case sdl::EventType::quit:
+					if (ignoreCloseEventOnce)
+					{
+						ignoreCloseEventOnce = false;
+					}
+					else
+					{
+						exec = false;
+					}
 					break;
 				}
-				if (exec.is(off)) break;
+				if (!exec) break;
+				eventProcessorSignals[1](ev);
 			}
-			if (exec.is(off)) break;
+			if (!exec) break;
 
 			tick();
 			draw();
 		}
+		mainWindow.destroy();
+		sdl::mixer::closeAudio();
+		SceneManager::getInstance().clear();
 	}
 
-	void Base::clean()
+	void Base::cleanAndQuit()
 	{
-		sdl::mixer::closeAudio();
 		sdl::mixer::quit();
 		sdl::ttf::quit();
 		sdl::image::quit();
 		sdl::quit();
 	}
 
-	void Base::setWindow(const sdl::Window & instance)
+	const bool & Base::Exec()
 	{
-		mainWindow = instance;
+		return exec;
 	}
 
-	void Base::setWindow(sdl::Window && instance)
+	bool & Base::IgnoreCloseEventOnce()
 	{
-		mainWindow = std::move(instance);
+		return ignoreCloseEventOnce;
 	}
 
-	void Base::setRenderer(const sdl::Renderer & instance)
+	bool & Base::DoubleSceneRendering()
 	{
-		mainRenderer = instance;
+		return doubleSceneRendering;
 	}
 
-	void Base::setRenderer(sdl::Renderer && instance)
+	sdl::Window & Base::Window()
 	{
-		mainRenderer = std::move(instance);
+		return mainWindow;
+	}
+
+	sdl::Renderer & Base::Renderer()
+	{
+		return mainRenderer;
+	}
+
+	boost::signals2::signal<void(sdl::Event&)>& Base::EventProcessorSignal(Base::SignalsType::EventProcessor type)
+	{
+		return eventProcessorSignals[static_cast<uint8_t>(type)];
 	}
 
 	Base::Base()
@@ -87,11 +113,13 @@ namespace vas
 
 	void Base::draw()
 	{
-		if (!SceneManager::getInstance().isEmpty)
+		if (!SceneManager::getInstance().isEmpty())
 		{
-			if (doubleSceneRendering.is(on) && SceneManager::getInstance().atleast2Scene())
+			mainRenderer.clear();
+			if (doubleSceneRendering && SceneManager::getInstance().atleast2Scene())
 				SceneManager::getInstance().previous()->draw();
 			SceneManager::getInstance().current()->draw();
+			mainRenderer.present();
 		}
 	}
 }

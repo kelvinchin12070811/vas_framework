@@ -7,8 +7,8 @@ namespace vas
 	{
 	public:
 		static CommonTools& getInstance();
-
-		bool hasConsole = false;
+	
+		bool hasConsole{ false };
 	private:
 		CommonTools();
 		~CommonTools();

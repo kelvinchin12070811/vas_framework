@@ -7,6 +7,15 @@
 
 namespace sdl
 {
+	const class EmptyComponent_t
+	{
+	public:
+		operator std::nullptr_t() const
+		{
+			return nullptr;
+		}
+	} emptycomponent = {};
+
 	template <typename SDLComponent, typename SDLWrapedComponent>
 	class SDLComponentBase
 	{
@@ -89,7 +98,7 @@ namespace sdl
 			return;
 		}
 	protected:
-		std::shared_ptr<SDLComponent> componentInstance = nullptr;
+		std::shared_ptr<SDLComponent> componentInstance{ nullptr };
 	};
 
 	template<typename SDLComponentType, typename SDLComponentRawType>

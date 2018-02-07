@@ -7,13 +7,13 @@ namespace vas
 	{
 	}
 	Timer::Timer(uint32_t interval):
-		duration(interval), countingState(off)
+		duration(interval), countingState(false)
 	{
 	}
 
 	Timer::~Timer()
 	{
-		if (countingState.is(on))
+		if (countingState)
 			stop();
 		timeOutSignal.disconnect_all_slots();
 	}
@@ -25,7 +25,7 @@ namespace vas
 
 	bool Timer::setInterval(std::chrono::milliseconds interval)
 	{
-		if (countingState.is(on)) return false;
+		if (countingState) return false;
 		duration = interval;
 		return true;
 	}
@@ -37,14 +37,14 @@ namespace vas
 
 	void Timer::start()
 	{
-		countingState(on);
+		countingState = true;
 		startTime = std::chrono::steady_clock::now();
 		timerThread = std::thread(std::bind(&Timer::threadRuner, this));
 	}
 
 	void Timer::stop()
 	{
-		countingState(off);
+		countingState = false;
 		if (!timerThread.joinable())
 			throw std::runtime_error("Timer thread is unjoinable.");
 		timerThread.join();
@@ -52,12 +52,12 @@ namespace vas
 
 	bool Timer::started()
 	{
-		return countingState.is(on);
+		return countingState;
 	}
 
 	void Timer::threadRuner()
 	{
-		while (countingState.is(on))
+		while (countingState)
 		{
 			using namespace std;
 			using namespace chrono;

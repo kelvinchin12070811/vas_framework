@@ -13,10 +13,10 @@ namespace sdl
 		Rect(const Rect& rect);
 		explicit Rect(SDL_Rect rect);
 		~Rect();
-		int x = 0;
-		int y = 0;
-		int w = 0;
-		int h = 0;
+		int x{ 0 };
+		int y{ 0 };
+		int w{ 0 };
+		int h{ 0 };
 
 		bool intersectWith(const Rect& other) const;
 		Rect getIntersectionBetween(const Rect& other) const;

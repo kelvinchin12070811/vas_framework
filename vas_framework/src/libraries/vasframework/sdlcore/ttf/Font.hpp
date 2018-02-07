@@ -4,7 +4,6 @@
 #include "../SDLComponentBase.hpp"
 #include "../RWops.hpp"
 #include "Flags.hpp"
-#include "../../container/Switch.hpp"
 #include "../math/Point.hpp"
 #include "../math/Colour.hpp"
 #include "../video/Surface.hpp"
@@ -37,8 +36,8 @@ namespace sdl
 			FontHinting::FlagType getFontHinting();
 			void setFontHinting(FontHinting::FlagType hintingType);
 
-			vas::Switch getFontKerning();
-			void setFontKerning(vas::Switch value);
+			bool getFontKerning();
+			void setFontKerning(bool value);
 
 			int fontHeight();
 			int fontAscent();
