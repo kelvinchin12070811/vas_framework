@@ -37,9 +37,9 @@ namespace scene
 				bgm.resume();
 		}
 
-		angle += 0.6;
+		/*angle += 0.6;
 		if (angle >= 360.0)
-			angle -= 360.0;
+			angle -= 360.0;*/
 
 		//vas::TextTools::printfln(boost::format("Last fps: %d") % vas::Base::getInstance().getLastFpsCount());
 		SetConsoleTitle(vas::TextTools::stows((boost::format("Last fps: %d") % vas::Base::getInstance().getLastFpsCount()).str()).c_str());
@@ -97,24 +97,33 @@ namespace scene
 		switch (ev)
 		{
 		case sdl::EventType::keydown:
-			switch (static_cast<sdl::Keycode>(ev.key().keysym.sym))
+			eventKeyPressHwnd(ev, true);
+			break;
+		}
+	}
+
+	void MainScene::eventKeyPressHwnd(sdl::Event&ev, bool isKeyDown)
+	{
+		if (isKeyDown)
+		{
+			if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::backspace))
 			{
-			case sdl::Keycode::backspace:
 				vas::TextTools::println("Debug, test event ignoreer");
 				vas::Base::getInstance().IgnoreCloseEventOnce() = true;
-				break;
-			case sdl::Keycode::escape:
+			}
+			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::escape))
+			{
 				vas::TextTools::println("Debug, close event triggered by escape");
 				ev.pushEvent(sdl::EventType::quit);
-				break;
-			case sdl::Keycode::m:
-				me.play();
-				break;
-			case sdl::Keycode::r:
-				bgm.rewind();
-				break;
 			}
-			break;
+			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::m))
+			{
+				me.play();
+			}
+			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::r))
+			{
+				bgm.rewind();
+			}
 		}
 	}
 }

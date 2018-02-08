@@ -9,16 +9,16 @@ namespace sdl
 {
 	namespace mixer
 	{
-		int VAS_DECLSPEC init(int flags);
-		bool VAS_DECLSPEC init();
-		void VAS_DECLSPEC quit();
-		bool VAS_DECLSPEC openAudio(int frequency = DefaultValues::frequency, uint16_t format = DefaultValues::format,
+		VAS_DECLSPEC int init(int flags);
+		VAS_DECLSPEC bool init();
+		VAS_DECLSPEC void quit();
+		VAS_DECLSPEC bool openAudio(int frequency = DefaultValues::frequency, uint16_t format = DefaultValues::format,
 																int channels = DefaultValues::channelCount, int chunckSize = DefaultValues::chunkSize);
-		void VAS_DECLSPEC closeAudio();
-		int VAS_DECLSPEC allocateChannels(int numChannels);
-		bool VAS_DECLSPEC querySpec(int *frequency, uint16_t *format, int* channels);
-		bool VAS_DECLSPEC setChannelPosition(int channel, int16_t angle, uint8_t distance);
-		bool VAS_DECLSPEC setChannelDistance(int channel, int8_t distance);
+		VAS_DECLSPEC void closeAudio();
+		VAS_DECLSPEC int allocateChannels(int numChannels);
+		VAS_DECLSPEC bool querySpec(int *frequency, uint16_t *format, int* channels);
+		VAS_DECLSPEC bool setChannelPosition(int channel, int16_t angle, uint8_t distance);
+		VAS_DECLSPEC bool setChannelDistance(int channel, int8_t distance);
 
 		/* Set the panning of a channel. The left and right channels are specified
 		*  as integers between 0 and 255, quietest to loudest, respectively.
@@ -45,7 +45,7 @@ namespace sdl
 		*  mode is a no-op, but this call will return successful in that case.
 		*  Error messages can be retrieved from Mix_GetError().
 		*/
-		bool VAS_DECLSPEC setPanning(int channel, uint8_t left, uint8_t right);
+		VAS_DECLSPEC bool setPanning(int channel, uint8_t left, uint8_t right);
 
 		/* Causes a channel to reverse its stereo. This is handy if the user has his
 		*  speakers hooked up backwards, or you would like to have a minor bit of
@@ -67,13 +67,13 @@ namespace sdl
 		*  mode is a no-op, but this call will return successful in that case.
 		*  Error messages can be retrieved from Mix_GetError().
 		*/
-		bool VAS_DECLSPEC setReverseStereo(int channel, bool flip);
+		VAS_DECLSPEC bool setReverseStereo(int channel, bool flip);
 
 		/* Reserve the first channels (0 -> n-1) for the application, i.e. don't allocate
 		them dynamically to the next sample if requested with a -1 value below.
 		Returns the number of reserved channels.
 		*/
-		int VAS_DECLSPEC reserveChannels(int num);
+		VAS_DECLSPEC int reserveChannels(int num);
 
 		/* Attach a tag to a channel. A tag can be assigned to several mixer
 		channels, to form groups of channels.
@@ -81,30 +81,30 @@ namespace sdl
 		represent the group of all the channels).
 		Returns true if everything was OK.
 		*/
-		bool VAS_DECLSPEC groupChannel(int which, int tag);
-		int VAS_DECLSPEC groupChannels(int from, int to, int tag);
+		VAS_DECLSPEC bool groupChannel(int which, int tag);
+		VAS_DECLSPEC int groupChannels(int from, int to, int tag);
 
 		/* Finds the first available channel in a group of channels,
 		returning -1 if none are available.
 		*/
-		int VAS_DECLSPEC groupAvailable(int tag);
+		VAS_DECLSPEC int groupAvailable(int tag);
 
 		/* Returns the number of channels in a group. This is also a subtle
 		way to get the total number of channels when 'tag' is -1
 		*/
-		int VAS_DECLSPEC groupCount(int tag);
+		VAS_DECLSPEC int groupCount(int tag);
 
 		/* Finds the "oldest" sample playing in a group of channels */
-		int VAS_DECLSPEC groupOldest(int tag);
+		VAS_DECLSPEC int groupOldest(int tag);
 
 		/* Finds the "most recent" (i.e. last) sample playing in a group of channels */
-		int VAS_DECLSPEC groupNewer(int tag);
+		VAS_DECLSPEC int groupNewer(int tag);
 
 		/* Set the volume in the range of 0-128 of a specific channel or chunk.
 		If the specified channel is -1, set volume for all channels.
 		Returns the original volume.
 		If the specified volume is -1, just return the current volume.
 		*/
-		int VAS_DECLSPEC volume(int channel, int volume);
+		VAS_DECLSPEC int volume(int channel, int volume);
 	}
 }

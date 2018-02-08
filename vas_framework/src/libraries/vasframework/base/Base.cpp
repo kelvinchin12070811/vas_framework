@@ -3,6 +3,7 @@
 #include "../util/TextTools.hpp"
 #include "../manager/SceneManager.hpp"
 #include "../manager/TextureManager.hpp"
+#include "../manager/InputManager.hpp"
 
 namespace vas
 {
@@ -44,6 +45,7 @@ namespace vas
 		frameCounterUpdater.start();
 
 		sdl::Event ev;
+		InputManager::getInstance().init(&ev);
 		while (exec)
 		{
 			gameLoopClock.justReset();
@@ -139,6 +141,7 @@ namespace vas
 
 	void Base::tick()
 	{
+		InputManager::getInstance().tick();
 		if (!SceneManager::getInstance().isEmpty())
 		{
 			SceneManager::getInstance().current()->tick();

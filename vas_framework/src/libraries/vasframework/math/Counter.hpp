@@ -8,7 +8,7 @@ namespace vas
 	{
 	public:
 		Counter();
-		Counter(size_t autoResetLimit);
+		explicit Counter(size_t autoResetLimit);
 		~Counter();
 
 		void setAutoResetLimit(size_t autoResetLimit);
@@ -21,6 +21,7 @@ namespace vas
 		bool operator==(const size_t& rhs);
 
 		operator size_t&();
+		operator const size_t&() const;
 	private:
 		size_t ticks{ 0 };
 		size_t autoResetLimit{ SIZE_MAX };

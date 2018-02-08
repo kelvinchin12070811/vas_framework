@@ -2,6 +2,7 @@
 #include "../../libraries/vasframework/graphics/scene/SceneBase.hpp"
 #include "../../libraries/vasframework/sreflex/IObjectAutoRegistrar.h"
 #include "../../libraries/vasframework/base/Base.hpp"
+#include "../../libraries/vasframework/manager/InputManager.hpp"
 
 namespace scene
 {
@@ -19,6 +20,8 @@ namespace scene
 
 		void eventSlot(sdl::Event& ev);
 	private:
+		void eventKeyPressHwnd(sdl::Event& ev, bool isKeyDown);
+
 		static vas::sreflex::IObjectAutoRegistrar<MainScene> _registrar;
 
 		sdl::mixer::Music bgm;

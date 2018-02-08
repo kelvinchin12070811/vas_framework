@@ -19,8 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\manager\InputManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Clock.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\Property.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\Keyboard.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\keyboard\KeyboardCore.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sdlcore\keyboard\Scancode.hpp" />
     <ClInclude Include="src\test\scenes\MainScene.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\SceneManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\util\CommonTools.hpp" />
@@ -65,8 +69,11 @@
     <ClInclude Include="src\libraries\vasframework\manager\TextureManager.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\manager\InputManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Clock.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\Property.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\keyboard\KeyboardCore.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sdlcore\keyboard\Scancode.cpp" />
     <ClCompile Include="src\test\scenes\MainScene.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\SceneManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\util\CommonTools.cpp" />
@@ -153,7 +160,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_65_1;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SDK_HOME)\boost_1_66_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -163,7 +170,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_62_0;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SDL_HOME)\boost_1_66_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_62_0;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

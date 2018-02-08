@@ -54,4 +54,9 @@ namespace vas
 	{
 		return ticks;
 	}
+
+	Counter::operator const size_t&() const
+	{
+		return ticks;
+	}
 }

@@ -7,8 +7,8 @@ namespace sdl
 {
 	namespace ttf
 	{
-		bool VAS_DECLSPEC init();
-		void VAS_DECLSPEC quit();
-		bool VAS_DECLSPEC wasInit();
+		VAS_DECLSPEC bool init();
+		VAS_DECLSPEC void quit();
+		VAS_DECLSPEC bool wasInit();
 	}
 }

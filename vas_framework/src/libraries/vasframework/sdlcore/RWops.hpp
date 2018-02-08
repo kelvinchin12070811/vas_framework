@@ -61,7 +61,7 @@ namespace sdl
 		*
 		*  \return 0 if successful or -1 on write error when flushing data.
 		*/
-		void VAS_DECLSPEC close(RWops* instance);
+		VAS_DECLSPEC void close(RWops* instance);
 
 		inline RWops* fromFile(const std::string& name, const std::string& mode = u8"rb")
 		{
