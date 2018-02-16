@@ -1,12 +1,14 @@
 #pragma once
-#include "../../libraries/vasframework/graphics/scene/SceneBase.hpp"
+#include <memory>
 #include "../../libraries/vasframework/sreflex/IObjectAutoRegistrar.h"
 #include "../../libraries/vasframework/base/Base.hpp"
 #include "../../libraries/vasframework/manager/InputManager.hpp"
+#include "../../libraries/vasframework/graphics/sprites/SpriteSheet.hpp"
+#include "AbstractFrameCountingScene.hpp"
 
 namespace scene
 {
-	class MainScene : public vas::SceneBase
+	class MainScene : public AbstractFrameCountingScene
 	{
 	public:
 		MainScene();
@@ -21,14 +23,12 @@ namespace scene
 		void eventSlot(sdl::Event& ev);
 	private:
 		void eventKeyPressHwnd(sdl::Event& ev, bool isKeyDown);
-
+		void meFinishedPlaying(int channel);
 		static vas::sreflex::IObjectAutoRegistrar<MainScene> _registrar;
 
 		sdl::mixer::Music bgm;
 		sdl::mixer::Chunk me{ 1 };
-		sdl::Texture testTexture;
-		sdl::Rect testRect;
-		sdl::Point center;
-		double angle = 0;
+		std::shared_ptr<vas::Sprite> testSprite{ nullptr };
+		std::shared_ptr<vas::SpriteSheet> testSheet{ nullptr };
 	};
 }

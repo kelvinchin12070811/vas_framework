@@ -44,6 +44,7 @@ namespace vas
 
 	void Timer::stop()
 	{
+		if (countingState == false) return;
 		countingState = false;
 		if (!timerThread.joinable())
 			throw std::runtime_error("Timer thread is unjoinable.");

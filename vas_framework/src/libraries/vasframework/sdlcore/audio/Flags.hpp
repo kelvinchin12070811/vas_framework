@@ -36,9 +36,9 @@ namespace sdl
 			mid = MUS_MID,
 			ogg = MUS_OGG,
 			mp3 = MUS_MP3,
-			mp3Mad = MUS_MP3_MAD,
+			//mp3Mad = Mix_MusicType::MUS_MP3_MAD_UNUSED,
 			flac = MUS_FLAC,
-			modplug = MUS_MODPLUG
+			//modplug = MUS_MODPLUG
 		};
 	}
 }

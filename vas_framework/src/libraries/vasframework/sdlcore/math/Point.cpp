@@ -30,6 +30,16 @@ namespace sdl
 		return SDL_Point{ x, y };
 	}
 
+	bool Point::operator==(const Point & rhs) const
+	{
+		return (this->x == rhs.x) && (this->y == rhs.y);
+	}
+
+	bool Point::operator!=(const Point & rhs) const
+	{
+		return (this->x != rhs.x) || (this->y != rhs.y);
+	}
+
 	Point Point::operator+(const Point & rhs) const
 	{
 		return Point(this->x + rhs.x, this->y + rhs.y);

@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\manager\AudioManger.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\sprites\SpriteSheet.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\layer\Layers.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\GraphicsFlags.hpp" />
+    <ClInclude Include="src\libraries\vasframework\math\Angle.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\sprites\Sprite.hpp" />
+    <ClInclude Include="src\test\scenes\AbstractFrameCountingScene.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\InputManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Clock.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\Property.hpp" />
@@ -29,7 +36,7 @@
     <ClInclude Include="src\libraries\vasframework\manager\SceneManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\util\CommonTools.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\IRenderAble.hpp" />
-    <ClInclude Include="src\libraries\vasframework\graphics\scene\SceneBase.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\scene\AbstractScene.hpp" />
     <ClInclude Include="src\libraries\vasframework\sreflex\IObjectAutoRegistrar.h" />
     <ClInclude Include="src\libraries\vasframework\sreflex\IObjectFactory.hpp" />
     <ClInclude Include="src\libraries\vasframework\sreflex\IObjectEntries.hpp" />
@@ -67,8 +74,15 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Texture.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Timer.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\TextureManager.hpp" />
+    <ClInclude Include="src\libraries\vasframework\math\Vector2D.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\manager\AudioManger.cpp" />
+    <ClCompile Include="src\libraries\vasframework\graphics\sprites\SpriteSheet.cpp" />
+    <ClCompile Include="src\libraries\vasframework\graphics\layer\Layers.cpp" />
+    <ClCompile Include="src\libraries\vasframework\math\Angle.cpp" />
+    <ClCompile Include="src\libraries\vasframework\graphics\sprites\Sprite.cpp" />
+    <ClCompile Include="src\test\scenes\AbstractFrameCountingScene.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\InputManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Clock.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\Property.cpp" />
@@ -77,7 +91,7 @@
     <ClCompile Include="src\test\scenes\MainScene.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\SceneManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\util\CommonTools.cpp" />
-    <ClCompile Include="src\libraries\vasframework\graphics\scene\SceneBase.cpp" />
+    <ClCompile Include="src\libraries\vasframework\graphics\scene\AbstractScene.cpp" />
     <ClCompile Include="src\libraries\vasframework\sreflex\IObjectFactory.cpp" />
     <ClCompile Include="src\libraries\vasframework\sreflex\IObjectEntries.cpp" />
     <ClCompile Include="src\libraries\vasframework\base\Base.cpp" />
@@ -106,6 +120,7 @@
     <ClCompile Include="src\libraries\vasframework\math\Timer.cpp" />
     <ClCompile Include="src\libraries\vasframework\util\TextTools.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\TextureManager.cpp" />
+    <ClCompile Include="src\libraries\vasframework\math\Vector2D.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>

@@ -5,6 +5,7 @@
 
 //#define VAS_GEN_DLL
 //#define VAS_USE_UTF16
+#define VAS_WINDOWS_MODE
 
 /*Configuration end*/
 

@@ -7,6 +7,7 @@
 
 namespace sdl
 {
+	//Empty component instance
 	const class EmptyComponent_t
 	{
 	public:

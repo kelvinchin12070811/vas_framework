@@ -2,6 +2,7 @@
 #include "../libraries/vasframework/base/Base.hpp"
 #include "../libraries/vasframework/manager/SceneManager.hpp"
 #include "../libraries/vasframework/util/TextTools.hpp"
+#include "../libraries/vasframework/util/CommonTools.hpp"
 #include "scenes/MainScene.hpp"
 
 //int main(int argc, char** argv)
@@ -11,6 +12,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 	freopen("CONIN$", "r+t", stdin);
 	freopen("CONIN$", "w+t", stdout);
 
+	vas::CommonTools::getInstance().setAssistanceName("宮本サクラ");
 	try
 	{
 		vas::Base::getInstance().init();
@@ -32,9 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 	catch (const std::exception& e)
 	{
 		vas::Base::getInstance().cleanAndQuit();
-		MessageBeep(MB_ICONERROR);
-		MessageBox(nullptr, vas::TextTools::stows(e.what()).c_str(), L"Unhandled Exception Occur", MB_ICONERROR);
-		return -1;
+		return vas::CommonTools::getInstance().messenger(e.what(), vas::CommonTools::MessageType::error, -1);
 	}
 
 	return 0;

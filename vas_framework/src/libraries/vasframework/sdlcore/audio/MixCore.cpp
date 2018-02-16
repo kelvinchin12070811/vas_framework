@@ -1,17 +1,22 @@
 #include "MixCore.hpp"
 
+boost::signals2::signal<void()> sdl::mixer::Signals::onMusicFinished{};
+boost::signals2::signal<void(int)> sdl::mixer::Signals::onChannelFinished{};
+
 namespace sdl
 {
 	namespace mixer
 	{
 		int  init(int flags)
 		{
+			Mix_HookMusicFinished([]() { Signals::onMusicFinished(); });
+			Mix_ChannelFinished([](int channel) { Signals::onChannelFinished(channel); });
 			return Mix_Init(flags);
 		}
 
 		bool init()
 		{
-			return init(MixInitFlags::commonType) == MixInitFlags::commonType;
+			return init(MixInitFlags::commonType) != 0;
 		}
 
 		void quit()

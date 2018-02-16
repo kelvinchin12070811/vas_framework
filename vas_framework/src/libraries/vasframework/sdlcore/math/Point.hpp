@@ -18,6 +18,9 @@ namespace sdl
 		explicit operator SDL_Point();
 		explicit operator const SDL_Point() const;
 
+		bool operator==(const Point& rhs) const;
+		bool operator!=(const Point& rhs) const;
+
 		Point operator+(const Point& rhs) const;
 		Point operator-(const Point& rhs) const;
 		Point operator*(const Point& rhs) const;

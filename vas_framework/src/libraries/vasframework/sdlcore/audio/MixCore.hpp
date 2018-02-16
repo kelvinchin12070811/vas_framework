@@ -1,4 +1,5 @@
 #pragma once
+#include <boost/signals2.hpp>
 #include <SDL_mixer.h>
 #include "../../VASConfig.hpp"
 #include "Flags.hpp"
@@ -9,6 +10,13 @@ namespace sdl
 {
 	namespace mixer
 	{
+		class VAS_DECLSPEC Signals
+		{
+		public:
+			static boost::signals2::signal<void()> onMusicFinished;
+			static boost::signals2::signal<void(int)> onChannelFinished;
+		};
+
 		VAS_DECLSPEC int init(int flags);
 		VAS_DECLSPEC bool init();
 		VAS_DECLSPEC void quit();

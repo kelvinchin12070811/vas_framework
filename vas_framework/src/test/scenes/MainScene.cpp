@@ -1,8 +1,7 @@
-#include <Windows.h>
 #include "MainScene.hpp"
+#include "../../libraries/vasframework/util/CommonTools.hpp"
 #include "../../libraries/vasframework/util/TextTools.hpp"
 #include "../../libraries/vasframework/container/Property.hpp"
-#include "../../libraries/vasframework/manager/TextureManager.hpp"
 
 using namespace std::string_literals;
 
@@ -12,12 +11,13 @@ namespace scene
 
 	MainScene::MainScene()
 	{
+		CallRenderAssistance;
 		vas::Property test1 = "test"s;
 		vas::Property test2 = "test"s;
 		vas::Property test3(test2);
 		bool comResult = test3.notEqual<std::string>(test2);
-		vas::TextTools::println("compare result: "s + (comResult ? "true" : "false"));
-		vas::TextTools::println("test1: " + *test1.get<std::string>());
+		vas::CommonTools::getInstance().messengerf(boost::format("compare result: %s"s) % (comResult ? "true"s : "false"s));
+		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
 	}
 
 	MainScene::~MainScene()
@@ -36,60 +36,44 @@ namespace scene
 			if (bgm.isPaused())
 				bgm.resume();
 		}
-
-		/*angle += 0.6;
-		if (angle >= 360.0)
-			angle -= 360.0;*/
-
-		//vas::TextTools::printfln(boost::format("Last fps: %d") % vas::Base::getInstance().getLastFpsCount());
-		SetConsoleTitle(vas::TextTools::stows((boost::format("Last fps: %d") % vas::Base::getInstance().getLastFpsCount()).str()).c_str());
+		scene::AbstractFrameCountingScene::tick();
 	}
 
 	void MainScene::draw()
 	{
-		auto renderer = vas::Base::getInstance().Renderer();
-		renderer.copyEx(testTexture, &testRect, &testRect, angle, center);
+		scene::AbstractFrameCountingScene::draw();
+		testSheet->drawTile(13, vas::Vector2D(56, 67));
 	}
 
 	void MainScene::Signal_afterSceneCall()
 	{
-		{
-			auto& signal = vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop);
-			signal.connect(boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1));
-		}
+		vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop).connect(
+			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
+		);
+
+		sdl::mixer::Signals::onChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 
 		bgm.load("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 		me.load("assets/audios/me/rain1.ogg");
 
-		if (vas::TextureManager::getInstance().has("assets/textures/639111.jpg"))
-		{
-			testTexture = vas::TextureManager::getInstance().get("assets/textures/639111.jpg");
-		}
-		else
-		{
-			testTexture.loadImage(vas::Base::getInstance().Renderer(), "assets/textures/639111.jpg");
-			vas::TextureManager::getInstance().insert("assets/textures/639111.jpg", testTexture);
-		}
-		
+		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2D());
+		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
+		RenderAssistance->insert(std::make_pair("testSprite", testSprite));
+
 		if (bgm == sdl::emptycomponent ||
-			me == sdl::emptycomponent ||
-			testTexture == sdl::emptycomponent)
+			me == sdl::emptycomponent)
 		{
 			throw sdl::SDLCoreException();
 		}
-
-		testTexture.queryTexture(&testRect.w, &testRect.h);
-		center.x = testRect.w / 2;
-		center.y = testRect.h / 2;
 		bgm.play();
 	}
 
 	void MainScene::Signal_beforeTerminate()
 	{
-		{
-			auto& signal = vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop);
-			signal.disconnect(boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1));
-		}
+		vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop).disconnect(
+			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
+		);
+		sdl::mixer::Signals::onChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 	}
 
 	void MainScene::eventSlot(sdl::Event & ev)
@@ -108,12 +92,12 @@ namespace scene
 		{
 			if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::backspace))
 			{
-				vas::TextTools::println("Debug, test event ignoreer");
+				vas::CommonTools::getInstance().messenger("test event ignoreer");
 				vas::Base::getInstance().IgnoreCloseEventOnce() = true;
 			}
 			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::escape))
 			{
-				vas::TextTools::println("Debug, close event triggered by escape");
+				vas::CommonTools::getInstance().messenger("Debug, close event triggered by escape");
 				ev.pushEvent(sdl::EventType::quit);
 			}
 			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::m))
@@ -124,6 +108,14 @@ namespace scene
 			{
 				bgm.rewind();
 			}
+			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::s))
+				bgm.stop();
 		}
+	}
+
+	void MainScene::meFinishedPlaying(int channel)
+	{
+		if (channel == me.getChannel())
+			vas::CommonTools::getInstance().messenger("me finished playing");
 	}
 }
