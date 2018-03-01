@@ -7,8 +7,8 @@ namespace vas
 	{
 	public:
 		Property();
-		Property(const boost::any& value);
-		Property(boost::any&& value);
+		Property(const std::string& name, const boost::any& value);
+		Property(const std::string& name, boost::any&& value);
 		Property(const Property& rhs);
 		Property(Property&& rhs);
 		~Property();
@@ -38,6 +38,7 @@ namespace vas
 		template <typename T>
 		bool notEqual(const Property& rhs) const;
 	private:
+		std::string name;
 		boost::any value;
 	};
 

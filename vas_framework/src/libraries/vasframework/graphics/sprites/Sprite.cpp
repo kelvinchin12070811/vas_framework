@@ -7,7 +7,7 @@ namespace vas
 	{
 	}
 
-	Sprite::Sprite(const std::string & file, const Vector2D & position, const sdl::Point & origin, BufferMode bfMode):
+	Sprite::Sprite(const std::string & file, const Vector2 & position, const sdl::Point & origin, BufferMode bfMode):
 		filePath(file), position(position), origin(origin)
 	{
 		if (bfMode == BufferMode::buffered)
@@ -37,12 +37,12 @@ namespace vas
 	{
 	}
 
-	void Sprite::move(const Vector2D & movement)
+	void Sprite::move(const Vector2 & movement)
 	{
 		this->position += movement;
 	}
 
-	void Sprite::setPosition(const Vector2D & value)
+	void Sprite::setPosition(const Vector2 & value)
 	{
 		if (this->position != value)
 			this->position = value;
@@ -76,7 +76,7 @@ namespace vas
 		}
 	}
 
-	Vector2D Sprite::getPosition() const
+	Vector2 Sprite::getPosition() const
 	{
 		return position;
 	}

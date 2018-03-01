@@ -6,23 +6,23 @@ namespace vas
 	{
 	}
 
-	Property::Property(const boost::any & value):
-		value(value)
+	Property::Property(const std::string& name, const boost::any & value):
+		name(name), value(value)
 	{
 	}
 
-	Property::Property(boost::any && value):
-		value(std::move(value))
+	Property::Property(const std::string& name, boost::any && value):
+		name(name), value(std::move(value))
 	{
 	}
 
 	Property::Property(const Property & rhs):
-		value(rhs.value)
+		name(rhs.name), value(rhs.value)
 	{
 	}
 
 	Property::Property(Property && rhs):
-		value(std::move(rhs.value))
+		name(std::move(rhs.name)), value(std::move(rhs.value))
 	{
 	}
 
@@ -42,6 +42,7 @@ namespace vas
 
 	void Property::swap(Property & rhs)
 	{
+		name.swap(rhs.name);
 		value.swap(rhs.value);
 	}
 
@@ -61,12 +62,14 @@ namespace vas
 	}
 	Property & Property::operator=(const Property & rhs)
 	{
+		this->name = rhs.name;
 		this->value = rhs.value;
 		return *this;
 	}
 
 	Property & Property::operator=(Property && rhs)
 	{
+		this->name = std::move(rhs.name);
 		this->value = std::move(rhs.value);
 		return *this;
 	}

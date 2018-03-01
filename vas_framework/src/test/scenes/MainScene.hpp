@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "../../libraries/vasframework/sreflex/IObjectAutoRegistrar.h"
+#include "../../libraries/vasframework/sreflex/IObjectAutoRegistrar.hpp"
 #include "../../libraries/vasframework/base/Base.hpp"
 #include "../../libraries/vasframework/manager/InputManager.hpp"
 #include "../../libraries/vasframework/graphics/sprites/SpriteSheet.hpp"
@@ -26,8 +26,7 @@ namespace scene
 		void meFinishedPlaying(int channel);
 		static vas::sreflex::IObjectAutoRegistrar<MainScene> _registrar;
 
-		sdl::mixer::Music bgm;
-		sdl::mixer::Chunk me{ 1 };
+		const std::string me = "assets/audios/me/rain1.ogg";
 		std::shared_ptr<vas::Sprite> testSprite{ nullptr };
 		std::shared_ptr<vas::SpriteSheet> testSheet{ nullptr };
 	};

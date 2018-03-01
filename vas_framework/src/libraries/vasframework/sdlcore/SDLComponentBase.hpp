@@ -34,11 +34,6 @@ namespace sdl
 		{}
 		~SDLComponentBase() {}
 
-		void destroy() const
-		{
-			this->componentInstance == nullptr;
-		}
-
 		bool isEmpty() const
 		{
 			return this->componentInstance == nullptr;
@@ -87,6 +82,11 @@ namespace sdl
 		explicit operator const SDLComponent*() const
 		{
 			return &*componentInstance;
+		}
+
+		void destroy()
+		{
+			this->componentInstance = nullptr;
 		}
 
 		std::shared_ptr<SDLComponent> getComponent()

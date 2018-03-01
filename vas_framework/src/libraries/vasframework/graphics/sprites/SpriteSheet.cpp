@@ -7,7 +7,7 @@ namespace vas
 	{
 	}
 
-	SpriteSheet::SpriteSheet(const std::string & file, const sdl::Point & tileSize, const Vector2D & position,
+	SpriteSheet::SpriteSheet(const std::string & file, const sdl::Point & tileSize, const Vector2 & position,
 		const sdl::Point & origin, BufferMode bfMode):
 		Sprite(file, position, origin, bfMode), tileSize(tileSize)
 	{
@@ -31,7 +31,7 @@ namespace vas
 		return;
 	}
 
-	void SpriteSheet::drawTile(size_t index, const Vector2D & position, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
+	void SpriteSheet::drawTile(size_t index, const Vector2 & position, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
 	{
 		auto renderer = Base::getInstance().Renderer();
 

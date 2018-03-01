@@ -37,7 +37,7 @@
     <ClInclude Include="src\libraries\vasframework\util\CommonTools.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\IRenderAble.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\scene\AbstractScene.hpp" />
-    <ClInclude Include="src\libraries\vasframework\sreflex\IObjectAutoRegistrar.h" />
+    <ClInclude Include="src\libraries\vasframework\sreflex\IObjectAutoRegistrar.hpp" />
     <ClInclude Include="src\libraries\vasframework\sreflex\IObjectFactory.hpp" />
     <ClInclude Include="src\libraries\vasframework\sreflex\IObjectEntries.hpp" />
     <ClInclude Include="src\libraries\vasframework\base\Base.hpp" />
@@ -74,7 +74,7 @@
     <ClInclude Include="src\libraries\vasframework\sdlcore\video\Texture.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Timer.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\TextureManager.hpp" />
-    <ClInclude Include="src\libraries\vasframework\math\Vector2D.hpp" />
+    <ClInclude Include="src\libraries\vasframework\math\Vector2.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\manager\AudioManger.cpp" />
@@ -120,7 +120,7 @@
     <ClCompile Include="src\libraries\vasframework\math\Timer.cpp" />
     <ClCompile Include="src\libraries\vasframework\util\TextTools.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\TextureManager.cpp" />
-    <ClCompile Include="src\libraries\vasframework\math\Vector2D.cpp" />
+    <ClCompile Include="src\libraries\vasframework\math\Vector2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>

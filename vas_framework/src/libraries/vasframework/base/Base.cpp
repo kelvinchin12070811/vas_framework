@@ -4,6 +4,7 @@
 #include "../manager/SceneManager.hpp"
 #include "../manager/TextureManager.hpp"
 #include "../manager/InputManager.hpp"
+#include "../manager/AudioManger.hpp"
 
 namespace vas
 {
@@ -85,6 +86,7 @@ namespace vas
 		frameCounterUpdater.stop();
 		frameCounterUpdater.TimedOutSignal().disconnect_all_slots();
 		TextureManager::getInstance().clear();
+		AudioManger::getInstance().clear();
 		sdl::mixer::quit();
 		sdl::ttf::quit();
 		sdl::image::quit();
@@ -141,6 +143,7 @@ namespace vas
 
 	void Base::tick()
 	{
+		AudioManger::getInstance().tick();
 		InputManager::getInstance().tick();
 		if (!SceneManager::getInstance().isEmpty())
 		{

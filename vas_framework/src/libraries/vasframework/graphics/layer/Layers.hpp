@@ -26,10 +26,10 @@ namespace vas
 		size_t size();
 		bool isEmpty();
 
-		std::vector<Layers::LayerData>::iterator& begin();
-		std::vector<Layers::LayerData>::iterator& end();
-		std::vector<Layers::LayerData>::reverse_iterator& rbegin();
-		std::vector<Layers::LayerData>::reverse_iterator& rend();
+		std::vector<Layers::LayerData>::iterator begin();
+		std::vector<Layers::LayerData>::iterator end();
+		std::vector<Layers::LayerData>::reverse_iterator rbegin();
+		std::vector<Layers::LayerData>::reverse_iterator rend();
 
 		LayerData& get(size_t index);
 		LayerData& get(const std::string& name);

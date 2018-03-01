@@ -2,6 +2,7 @@
 #include "../../libraries/vasframework/util/CommonTools.hpp"
 #include "../../libraries/vasframework/util/TextTools.hpp"
 #include "../../libraries/vasframework/container/Property.hpp"
+#include "../../libraries/vasframework/manager/AudioManger.hpp"
 
 using namespace std::string_literals;
 
@@ -26,15 +27,16 @@ namespace scene
 	
 	void MainScene::tick()
 	{
-		if (me.isPlaying())
+		auto& auManager = vas::AudioManger::getInstance();
+		if (auManager.ME().isPlaying())
 		{
-			if (bgm.isPlaying())
-				bgm.pause();
+			if (auManager.BGM().isPlaying())
+				auManager.BGM().pause();
 		}
 		else
 		{
-			if (bgm.isPaused())
-				bgm.resume();
+			if (auManager.BGM().isPaused())
+				auManager.BGM().resume();
 		}
 		scene::AbstractFrameCountingScene::tick();
 	}
@@ -42,7 +44,7 @@ namespace scene
 	void MainScene::draw()
 	{
 		scene::AbstractFrameCountingScene::draw();
-		testSheet->drawTile(13, vas::Vector2D(56, 67));
+		testSheet->drawTile(13, vas::Vector2(56, 67));
 	}
 
 	void MainScene::Signal_afterSceneCall()
@@ -53,19 +55,11 @@ namespace scene
 
 		sdl::mixer::Signals::onChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 
-		bgm.load("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
-		me.load("assets/audios/me/rain1.ogg");
-
-		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2D());
+		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2());
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
 		RenderAssistance->insert(std::make_pair("testSprite", testSprite));
 
-		if (bgm == sdl::emptycomponent ||
-			me == sdl::emptycomponent)
-		{
-			throw sdl::SDLCoreException();
-		}
-		bgm.play();
+		vas::AudioManger::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 	}
 
 	void MainScene::Signal_beforeTerminate()
@@ -102,20 +96,20 @@ namespace scene
 			}
 			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::m))
 			{
-				me.play();
+				vas::AudioManger::getInstance().playME(me);
 			}
 			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::r))
 			{
-				bgm.rewind();
+				vas::AudioManger::getInstance().BGM().rewind();
 			}
 			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::s))
-				bgm.stop();
+				vas::AudioManger::getInstance().stopBGM();
 		}
 	}
 
 	void MainScene::meFinishedPlaying(int channel)
 	{
-		if (channel == me.getChannel())
+		if (channel == vas::AudioManger::getInstance().ME().getChannel())
 			vas::CommonTools::getInstance().messenger("me finished playing");
 	}
 }

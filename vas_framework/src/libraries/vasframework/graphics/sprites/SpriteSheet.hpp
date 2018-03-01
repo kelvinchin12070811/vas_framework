@@ -7,7 +7,7 @@ namespace vas
 	{
 	public:
 		SpriteSheet();
-		SpriteSheet(const std::string& file, const sdl::Point& tileSize, const Vector2D& position = Vector2D(),
+		SpriteSheet(const std::string& file, const sdl::Point& tileSize, const Vector2& position = Vector2(),
 			const sdl::Point& origin = sdl::Point(), BufferMode bfMode = BufferMode::buffered);
 		SpriteSheet(const SpriteSheet&) = delete;
 		SpriteSheet(SpriteSheet&&) = delete;
@@ -16,7 +16,7 @@ namespace vas
 		void tick() override;
 		void draw() override;
 
-		void drawTile(size_t index, const Vector2D& position, const sdl::Point& origin = sdl::Point(),
+		void drawTile(size_t index, const Vector2& position, const sdl::Point& origin = sdl::Point(),
 			const vas::Angle& angle = vas::Angle(), sdl::Renderer::Flip flip = sdl::Renderer::Flip::none);
 
 		SpriteSheet& operator=(const SpriteSheet&) = delete;

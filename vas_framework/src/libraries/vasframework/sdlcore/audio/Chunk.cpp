@@ -63,13 +63,13 @@ namespace sdl
 			return static_cast<Fading>(Mix_FadingChannel(channel));
 		}
 
-		void Chunk::fadeIn(int channel, int duration, int loops, int terminateDuration)
+		void Chunk::fadeIn(int channel, uint32_t duration, int loops, int terminateDuration)
 		{
 			if (loops > 0) loops--;
 			Mix_FadeInChannelTimed(channel, &*this->componentInstance, loops, duration, terminateDuration);
 		}
 
-		void Chunk::fadeIn(int duration, int loops, int terminateDuration)
+		void Chunk::fadeIn(uint32_t duration, int loops, int terminateDuration)
 		{
 			fadeIn(channel, duration, loops, terminateDuration);
 		}

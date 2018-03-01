@@ -27,8 +27,8 @@ namespace sdl
 			Fading fading();
 
 			//int terminateDuration = -1, this varaible tells the api to terminate the channel at duration in milisecond
-			void fadeIn(int channel, int duration, int loops = 1, int terminateDuration = -1);
-			void fadeIn(int duration, int loops = 1, int terminateDuration = -1);
+			void fadeIn(int channel, uint32_t duration, int loops = 1, int terminateDuration = -1);
+			void fadeIn(uint32_t duration, int loops = 1, int terminateDuration = -1);
 			void fadeOut(int duration);
 
 			//int terminateDuration = -1, this varaible tells the api to terminate the channel at duration in milisecond

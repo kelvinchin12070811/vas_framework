@@ -82,22 +82,22 @@ namespace vas
 		return layerData.empty();
 	}
 
-	std::vector<Layers::LayerData>::iterator & Layers::begin()
+	std::vector<Layers::LayerData>::iterator Layers::begin()
 	{
 		return layerData.begin();
 	}
 
-	std::vector<Layers::LayerData>::iterator & Layers::end()
+	std::vector<Layers::LayerData>::iterator Layers::end()
 	{
 		return layerData.end();
 	}
 
-	std::vector<Layers::LayerData>::reverse_iterator & Layers::rbegin()
+	std::vector<Layers::LayerData>::reverse_iterator Layers::rbegin()
 	{
 		return layerData.rbegin();
 	}
 
-	std::vector<Layers::LayerData>::reverse_iterator & Layers::rend()
+	std::vector<Layers::LayerData>::reverse_iterator Layers::rend()
 	{
 		return layerData.rend();
 	}

@@ -6,7 +6,7 @@
 #include "../../sdlcore/math/Colour.hpp"
 #include "../../sdlcore/math/Point.hpp"
 #include "../../sdlcore/math/Rect.hpp"
-#include "../../math/Vector2D.hpp"
+#include "../../math/Vector2.hpp"
 #include "../../math/Angle.hpp"
 #include "../../manager/TextureManager.hpp"
 
@@ -16,20 +16,20 @@ namespace vas
 	{
 	public:
 		Sprite();
-		Sprite(const std::string& file, const Vector2D& position, const sdl::Point& origin = sdl::Point(), BufferMode bfMode = BufferMode::buffered);
+		Sprite(const std::string& file, const Vector2& position, const sdl::Point& origin = sdl::Point(), BufferMode bfMode = BufferMode::buffered);
 		Sprite(const Sprite&) = delete;
 		Sprite(Sprite&&) = delete;
 		~Sprite();
 
-		void move(const Vector2D& movement);
+		void move(const Vector2& movement);
 
-		void setPosition(const Vector2D& value);
+		void setPosition(const Vector2& value);
 		void setAngle(const Angle& value);
 		void setOrigin(const sdl::Point& value);
 		void setRendererFlip(sdl::Renderer::Flip flip);
 		void setOverlay(const sdl::Colour& value);
 
-		Vector2D getPosition() const;
+		Vector2 getPosition() const;
 		Angle getAngle() const;
 		sdl::Point getOrigin() const;
 		sdl::Renderer::Flip getRendererFlip() const;
@@ -42,7 +42,7 @@ namespace vas
 		Sprite& operator=(Sprite&&) = delete;
 	protected:
 		std::string filePath;
-		Vector2D position;
+		Vector2 position;
 		Angle angle;
 		sdl::Point origin;
 		sdl::Colour overlay;
