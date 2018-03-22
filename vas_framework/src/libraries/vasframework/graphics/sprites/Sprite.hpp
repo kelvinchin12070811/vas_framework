@@ -35,7 +35,7 @@ namespace vas
 		sdl::Renderer::Flip getRendererFlip() const;
 		sdl::Colour getOverlay() const;
 
-		void tick();
+		void tick(); //TODO: position y error
 		void draw();
 
 		Sprite& operator=(const Sprite&) = delete;

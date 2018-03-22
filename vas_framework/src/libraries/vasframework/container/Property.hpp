@@ -23,8 +23,8 @@ namespace vas
 		template <typename OutputType>
 		const OutputType* get() const;
 
-		explicit operator boost::any&();
-		explicit operator const boost::any&() const;
+		operator boost::any&();
+		operator const boost::any&() const;
 		
 		Property& operator=(const Property& rhs);
 		Property& operator=(Property&& rhs);
@@ -57,6 +57,8 @@ namespace vas
 	template<typename T>
 	inline bool Property::isEqual(const Property & rhs) const
 	{
+		using namespace std::string_literals;
+		if (this->type() != typeid(T)) throw std::runtime_error("Unable to compate different type of value: "s + this->type().name() + " != " + typeid(T).name());
 		if (this->type() != rhs.type()) return false;
 		if (*this->get<T>() != *rhs.get<T>()) return false;
 		return true;
@@ -65,6 +67,8 @@ namespace vas
 	template<typename T>
 	inline bool Property::notEqual(const Property & rhs) const
 	{
+		using namespace std::string_literals;
+		if (this->type() != typeid(T)) throw std::runtime_error("Unable to compate different type of value: "s + this->type().name() + " != " + typeid(T).name());
 		if (this->type() != rhs.type()) return true;
 		if (*this->get<T>() != *rhs.get<T>()) return true;
 		return false;
