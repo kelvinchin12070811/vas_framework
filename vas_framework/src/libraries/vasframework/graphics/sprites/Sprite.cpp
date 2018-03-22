@@ -107,7 +107,7 @@ namespace vas
 			destination.x = static_cast<int>(position.x);
 
 		if (static_cast<int>(position.y) != destination.y)
-			destination.y = static_cast<int>(destination.y);
+			destination.y = static_cast<int>(position.y);
 	}
 
 	void Sprite::draw()
