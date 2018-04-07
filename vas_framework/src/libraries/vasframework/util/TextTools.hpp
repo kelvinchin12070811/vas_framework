@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <boost/format.hpp>
-
 #include "../VASConfig.hpp"
 
 namespace vas
@@ -10,13 +9,13 @@ namespace vas
 	class VAS_DECLSPEC TextTools
 	{
 	public:
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 		static bool inited;
 
 		static void initTextTools();
 		static std::string wstos(const std::wstring&str, bool unicode = true);
 		static std::wstring stows(const std::string& str, bool unicode = true);
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 
 		static void print(const std::string& str);
 		static void println(const std::string& str);
@@ -33,12 +32,12 @@ namespace vas
 	inline ReturnType TextTools::read()
 	{
 		ReturnType value;
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 		initTextTools();
 		wcin >> value;
 #else
 		cin >> value;
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 		return value;
 	}
 }

@@ -1,5 +1,6 @@
 #include "Chunk.hpp"
 
+#ifdef VAS_USE_MIXER
 namespace sdl
 {
 	namespace mixer
@@ -8,28 +9,28 @@ namespace sdl
 		{
 		}
 
-		Chunk::Chunk(int channel):
+		Chunk::Chunk(int channel) :
 			channel(channel)
 		{
 		}
 
-		Chunk::Chunk(const std::string & file, int channel):
+		Chunk::Chunk(const std::string & file, int channel) :
 			channel(channel)
 		{
 			load(file);
 		}
 
-		Chunk::Chunk(const Chunk & rhs):
+		Chunk::Chunk(const Chunk & rhs) :
 			SDLComponentBase(rhs.componentInstance)
 		{
 		}
 
-		Chunk::Chunk(Chunk && rhs):
+		Chunk::Chunk(Chunk && rhs) :
 			SDLComponentBase(std::move(rhs.componentInstance))
 		{
 		}
 
-		Chunk::Chunk(Mix_Chunk * instance, SDLComponentBase::DeleterType deleter):
+		Chunk::Chunk(Mix_Chunk * instance, SDLComponentBase::DeleterType deleter) :
 			SDLComponentBase(instance, deleter)
 		{
 		}
@@ -204,3 +205,4 @@ namespace sdl
 		}
 	}
 }
+#endif // VAS_USE_MIXER

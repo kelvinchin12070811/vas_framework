@@ -1,8 +1,11 @@
 #pragma once
+#include "../VASConfig.hpp"
+
+#ifdef VAS_USE_MIXER
 #include <array>
+#include <thread>
 #include <string>
 #include <chrono>
-#include "../VASConfig.hpp"
 #include "../sdlcore/audio/MixCore.hpp"
 
 namespace vas
@@ -14,7 +17,7 @@ namespace vas
 		{
 			static const float MAX_AUDIO;
 		};
-		enum class FadingState : uint8_t { none, fadeIn, fadeOut };
+		//enum class FadingState : uint8_t { none, bgm2me, me2bgm };
 		static AudioManger& getInstance();
 
 		void playBGM(const std::string& file, const std::chrono::milliseconds& fadeInTime = std::chrono::milliseconds(0), int loop = -1);
@@ -26,6 +29,10 @@ namespace vas
 		void stopBGS(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
 		void stopME(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
 		void stopSE(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
+
+		void pauseBGM(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
+
+		void resumeBGM(std::chrono::milliseconds& fadeInTime = std::chrono::milliseconds(0));
 
 		sdl::mixer::Music& BGM();
 		sdl::mixer::Chunk& BGS();
@@ -44,20 +51,23 @@ namespace vas
 
 		void clear();
 		void tick();
+
+		/*std::array<float, 1>& getLastVolume();
+		std::array<float, 4>& getVolume();*/
 	private:
 		AudioManger();
 		~AudioManger();
 
-		AudioManger::FadingState fadeState = AudioManger::FadingState::none;
-		std::chrono::milliseconds crossFadeDuration;
-
 		std::array<std::string, 4> lastFileName;
 		std::array<float, 4> volume{ 128.0f, 128.0f, 128.0f, 128.0f };
-		std::array<float, 2> volumeCache{ 128.0f, 128.0f };
+		std::array<float, 1> lastVolume{ 0 };
 
 		sdl::mixer::Music bgm;
 		sdl::mixer::Chunk bgs{ 0 };
 		sdl::mixer::Chunk me{ 1 };
 		sdl::mixer::Chunk se{ 2 };
+
+		//std::thread fadeWorker;
 	};
 }
+#endif // VAS_USE_MIXER

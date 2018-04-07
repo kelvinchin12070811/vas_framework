@@ -1,6 +1,9 @@
-#include <boost/algorithm/clamp.hpp>
 #include "AudioManger.hpp"
-#include "../../vasframework/util/CommonTools.hpp"
+
+#ifdef VAS_USE_MIXER
+#include <boost/algorithm/clamp.hpp>
+#include "../util/CommonTools.hpp"
+#include "../math/Clock.hpp"
 #include "../sdlcore/SDLCoreException.hpp"
 
 using namespace std::chrono_literals;
@@ -87,6 +90,43 @@ namespace vas
 			se.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
+	void AudioManger::pauseBGM(std::chrono::milliseconds & fadeOutTime)
+	{
+		if (fadeOutTime.count() == 0)
+		{
+			bgm.pause();
+			return;
+		}
+		//TODO: Make BGM Auto Pause when ME is playing
+		/*fadeWorker = std::thread([&]()->void
+		{
+			using namespace std::chrono_literals;
+			auto& bgm = AudioManger::getInstance().BGM();
+			float volumeDec = bgm.volume(-1) / static_cast<float>(fadeOutTime.count());
+			Clock clock;
+			while (true)
+			{
+				clock.reset();
+				if (bgm.volume(-1) == 0) break;
+
+				float newVolume = bgm.volume(-1) - volumeDec;
+				bgm.volume(newVolume);
+				auto now = clock.currentTick();
+				if (now < 1ms)
+					std::this_thread::sleep_for(1ms - now);
+			}
+		});*/
+	}
+
+	void AudioManger::resumeBGM(std::chrono::milliseconds & fadeInTime)
+	{
+		if (fadeInTime.count() == 0)
+		{
+			bgm.resume();
+			return;
+		}
+	}
+
 	sdl::mixer::Music & AudioManger::BGM()
 	{
 		return bgm;
@@ -130,16 +170,13 @@ namespace vas
 	void AudioManger::setBGMVolume(float value)
 	{
 		volume[0] = boost::algorithm::clamp(value, 0, AudioManger::DefValue::MAX_AUDIO);
-		volumeCache[0] = volume[0];
-		bgm.volume(static_cast<int>(volumeCache[0]));
+		bgm.volume(static_cast<int>(volume[0]));
 	}
 
 	void AudioManger::setBGSVolume(float value)
 	{
-
 		volume[1] = boost::algorithm::clamp(value, 0, AudioManger::DefValue::MAX_AUDIO);
-		volumeCache[1] = volume[1];
-		bgs.volume(static_cast<int>(volumeCache[1]));
+		bgs.volume(static_cast<int>(volume[1]));
 	}
 
 	void AudioManger::setMEVolume(float value)
@@ -164,14 +201,17 @@ namespace vas
 
 	void AudioManger::tick()
 	{
-		if (me.isPlaying() && bgm.isPlaying()) //Cross fade from me -> bgm
-		{
-			if (crossFadeDuration.count() != 0)
-			{
-
-			}
-		}
 	}
+
+	/*std::array<float, 1>& AudioManger::getLastVolume()
+	{
+		return lastVolume;
+	}
+
+	std::array<float, 4>& AudioManger::getVolume()
+	{
+		return volume;
+	}*/
 
 	AudioManger::AudioManger()
 	{
@@ -181,3 +221,4 @@ namespace vas
 	{
 	}
 }
+#endif // VAS_USE_MIXER

@@ -1,5 +1,6 @@
 #include "Font.hpp"
 
+#ifdef VAS_USE_TTF
 namespace sdl
 {
 	namespace ttf
@@ -8,17 +9,17 @@ namespace sdl
 		{
 		}
 
-		Font::Font(const Font & rhs):
+		Font::Font(const Font & rhs) :
 			SDLComponentBase(rhs.componentInstance)
 		{
 		}
 
-		Font::Font(Font && rhs):
+		Font::Font(Font && rhs) :
 			SDLComponentBase(std::move(rhs.componentInstance))
 		{
 		}
 
-		Font::Font(TTF_Font * instance, SDLComponentBase::DeleterType deleter):
+		Font::Font(TTF_Font * instance, SDLComponentBase::DeleterType deleter) :
 			SDLComponentBase(instance, deleter)
 		{
 		}
@@ -269,3 +270,4 @@ namespace sdl
 		}
 	}
 }
+#endif // VAS_USE_TTF

@@ -4,8 +4,9 @@
 /*Configuration of framework*/
 
 //#define VAS_GEN_DLL
-//#define VAS_USE_UTF16
 #define VAS_WINDOWS_MODE
+#define VAS_USE_MIXER
+#define VAS_USE_TTF
 
 /*Configuration end*/
 
@@ -16,7 +17,6 @@
 #define VAS_DECLSPEC
 #endif //VAS_GEN_DLL
 
-//Use UTF16 encoded string
 #ifdef VAS_USE_UTF16
 namespace vas
 {

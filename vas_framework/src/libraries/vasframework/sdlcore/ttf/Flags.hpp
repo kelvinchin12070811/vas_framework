@@ -1,4 +1,7 @@
 #pragma once
+#include "../../VASConfig.hpp"
+
+#ifdef VAS_USE_TTF
 #include <SDL_ttf.h>
 
 namespace sdl
@@ -25,3 +28,4 @@ namespace sdl
 		};
 	}
 }
+#endif // VAS_USE_TTF

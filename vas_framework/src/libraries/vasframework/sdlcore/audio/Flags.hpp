@@ -1,4 +1,7 @@
 #pragma once
+#include "../../VASConfig.hpp"
+
+#ifdef VAS_USE_MIXER
 #include <cstdint>
 #include <SDL_mixer.h>
 
@@ -28,7 +31,7 @@ namespace sdl
 			static const uint8_t maxVolume = 128;
 		};
 
-		enum class MusicType{
+		enum class MusicType {
 			none = MUS_NONE,
 			cmd = MUS_CMD,
 			wav = MUS_WAV,
@@ -42,3 +45,4 @@ namespace sdl
 		};
 	}
 }
+#endif // VAS_USE_MIXER

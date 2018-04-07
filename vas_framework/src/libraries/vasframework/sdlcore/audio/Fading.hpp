@@ -1,4 +1,7 @@
 #pragma once
+#include "../../VASConfig.hpp"
+
+#ifdef VAS_USE_MIXER
 #include <SDL_mixer.h>
 
 namespace sdl
@@ -13,3 +16,4 @@ namespace sdl
 		};
 	}
 }
+#endif // VAS_USE_MIXER

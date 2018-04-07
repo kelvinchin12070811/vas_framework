@@ -1,7 +1,9 @@
 #pragma once
+#include "../../VASConfig.hpp"
+
+#ifdef VAS_USE_MIXER
 #include <boost/signals2.hpp>
 #include <SDL_mixer.h>
-#include "../../VASConfig.hpp"
 #include "Flags.hpp"
 #include "Music.hpp"
 #include "Chunk.hpp"
@@ -21,7 +23,7 @@ namespace sdl
 		VAS_DECLSPEC bool init();
 		VAS_DECLSPEC void quit();
 		VAS_DECLSPEC bool openAudio(int frequency = DefaultValues::frequency, uint16_t format = DefaultValues::format,
-																int channels = DefaultValues::channelCount, int chunckSize = DefaultValues::chunkSize);
+			int channels = DefaultValues::channelCount, int chunckSize = DefaultValues::chunkSize);
 		VAS_DECLSPEC void closeAudio();
 		VAS_DECLSPEC int allocateChannels(int numChannels);
 		VAS_DECLSPEC bool querySpec(int *frequency, uint16_t *format, int* channels);
@@ -116,3 +118,4 @@ namespace sdl
 		VAS_DECLSPEC int volume(int channel, int volume);
 	}
 }
+#endif // VAS_USE_MIXER

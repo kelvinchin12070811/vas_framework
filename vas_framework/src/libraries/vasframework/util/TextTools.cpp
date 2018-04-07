@@ -2,16 +2,16 @@
 #include <iostream>
 #include "TextTools.hpp"
 
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 #include <memory>
 #include <Windows.h>
 #include <io.h>
 #include <fcntl.h>
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 
 namespace vas
 {
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 	bool TextTools::inited = false;
 
 	void TextTools::initTextTools()
@@ -47,51 +47,51 @@ namespace vas
 		MultiByteToWideChar(unicodeCP, 0, str.c_str(), oriLength, wstr.get(), newLength);
 		return std::wstring(wstr.get());
 	}
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 
 	void TextTools::print(const std::string & str)
 	{
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 		initTextTools();
 		std::wcout << stows(str);
 #else
 		std::cout << str;
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 	}
 
 	void TextTools::println(const std::string & str)
 	{
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 		initTextTools();
 		std::wcout << stows(str) << std::endl;
 #else
 		std::cout << str << std::endl;
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 	}
 
 	void TextTools::printf(const boost::format & fStr)
 	{
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 		initTextTools();
 		std::wcout << stows(boost::str(fStr));
 #else
 		std::cout << boost::str(fStr);
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 	}
 
 	void TextTools::printfln(const boost::format & fStr)
 	{
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 		initTextTools();
 		std::wcout << stows(boost::str(fStr)) << std::endl;
 #else
 		std::cout << boost::str(fStr) << std::endl;
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 	}
 
 	std::string TextTools::readln()
 	{
-#ifdef _WINDOWS
+#ifdef VAS_WINDOWS_MODE
 		initTextTools();
 		std::wstring buff;
 		std::getline(std::wcin, buff);
@@ -100,6 +100,6 @@ namespace vas
 		std::string buff;
 		std::getline(cin, buff);
 		return buff;
-#endif // _WINDOWS
+#endif // VAS_WINDOWS_MODE
 	}
 }

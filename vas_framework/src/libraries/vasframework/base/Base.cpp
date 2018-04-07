@@ -18,11 +18,15 @@ namespace vas
 	{
 		using namespace std::chrono_literals;
 		if (!sdl::init()) throw sdl::SDLCoreException();
-		if (!sdl::ttf::init()) throw sdl::SDLCoreException();
 		if (!sdl::image::init()) throw sdl::SDLCoreException();
-		if (!sdl::mixer::init()) throw sdl::SDLCoreException();
+#ifdef VAS_USE_TTF
+		if (!sdl::ttf::init()) throw sdl::SDLCoreException();
+#endif // VAS_USE_TTF
 
+#ifdef VAS_USE_MIXER
 		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException();
+#endif // VAS_USE_MIXER
+
 
 		frameStayTime = 1000ms / fps;
 		frameIndex.setAutoResetLimit(fps);
@@ -77,7 +81,9 @@ namespace vas
 		}
 
 		mainWindow.destroy();
+#ifdef VAS_USE_MIXER
 		sdl::mixer::closeAudio();
+#endif // VAS_USE_MIXER
 		SceneManager::getInstance().clear();
 	}
 
@@ -86,9 +92,15 @@ namespace vas
 		frameCounterUpdater.stop();
 		frameCounterUpdater.TimedOutSignal().disconnect_all_slots();
 		TextureManager::getInstance().clear();
+#ifdef VAS_USE_MIXER
 		AudioManger::getInstance().clear();
 		sdl::mixer::quit();
+#endif // VAS_USE_MIXER
+
+#ifdef VAS_USE_TTF
 		sdl::ttf::quit();
+#endif // VAS_USE_TTF
+
 		sdl::image::quit();
 		sdl::quit();
 	}
@@ -143,7 +155,6 @@ namespace vas
 
 	void Base::tick()
 	{
-		AudioManger::getInstance().tick();
 		InputManager::getInstance().tick();
 		if (!SceneManager::getInstance().isEmpty())
 		{

@@ -1,6 +1,8 @@
 #pragma once
-#include <SDL_ttf.h>
 #include "../../VASConfig.hpp"
+
+#ifdef VAS_USE_TTF
+#include <SDL_ttf.h>
 #include "../SDLComponentBase.hpp"
 #include "../RWops.hpp"
 #include "Flags.hpp"
@@ -58,7 +60,7 @@ namespace sdl
 			Surface renderTextShaded(const std::string& text, const Colour& foreground, const Colour& background);
 			Surface renderTextBlended(const std::string& text, const Colour& foreground);
 			Surface renderTextBlended(const std::string& text, const Colour& foreground, uint32_t warpLength);
-			
+
 			Surface renderUTF8Solid(const std::string& text, const Colour& foreground);
 			Surface renderUTF8Shaded(const std::string& text, const Colour& foreground, const Colour& background);
 			Surface renderUTF8Blended(const std::string& text, const Colour& foreground);
@@ -81,3 +83,4 @@ namespace sdl
 		};
 	}
 }
+#endif // VAS_USE_TTF

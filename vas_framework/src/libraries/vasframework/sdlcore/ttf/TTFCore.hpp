@@ -1,6 +1,8 @@
 #pragma once
-#include <SDL_ttf.h>
 #include "../../VASConfig.hpp"
+
+#ifdef VAS_USE_TTF
+#include <SDL_ttf.h>
 #include "Font.hpp"
 
 namespace sdl
@@ -12,3 +14,4 @@ namespace sdl
 		VAS_DECLSPEC bool wasInit();
 	}
 }
+#endif // VAS_USE_TTF

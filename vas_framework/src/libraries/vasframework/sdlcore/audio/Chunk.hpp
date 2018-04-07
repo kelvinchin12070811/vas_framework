@@ -1,6 +1,8 @@
 #pragma once
-#include <SDL_mixer.h>
 #include "../../VASConfig.hpp"
+
+#ifdef VAS_USE_MIXER
+#include <SDL_mixer.h>
 #include "../SDLComponentBase.hpp"
 #include "../RWops.hpp"
 #include "Fading.hpp"
@@ -76,3 +78,4 @@ namespace sdl
 		};
 	}
 }
+#endif // VAS_USE_MIXER

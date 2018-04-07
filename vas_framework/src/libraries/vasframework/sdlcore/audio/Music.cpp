@@ -1,5 +1,6 @@
 #include "Music.hpp"
 
+#ifdef VAS_USE_MIXER
 namespace sdl
 {
 	namespace mixer
@@ -13,17 +14,17 @@ namespace sdl
 			load(file);
 		}
 
-		Music::Music(const Music & other):
+		Music::Music(const Music & other) :
 			SDLComponentBase(other.componentInstance)
 		{
 		}
 
-		Music::Music(Music && other):
+		Music::Music(Music && other) :
 			SDLComponentBase(std::move(other.componentInstance))
 		{
 		}
 
-		Music::Music(Mix_Music * other):
+		Music::Music(Mix_Music * other) :
 			SDLComponentBase(other, &notDeleteDeleter)
 		{
 		}
@@ -144,3 +145,4 @@ namespace sdl
 		}
 	}
 }
+#endif // VAS_USE_MIXER
