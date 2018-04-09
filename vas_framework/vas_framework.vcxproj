@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\manager\ScreenManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\AudioManger.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\sprites\SpriteSheet.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\layer\Layers.hpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="src\libraries\vasframework\math\Vector2.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\manager\ScreenManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\AudioManger.cpp" />
     <ClCompile Include="src\libraries\vasframework\graphics\sprites\SpriteSheet.cpp" />
     <ClCompile Include="src\libraries\vasframework\graphics\layer\Layers.cpp" />

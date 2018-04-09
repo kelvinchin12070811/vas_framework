@@ -3,12 +3,23 @@
 
 /*Configuration of framework*/
 
+#ifndef VAS_GLOB_CONFIG
+#define VAS_GLOB_CONFIG
+/* Generate DLL friendly classes */
 //#define VAS_GEN_DLL
+
+/* Using Windows specific codes */
 #define VAS_WINDOWS_MODE
+
+/* Enable SDL_Mixer */
 #define VAS_USE_MIXER
+
+/* Enable SDL_TTF */
 #define VAS_USE_TTF
 
 /*Configuration end*/
+#endif // !VAS_GLOB_CNFIG
+
 
 //Generate library for dll
 #ifdef VAS_GEN_DLL

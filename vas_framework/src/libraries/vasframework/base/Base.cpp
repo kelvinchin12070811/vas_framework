@@ -2,6 +2,7 @@
 #include "Base.hpp"
 #include "../util/TextTools.hpp"
 #include "../manager/SceneManager.hpp"
+#include "../manager/ScreenManager.hpp"
 #include "../manager/TextureManager.hpp"
 #include "../manager/InputManager.hpp"
 #include "../manager/AudioManger.hpp"
@@ -160,18 +161,20 @@ namespace vas
 		{
 			SceneManager::getInstance().current()->tick();
 		}
+		ScreenManager::getInstance().tick();
 	}
 
 	void Base::draw()
 	{
+		mainRenderer.clear();
 		if (!SceneManager::getInstance().isEmpty())
 		{
-			mainRenderer.clear();
 			if (doubleSceneRendering && SceneManager::getInstance().atleast2Scene())
 				SceneManager::getInstance().previous()->draw();
 			SceneManager::getInstance().current()->draw();
-			mainRenderer.present();
 		}
+		ScreenManager::getInstance().draw();
+		mainRenderer.present();
 	}
 
 	void Base::delay()
