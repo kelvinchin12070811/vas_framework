@@ -12,8 +12,7 @@ namespace vas
 			IObjectFactory();
 			~IObjectFactory();
 
-			IObject* createObjectRaw(const std::string& objName);
-			std::shared_ptr<IObject> createObject(const std::string& objName);
+			std::unique_ptr<IObject> createObject(const std::string& objName);
 		};
 	}
 }

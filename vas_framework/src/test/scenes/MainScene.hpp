@@ -8,7 +8,7 @@
 
 namespace scene
 {
-	class MainScene : public AbstractFrameCountingScene
+	class MainScene : public AbstractFrameCountingScene, public vas::sreflex::IObject
 	{
 	public:
 		MainScene();

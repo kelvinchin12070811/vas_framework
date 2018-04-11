@@ -1,16 +1,15 @@
 #pragma once
-#include "../../sreflex/IObject.hpp"
 #include "../layer/Layers.hpp"
 #include "../../VASConfig.hpp"
 
 #define RenderAssistance this->__renderAssistance
 #define CallRenderAssistance \
 	if (this->__renderAssistance == nullptr) \
-		this->__renderAssistance = std::make_shared<vas::Layers>()
+		this->__renderAssistance = std::make_unique<vas::Layers>()
 
 namespace vas
 {
-	class VAS_DECLSPEC AbstractScene : public vas::sreflex::IObject
+	class VAS_DECLSPEC AbstractScene
 	{
 	public:
 		AbstractScene();
@@ -28,6 +27,6 @@ namespace vas
 		// Call to current scene when previous scene changed
 		virtual void Signal_afterSceneCall();
 	protected:
-		std::shared_ptr<Layers> __renderAssistance{ nullptr };
+		std::unique_ptr<Layers> __renderAssistance{ nullptr };
 	};
 }

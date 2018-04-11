@@ -9,11 +9,11 @@ namespace vas
 {
 	namespace sreflex
 	{
-		using IObjectCreateFunction = IObject* (*)();
+		using IObjectCreateFunction = std::unique_ptr<IObject> (*)();
 		template <typename IObjectType>
-		IObject* createObjectBase()
+		std::unique_ptr<IObject> createObjectBase()
 		{
-			return new IObjectType();
+			return std::make_unique<IObjectType>();
 		}
 
 		class VAS_DECLSPEC IObjectEntries

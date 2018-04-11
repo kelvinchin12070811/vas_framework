@@ -12,13 +12,8 @@ namespace vas
 		class IObject
 		{
 		public:
-			IObject()
-			{
-			}
-
-			virtual ~IObject()
-			{
-			}
+			IObject() {}
+			virtual ~IObject() = 0 {}
 		};
 	}
 }
