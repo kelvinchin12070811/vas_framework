@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <boost/format.hpp>
+#include <boost/algorithm/clamp.hpp>
+#include <boost/any.hpp>
 #include "Layers.hpp"
 
 namespace vas
@@ -65,6 +67,42 @@ namespace vas
 	{
 		if (index >= layerData.size()) return;
 		layerData.erase(layerData.begin() + index);
+	}
+
+	size_t Layers::shift(size_t index, Layers::ShiftDirection direction, size_t count)
+	{
+		if (index >= layerData.size()) throw std::logic_error((boost::format("Cannot shift item at %i because this layer only contain %i item(s)") % index % layerData.size()).str());
+
+		size_t newPos = index;
+		switch (direction)
+		{
+		case vas::Layers::ShiftDirection::up:
+			if (index == 0) return index; // Don't shift if the item is already on the very top
+
+			//newPos = boost::algorithm::clamp(newPos - count, 0, layerData.size());
+			for (size_t i = 0; i < count; i++)
+			{
+				if (newPos == layerData.size() - 1) break;
+				newPos++;
+			}
+			std::rotate(this->begin() + newPos, this->begin() + index, this->begin() + index + 1);
+			break;
+		case vas::Layers::ShiftDirection::down:
+			if (index == layerData.size() - 1) return index; // Don't shift if the item is already on the very bottom
+			auto oriIndex = index;
+			//newPos = boost::algorithm::clamp(newPos + count, 0, layerData.size());
+			newPos = layerData.size() - 1 - newPos;
+			index = layerData.size() - 1 - index;
+			for (size_t i = 0; i < count; i++)
+			{
+				if (newPos == 0) break;
+				newPos--;
+			}
+			std::rotate(this->rbegin() + newPos, this->rbegin() + index, this->rbegin() + index + 1);
+			return oriIndex;
+			break;
+		}
+		return newPos;
 	}
 
 	void Layers::clear()

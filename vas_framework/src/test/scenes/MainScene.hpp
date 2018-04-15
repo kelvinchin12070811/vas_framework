@@ -28,6 +28,7 @@ namespace scene
 
 		const std::string me = "assets/audios/me/rain1.ogg";
 		std::shared_ptr<vas::Sprite> testSprite{ nullptr };
+		std::shared_ptr<vas::Sprite> testSprite2{ nullptr };
 		std::shared_ptr<vas::SpriteSheet> testSheet{ nullptr };
 	};
 }

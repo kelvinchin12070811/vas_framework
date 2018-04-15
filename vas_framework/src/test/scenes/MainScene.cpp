@@ -56,8 +56,13 @@ namespace scene
 		sdl::mixer::Signals::onChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2());
+		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::Vector2());
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
+
 		RenderAssistance->insert(std::make_pair("testSprite", testSprite));
+		RenderAssistance->insert(std::make_pair("testSprite2", testSprite2));
+		RenderAssistance->insert(std::make_pair("gostItem1", nullptr));
+		RenderAssistance->insert(std::make_pair("gostItem2", nullptr));
 
 		vas::AudioManger::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 	}

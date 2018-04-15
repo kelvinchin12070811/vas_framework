@@ -9,6 +9,7 @@ namespace vas
 	class Layers : public IRendererAble
 	{
 	public:
+		enum class ShiftDirection : uint8_t { up, down };
 		using LayerData = std::pair<std::string, std::shared_ptr<IRendererAble>>;
 		Layers();
 		Layers(const Layers& rhs);
@@ -21,6 +22,8 @@ namespace vas
 		void remove();
 		void remove(const std::string& name);
 		void remove(size_t index);
+
+		size_t shift(size_t index, Layers::ShiftDirection direction, size_t count);
 
 		void clear();
 		size_t size();
