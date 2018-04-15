@@ -1,4 +1,6 @@
 #pragma once
+#include <chrono>
+#include <boost/signals2.hpp>
 #include "../sdlcore/video/Renderer.hpp"
 #include "../graphics/sprites/Sprite.hpp"
 #include "../graphics/layer/Layers.hpp"
@@ -9,6 +11,7 @@ namespace vas
 	{
 	public:
 		enum class FadingState : uint8_t { none, fade_in, fade_out };
+	public:
 		static ScreenManager& getInstance();
 
 		void tick();
@@ -25,14 +28,25 @@ namespace vas
 		uint8_t getScreenOpacity();
 		void setScreenOpacity(uint8_t value);
 
+		void fadeScreen(ScreenManager::FadingState fadeType, const std::chrono::milliseconds& time);
+
 		ScreenManager::FadingState getCurrentFadingState();
+	public:
+		bool WaitFadingCompleate{ false };
+		boost::signals2::signal<void(ScreenManager::FadingState)> Signal_FadeBegin;
+		boost::signals2::signal<void(ScreenManager::FadingState)> Signal_FadeEnd;
 	private:
 		ScreenManager();
 		~ScreenManager();
 
+		void fader();
+	private:
 		sdl::Texture screenMasterOverlay;
 		sdl::Renderer masterRenderer;
 		sdl::Colour masterOverlayColour{ 255, 255, 255, 255};
-		FadingState currentState = FadingState::none;
+		FadingState currentState{ FadingState::none };
+		std::chrono::milliseconds fadingDuration;
+		double screenOpacityBuffer{ 0.0f };
+		double screenOpacityDelta{ 0.0f };
 	};
 }

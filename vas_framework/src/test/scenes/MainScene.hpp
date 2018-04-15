@@ -4,6 +4,7 @@
 #include "../../libraries/vasframework/base/Base.hpp"
 #include "../../libraries/vasframework/manager/InputManager.hpp"
 #include "../../libraries/vasframework/graphics/sprites/SpriteSheet.hpp"
+#include "../../libraries/vasframework/manager/ScreenManager.hpp"
 #include "AbstractFrameCountingScene.hpp"
 
 namespace scene
@@ -24,11 +25,17 @@ namespace scene
 	private:
 		void eventKeyPressHwnd(sdl::Event& ev, bool isKeyDown);
 		void meFinishedPlaying(int channel);
+
+		void faderTrigerer();
+
+		void on_fadeCompleate(vas::ScreenManager::FadingState compleatedState);
+	private:
 		static vas::sreflex::IObjectAutoRegistrar<MainScene> _registrar;
 
 		const std::string me = "assets/audios/me/rain1.ogg";
 		std::shared_ptr<vas::Sprite> testSprite{ nullptr };
 		std::shared_ptr<vas::Sprite> testSprite2{ nullptr };
 		std::shared_ptr<vas::SpriteSheet> testSheet{ nullptr };
+		bool fadeController{ false };
 	};
 }

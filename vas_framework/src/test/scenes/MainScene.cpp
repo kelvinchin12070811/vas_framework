@@ -13,6 +13,7 @@ namespace scene
 	MainScene::MainScene()
 	{
 		CallRenderAssistance;
+		vas::ScreenManager::getInstance().setScreenOpacity(0);
 		vas::Property test1("test1", "test"s);
 		vas::Property test2("test2", 0xCC50);
 		vas::Property test3(test2);
@@ -49,11 +50,13 @@ namespace scene
 
 	void MainScene::Signal_afterSceneCall()
 	{
+		using namespace std::chrono_literals;
 		vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop).connect(
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
 		);
 
 		sdl::mixer::Signals::onChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
+		vas::ScreenManager::getInstance().Signal_FadeEnd.connect(boost::bind(&MainScene::on_fadeCompleate, this, boost::placeholders::_1));
 
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2());
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::Vector2());
@@ -61,10 +64,9 @@ namespace scene
 
 		RenderAssistance->insert(std::make_pair("testSprite", testSprite));
 		RenderAssistance->insert(std::make_pair("testSprite2", testSprite2));
-		RenderAssistance->insert(std::make_pair("gostItem1", nullptr));
-		RenderAssistance->insert(std::make_pair("gostItem2", nullptr));
 
 		vas::AudioManger::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
+		vas::ScreenManager::getInstance().fadeScreen(vas::ScreenManager::FadingState::fade_in, 5s);
 	}
 
 	void MainScene::Signal_beforeTerminate()
@@ -73,6 +75,7 @@ namespace scene
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
 		);
 		sdl::mixer::Signals::onChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
+		vas::ScreenManager::getInstance().Signal_FadeEnd.disconnect_all_slots();
 	}
 
 	void MainScene::eventSlot(sdl::Event & ev)
@@ -109,6 +112,11 @@ namespace scene
 			}
 			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::s))
 				vas::AudioManger::getInstance().stopBGM();
+			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::f))
+			{
+				fadeController = !fadeController;
+				faderTrigerer();
+			}
 		}
 	}
 
@@ -116,5 +124,33 @@ namespace scene
 	{
 		if (channel == vas::AudioManger::getInstance().ME().getChannel())
 			vas::CommonTools::getInstance().messenger("me finished playing");
+	}
+
+	void MainScene::faderTrigerer()
+	{
+		using vas::ScreenManager;
+		using namespace std::chrono_literals;
+		switch (fadeController)
+		{
+		case false:
+			ScreenManager::getInstance().fadeScreen(ScreenManager::FadingState::fade_in, 5s);
+			break;
+		case true:
+			ScreenManager::getInstance().fadeScreen(ScreenManager::FadingState::fade_out, 5s);
+			break;
+		}
+	}
+
+	void MainScene::on_fadeCompleate(vas::ScreenManager::FadingState compleatedState)
+	{
+		switch (compleatedState)
+		{
+		case vas::ScreenManager::FadingState::fade_in:
+			vas::CommonTools::getInstance().messenger("Operation fade in compleated");
+			break;
+		case vas::ScreenManager::FadingState::fade_out:
+			vas::CommonTools::getInstance().messenger("Operation fade out compleated");
+			break;
+		}
 	}
 }

@@ -37,6 +37,7 @@ namespace vas
 		boost::signals2::signal<void(sdl::Event&)>& EventProcessorSignal(Base::SignalsType::EventProcessor type);
 		const Counter& FrameIndex();
 		size_t getLastFpsCount();
+		size_t getRefreshRate();
 	private:
 		Base();
 		~Base();

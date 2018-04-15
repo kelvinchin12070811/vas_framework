@@ -146,6 +146,11 @@ namespace vas
 		return lastFpsCount;
 	}
 
+	size_t Base::getRefreshRate()
+	{
+		return fps;
+	}
+
 	Base::Base()
 	{
 	}
@@ -159,7 +164,13 @@ namespace vas
 		InputManager::getInstance().tick();
 		if (!SceneManager::getInstance().isEmpty())
 		{
-			SceneManager::getInstance().current()->tick();
+			if (ScreenManager::getInstance().WaitFadingCompleate) // If waiting ScreenManager to compleate fading
+			{
+				if (ScreenManager::getInstance().getCurrentFadingState() == ScreenManager::FadingState::none)
+					SceneManager::getInstance().current()->tick();
+			}
+			else // if not wait for ScreenManager conpleate fading
+				SceneManager::getInstance().current()->tick();
 		}
 		ScreenManager::getInstance().tick();
 	}
