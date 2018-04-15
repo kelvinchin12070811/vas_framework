@@ -10,8 +10,8 @@ namespace sdl
 	{
 		int  init(int flags)
 		{
-			Mix_HookMusicFinished([]() { Signals::onMusicFinished(); });
-			Mix_ChannelFinished([](int channel) { Signals::onChannelFinished(channel); });
+			Mix_HookMusicFinished(&__INNER_ON_MUSIC_END);
+			Mix_ChannelFinished(&__INNER_ON_CHANNEL_END);
 			return Mix_Init(flags);
 		}
 
@@ -105,5 +105,15 @@ namespace sdl
 			return Mix_Volume(channel, volume);
 		}
 	}
+}
+
+void __INNER_ON_MUSIC_END()
+{
+	sdl::mixer::Signals::onMusicFinished();
+}
+
+void __INNER_ON_CHANNEL_END(int channel)
+{
+	sdl::mixer::Signals::onChannelFinished(channel);
 }
 #endif // VAS_USE_MIXER

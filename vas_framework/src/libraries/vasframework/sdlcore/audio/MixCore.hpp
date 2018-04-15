@@ -118,4 +118,7 @@ namespace sdl
 		VAS_DECLSPEC int volume(int channel, int volume);
 	}
 }
+
+void __INNER_ON_MUSIC_END();
+void __INNER_ON_CHANNEL_END(int channel);
 #endif // VAS_USE_MIXER
