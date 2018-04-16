@@ -14,7 +14,14 @@ namespace vas
 
 		std::unique_ptr<IObject> IObjectFactory::createObject(const std::string & objName)
 		{
-			return IObjectEntries::getInstance().getRegistry()->at(objName)();
+			try
+			{
+				return IObjectEntries::getInstance().getRegistry()->at(objName)();
+			}
+			catch (const std::exception&)
+			{
+				return nullptr;
+			}
 		}
 	}
 }
