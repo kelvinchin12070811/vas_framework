@@ -12,12 +12,14 @@ namespace vas
 
 	void AbstractScene::tick()
 	{
-		this->__renderAssistance->tick();
+		if (IsRenderAssistanceReady)
+			this->__renderAssistance->tick();
 	}
 
 	void AbstractScene::draw()
 	{
-		this->__renderAssistance->draw();
+		if (IsRenderAssistanceReady)
+			this->__renderAssistance->draw();
 	}
 
 	void AbstractScene::Signal_beforeTerminate()
@@ -38,5 +40,10 @@ namespace vas
 	void AbstractScene::Signal_afterSceneCall()
 	{
 		return;
+	}
+
+	bool AbstractScene::__isRenderAssistanceEnabled()
+	{
+		return __enableRenderAssistance;
 	}
 }
