@@ -76,6 +76,7 @@
     <ClInclude Include="src\libraries\vasframework\math\Timer.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\TextureManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Vector2.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\text\Text.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\manager\ScreenManager.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="src\libraries\vasframework\util\TextTools.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\TextureManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Vector2.cpp" />
+    <ClCompile Include="src\libraries\vasframework\graphics\text\Text.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>
