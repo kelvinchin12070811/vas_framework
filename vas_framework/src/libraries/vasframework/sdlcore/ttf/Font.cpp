@@ -30,22 +30,22 @@ namespace sdl
 
 		void Font::openFont(const std::string & file, int fontSize)
 		{
-			TTF_OpenFont(file.c_str(), fontSize);
+			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFont(file.c_str(), fontSize), &Font::defDeleter);
 		}
 
 		void Font::openFont(const std::string & file, int fontSize, long index)
 		{
-			TTF_OpenFontIndex(file.c_str(), fontSize, index);
+			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFontIndex(file.c_str(), fontSize, index), &Font::defDeleter);
 		}
 
 		void Font::openFontRaw(rwops::RWops * src, int fontSize, bool freeSrc)
 		{
-			TTF_OpenFontRW(src, freeSrc ? 1 : 0, fontSize);
+			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFontRW(src, freeSrc ? 1 : 0, fontSize), &Font::defDeleter);
 		}
 
 		void Font::openFontRaw(rwops::RWops * src, int fontSize, long index, bool freeSrc)
 		{
-			TTF_OpenFontIndexRW(src, freeSrc ? 1 : 0, fontSize, index);
+			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFontIndexRW(src, freeSrc ? 1 : 0, fontSize, index), &Font::defDeleter);
 		}
 
 		FontStyle::FlagType Font::getFontStyle()
