@@ -8,7 +8,7 @@ using namespace std::string_literals;
 
 namespace scene
 {
-	vas::sreflex::IObjectAutoRegistrar<MainScene> MainScene::_registrar(SREFLEX_OBJ_NAME(scene::MainScene));
+	vas::sreflex::IObjectAutoRegistrar<MainScene> MainScene::_registrar{};
 
 	MainScene::MainScene()
 	{
@@ -61,9 +61,14 @@ namespace scene
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2());
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::Vector2());
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
+		textTest = std::make_shared<vas::Text>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::Vector2(), 24, sdl::ColourPresets::white, false);
+
+		textTest->getFont()->setFontOutlineSize(4);
+		textTest->reRender();
 
 		RenderAssistance->insert(std::make_pair("testSprite", testSprite));
 		RenderAssistance->insert(std::make_pair("testSprite2", testSprite2));
+		RenderAssistance->insert(std::make_pair("textTest", textTest));
 
 		vas::AudioManger::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 		vas::ScreenManager::getInstance().fadeScreen(vas::ScreenManager::FadingState::fade_in, 5s);

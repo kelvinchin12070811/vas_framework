@@ -26,6 +26,7 @@
     <ClInclude Include="src\libraries\vasframework\graphics\GraphicsFlags.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Angle.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\sprites\Sprite.hpp" />
+    <ClInclude Include="src\libraries\vasframework\sreflex\Util.hpp" />
     <ClInclude Include="src\test\scenes\AbstractFrameCountingScene.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\InputManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Clock.hpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="src\libraries\vasframework\manager\TextureManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Vector2.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\text\Text.hpp" />
+    <ClInclude Include="src\libraries\vasframework\graphics\text\StyledText.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\manager\ScreenManager.cpp" />
@@ -85,6 +87,7 @@
     <ClCompile Include="src\libraries\vasframework\graphics\layer\Layers.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Angle.cpp" />
     <ClCompile Include="src\libraries\vasframework\graphics\sprites\Sprite.cpp" />
+    <ClCompile Include="src\libraries\vasframework\sreflex\Util.cpp" />
     <ClCompile Include="src\test\scenes\AbstractFrameCountingScene.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\InputManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Clock.cpp" />
@@ -125,6 +128,7 @@
     <ClCompile Include="src\libraries\vasframework\manager\TextureManager.cpp" />
     <ClCompile Include="src\libraries\vasframework\math\Vector2.cpp" />
     <ClCompile Include="src\libraries\vasframework\graphics\text\Text.cpp" />
+    <ClCompile Include="src\libraries\vasframework\graphics\text\StyledText.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>

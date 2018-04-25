@@ -2,8 +2,7 @@
 #include <map>
 #include <memory>
 #include "IObject.hpp"
-
-#define SREFLEX_OBJ_NAME(obj) std::string(#obj)
+#include "Util.hpp"
 
 namespace vas
 {

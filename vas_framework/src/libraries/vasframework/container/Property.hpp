@@ -1,5 +1,6 @@
 #pragma once
 #include <boost/any.hpp>
+#include "../sreflex/Util.hpp"
 
 namespace vas
 {
@@ -13,7 +14,7 @@ namespace vas
 		Property(Property&& rhs);
 		~Property();
 
-		const std::type_info& type() const;
+		const boost::typeindex::type_index& type() const;
 		bool empty() const;
 		void swap(Property& rhs);
 		void clear();
@@ -58,7 +59,7 @@ namespace vas
 	inline bool Property::isEqual(const Property & rhs) const
 	{
 		using namespace std::string_literals;
-		if (this->type() != typeid(T)) throw std::runtime_error("Unable to compate different type of value: "s + this->type().name() + " != " + typeid(T).name());
+		if (this->type() != boost::typeindex::type_id<T>()) throw std::runtime_error("Unable to compate different type of value: "s + sreflex::simpliflyObjectNameCpy(this->type().pretty_name()) + " != " + sreflex::getObjectName<T>());
 		if (this->type() != rhs.type()) return false;
 		if (*this->get<T>() != *rhs.get<T>()) return false;
 		return true;
@@ -68,7 +69,7 @@ namespace vas
 	inline bool Property::notEqual(const Property & rhs) const
 	{
 		using namespace std::string_literals;
-		if (this->type() != typeid(T)) throw std::runtime_error("Unable to compate different type of value: "s + this->type().name() + " != " + typeid(T).name());
+		if (this->type() != boost::typeindex::type_id<T>()) throw std::runtime_error("Unable to compate different type of value: "s + sreflex::simpliflyObjectNameCpy(this->type().pretty_name()) + " != " + sreflex::getObjectName<T>());
 		if (this->type() != rhs.type()) return true;
 		if (*this->get<T>() != *rhs.get<T>()) return true;
 		return false;

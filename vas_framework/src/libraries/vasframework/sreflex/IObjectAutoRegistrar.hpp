@@ -13,6 +13,11 @@ namespace vas
 			{
 				IObjectEntries::getInstance().registerInstance(objName, &vas::sreflex::createObjectBase<ObjectType>);
 			}
+
+			IObjectAutoRegistrar()
+			{
+				IObjectEntries::getInstance().registerInstance(getObjectName<ObjectType>(), &vas::sreflex::createObjectBase<ObjectType>);
+			}
 		};
 	}
 }

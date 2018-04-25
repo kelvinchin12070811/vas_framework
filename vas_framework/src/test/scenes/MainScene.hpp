@@ -5,6 +5,7 @@
 #include "../../libraries/vasframework/manager/InputManager.hpp"
 #include "../../libraries/vasframework/graphics/sprites/SpriteSheet.hpp"
 #include "../../libraries/vasframework/manager/ScreenManager.hpp"
+#include "../../libraries/vasframework/graphics/text/Text.hpp"
 #include "AbstractFrameCountingScene.hpp"
 
 namespace scene
@@ -36,6 +37,7 @@ namespace scene
 		std::shared_ptr<vas::Sprite> testSprite{ nullptr };
 		std::shared_ptr<vas::Sprite> testSprite2{ nullptr };
 		std::shared_ptr<vas::SpriteSheet> testSheet{ nullptr };
+		std::shared_ptr<vas::Text> textTest{ nullptr };
 		bool fadeController{ false };
 	};
 }
