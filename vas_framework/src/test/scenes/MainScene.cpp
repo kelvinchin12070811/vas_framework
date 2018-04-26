@@ -28,6 +28,17 @@ namespace scene
 	
 	void MainScene::tick()
 	{
+		if (textTest->foreground->getPosition().x >= 640 - textTest->foreground->getWidth())
+			movement.x = -1.0f;
+		else if (textTest->foreground->getPosition().x <= 0)
+			movement.x = 1.0f;
+
+		if (textTest->foreground->getPosition().y >= 480 - textTest->foreground->getHeight())
+			movement.y = -1.0f;
+		else if (textTest->foreground->getPosition().y <= 0)
+			movement.y = 1.0f;
+
+		textTest->move(movement);
 		auto& auManager = vas::AudioManger::getInstance();
 		if (auManager.ME().isPlaying())
 		{
@@ -61,14 +72,17 @@ namespace scene
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2());
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::Vector2());
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
-		textTest = std::make_shared<vas::Text>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::Vector2(), 24, sdl::ColourPresets::white, false);
+		textTest = std::make_shared<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::Vector2(), 24, sdl::ColourPresets::white);
+		
+		/*textTest->background->getFont().setFontOutlineSize(5);
+		textTest->background->reRender();
+		textTest->setBackgroundOffset(vas::Vector2(-5.0f, -5.0f));*/
 
-		textTest->getFont()->setFontOutlineSize(4);
-		textTest->reRender();
+		textTest->setOutlineSize(5);
 
-		RenderAssistance->insert(std::make_pair("testSprite", testSprite));
-		RenderAssistance->insert(std::make_pair("testSprite2", testSprite2));
-		RenderAssistance->insert(std::make_pair("textTest", textTest));
+		RenderAssistance->insert(VAS_INSERT_VAR(testSprite));
+		RenderAssistance->insert(VAS_INSERT_VAR(testSprite2));
+		RenderAssistance->insert(VAS_INSERT_VAR(textTest));
 
 		vas::AudioManger::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 		vas::ScreenManager::getInstance().fadeScreen(vas::ScreenManager::FadingState::fade_in, 5s);

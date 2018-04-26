@@ -19,7 +19,7 @@ namespace vas
 		Sprite(const std::string& file, const Vector2& position, const sdl::Point& origin = sdl::Point(), BufferMode bfMode = BufferMode::buffered);
 		Sprite(const Sprite&) = delete;
 		Sprite(Sprite&&) = delete;
-		~Sprite();
+		virtual ~Sprite();
 
 		void move(const Vector2& movement);
 
@@ -34,6 +34,11 @@ namespace vas
 		sdl::Point getOrigin() const;
 		sdl::Renderer::Flip getRendererFlip() const;
 		sdl::Colour getOverlay() const;
+		sdl::Rect getSourceRect() const;
+		sdl::Rect getDestRect() const;
+
+		int getWidth() const;
+		int getHeight() const;
 
 		void tick();
 		void draw();

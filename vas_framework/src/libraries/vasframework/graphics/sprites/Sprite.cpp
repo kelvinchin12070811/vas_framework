@@ -101,6 +101,26 @@ namespace vas
 		return overlay;
 	}
 
+	sdl::Rect Sprite::getSourceRect() const
+	{
+		return source;
+	}
+
+	sdl::Rect Sprite::getDestRect() const
+	{
+		return destination;
+	}
+
+	int Sprite::getWidth() const
+	{
+		return destination.w;
+	}
+
+	int Sprite::getHeight() const
+	{
+		return destination.h;
+	}
+
 	void Sprite::tick()
 	{
 		if (static_cast<int>(position.x) != destination.x)

@@ -4,6 +4,8 @@
 #include <string>
 #include "../IRenderAble.hpp"
 
+#define VAS_INSERT_VAR(var) std::make_pair(std::string(#var), var)
+
 namespace vas
 {
 	class Layers : public IRendererAble

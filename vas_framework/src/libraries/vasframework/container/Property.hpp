@@ -14,7 +14,7 @@ namespace vas
 		Property(Property&& rhs);
 		~Property();
 
-		const boost::typeindex::type_index& type() const;
+		const boost::typeindex::type_index type() const;
 		bool empty() const;
 		void swap(Property& rhs);
 		void clear();

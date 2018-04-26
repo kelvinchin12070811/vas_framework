@@ -30,7 +30,7 @@ namespace vas
 	{
 	}
 
-	const boost::typeindex::type_index & Property::type() const
+	const boost::typeindex::type_index Property::type() const
 	{
 		return value.type();
 	}
