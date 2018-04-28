@@ -1,3 +1,4 @@
+#include <boost/lexical_cast.hpp>
 #include "MainScene.hpp"
 #include "../../libraries/vasframework/util/CommonTools.hpp"
 #include "../../libraries/vasframework/util/TextTools.hpp"
@@ -69,10 +70,10 @@ namespace scene
 		sdl::mixer::Signals::onChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 		vas::ScreenManager::getInstance().Signal_FadeEnd.connect(boost::bind(&MainScene::on_fadeCompleate, this, boost::placeholders::_1));
 
-		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::Vector2());
-		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::Vector2());
+		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector);
+		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector);
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
-		textTest = std::make_shared<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::Vector2(), 24, sdl::ColourPresets::white);
+		textTest = std::make_shared<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24, sdl::ColourPresets::white);
 		
 		/*textTest->background->getFont().setFontOutlineSize(5);
 		textTest->background->reRender();
@@ -83,6 +84,11 @@ namespace scene
 		RenderAssistance->insert(VAS_INSERT_VAR(testSprite));
 		RenderAssistance->insert(VAS_INSERT_VAR(testSprite2));
 		RenderAssistance->insert(VAS_INSERT_VAR(textTest));
+
+		vas::Vector2 test(5.0, vas::Angle(53.13));
+		vas::CommonTools::getInstance().messenger(SREFLEX_CODE2STR(test) + " angle: " + std::to_string(test.angle()));
+		vas::CommonTools::getInstance().messenger(SREFLEX_CODE2STR(test) + " magnitude: " + boost::lexical_cast<std::string>(test.magnitude()));
+		vas::CommonTools::getInstance().messenger(SREFLEX_CODE2STR(test) + " gradient: " + boost::lexical_cast<std::string>(test.gradient()));
 
 		vas::AudioManger::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 		vas::ScreenManager::getInstance().fadeScreen(vas::ScreenManager::FadingState::fade_in, 5s);
