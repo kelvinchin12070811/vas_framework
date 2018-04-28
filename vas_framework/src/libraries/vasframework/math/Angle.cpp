@@ -207,10 +207,10 @@ namespace vas
 		}
 		else
 		{
-			if (value >= boost::math::constants::pi<double>())
-				value -= boost::math::constants::pi<double>();
+			if (value >= 2 * boost::math::constants::pi<double>())
+				value -= 2 * boost::math::constants::pi<double>();
 			else if (value < 0)
-				value += boost::math::constants::pi<double>();
+				value += 2 * boost::math::constants::pi<double>();
 		}
 	}
 }
