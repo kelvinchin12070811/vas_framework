@@ -76,18 +76,6 @@ namespace vas
 		setBackgroundOffset(vas::Vector2(static_cast<float>(-value), static_cast<float>(-value)));
 	}
 
-	void StyledText::getShadowAttr(float * distance, vas::Angle * angle) const
-	{
-		//TODO: Add algorithm to calculate distance and angle;
-	}
-
-	void StyledText::setShardowAttr(float distance, const vas::Angle & angle)
-	{
-		vas::Vector2 shadowPos;
-		//TODO: Add algorithm to generate vas::Vector2 from distance and angle
-		applyBackgroundOffset();
-	}
-
 	sdl::Colour StyledText::getColour() const
 	{
 		return foreground->getTextColour();

@@ -39,9 +39,6 @@ namespace vas
 		int getOutlineSize() const;
 		void setOutlineSize(int value);
 
-		void getShadowAttr(float* distance, vas::Angle* angle) const;
-		void setShardowAttr(float distance, const vas::Angle& angle);
-
 		sdl::Colour getColour() const;
 		void setColour(const sdl::Colour& value, bool update);
 

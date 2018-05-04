@@ -101,6 +101,7 @@ namespace vas
 			return Angle(atan(temp.y / temp.x), Angle::AngleType::rad).toDegree() + Angle(270.0);
 			break;
 		}
+		return 0.0f;
 	}
 
 	bool Vector2::operator==(const Vector2 & rhs) const
