@@ -25,6 +25,7 @@ namespace vas
 #endif // VAS_USE_TTF
 
 #ifdef VAS_USE_MIXER
+		if (!sdl::mixer::init()) throw sdl::SDLCoreException();
 		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException();
 #endif // VAS_USE_MIXER
 
