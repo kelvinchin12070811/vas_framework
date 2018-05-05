@@ -20,6 +20,7 @@ namespace vas
 		void swap(Property& rhs);
 		void clear();
 
+		void setName(const std::string& name);
 		std::string getName() const;
 
 		template <typename OutputType>

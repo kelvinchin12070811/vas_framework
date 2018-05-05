@@ -198,6 +198,36 @@
     <ClInclude Include="src\test\scenes\TileMap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\TMXParser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\MapProperties.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\PropertyList.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\Tileset.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\AnimationController.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\AnimationStrip.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\maplayers\AbstractMapLayer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\maplayers\TileLayer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\math\base64\base64.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\BytesArray.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCore.cpp">
@@ -345,6 +375,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\test\scenes\TileMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\TMXParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\container\PropertyList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\container\AnimationController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\AbstractMapLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\TileLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\math\base64\base64.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

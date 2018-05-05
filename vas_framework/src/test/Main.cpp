@@ -3,7 +3,7 @@
 #include "../libraries/vasframework/manager/SceneManager.hpp"
 #include "../libraries/vasframework/util/TextTools.hpp"
 #include "../libraries/vasframework/util/CommonTools.hpp"
-#include "scenes/MainScene.hpp"
+#include "scenes/TileMap.hpp"
 
 //int main(int argc, char** argv)
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow)
@@ -27,7 +27,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 		vas::Base::getInstance().Window() = std::move(mainWindow);
 		vas::Base::getInstance().Renderer() = std::move(mainRenderer);
 
-		vas::SceneManager::getInstance().call(std::make_shared<scene::MainScene>());
+		vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
 		vas::Base::getInstance().startGameLoop();
 		vas::Base::getInstance().cleanAndQuit();
 	}

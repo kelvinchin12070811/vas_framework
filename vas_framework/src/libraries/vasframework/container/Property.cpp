@@ -51,6 +51,11 @@ namespace vas
 		value.clear();
 	}
 
+	void Property::setName(const std::string & name)
+	{
+		this->name = name;
+	}
+
 	std::string Property::getName() const
 	{
 		return name;

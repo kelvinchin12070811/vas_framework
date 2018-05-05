@@ -246,3 +246,4 @@ ModelManifest.xml
 
 # User Define
 #vas_framework/assets/*
+*.etl
