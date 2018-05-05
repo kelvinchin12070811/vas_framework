@@ -27,7 +27,7 @@ namespace vas
 
 	const Property & PropertyList::find(const std::string & name) const
 	{
-		auto result = std::find(this->begin(), this->end(), [&](Property& itr)-> bool
+		auto result = std::find_if(this->begin(), this->end(), [&](const Property& itr)-> bool
 		{
 			return itr.getName() == name;
 		});
