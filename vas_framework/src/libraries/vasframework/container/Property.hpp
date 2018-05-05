@@ -1,10 +1,11 @@
 #pragma once
 #include <boost/any.hpp>
 #include "../sreflex/Util.hpp"
+#include "../VASConfig.hpp"
 
 namespace vas
 {
-	class Property
+	class VAS_DECLSPEC Property
 	{
 	public:
 		Property();
@@ -18,6 +19,8 @@ namespace vas
 		bool empty() const;
 		void swap(Property& rhs);
 		void clear();
+
+		std::string getName() const;
 
 		template <typename OutputType>
 		OutputType* get();

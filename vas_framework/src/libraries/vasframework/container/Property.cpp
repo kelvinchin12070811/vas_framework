@@ -51,6 +51,11 @@ namespace vas
 		value.clear();
 	}
 
+	std::string Property::getName() const
+	{
+		return name;
+	}
+
 	Property::operator boost::any&()
 	{
 		return const_cast<boost::any&>(operator const boost::any &());
