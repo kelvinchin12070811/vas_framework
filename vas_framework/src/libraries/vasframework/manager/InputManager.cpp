@@ -18,27 +18,22 @@ namespace vas
 		keyState = sdl::getKeyboardState();
 	}
 
-	bool InputManager::isKeyTriggeredEv(sdl::Scancode key)
-	{
-		return ev->key().keysym.scancode == key;
-	}
-
-	bool InputManager::isKeyTriggeredEv(sdl::Keycode key)
-	{
-		return ev->key().keysym.sym == key;
-	}
-
 	bool InputManager::isKeyTriggered(sdl::Scancode key)
 	{
 		return keyState[static_cast<SDL_Scancode>(key)] != 0;
 	}
 
-	bool InputManager::isMouseButtonTriggered()
+	void InputManager::setMousePosition(sdl::Point && value)
 	{
-		return false;
+		currentMousePosition = std::move(value);
 	}
 
 	sdl::Point InputManager::getMousePosition()
+	{
+		return currentMousePosition;
+	}
+
+	sdl::Point InputManager::getMousePositionRaw()
 	{
 		sdl::Point mousePos;
 		SDL_GetMouseState(&mousePos.x, &mousePos.y);

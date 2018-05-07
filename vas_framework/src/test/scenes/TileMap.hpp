@@ -3,6 +3,7 @@
 #include "../../libraries/vasframework/base/Base.hpp"
 #include "../../libraries/vasframework/graphics/text/StyledText.hpp"
 #include "../../libraries/vasframework/tiledmap/TMXParser.hpp"
+#include "../../libraries/vasframework/manager/InputManager.hpp"
 
 namespace scene
 {
@@ -19,6 +20,8 @@ namespace scene
 		void Signal_beforeTerminate() override;
 	private:
 		void on_EventPulsed(sdl::Event& ev);
+		void on_mouseClicked(vas::MouseButtonIndex index, int x, int y);
+
 	private:
 		std::shared_ptr<vas::StyledText> engineName{ nullptr };
 		vas::TMXParser map;

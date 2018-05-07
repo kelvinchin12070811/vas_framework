@@ -69,7 +69,7 @@ namespace scene
 
 		sdl::mixer::Signals::onChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 		vas::ScreenManager::getInstance().Signal_FadeEnd.connect(boost::bind(&MainScene::on_fadeCompleate, this, boost::placeholders::_1));
-
+		vas::InputManager::getInstance().keyPressed.connect(boost::bind(&MainScene::on_keyPressed, this, boost::placeholders::_1));
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector);
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector);
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
@@ -96,15 +96,9 @@ namespace scene
 
 	void MainScene::eventSlot(sdl::Event & ev)
 	{
-		switch (ev)
-		{
-		case sdl::EventType::keydown:
-			eventKeyPressHwnd(ev, true);
-			break;
-		}
 	}
 
-	void MainScene::eventKeyPressHwnd(sdl::Event&ev, bool isKeyDown)
+	/*void MainScene::eventKeyPressHwnd(sdl::Event&ev, bool isKeyDown)
 	{
 		if (isKeyDown)
 		{
@@ -133,6 +127,35 @@ namespace scene
 				fadeController = !fadeController;
 				faderTrigerer();
 			}
+		}
+	}*/
+
+	void MainScene::on_keyPressed(sdl::Keycode key)
+	{
+		switch (key)
+		{
+		case sdl::Keycode::backspace:
+				vas::CommonTools::getInstance().messenger("test event ignoreer");
+				vas::Base::getInstance().IgnoreCloseEventOnce() = true;
+				break;
+		case sdl::Keycode::escape:
+				vas::CommonTools::getInstance().messenger("Debug, close event triggered by escape");
+				//ev.pushEvent(sdl::EventType::quit);
+				vas::Base::getInstance().getEvent().pushEvent(sdl::EventType::quit);
+				break;
+		case sdl::Keycode::m:
+				vas::AudioManger::getInstance().playME(me);
+				break;
+		case sdl::Keycode::r:
+				vas::AudioManger::getInstance().BGM().rewind();
+				break;
+		case sdl::Keycode::s:
+				vas::AudioManger::getInstance().stopBGM();
+				break;
+		case sdl::Keycode::f:
+				fadeController = !fadeController;
+				faderTrigerer();
+				break;
 		}
 	}
 

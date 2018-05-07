@@ -228,6 +228,27 @@
     <ClInclude Include="src\libraries\vasframework\container\BytesArray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\maplayers\ObjectLayer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\ObjectData.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\IShape.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\Rectangle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\Ellipse.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\Polyline.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\AllShape.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCore.cpp">
@@ -393,6 +414,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\libraries\vasframework\math\base64\base64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\ObjectLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

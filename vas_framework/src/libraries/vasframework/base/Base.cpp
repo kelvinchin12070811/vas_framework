@@ -51,7 +51,6 @@ namespace vas
 
 		frameCounterUpdater.start();
 
-		sdl::Event ev;
 		InputManager::getInstance().init(&ev);
 		while (exec)
 		{
@@ -63,13 +62,28 @@ namespace vas
 				{
 				case sdl::EventType::quit:
 					if (ignoreCloseEventOnce)
-					{
 						ignoreCloseEventOnce = false;
-					}
 					else
-					{
 						exec = false;
-					}
+					break;
+				case sdl::EventType::keydown:
+					InputManager::getInstance().keyPressed(static_cast<sdl::Keycode>(ev.key().keysym.sym));
+					break;
+				case sdl::EventType::keyup:
+					InputManager::getInstance().keyReleased(static_cast<sdl::Keycode>(ev.key().keysym.sym));
+					break;
+				case sdl::EventType::mousebuttondown:
+					InputManager::getInstance().mouseButtonPressed(ev.button().button, ev.button().x, ev.button().y);
+					break;
+				case sdl::EventType::mousebuttonup:
+					InputManager::getInstance().mouseButtonReleased(ev.button().button, ev.button().x, ev.button().y);
+					break;
+				case sdl::EventType::mousemotion:
+					InputManager::getInstance().setMousePosition(sdl::Point(ev.motion().x, ev.motion().y));
+					InputManager::getInstance().mouseMoved(ev.motion().x, ev.motion().y);
+					break;
+				case sdl::EventType::mousewheel:
+					InputManager::getInstance().mouseWheelMoved(static_cast<MouseWheelDirection>(ev.wheel().direction), std::abs(ev.wheel().x), std::abs(ev.wheel().y));
 					break;
 				}
 				if (!exec) break;
@@ -151,6 +165,11 @@ namespace vas
 	size_t Base::getRefreshRate()
 	{
 		return fps;
+	}
+
+	sdl::Event & Base::getEvent()
+	{
+		return ev;
 	}
 
 	Base::Base()

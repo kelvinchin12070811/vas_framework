@@ -38,6 +38,7 @@ namespace vas
 		const Counter& FrameIndex();
 		size_t getLastFpsCount();
 		size_t getRefreshRate();
+		sdl::Event& getEvent();
 	private:
 		Base();
 		~Base();
@@ -53,6 +54,7 @@ namespace vas
 		std::array<boost::signals2::signal<void(sdl::Event&)>, 2> eventProcessorSignals;
 		sdl::Window mainWindow;
 		sdl::Renderer mainRenderer;
+		sdl::Event ev;
 
 		size_t fps{ 60 };
 		size_t lastFpsCount{ 0 };

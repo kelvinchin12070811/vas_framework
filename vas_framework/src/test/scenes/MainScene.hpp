@@ -24,7 +24,8 @@ namespace scene
 
 		void eventSlot(sdl::Event& ev);
 	private:
-		void eventKeyPressHwnd(sdl::Event& ev, bool isKeyDown);
+		//void eventKeyPressHwnd(sdl::Event& ev, bool isKeyDown);
+		void on_keyPressed(sdl::Keycode key);
 		void meFinishedPlaying(int channel);
 
 		void faderTrigerer();

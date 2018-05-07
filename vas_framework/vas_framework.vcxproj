@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\AllShape.hpp" />
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\Ellipse.hpp" />
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\IShape.hpp" />
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\Polyline.hpp" />
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\Rectangle.hpp" />
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\ObjectData.hpp" />
+    <ClInclude Include="src\libraries\vasframework\tiledmap\maplayers\ObjectLayer.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\AnimationController.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\AnimationStrip.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\BytesArray.hpp" />
@@ -92,6 +99,7 @@
     <ClInclude Include="src\libraries\vasframework\tiledmap\maplayers\TileLayer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\ObjectLayer.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\AnimationController.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\PropertyList.cpp" />
     <ClCompile Include="src\libraries\vasframework\manager\ScreenManager.cpp" />

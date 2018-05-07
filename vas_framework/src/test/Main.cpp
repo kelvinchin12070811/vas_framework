@@ -3,6 +3,7 @@
 #include "../libraries/vasframework/manager/SceneManager.hpp"
 #include "../libraries/vasframework/util/TextTools.hpp"
 #include "../libraries/vasframework/util/CommonTools.hpp"
+//#include "scenes/MainScene.hpp"
 #include "scenes/TileMap.hpp"
 
 //int main(int argc, char** argv)
