@@ -4,7 +4,7 @@
 
 namespace vas
 {
-	class TileLayer : public AbstractMapLayer
+	class VAS_DECLSPEC TileLayer : public AbstractMapLayer
 	{
 	public:
 		TileLayer();

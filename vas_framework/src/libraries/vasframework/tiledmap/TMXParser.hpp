@@ -3,9 +3,10 @@
 #include <memory>
 #include <pugixml/pugixml.hpp>
 #include "../VASConfig.hpp"
-#include "maplayers/AbstractMapLayer.hpp"
 #include "container/MapProperties.hpp"
 #include "container/Tileset.hpp"
+#include "maplayers/TileLayer.hpp"
+#include "maplayers/ObjectLayer.hpp"
 
 namespace vas
 {
@@ -25,13 +26,16 @@ namespace vas
 		AbstractMapLayer* getDataAt(const std::string& name) const;
 		std::string getFileName() const;
 		const MapProperties& getMapProperties() const;
+		const std::vector<Tileset>& getRequireTilesets() const;
 
 	private:
 		void parse() const;
-		void prase_properties(pugi::xml_node& node) const;
+		void prase_mapProperties(pugi::xml_node& node) const;
 		void prase_tileset(pugi::xml_node& node) const;
 		void prase_tilelayer(pugi::xml_node& node) const;
-
+		void prase_objectlayer(pugi::xml_node& node) const;
+		Property prase_property(pugi::xml_node& node) const;
+		PropertyList propertiesPraser(pugi::xml_node& node) const;
 	private:
 		mutable std::vector<std::unique_ptr<AbstractMapLayer>> mapData;
 		mutable std::vector<Tileset> tilesets;

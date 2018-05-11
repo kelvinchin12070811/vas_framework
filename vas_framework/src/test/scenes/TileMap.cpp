@@ -29,7 +29,7 @@ namespace scene
 
 	void TileMap::Signal_afterSceneCall()
 	{
-		using namespace std::chrono_literals;
+		using namespace std::chrono;
 		CommonTools::getInstance().messenger("Scene " + sreflex::getObjectName<TileMap>() + " is called");
 		InputManager::getInstance().mouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3));
 		engineName = std::make_shared<StyledText>("VAS Framework v2.0 indev", "assets/fonts/caladea-regular.ttf", zerovector, 12);

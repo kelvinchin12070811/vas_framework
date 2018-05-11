@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="32" tileheight="32" nextobjectid="4">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="32" tileheight="32" nextobjectid="54">
  <properties>
   <property name="fadein duration" type="float" value="5"/>
   <property name="startup bgm" type="file" value="../audios/bgm/聞こえていますか僕らの声が.mp3"/>
@@ -35,7 +35,9 @@
   <tile id="2" terrain="0,0,,0"/>
   <tile id="4" terrain="0,,0,0"/>
   <tile id="5" terrain=",0,0,0"/>
-  <tile id="6" terrain=",,,0"/>
+  <tile id="6" terrain=",,,0">
+   <objectgroup draworder="index"/>
+  </tile>
   <tile id="7" terrain=",,0,0"/>
   <tile id="8" terrain=",,0,"/>
   <tile id="9" terrain=",0,,0"/>
@@ -238,14 +240,44 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="$!collisions" width="40" height="23" opacity="0">
+ <layer name="$!collisions" width="40" height="23" opacity="0.11">
   <data encoding="base64" compression="zlib">
    eJztl0EKwDAIBHPq///Xz5QeCkWi2Y2aSslCDwF1p0FM0pqt8xgEkLmeek/++/NK1kBq9vwtHsnMsCN8SN0eq5XD7IPFwvwnkyNjWd+o/kE047WSb2vr72LnkLb2MmgzataD5RvNTdY7QtFnepSqM1XiulWZ6Qs25G5UYb+yWOSMkV7oHS2DK+JtknkuaL2zgg/tUSTmAiuPeUs=
   </data>
  </layer>
+ <objectgroup name="$col">
+  <object id="39" name="tourch" x="1097.33" y="327.333" width="14.3333" height="24">
+   <ellipse/>
+  </object>
+  <object id="41" name="tourch" x="745.667" y="359.333" width="14.3333" height="24">
+   <ellipse/>
+  </object>
+  <object id="42" name="anvil" x="226.333" y="581" width="28.3333" height="25.3333">
+   <ellipse/>
+  </object>
+  <object id="43" name="log 2x1" x="400.75" y="358.5" width="30.75" height="25"/>
+  <object id="44" name="log 2x1" x="64.75" y="372.5" width="30.75" height="25"/>
+  <object id="46" name="log 2x1" x="225.417" y="423.833" width="30.75" height="25"/>
+  <object id="52" name="zone 1" x="271" y="1">
+   <polyline points="0,0 -5,9.5 -18,15.5 -37.5,44 -149,45 -170.5,72.5 -192,91 -192,134 -103,141.5 -87.5,117.5 -76,110.5 25,108.5 36,87 44,81 51.5,78.5 179.5,78 194,93 193,126 203.5,140 229,138 255.5,155 304.5,208 311.5,207 324.5,185 319.5,172 323,150.5 342,141.5 370.5,142 383.5,154.5 388,163.5 397.5,175 410.5,170 420,150 435,141.5 469.5,143 482.5,124.5 497,111.5 545.5,111.5 545,43 517.5,31 501,12 524,4.5 534,2 584.5,3 617,12 616.5,34.5 607,38.5 608,106.5 709,109 792.5,109 804.5,88.5 820,77.5 919.5,77.5 933,55 944,47 1009,47"/>
+  </object>
+  <object id="53" name="zone 2" x="236" y="734">
+   <polyline points="0,0 -1,-92 64,-91 63,-123 128,-123 128,-157 288,-156 287,-186 386,-187 384,-219 416,-219 416,-252 513,-251 512,-283 576,-283 575,-315 672,-314 671,-346 754,-347 755,-326 679,-326 679,-294 583,-294 583,-264 518,-263 519,-231 424,-231 424,-198 392,-199 392,-164 294,-166 295,-134 134,-134 134,-103 71,-103 72,-69 6,-69 7,2"/>
+  </object>
+ </objectgroup>
  <objectgroup name="$debug" visible="0">
   <object id="3" name="npc path" type="path" x="96" y="192">
    <polyline points="0,0 128,0 128,64 384,64 384,96 544,96 576,64 672,64 672,0 768,0 768,64 832,64"/>
+  </object>
+  <object id="4" name="test cube" x="305" y="344" width="67" height="54"/>
+  <object id="8" name="tes circle" x="98" y="350" width="161" height="163">
+   <ellipse/>
+  </object>
+  <object id="9" name="test polygon" x="482" y="489">
+   <polygon points="0,0 339,1 340,184 -5,185"/>
+  </object>
+  <object id="11" name="test circle 2" x="194" y="339" width="168" height="95">
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

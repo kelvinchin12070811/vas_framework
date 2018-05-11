@@ -2,10 +2,10 @@
 #include <boost/algorithm/string.hpp>
 #include <zlib.h>
 #include "TMXParser.hpp"
-#include "maplayers/TileLayer.hpp"
 #include "../sdlcore/math/Colour.hpp"
 #include "../math/base64/base64.hpp"
 #include "../container/BytesArray.hpp"
+#include "container/objclass/AllShape.hpp"
 
 namespace vas
 {
@@ -61,6 +61,11 @@ namespace vas
 	{
 		return mapProperties;
 	}
+
+	const std::vector<Tileset> & TMXParser::getRequireTilesets() const
+	{
+		return tilesets;
+	}
 	
 	void TMXParser::parse() const
 	{
@@ -89,15 +94,17 @@ namespace vas
 		for(auto itr = root.begin(); itr != root.end(); itr++)
 		{
 			if (static_cast<string>(itr->name()) == "properties")
-				prase_properties(*itr);
+				prase_mapProperties(*itr);
 			else if (static_cast<string>(itr->name()) == "tileset")
 				prase_tileset(*itr);
 			else if (static_cast<string>(itr->name()) == "layer")
 				prase_tilelayer(*itr);
+			else if (static_cast<string>(itr->name()) == "objectgroup")
+				prase_objectlayer(*itr);
 		}
 	}
 
-	void TMXParser::prase_properties(pugi::xml_node & node) const
+	void TMXParser::prase_mapProperties(pugi::xml_node & node) const
 	{
 		using namespace std;
 		if (!node.empty())
@@ -106,29 +113,7 @@ namespace vas
 			auto propertyItr = node.children("property");
 			for (auto& itr = propertyItr.begin(); itr != propertyItr.end(); itr++)
 			{
-				Property item;
-				item.setName(itr->attribute("name").as_string());
-
-				std::string type = itr->attribute("type").as_string();
-				if (type == "string" || "file")
-					item = static_cast<string>(itr->attribute("value").as_string());
-				else if (type == "bool")
-					item = itr->attribute("value").as_bool();
-				else if (type == "float")
-					item = itr->attribute("value").as_float();
-				else if (type == "int")
-					item = itr->attribute("value").as_int();
-				else if (type == "color")
-				{
-					std::string colourValue = itr->attribute("value").as_string();
-					item = sdl::Colour(
-						boost::lexical_cast<uint8_t>(colourValue.substr(3, 2)),
-						boost::lexical_cast<uint8_t>(colourValue.substr(5, 2)),
-						boost::lexical_cast<uint8_t>(colourValue.substr(7, 2)),
-						boost::lexical_cast<uint8_t>(colourValue.substr(1, 2))
-					);
-				}
-				mapProperties.customProperties.push_back(std::move(item));
+				mapProperties.customProperties.push_back(prase_property(*itr));
 			}
 		}
 	}
@@ -202,5 +187,98 @@ namespace vas
 		auto tempLayer = std::make_unique<TileLayer>(std::move(layerDataExtr), width, height, opacity, hidden);
 		tempLayer->setName(name);
 		mapData.push_back(std::move(tempLayer));
+	}
+
+	void TMXParser::prase_objectlayer(pugi::xml_node & node) const
+	{
+		std::vector<ObjectData> tempObjList;
+		auto objectsRaw = node.children("object");
+		tempObjList.reserve(std::distance(objectsRaw.begin(), objectsRaw.end()));
+		for (auto& itr : objectsRaw)
+		{
+			ObjectData tempDat;
+			tempDat.name = itr.attribute("name").as_string();
+			tempDat.type = itr.attribute("type").as_string();
+			
+			auto first_child = itr.first_child();
+			std::string name = first_child.name();
+			if (name == "ellipse")
+			{
+				auto instance = std::make_unique<Ellipse>();
+				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
+				instance->width = itr.attribute("width").as_int();
+				instance->height = itr.attribute("height").as_int();
+				tempDat.instance = std::move(instance);
+			}
+			else if (name == "polyline")
+			{
+				auto instance = std::make_unique<Polyline>();
+				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
+				std::string points = first_child.attribute("points").as_string();
+				std::vector<std::string> pointsData;
+				std::vector<Vector2> pointsPosition;
+				boost::split(pointsData, points, [](char c) { return c == ' '; });
+				
+				for (auto& itr : pointsData)
+				{
+					std::vector<std::string> buffer;
+					boost::split(buffer, itr, [](char c) { return c == ','; });
+					pointsPosition.push_back(Vector2(boost::lexical_cast<float>(buffer[0]), boost::lexical_cast<float>(buffer[1])));
+				}
+				instance->line = std::move(pointsPosition);
+				tempDat.instance = std::move(instance);
+			}
+			else if (name == "polygon")
+			{
+				tempDat.instance = nullptr;
+			}
+			else
+			{
+				auto instance = std::make_unique<Rectangle>();
+				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
+				instance->width = itr.attribute("width").as_int();
+				instance->height = itr.attribute("height").as_int();
+				tempDat.instance = std::move(instance);
+			}
+			tempObjList.push_back(std::move(tempDat));
+		}
+
+		auto tempLayer = std::make_unique<ObjectLayer>();
+		tempLayer->setName(node.attribute("name").as_string());
+		tempLayer->setObjectList(std::move(tempObjList)); 
+		mapData.push_back(std::move(tempLayer));
+	}
+
+	Property TMXParser::prase_property(pugi::xml_node & node) const
+	{
+		using namespace std;
+		Property item;
+		item.setName(node.attribute("name").as_string());
+
+		std::string type = node.attribute("type").as_string();
+		if (type == "string" || "file")
+			item = static_cast<string>(node.attribute("value").as_string());
+		else if (type == "bool")
+			item = node.attribute("value").as_bool();
+		else if (type == "float")
+			item = node.attribute("value").as_float();
+		else if (type == "int")
+			item = node.attribute("value").as_int();
+		else if (type == "color")
+		{
+			std::string colourValue = node.attribute("value").as_string();
+			item = sdl::Colour(
+				boost::lexical_cast<uint8_t>(colourValue.substr(3, 2)),
+				boost::lexical_cast<uint8_t>(colourValue.substr(5, 2)),
+				boost::lexical_cast<uint8_t>(colourValue.substr(7, 2)),
+				boost::lexical_cast<uint8_t>(colourValue.substr(1, 2))
+			);
+		}
+		return item;
+	}
+	
+	PropertyList TMXParser::propertiesPraser(pugi::xml_node & node) const
+	{
+		return PropertyList();
 	}
 }

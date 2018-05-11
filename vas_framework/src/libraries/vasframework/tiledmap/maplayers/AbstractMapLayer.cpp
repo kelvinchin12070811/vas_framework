@@ -19,4 +19,14 @@ namespace vas
 	{
 		this->name = name;
 	}
+
+	const PropertyList & AbstractMapLayer::getProperties() const
+	{
+		return properties;
+	}
+
+	void AbstractMapLayer::setProperties(PropertyList && value)
+	{
+		properties = std::move(value);
+	}
 }
