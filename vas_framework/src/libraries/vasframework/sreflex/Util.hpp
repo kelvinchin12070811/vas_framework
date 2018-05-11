@@ -25,6 +25,24 @@ namespace vas
 			return result;
 		}
 
+		template <typename Type>
+		boost::typeindex::type_index getObjectInfo()
+		{
+			return boost::typeindex::type_id<Type>()
+		}
+
+		template <typename Type>
+		boost::typeindex::type_index getObjectInfo_with_cvr()
+		{
+			return boost::typeindex::type_id_with_cvr<Type>()
+		}
+
+		template <typename Type>
+		boost::typeindex::type_index getObjectInfo_runtime()
+		{
+			return boost::typeindex::type_id_runtime<Type>()
+		}
+
 		VAS_DECLSPEC void simpliflyObjectName(std::string& input);
 		VAS_DECLSPEC std::string simpliflyObjectNameCpy(const std::string& input);
 	}
