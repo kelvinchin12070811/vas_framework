@@ -192,6 +192,7 @@ namespace vas
 	void TMXParser::prase_objectlayer(pugi::xml_node & node) const
 	{
 		std::vector<ObjectData> tempObjList;
+		auto tempLayer = std::make_unique<ObjectLayer>();
 		auto objectsRaw = node.children("object");
 		tempObjList.reserve(std::distance(objectsRaw.begin(), objectsRaw.end()));
 		for (auto& itr : objectsRaw)
@@ -240,10 +241,13 @@ namespace vas
 				instance->height = itr.attribute("height").as_int();
 				tempDat.instance = std::move(instance);
 			}
+
+			auto objectProperties = itr.child("properties");
+			if (!objectProperties)
+				tempLayer->setProperties(propertiesPraser(objectProperties));
 			tempObjList.push_back(std::move(tempDat));
 		}
 
-		auto tempLayer = std::make_unique<ObjectLayer>();
 		tempLayer->setName(node.attribute("name").as_string());
 		tempLayer->setObjectList(std::move(tempObjList)); 
 		mapData.push_back(std::move(tempLayer));
@@ -279,6 +283,18 @@ namespace vas
 	
 	PropertyList TMXParser::propertiesPraser(pugi::xml_node & node) const
 	{
+		using namespace std;
+		if (!node.empty())
+		{
+			PropertyList list;
+			list.reserve(std::distance(node.children().begin(), node.children().end()));
+			auto propertyItr = node.children("property");
+			for (auto& itr = propertyItr.begin(); itr != propertyItr.end(); itr++)
+			{
+				list.push_back(prase_property(*itr));
+			}
+			return list;
+		}
 		return PropertyList();
 	}
 }

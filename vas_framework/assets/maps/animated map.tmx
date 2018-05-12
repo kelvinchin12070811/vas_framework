@@ -234,6 +234,9 @@
   </data>
  </layer>
  <objectgroup name="entities">
+  <properties>
+   <property name="player name" value="test name-by Sakura Miyamoto"/>
+  </properties>
   <object id="2" name="player" gid="1757" x="510" y="284" width="32" height="32">
    <properties>
     <property name="facing" type="int" value="1"/>
@@ -253,6 +256,9 @@
    <ellipse/>
   </object>
   <object id="42" name="anvil" x="226.333" y="581" width="28.3333" height="25.3333">
+   <properties>
+    <property name="name" value="test anvil"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="43" name="log 2x1" x="400.75" y="358.5" width="30.75" height="25"/>
