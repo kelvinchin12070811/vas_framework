@@ -25,5 +25,7 @@ namespace scene
 	private:
 		std::shared_ptr<vas::StyledText> engineName{ nullptr };
 		vas::TMXParser map;
+
+		std::vector<boost::signals2::connection> signalsPool;
 	};
 }

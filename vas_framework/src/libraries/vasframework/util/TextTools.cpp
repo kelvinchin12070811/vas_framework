@@ -59,6 +59,11 @@ namespace vas
 #endif // VAS_WINDOWS_MODE
 	}
 
+	void TextTools::print(const std::ostream & str)
+	{
+		print(dynamic_cast<const std::stringstream&>(str).str());
+	}
+
 	void TextTools::println(const std::string & str)
 	{
 #ifdef VAS_WINDOWS_MODE
@@ -67,6 +72,11 @@ namespace vas
 #else
 		std::cout << str << std::endl;
 #endif // VAS_WINDOWS_MODE
+	}
+
+	void TextTools::println(const std::ostream & str)
+	{
+		println(dynamic_cast<const std::stringstream&>(str).str());
 	}
 
 	void TextTools::printf(const boost::format & fStr)

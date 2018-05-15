@@ -1,5 +1,4 @@
 #include "CommonTools.hpp"
-#include "TextTools.hpp"
 
 
 namespace vas
@@ -33,7 +32,12 @@ namespace vas
 		return rtnValue;
 	}
 
-	int CommonTools::messengerf(const boost::format& message, CommonTools::MessageType messType, int rtnValue)
+	int CommonTools::messenger(const std::ostream & message, CommonTools::MessageType messType, int rtnValue)
+	{
+		return messenger(dynamic_cast<const std::stringstream&>(message).str(), messType, rtnValue);
+	}
+
+	int CommonTools::messenger(const boost::format& message, CommonTools::MessageType messType, int rtnValue)
 	{
 		return messenger(message.str(), messType, rtnValue);
 	}
@@ -59,5 +63,20 @@ namespace vas
 
 	CommonTools::~CommonTools()
 	{
+	}
+
+	void vasout_t::operator=(std::ostream & rhs) const
+	{
+		CommonTools::getInstance().messenger(rhs);
+	}
+
+	void vasinfo_t::operator=(std::ostream & rhs) const
+	{
+		CommonTools::getInstance().messenger(rhs, vas::CommonTools::MessageType::info);
+	}
+
+	void vaserr_t::operator=(std::ostream & rhs) const
+	{
+		CommonTools::getInstance().messenger(rhs, vas::CommonTools::MessageType::error);
 	}
 }

@@ -40,10 +40,10 @@ namespace vas
 		void setOutlineSize(int value);
 
 		sdl::Colour getColour() const;
-		void setColour(const sdl::Colour& value, bool update);
+		void setColour(const sdl::Colour& value, bool update = true);
 
 		sdl::Colour getBackgroundColour() const;
-		void setBackgroundColour(const sdl::Colour& value, bool update);
+		void setBackgroundColour(const sdl::Colour& value, bool update = true);
 
 		std::string getText() const;
 		void setString(const std::string& value, bool update = true);

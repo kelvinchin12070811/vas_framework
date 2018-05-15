@@ -1,8 +1,12 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <boost/format.hpp>
 #include "../VASConfig.hpp"
+
+#define vasstream std::stringstream()
+#define vasformat(str) boost::format(str)
 
 namespace vas
 {
@@ -18,7 +22,9 @@ namespace vas
 #endif // VAS_WINDOWS_MODE
 
 		static void print(const std::string& str);
+		static void print(const std::ostream& str);
 		static void println(const std::string& str);
+		static void println(const std::ostream& str);
 		static void printf(const boost::format& fStr);
 		static void printfln(const boost::format& fStr);
 

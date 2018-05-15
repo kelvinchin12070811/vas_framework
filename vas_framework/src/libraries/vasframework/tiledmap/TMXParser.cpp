@@ -186,6 +186,7 @@ namespace vas
 		}
 		auto tempLayer = std::make_unique<TileLayer>(std::move(layerDataExtr), width, height, opacity, hidden);
 		tempLayer->setName(name);
+		tempLayer->setProperties(propertiesPraser(node.child("properties")));
 		mapData.push_back(std::move(tempLayer));
 	}
 
@@ -201,9 +202,7 @@ namespace vas
 			tempDat.name = itr.attribute("name").as_string();
 			tempDat.type = itr.attribute("type").as_string();
 			
-			auto first_child = itr.first_child();
-			std::string name = first_child.name();
-			if (name == "ellipse")
+			if (auto child = itr.child("ellipse"); child)
 			{
 				auto instance = std::make_unique<Ellipse>();
 				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
@@ -211,11 +210,11 @@ namespace vas
 				instance->height = itr.attribute("height").as_int();
 				tempDat.instance = std::move(instance);
 			}
-			else if (name == "polyline")
+			else if (child = itr.child("polyline"); child)
 			{
 				auto instance = std::make_unique<Polyline>();
 				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
-				std::string points = first_child.attribute("points").as_string();
+				std::string points = child.attribute("points").as_string();
 				std::vector<std::string> pointsData;
 				std::vector<Vector2> pointsPosition;
 				boost::split(pointsData, points, [](char c) { return c == ' '; });
@@ -229,7 +228,7 @@ namespace vas
 				instance->line = std::move(pointsPosition);
 				tempDat.instance = std::move(instance);
 			}
-			else if (name == "polygon")
+			else if (child = itr.child("polygon"); child)
 			{
 				tempDat.instance = nullptr;
 			}
@@ -243,13 +242,14 @@ namespace vas
 			}
 
 			auto objectProperties = itr.child("properties");
-			if (!objectProperties)
-				tempLayer->setProperties(propertiesPraser(objectProperties));
+			if (objectProperties)
+				tempDat.properties = propertiesPraser(objectProperties);
 			tempObjList.push_back(std::move(tempDat));
 		}
 
 		tempLayer->setName(node.attribute("name").as_string());
 		tempLayer->setObjectList(std::move(tempObjList)); 
+		tempLayer->setProperties(propertiesPraser(node.child("properties")));
 		mapData.push_back(std::move(tempLayer));
 	}
 

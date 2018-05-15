@@ -1,8 +1,8 @@
 ﻿#include <Windows.h>
 #include "../libraries/vasframework/base/Base.hpp"
 #include "../libraries/vasframework/manager/SceneManager.hpp"
-#include "../libraries/vasframework/util/TextTools.hpp"
 #include "../libraries/vasframework/util/CommonTools.hpp"
+#include "../libraries/vasframework/sreflex/Util.hpp"
 //#include "scenes/MainScene.hpp"
 #include "scenes/TileMap.hpp"
 
@@ -34,8 +34,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 	}
 	catch (const std::exception& e)
 	{
+		vaserr << "exception occur, " << vas::sreflex::getObjectNameRuntime(e) << ": " << e.what();
 		vas::Base::getInstance().cleanAndQuit();
-		return vas::CommonTools::getInstance().messenger(e.what(), vas::CommonTools::MessageType::error, -1);
+		//return vas::CommonTools::getInstance().messenger(e.what(), vas::CommonTools::MessageType::error, -1);
+		return -1;
 	}
 
 	return 0;

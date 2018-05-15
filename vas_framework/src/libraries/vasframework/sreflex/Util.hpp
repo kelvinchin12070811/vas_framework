@@ -26,6 +26,14 @@ namespace vas
 		}
 
 		template <typename Type>
+		std::string getObjectNameRuntime(const Type& t)
+		{
+			auto result = boost::typeindex::type_id_runtime(t).pretty_name();
+			simpliflyObjectName(result);
+			return result;
+		}
+
+		template <typename Type>
 		boost::typeindex::type_index getObjectInfo()
 		{
 			return boost::typeindex::type_id<Type>()

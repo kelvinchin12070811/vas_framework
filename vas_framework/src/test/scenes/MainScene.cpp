@@ -19,7 +19,7 @@ namespace scene
 		vas::Property test2("test2", 0xCC50);
 		vas::Property test3(test2);
 		bool comResult = test3.notEqual<int>(test2);
-		vas::CommonTools::getInstance().messengerf(boost::format("compare result: %s"s) % (comResult ? "true"s : "false"s));
+		vas::CommonTools::getInstance().messenger(boost::format("compare result: %s"s) % (comResult ? "true"s : "false"s));
 		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
 	}
 

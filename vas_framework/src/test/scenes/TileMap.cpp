@@ -1,3 +1,4 @@
+#include <sstream>
 #include <boost/algorithm/string.hpp>
 #include "TileMap.hpp"
 #include "../../libraries/vasframework/util/CommonTools.hpp"
@@ -30,12 +31,19 @@ namespace scene
 	void TileMap::Signal_afterSceneCall()
 	{
 		using namespace std::chrono;
-		CommonTools::getInstance().messenger("Scene " + sreflex::getObjectName<TileMap>() + " is called");
-		InputManager::getInstance().mouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3));
-		engineName = std::make_shared<StyledText>("VAS Framework v2.0 indev", "assets/fonts/caladea-regular.ttf", zerovector, 12);
-		engineName->setBackgroundOffset(Vector2(3.0f, Angle(45.0 + 90.0)));
+		vasout << "Scene " << sreflex::getObjectName<TileMap>() << " is called";
+
+		signalsPool.push_back(InputManager::getInstance().mouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3)));
+
+		engineName = std::make_shared<StyledText>("VAS Framework v2.0 indev", "assets/fonts/caladea-regular.ttf", zerovector, 24);
+		engineName->setColour(sdl::ColourPresets::white);
+		engineName->setBackgroundColour(sdl::ColourPresets::red);
+		engineName->setBackgroundOffset(Vector2(3.0f, ANGLE_FROM_SECOND_QUATER(45.0)));
 
 		map.load("assets/maps/animated map.tmx");
+
+		vas::CommonTools::getInstance().messenger(vasstream << "this is a test to print " << 35 << "test at the back");
+		vas::CommonTools::getInstance().messenger(vasformat("this is a test to printf %1%") % 35);
 
 		CallRenderAssistance;
 		RenderAssistance->insert(VAS_INSERT_VAR(engineName));
@@ -46,7 +54,8 @@ namespace scene
 
 	void TileMap::Signal_beforeTerminate()
 	{
-		InputManager::getInstance().mouseButtonPressed.disconnect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3));
+		for (auto& itr : signalsPool)
+			itr.disconnect();
 	}
 
 	void TileMap::on_EventPulsed(sdl::Event & ev)
@@ -58,7 +67,8 @@ namespace scene
 		switch (index)
 		{
 		case SDL_BUTTON_LEFT:
-			vas::CommonTools::getInstance().messenger((boost::format("Mouse left clicked at: %i , %i") % x % y).str());
+			//vas::CommonTools::getInstance().messenger((boost::format("Mouse left clicked at: %i , %i") % x % y).str());
+			vasout << vasformat("Mouse left clicked at: %i, %i") % x % y;
 			break;
 		}
 	}

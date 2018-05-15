@@ -1,5 +1,11 @@
 #pragma once
 #include "../VASConfig.hpp"
+
+#define ANGLE_FROM_FIRST_QUATER(x) (vas::Angle(x))
+#define ANGLE_FROM_SECOND_QUATER(x) (vas::Angle(x + 90.0))
+#define ANGLE_FROM_THIRD_QUATER(x) (vas::Angle(x + 180.0))
+#define ANGLE_FROM_FOURT_QUATER(x) (vas::Angle(x + 270.0))
+
 //TODO: Fix more calculation error in Angle
 namespace vas
 {
