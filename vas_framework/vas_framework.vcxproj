@@ -214,7 +214,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\pugixml-1.9\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>

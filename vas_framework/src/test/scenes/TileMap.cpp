@@ -1,5 +1,4 @@
-#include <sstream>
-#include <filesystem>
+#include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
 #include "TileMap.hpp"
 #include "../../libraries/vasframework/util/CommonTools.hpp"
@@ -31,7 +30,6 @@ namespace scene
 
 	void TileMap::Signal_afterSceneCall()
 	{
-		using namespace std::experimental;
 		using namespace std::chrono;
 		vas::Log() << "Scene " << sreflex::getObjectName<TileMap>() << " is called";
 
@@ -48,17 +46,10 @@ namespace scene
 		RenderAssistance->insert(VAS_INSERT_VAR(engineName));
 		auto bgm = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
 
-		filesystem::path bgmPath = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
-		filesystem::path assetsPath = filesystem::current_path() / "assets/maps";
-
-		vas::Log() << bgmPath;
-		vas::Log() << assetsPath;
-		vas::Log() << filesystem::absolute(bgmPath, assetsPath);
-
-		vas::Cout() << "this is the test on outputing raw text" << std::endl;
-		vas::Cout() << "test is now: test" << std::endl << std::endl;
-		vas::Cout() << std::endl << std::endl << "manipulator test" << std::endl;
-		//AudioManger::getInstance().playBGM(bgmPath.generic_string(), 500ms);
+		boost::filesystem::path bgmPath = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
+		boost::filesystem::path assetsPath = boost::filesystem::current_path() / "assets/maps";
+		bgmPath = boost::filesystem::absolute(bgmPath, assetsPath).normalize().make_preferred();
+		AudioManger::getInstance().playBGM(bgmPath.string(), 500ms);
 	}
 
 	void TileMap::Signal_beforeTerminate()

@@ -4,7 +4,7 @@
 
 namespace sdl
 {
-	class VAS_DECLSPEC SDLCoreException : std::exception
+	class VAS_DECLSPEC SDLCoreException : public std::exception
 	{
 	public:
 		SDLCoreException();
