@@ -26,8 +26,6 @@
 
 namespace vas
 {
-	VAS_DECLSPEC boost::format make_format(const std::string& rhs);
-
 	class VAS_DECLSPEC TextTools
 	{
 	public:

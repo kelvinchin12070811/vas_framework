@@ -77,7 +77,7 @@ namespace scene
 		{
 		case SDL_BUTTON_LEFT:
 			//vas::CommonTools::getInstance().messenger((boost::format("Mouse left clicked at: %i , %i") % x % y).str());
-			vas::Log() << vas::make_format("Mouse left clicked at: %i, %i") % x % y;
+			vas::Log() << boost::format("Mouse left clicked at: %i, %i") % x % y;
 			break;
 		}
 	}

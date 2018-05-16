@@ -114,11 +114,6 @@ namespace vas
 #endif // VAS_WINDOWS_MODE
 	}
 
-	VAS_DECLSPEC boost::format make_format(const std::string& rhs)
-	{
-		return boost::format(rhs);
-	}
-
 	Cout::Cout()
 	{
 #ifdef VAS_WINDOWS_MODE
