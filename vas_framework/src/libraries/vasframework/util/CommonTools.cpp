@@ -65,18 +65,21 @@ namespace vas
 	{
 	}
 
-	void vasout_t::operator=(std::ostream & rhs) const
+	Log & Log::operator<<(std::ostream &(*manipulator)(std::ostream &o))
 	{
-		CommonTools::getInstance().messenger(rhs);
+		ss << manipulator;
+		return *this;
 	}
 
-	void vasinfo_t::operator=(std::ostream & rhs) const
+	Err & Err::operator<<(std::ostream &(*manipulator)(std::ostream &o))
 	{
-		CommonTools::getInstance().messenger(rhs, vas::CommonTools::MessageType::info);
+		ss << manipulator;
+		return *this;
 	}
 
-	void vaserr_t::operator=(std::ostream & rhs) const
+	Info & Info::operator<<(std::ostream &(*manipulator)(std::ostream &o))
 	{
-		CommonTools::getInstance().messenger(rhs, vas::CommonTools::MessageType::error);
+		ss << manipulator;
+		return *this;
 	}
 }

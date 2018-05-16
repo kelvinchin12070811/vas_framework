@@ -19,6 +19,7 @@ namespace vas
 		if (inited) return;
 		_setmode(fileno(stdin), _O_U16TEXT);
 		_setmode(fileno(stdout), _O_U16TEXT);
+		_setmode(fileno(stderr), _O_U16TEXT);
 		inited = true;
 	}
 
@@ -111,5 +112,61 @@ namespace vas
 		std::getline(cin, buff);
 		return buff;
 #endif // VAS_WINDOWS_MODE
+	}
+
+	VAS_DECLSPEC boost::format make_format(const std::string& rhs)
+	{
+		return boost::format(rhs);
+	}
+
+	Cout::Cout()
+	{
+#ifdef VAS_WINDOWS_MODE
+		TextTools::initTextTools();
+#endif // VAS_WINDOWS_MODE
+	}
+
+	Cout::~Cout()
+	{
+		STD_COUT << VAS_STR_2_WSTR(ss.str());
+	}
+
+	Cout & Cout::operator<<(std::ostream &(*manipulator)(std::ostream &o))
+	{
+		ss << manipulator;
+		return *this;
+	}
+
+	Cin::Cin()
+	{
+#ifdef VAS_WINDOWS_MODE
+		TextTools::initTextTools();
+#endif // VAS_WINDOWS_MODE
+	}
+
+	Cin & Cin::operator>>(std::string & rhs)
+	{
+		VAS_COMM_STR temp;
+		STD_CIN >> temp;
+		rhs = VAS_WSTR_2_STR(temp);
+		return *this;
+	}
+
+	Ceer::Ceer()
+	{
+#ifdef VAS_WINDOWS_MODE
+		TextTools::initTextTools();
+#endif // VAS_WINDOWS_MODE
+	}
+
+	Ceer::~Ceer()
+	{
+		STD_CEER << VAS_STR_2_WSTR(ss.str());
+	}
+
+	Ceer & Ceer::operator<<(std::ostream &(*manipulator)(std::ostream &o))
+	{
+		ss << manipulator;
+		return *this;
 	}
 }

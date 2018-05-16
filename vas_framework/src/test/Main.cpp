@@ -34,7 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 	}
 	catch (const std::exception& e)
 	{
-		vaserr << "exception occur, " << vas::sreflex::getObjectNameRuntime(e) << ": " << e.what();
+		vas::Err() << "exception occur, " << vas::sreflex::getObjectNameRuntime(e) << ": " << e.what();
 		vas::Base::getInstance().cleanAndQuit();
 		//return vas::CommonTools::getInstance().messenger(e.what(), vas::CommonTools::MessageType::error, -1);
 		return -1;

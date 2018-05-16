@@ -65,24 +65,60 @@ namespace vas
 		std::function<void(const std::string&, CommonTools::MessageType, int)> loggingFunction = nullptr;
 	};
 
-	const class vasout_t
+	class Log
 	{
 	public:
-		void operator=(std::ostream& rhs) const;
-	} vasout_base = {};
+		Log() = default;
+		~Log()
+		{
+			vas::CommonTools::getInstance().messenger(ss);
+		}
+		template<typename Type>
+		Log& operator<<(const Type& rhs)
+		{
+			ss << rhs;
+			return *this;
+		}
+		Log& operator<<(std::ostream& (*manipulator)(std::ostream& o));
+	private:
+		std::stringstream ss;
+	};
 
-	const class vasinfo_t
+	class Info
 	{
 	public:
-		void operator=(std::ostream& rhs) const;
-	} vasinfo_base = {};
+		Info() = default;
+		~Info()
+		{
+			vas::CommonTools::getInstance().messenger(ss, vas::CommonTools::MessageType::info);
+		}
+		template<typename Type>
+		Info& operator<<(const Type& rhs)
+		{
+			ss << rhs;
+			return *this;
+		}
+		Info& operator<<(std::ostream& (*manipulator)(std::ostream& o));
+	private:
+		std::stringstream ss;
+	};
 
-	const class vaserr_t
+	class Err
 	{
 	public:
-		void operator=(std::ostream& rhs) const;
-	} vaserr_base = {};
+		Err() = default;
+		~Err()
+		{
+			vas::CommonTools::getInstance().messenger(ss, vas::CommonTools::MessageType::error);
+		}
+		template<typename Type>
+		Err& operator<<(const Type& rhs)
+		{
+			ss << rhs;
+			return *this;
+		}
+		Err& operator<<(std::ostream& (*manipulator)(std::ostream& o));
+	private:
+		std::stringstream ss;
+	};
 }
-#define vasout vas::vasout_base = vasstream
-#define vasinfo vas::vasinfo_base = vasstream
-#define vaserr vas::vaserr_base = vasstream

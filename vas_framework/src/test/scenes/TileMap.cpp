@@ -33,7 +33,7 @@ namespace scene
 	{
 		using namespace std::experimental;
 		using namespace std::chrono;
-		vasout << "Scene " << sreflex::getObjectName<TileMap>() << " is called";
+		vas::Log() << "Scene " << sreflex::getObjectName<TileMap>() << " is called";
 
 		signalsPool.push_back(InputManager::getInstance().mouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3)));
 
@@ -51,10 +51,13 @@ namespace scene
 		filesystem::path bgmPath = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
 		filesystem::path assetsPath = filesystem::current_path() / "assets/maps";
 
-		vasout << bgmPath;
-		vasout << assetsPath;
-		vasout << filesystem::absolute(bgmPath, assetsPath);
+		vas::Log() << bgmPath;
+		vas::Log() << assetsPath;
+		vas::Log() << filesystem::absolute(bgmPath, assetsPath);
 
+		vas::Cout() << "this is the test on outputing raw text" << std::endl;
+		vas::Cout() << "test is now: test" << std::endl << std::endl;
+		vas::Cout() << std::endl << std::endl << "manipulator test" << std::endl;
 		//AudioManger::getInstance().playBGM(bgmPath.generic_string(), 500ms);
 	}
 
@@ -74,7 +77,7 @@ namespace scene
 		{
 		case SDL_BUTTON_LEFT:
 			//vas::CommonTools::getInstance().messenger((boost::format("Mouse left clicked at: %i , %i") % x % y).str());
-			vasout << vasformat("Mouse left clicked at: %i, %i") % x % y;
+			vas::Log() << vas::make_format("Mouse left clicked at: %i, %i") % x % y;
 			break;
 		}
 	}
