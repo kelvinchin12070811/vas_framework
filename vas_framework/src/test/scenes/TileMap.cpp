@@ -1,4 +1,5 @@
 #include <sstream>
+#include <filesystem>
 #include <boost/algorithm/string.hpp>
 #include "TileMap.hpp"
 #include "../../libraries/vasframework/util/CommonTools.hpp"
@@ -30,6 +31,7 @@ namespace scene
 
 	void TileMap::Signal_afterSceneCall()
 	{
+		using namespace std::experimental;
 		using namespace std::chrono;
 		vasout << "Scene " << sreflex::getObjectName<TileMap>() << " is called";
 
@@ -42,14 +44,18 @@ namespace scene
 
 		map.load("assets/maps/animated map.tmx");
 
-		vas::CommonTools::getInstance().messenger(vasstream << "this is a test to print " << 35 << "test at the back");
-		vas::CommonTools::getInstance().messenger(vasformat("this is a test to printf %1%") % 35);
-
 		CallRenderAssistance;
 		RenderAssistance->insert(VAS_INSERT_VAR(engineName));
 		auto bgm = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
-		boost::replace_all(bgm, "../", "assets/");
-		AudioManger::getInstance().playBGM(bgm, 500ms);
+
+		filesystem::path bgmPath = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
+		filesystem::path assetsPath = filesystem::current_path() / "assets/maps";
+
+		vasout << bgmPath;
+		vasout << assetsPath;
+		vasout << filesystem::absolute(bgmPath, assetsPath);
+
+		//AudioManger::getInstance().playBGM(bgmPath.generic_string(), 500ms);
 	}
 
 	void TileMap::Signal_beforeTerminate()

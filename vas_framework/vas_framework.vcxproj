@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\MapRenderer.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\AllShape.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\Ellipse.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\IShape.hpp" />
@@ -97,8 +98,10 @@
     <ClInclude Include="src\test\scenes\TileMap.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\TMXParser.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\maplayers\TileLayer.hpp" />
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\TilesetsBundle.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\MapRenderer.cpp" />
     <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\ObjectLayer.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\AnimationController.cpp" />
     <ClCompile Include="src\libraries\vasframework\container\PropertyList.cpp" />
@@ -155,6 +158,7 @@
     <ClCompile Include="src\test\scenes\TileMap.cpp" />
     <ClCompile Include="src\libraries\vasframework\tiledmap\TMXParser.cpp" />
     <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\TileLayer.cpp" />
+    <ClCompile Include="src\libraries\vasframework\tiledmap\container\TilesetsBundle.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>

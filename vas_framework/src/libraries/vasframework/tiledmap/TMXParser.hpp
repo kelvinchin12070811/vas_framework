@@ -24,6 +24,7 @@ namespace vas
 	public: // getters
 		AbstractMapLayer* getDataAt(size_t index) const;
 		AbstractMapLayer* getDataAt(const std::string& name) const;
+		const std::vector<std::unique_ptr<AbstractMapLayer>>& getMapData() const;
 		std::string getFileName() const;
 		const MapProperties& getMapProperties() const;
 		const std::vector<Tileset>& getRequireTilesets() const;

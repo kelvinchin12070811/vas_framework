@@ -229,6 +229,9 @@
   </data>
  </layer>
  <layer name="Tile Layer 6" width="40" height="23">
+  <properties>
+   <property name="layer id" type="int" value="35"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMAqGLjjFNjLsHAWjYBSMglFAHdDMwsAwg2WgXYEbTB/EbiMGAAAJygNf
   </data>

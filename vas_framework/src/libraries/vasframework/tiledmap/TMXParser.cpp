@@ -52,6 +52,11 @@ namespace vas
 		return result == mapData.end() ? nullptr : result->get();
 	}
 
+	const std::vector<std::unique_ptr<AbstractMapLayer>>& TMXParser::getMapData() const
+	{
+		return mapData;
+	}
+
 	std::string TMXParser::getFileName() const
 	{
 		return fileName;

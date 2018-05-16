@@ -249,6 +249,12 @@
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\AllShape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\MapRenderer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\tiledmap\container\TilesetsBundle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCore.cpp">
@@ -417,6 +423,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\ObjectLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\MapRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\tiledmap\container\TilesetsBundle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
