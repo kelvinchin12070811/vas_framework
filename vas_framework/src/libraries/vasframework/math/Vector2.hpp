@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "../sdlcore/math/Point.hpp"
 #include "../VASConfig.hpp"
 
 namespace vas
@@ -11,6 +12,9 @@ namespace vas
 		Vector2();
 		Vector2(float x, float y);
 		Vector2(float magnitude, const Angle& value);
+		explicit Vector2(const sdl::Point& point);
+		Vector2(const Vector2&) = default;
+		Vector2(Vector2&&) = default;
 		~Vector2();
 
 		//from (0, 0)
@@ -36,6 +40,11 @@ namespace vas
 		const Vector2& operator*=(float rhs);
 		const Vector2& operator/=(const Vector2& rhs);
 		const Vector2& operator/=(float rhs);
+
+		Vector2& operator=(const Vector2&) = default;
+		Vector2& operator=(Vector2&&) = default;
+
+		explicit operator sdl::Point() const;
 	public:
 		float x{ 0 };
 		float y{ 0 };

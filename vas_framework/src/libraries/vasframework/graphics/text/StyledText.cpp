@@ -107,6 +107,17 @@ namespace vas
 		if (update) applyBackgroundOffset();
 	}
 
+	bool StyledText::isStaticOnCamera() const
+	{
+		return foreground->isStaticOnCamera();
+	}
+
+	void StyledText::setStaticOnCamera(bool value)
+	{
+		foreground->setStaticOnCamera(value);
+		background->setStaticOnCamera(value);
+	}
+
 	void StyledText::applyBackgroundOffset()
 	{
 		auto newPos = foreground->getPosition() + backgroundOffset;

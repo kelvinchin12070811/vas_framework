@@ -28,6 +28,7 @@ namespace vas
 		void setOrigin(const sdl::Point& value);
 		void setRendererFlip(sdl::Renderer::Flip flip);
 		void setOverlay(const sdl::Colour& value);
+		void setStaticOnCamera(bool value);
 
 		Vector2 getPosition() const;
 		Angle getAngle() const;
@@ -36,6 +37,7 @@ namespace vas
 		sdl::Colour getOverlay() const;
 		sdl::Rect getSourceRect() const;
 		sdl::Rect getDestRect() const;
+		bool isStaticOnCamera() const;
 
 		int getWidth() const;
 		int getHeight() const;
@@ -55,5 +57,7 @@ namespace vas
 		sdl::Rect destination;
 		sdl::Renderer::Flip rendererFlip{ sdl::Renderer::Flip::none };
 		sdl::Texture texture;
+
+		bool staticOnCamera = false;
 	};
 }

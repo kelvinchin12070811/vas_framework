@@ -14,6 +14,9 @@ namespace vas
 		void setAutoResetLimit(size_t autoResetLimit);
 		void reset();
 
+		size_t getMaxTick() const;
+		size_t getLimit() const;
+
 		Counter& operator++(int);
 		Counter& operator--(int);
 

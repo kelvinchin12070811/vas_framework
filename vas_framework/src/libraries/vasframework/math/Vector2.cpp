@@ -58,6 +58,11 @@ namespace vas
 		}
 	}
 
+	Vector2::Vector2(const sdl::Point & point):
+		x(static_cast<float>(point.x)), y(static_cast<float>(point.y))
+	{
+	}
+
 	Vector2::~Vector2()
 	{
 	}
@@ -190,6 +195,11 @@ namespace vas
 		this->x /= rhs;
 		this->y /= rhs;
 		return *this;
+	}
+
+	Vector2::operator sdl::Point() const
+	{
+		return sdl::Point(static_cast<int>(x), static_cast<int>(y));
 	}
 
 	uint8_t Vector2::getQuaterId() const

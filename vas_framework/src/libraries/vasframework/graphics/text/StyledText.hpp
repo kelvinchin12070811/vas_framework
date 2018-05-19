@@ -47,6 +47,9 @@ namespace vas
 
 		std::string getText() const;
 		void setString(const std::string& value, bool update = true);
+
+		bool isStaticOnCamera() const;
+		void setStaticOnCamera(bool value);
 	public:
 		std::unique_ptr<Text> foreground{ nullptr };
 		std::unique_ptr<Text> background{ nullptr };

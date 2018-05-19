@@ -4,6 +4,7 @@
 #include "../../libraries/vasframework/util/CommonTools.hpp"
 #include "../../libraries/vasframework/manager/AudioManger.hpp"
 #include "../../libraries/vasframework/sreflex/Util.hpp"
+#include "../../libraries/vasframework/tiledmap/container/TilesetsBundle.hpp"
 
 using namespace vas;
 using namespace boost::placeholders;
@@ -50,6 +51,15 @@ namespace scene
 		boost::filesystem::path assetsPath = boost::filesystem::current_path() / "assets/maps";
 		bgmPath = boost::filesystem::absolute(bgmPath, assetsPath).normalize().make_preferred();
 		AudioManger::getInstance().playBGM(bgmPath.string(), 500ms);
+
+		vas::TilesetsBundle tilesets;
+		for (auto& itr : const_cast<std::vector<vas::Tileset>&>(map.getRequireTilesets()))
+		{
+			boost::filesystem::path path = boost::filesystem::absolute(itr.source.name, assetsPath).normalize().make_preferred();
+			itr.source.name = path.string();
+		}
+
+		tilesets.load(map.getRequireTilesets(), map.getMapProperties().tileWidth, map.getMapProperties().tileHeight);
 	}
 
 	void TileMap::Signal_beforeTerminate()

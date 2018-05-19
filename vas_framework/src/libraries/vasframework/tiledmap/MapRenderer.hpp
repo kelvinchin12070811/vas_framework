@@ -1,19 +1,22 @@
 #pragma once
-#include "TMXParser.hpp"
+#include <vector>
+#include "maplayers/TileLayer.hpp"
 #include "../graphics/sprites/SpriteSheet.hpp"
+#include "container/TilesetsBundle.hpp"
 
 namespace vas
 {
 	class VAS_DECLSPEC MapRenderer : IRendererAble
 	{
 	public:
-		MapRenderer(const std::unique_ptr<TileLayer>& layer, int mapWidth, int mapHeight);
+		MapRenderer(TileLayer* layer, int mapWidth, int mapHeight, const TilesetsBundle& bundle);
 		~MapRenderer();
 
 		void tick() override;
 		void draw() override;
 	private:
-		const std::unique_ptr<TileLayer>& layer;
+		TileLayer* layer;
+		TilesetsBundle bundle;
 		int mapWidth{ 0 };
 		int mapHeight{ 0 };
 	};

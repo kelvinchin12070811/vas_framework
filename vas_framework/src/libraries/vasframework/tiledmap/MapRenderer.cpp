@@ -1,19 +1,25 @@
 #include "MapRenderer.hpp"
+#include "../base/Base.hpp"
+//#include "../"
 
 namespace vas
 {
-	MapRenderer::MapRenderer(const std::unique_ptr<TileLayer>& layer, int mapWidth, int mapHeight):
-		layer(layer), mapWidth(mapWidth), mapHeight(mapHeight)
+	MapRenderer::MapRenderer(TileLayer* layer, int mapWidth, int mapHeight, const TilesetsBundle& bundle):
+		layer(layer), mapWidth(mapWidth), mapHeight(mapHeight), bundle(bundle)
 	{
 	}
 
 	MapRenderer::~MapRenderer()
 	{
 	}
+
 	void MapRenderer::tick()
 	{
+		bundle.tick();
 	}
+
 	void MapRenderer::draw()
 	{
+
 	}
 }

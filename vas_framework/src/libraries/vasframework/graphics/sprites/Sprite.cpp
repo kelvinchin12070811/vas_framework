@@ -1,5 +1,6 @@
 #include "Sprite.hpp"
 #include "../../base/Base.hpp"
+#include "../Camera.hpp"
 
 namespace vas
 {
@@ -76,6 +77,11 @@ namespace vas
 		}
 	}
 
+	void Sprite::setStaticOnCamera(bool value)
+	{
+		staticOnCamera = value;
+	}
+
 	Vector2 Sprite::getPosition() const
 	{
 		return position;
@@ -111,6 +117,11 @@ namespace vas
 		return destination;
 	}
 
+	bool Sprite::isStaticOnCamera() const
+	{
+		return staticOnCamera;
+	}
+
 	int Sprite::getWidth() const
 	{
 		return destination.w;
@@ -135,6 +146,16 @@ namespace vas
 		if (texture == sdl::emptycomponent) return;
 
 		auto renderer = Base::getInstance().Renderer();
-		renderer.copyEx(texture, &source, &destination, static_cast<double>(angle), origin, rendererFlip);
+		if (staticOnCamera)
+		{
+			if (Camera::getInstance().canSee(destination))
+				renderer.copyEx(texture, &source, &destination, static_cast<double>(angle), origin, rendererFlip);
+		}
+		else
+		{
+			auto foreginRect = Camera::getInstance().getRectOnCamera(destination);
+			if (Camera::getInstance().canSee(foreginRect))
+				renderer.copyEx(texture, &source, &foreginRect, static_cast<double>(angle), origin, rendererFlip);
+		}
 	}
 }

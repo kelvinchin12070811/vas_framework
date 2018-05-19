@@ -6,6 +6,7 @@
 #include "../manager/TextureManager.hpp"
 #include "../manager/InputManager.hpp"
 #include "../manager/AudioManger.hpp"
+#include "../graphics/Camera.hpp"
 
 namespace vas
 {
@@ -51,6 +52,16 @@ namespace vas
 
 		frameCounterUpdater.start();
 
+		if (!mainRenderer)
+			throw std::runtime_error("Unable to start game loop scene renderer instance is nullptr");
+
+		{
+			auto canvasSize = mainRenderer.getLogicalSize();
+			if (canvasSize.x == 0 && canvasSize.y == 0)
+				canvasSize = mainWindow.getSize();
+
+			Camera::getInstance().setSize(canvasSize);
+		}
 		InputManager::getInstance().init(&ev);
 		while (exec)
 		{

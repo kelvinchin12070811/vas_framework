@@ -4,6 +4,7 @@
 #include "../../libraries/vasframework/util/TextTools.hpp"
 #include "../../libraries/vasframework/container/Property.hpp"
 #include "../../libraries/vasframework/manager/AudioManger.hpp"
+#include "../../libraries/vasframework/graphics/Camera.hpp"
 
 using namespace std::string_literals;
 
@@ -38,6 +39,22 @@ namespace scene
 			movement.y = -1.0f;
 		else if (textTest->foreground->getPosition().y <= 0)
 			movement.y = 1.0f;
+
+		/*{
+			vas::Vector2 cameraMovement = vas::zerovector;
+			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::up))
+				cameraMovement.y = -1;
+			else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::down))
+				cameraMovement.y = 1;
+
+			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::left))
+				cameraMovement.x = -1;
+			else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::right))
+				cameraMovement.x = 1;
+			vas::Camera::getInstance().move(cameraMovement);
+		}*/
+
+		vas::Camera::getInstance().focusOn(static_cast<vas::Vector2>(vas::InputManager::getInstance().getMousePosition()));
 
 		textTest->move(movement);
 		auto& auManager = vas::AudioManger::getInstance();
@@ -74,7 +91,7 @@ namespace scene
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector);
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
 		textTest = std::make_shared<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24, sdl::ColourPresets::white);
-	
+		textTest->setStaticOnCamera(true);
 		textTest->setBackgroundOffset(vas::Vector2(3.0f, vas::Angle(45.0 + 90.0)));
 
 		RenderAssistance->insert(VAS_INSERT_VAR(testSprite));

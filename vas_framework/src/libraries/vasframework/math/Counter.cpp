@@ -25,6 +25,16 @@ namespace vas
 		ticks = 0;
 	}
 
+	size_t Counter::getMaxTick() const
+	{
+		return getLimit() - 1;
+	}
+
+	size_t Counter::getLimit() const
+	{
+		return autoResetLimit;
+	}
+
 	Counter & Counter::operator++(int)
 	{
 		ticks++;
@@ -37,6 +47,8 @@ namespace vas
 	{
 		if (ticks != 0)
 			ticks--;
+		else
+			ticks = autoResetLimit--;
 		return *this;
 	}
 
