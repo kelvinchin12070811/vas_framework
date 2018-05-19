@@ -52,6 +52,11 @@ namespace vas
 		this->position = position - Vector2(size.x / 2, size.y / 2);
 	}
 
+	void Camera::zoom(double value)
+	{
+		this->multiplyer *= value;
+	}
+
 	void Camera::setPosition(const Vector2 & value)
 	{
 		if (position != value)
@@ -64,6 +69,11 @@ namespace vas
 			size = value;
 	}
 
+	void Camera::setMultiplyer(double value)
+	{
+		multiplyer = value;
+	}
+
 	Vector2 Camera::getPosition()
 	{
 		return position;
@@ -72,6 +82,11 @@ namespace vas
 	sdl::Point Camera::getSize()
 	{
 		return size;
+	}
+
+	double Camera::getMultiplyer()
+	{
+		return multiplyer;
 	}
 
 	Camera::Camera()

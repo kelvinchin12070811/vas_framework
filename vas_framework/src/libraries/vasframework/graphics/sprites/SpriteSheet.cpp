@@ -1,5 +1,6 @@
 #include "SpriteSheet.hpp"
 #include "../../base/Base.hpp"
+#include "../Camera.hpp"
 
 namespace vas
 {
@@ -31,7 +32,7 @@ namespace vas
 		return;
 	}
 
-	void SpriteSheet::drawTile(size_t index, const Vector2 & position, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
+	void SpriteSheet::drawTile(size_t index, const Vector2 & position, bool staticOnCamera, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
 	{
 		auto renderer = Base::getInstance().Renderer();
 
@@ -43,6 +44,16 @@ namespace vas
 		tileSource = sdl::Rect(tilePos.x, tilePos.y, tileSize.x, tileSize.y);
 		tileDest = sdl::Rect(static_cast<int>(position.x), static_cast<int>(position.y), tileSize.x, tileSize.y);
 
-		renderer.copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
+		if (staticOnCamera)
+		{
+			if (Camera::getInstance().canSee(tileDest))
+				renderer.copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
+		}
+		else
+		{
+			tileDest = Camera::getInstance().getRectOnCamera(tileDest);
+			if (Camera::getInstance().canSee(tileDest))
+				renderer.copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
+		}
 	}
 }

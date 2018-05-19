@@ -16,7 +16,7 @@ namespace vas
 		void tick() override;
 		void draw() override;
 
-		void drawTile(size_t index, const Vector2& position, const sdl::Point& origin = sdl::Point(),
+		void drawTile(size_t index, const Vector2& position, bool staticOnCamera = false, const sdl::Point& origin = sdl::Point(),
 			const vas::Angle& angle = vas::Angle(), sdl::Renderer::Flip flip = sdl::Renderer::Flip::none);
 
 		SpriteSheet& operator=(const SpriteSheet&) = delete;

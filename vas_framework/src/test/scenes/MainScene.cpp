@@ -54,7 +54,17 @@ namespace scene
 			vas::Camera::getInstance().move(cameraMovement);
 		}*/
 
-		vas::Camera::getInstance().focusOn(static_cast<vas::Vector2>(vas::InputManager::getInstance().getMousePosition()));
+		if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::up))
+			tilePos.y += -1;
+		else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::down))
+			tilePos.y += 1;
+
+		if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::left))
+			tilePos.x += -1;
+		else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::right))
+			tilePos.x += 1;
+
+		vas::Camera::getInstance().focusOn(tilePos + vas::Vector2(16, 16));
 
 		textTest->move(movement);
 		auto& auManager = vas::AudioManger::getInstance();
@@ -74,7 +84,7 @@ namespace scene
 	void MainScene::draw()
 	{
 		scene::AbstractFrameCountingScene::draw();
-		testSheet->drawTile(13, vas::Vector2(56, 67));
+		testSheet->drawTile(13, tilePos);
 	}
 
 	void MainScene::Signal_afterSceneCall()

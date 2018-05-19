@@ -18,14 +18,17 @@ namespace vas
 
 		void move(const Vector2& movement);
 		void focusOn(const Vector2& position);
+		void zoom(double value);
 
 	public: //setters
 		void setPosition(const Vector2& value);
 		void setSize(const sdl::Point& value);
+		void setMultiplyer(double value);
 
 	public: //getters
 		Vector2 getPosition();
 		sdl::Point getSize();
+		double getMultiplyer();
 
 	private:
 		Camera();

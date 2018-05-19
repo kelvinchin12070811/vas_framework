@@ -42,5 +42,6 @@ namespace scene
 		bool fadeController{ false };
 
 		vas::Vector2 movement{ 1.0f, 1.0f };
+		vas::Vector2 tilePos{ 56, 67 };
 	};
 }
