@@ -123,13 +123,29 @@ namespace vas
 
 	Cout::~Cout()
 	{
-		STD_COUT << VAS_STR_2_WSTR(ss.str());
+		outputStream(false);
 	}
 
 	Cout & Cout::operator<<(std::ostream &(*manipulator)(std::ostream &o))
 	{
-		ss << manipulator;
+		if (manipulator == std::endl<std::ostream::char_type, std::ostream::traits_type>)
+		{
+			outputStream();
+			this->getWrapedStream() << std::endl;
+		}
+		else
+		{
+			ss << manipulator;
+		}
 		return *this;
+	}
+
+	void Cout::outputStream(bool clearBuffer)
+	{
+		auto str = ss.str();
+		if (str.empty()) return;
+		STD_COUT << VAS_STR_2_WSTR(str);
+		if (clearBuffer) ss = std::stringstream();
 	}
 
 	Cin::Cin()
@@ -156,12 +172,28 @@ namespace vas
 
 	Ceer::~Ceer()
 	{
-		STD_CEER << VAS_STR_2_WSTR(ss.str());
+		outputStream(true);
 	}
 
 	Ceer & Ceer::operator<<(std::ostream &(*manipulator)(std::ostream &o))
 	{
-		ss << manipulator;
+		if (manipulator == std::endl<std::ostream::char_type, std::ostream::traits_type>)
+		{
+			outputStream();
+			this->getWrapedStream() << std::endl;
+		}
+		else
+		{
+			ss << manipulator;
+		}
 		return *this;
+	}
+
+	void Ceer::outputStream(bool clearBuffer)
+	{
+		auto str = ss.str();
+		if (str.empty()) return;
+		STD_CEER << VAS_STR_2_WSTR(str);
+		if (clearBuffer) ss = std::stringstream();
 	}
 }

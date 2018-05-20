@@ -95,6 +95,8 @@ namespace vas
 			return *this;
 		}
 	private:
+		void outputStream(bool clearBuffer = true);
+	private:
 		std::stringstream ss;
 	};
 
@@ -113,6 +115,8 @@ namespace vas
 			ss << rhs;
 			return *this;
 		}
+	private:
+		void outputStream(bool clearBuffer = true);
 	private:
 		std::stringstream ss;
 	};
