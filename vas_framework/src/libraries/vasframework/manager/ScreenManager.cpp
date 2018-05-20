@@ -17,15 +17,15 @@ namespace vas
 		if (!screenOverlays.isEmpty())
 			for (auto& itr : screenOverlays)
 			{
-				if (itr.second != nullptr)
-					itr.second->tick();
+				if (itr.instance != nullptr)
+					itr.instance->tick();
 			}
 
 		if (!screenAboveOverlays.isEmpty())
 			for (auto& itr : screenAboveOverlays)
 			{
-				if (itr.second != nullptr)
-					itr.second->tick();
+				if (itr.instance != nullptr)
+					itr.instance->tick();
 			}
 	}
 
@@ -34,8 +34,8 @@ namespace vas
 		if (!screenOverlays.isEmpty())
 			for (auto& itr : screenOverlays)
 			{
-				if (itr.second != nullptr)
-					itr.second->tick();
+				if (itr.instance != nullptr)
+					itr.instance->tick();
 			}
 
 		if (masterOverlayColour.alpha != 0 && screenMasterOverlay != nullptr)
@@ -44,8 +44,8 @@ namespace vas
 		if (!screenAboveOverlays.isEmpty())
 			for (auto& itr : screenAboveOverlays)
 			{
-				if (itr.second != nullptr)
-					itr.second->draw();
+				if (itr.instance != nullptr)
+					itr.instance->draw();
 			}
 	}
 
