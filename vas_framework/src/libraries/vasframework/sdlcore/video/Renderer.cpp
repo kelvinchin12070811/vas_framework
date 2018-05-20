@@ -236,9 +236,9 @@ namespace sdl
 		return SDL_RenderSetClipRect(&*this->componentInstance, &temp) == 0 ? true : false;
 	}
 
-	bool Renderer::setIntegerScale(bool enable)
+	bool Renderer::setIntegerScale(bool visible)
 	{
-		return SDL_RenderSetIntegerScale(&*this->componentInstance, boolean_cast(enable)) == 0 ? true : false;
+		return SDL_RenderSetIntegerScale(&*this->componentInstance, boolean_cast(visible)) == 0 ? true : false;
 	}
 
 	bool Renderer::setLogicalSize(const Point & size)

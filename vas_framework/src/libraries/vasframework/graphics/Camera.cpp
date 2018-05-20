@@ -49,7 +49,7 @@ namespace vas
 
 	void Camera::focusOn(const Vector2 & position)
 	{
-		this->position = position - Vector2(size.x / 2, size.y / 2);
+		this->position = position - Vector2(size.x / 2.0f, size.y / 2.0f);
 	}
 
 	void Camera::zoom(double value)

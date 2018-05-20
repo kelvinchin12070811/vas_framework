@@ -40,7 +40,7 @@ namespace vas
 		auto result = std::find_if(spriteData.begin(), spriteData.end(),
 			[&](decltype(spriteData)::value_type& itr)->bool
 		{
-			return index > itr.first.firstGid && index < itr.first.firstGid + itr.first.tileCount;
+			return index >= itr.first.firstGid && index < itr.first.firstGid + itr.first.tileCount;
 		}
 		);
 		if (result == spriteData.end()) return std::make_pair(0, nullptr);
@@ -50,9 +50,29 @@ namespace vas
 		return selectedTile;
 	}
 
+	Tileset * TilesetsBundle::getTileLocatedTilesets(uint32_t index)
+	{
+		if (index == 0) return nullptr;
+
+		auto result = std::find_if(spriteData.begin(), spriteData.end(),
+			[&](decltype(spriteData)::value_type& itr)->bool
+		{
+			return index >= itr.first.firstGid && index < itr.first.firstGid + itr.first.tileCount;
+		}
+		);
+		if (result == spriteData.end()) return nullptr;
+
+		return &result->first;
+	}
+
 	bool TilesetsBundle::isAnimatedTile(uint32_t index)
 	{
 		return animationsData.find(index) == animationsData.end() ? false : true;
+	}
+
+	std::map<uint32_t, AnimationController>& TilesetsBundle::getAnimatiosData()
+	{
+		return animationsData;
 	}
 
 	void TilesetsBundle::tick()

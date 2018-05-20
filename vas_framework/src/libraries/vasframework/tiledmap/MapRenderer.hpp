@@ -6,18 +6,26 @@
 
 namespace vas
 {
-	class VAS_DECLSPEC MapRenderer : IRendererAble
+	class VAS_DECLSPEC MapRenderer : public IRendererAble
 	{
 	public:
-		MapRenderer(TileLayer* layer, int mapWidth, int mapHeight, const TilesetsBundle& bundle);
+		MapRenderer(TileLayer* layer, const sdl::Point& mapSize, const sdl::Point& tileSize, const TilesetsBundle& bundle);
 		~MapRenderer();
 
 		void tick() override;
 		void draw() override;
+
+	public: //Setters
+		void setStaticOnCamera(bool value);
+		
+	public: //Getters
+		bool isStaticOnCamera();
+
 	private:
 		TileLayer* layer;
-		TilesetsBundle bundle;
-		int mapWidth{ 0 };
-		int mapHeight{ 0 };
+		TilesetsBundle* bundle;
+		sdl::Point mapSize;
+		sdl::Point tileSize;
+		bool staticOnCamera = false;
 	};
 }

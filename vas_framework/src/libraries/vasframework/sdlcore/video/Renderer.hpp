@@ -82,7 +82,7 @@ namespace sdl
 		bool renderTargetSupported();
 
 		bool setClipRect(const Rect& rect);
-		bool setIntegerScale(bool enable);
+		bool setIntegerScale(bool visible);
 		bool setLogicalSize(const Point& size);
 		bool setRenderDrawBlendMode(BlendMode mode);
 		bool setRenderDrawColor(uint8_t red, uint8_t green, uint8_t bule, uint8_t alpha);

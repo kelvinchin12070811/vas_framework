@@ -57,7 +57,7 @@ namespace vas
 	{
 		auto result = std::find_if(layerData.begin(), layerData.end(), [&](LayerData& itr)->bool
 		{
-			return itr.first == name;
+			return itr.name == name;
 		});
 		if (result == layerData.end()) return;
 		remove(std::distance(layerData.begin(), result));
@@ -155,7 +155,7 @@ namespace vas
 	{
 		auto result = std::find_if(layerData.begin(), layerData.end(), [&](LayerData& itr)->bool
 		{
-			return itr.first == name;
+			return itr.name == name;
 		});
 
 		if (result == layerData.end())
@@ -167,7 +167,7 @@ namespace vas
 	{
 		auto result = std::find_if(layerData.begin(), layerData.end(), [&](LayerData& itr)->bool
 		{
-			return itr.second.get() == instance;
+			return itr.instance.get() == instance;
 		});
 
 		if (result == layerData.end())
@@ -179,7 +179,7 @@ namespace vas
 	{
 		for (auto& itr : layerData)
 		{
-			if (itr.second != nullptr) itr.second->tick();
+			if (itr.instance != nullptr) itr.instance->tick();
 		}
 	}
 
@@ -187,7 +187,8 @@ namespace vas
 	{
 		for (auto& itr : layerData)
 		{
-			if (itr.second != nullptr) itr.second->draw();
+			if (!itr.visible) return;
+			if (itr.instance != nullptr) itr.instance->draw();
 		}
 	}
 
@@ -206,5 +207,22 @@ namespace vas
 	std::vector<Layers::LayerData>& Layers::getLayerData()
 	{
 		return layerData;
+	}
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, const std::shared_ptr<IRendererAble>& instance, bool visible)
+	{
+		Layers::LayerData data;
+		data.name = name;
+		data.instance = instance;
+		data.visible = visible;
+		return data;
+	}
+
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, std::shared_ptr<IRendererAble>&& instance, bool visible)
+	{
+		Layers::LayerData data;
+		data.name = name;
+		data.instance = std::move(instance);
+		data.visible = visible;
+		return data;
 	}
 }

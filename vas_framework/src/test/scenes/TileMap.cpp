@@ -1,5 +1,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
 #include "TileMap.hpp"
 #include "../../libraries/vasframework/util/CommonTools.hpp"
 #include "../../libraries/vasframework/manager/AudioManger.hpp"
@@ -21,6 +22,25 @@ namespace scene
 
 	void TileMap::tick()
 	{
+		{ // Input area
+			vas::Vector2 camMovement;
+			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::up))
+				camMovement.y = -1;
+			else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::down))
+				camMovement.y = 1;
+
+			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::left))
+				camMovement.x = -1;
+			else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::right))
+				camMovement.x = 1;
+
+			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::lshift))
+				camMovement *= 4;
+
+			vas::Camera::getInstance().move(camMovement);
+		}
+
+		tilesets.tick();
 		AbstractFrameCountingScene::tick();
 	}
 
@@ -44,7 +64,6 @@ namespace scene
 		map.load("assets/maps/animated map.tmx");
 
 		CallRenderAssistance;
-		RenderAssistance->insert(VAS_INSERT_VAR(engineName));
 		auto bgm = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
 
 		boost::filesystem::path bgmPath = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
@@ -52,7 +71,6 @@ namespace scene
 		bgmPath = boost::filesystem::absolute(bgmPath, assetsPath).normalize().make_preferred();
 		AudioManger::getInstance().playBGM(bgmPath.string(), 500ms);
 
-		vas::TilesetsBundle tilesets;
 		for (auto& itr : const_cast<std::vector<vas::Tileset>&>(map.getRequireTilesets()))
 		{
 			boost::filesystem::path path = boost::filesystem::absolute(itr.source.name, assetsPath).normalize().make_preferred();
@@ -60,6 +78,24 @@ namespace scene
 		}
 
 		tilesets.load(map.getRequireTilesets(), map.getMapProperties().tileWidth, map.getMapProperties().tileHeight);
+
+		for (auto& itr : map.getMapData())
+		{
+			if (itr->getName() == "$!collisions") continue;
+			if (auto layerData = dynamic_cast<vas::TileLayer*>(itr.get()); layerData != nullptr)
+			{
+				mapLayers.push_back(std::make_shared<vas::MapRenderer>(layerData,
+					sdl::Point(map.getMapProperties().mapWidth, map.getMapProperties().mapHeight),
+					sdl::Point(map.getMapProperties().tileWidth, map.getMapProperties().tileHeight),
+					tilesets));
+			}
+		}
+		
+		for (size_t index = 0; index < mapLayers.size(); index++)
+		{
+			RenderAssistance->insert(VAS_LAYER_DATA("map layer " + boost::lexical_cast<std::string>(index), mapLayers[index]));
+		}
+		RenderAssistance->insert(VAS_INSERT_VAR(engineName));
 	}
 
 	void TileMap::Signal_beforeTerminate()

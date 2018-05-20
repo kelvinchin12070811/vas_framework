@@ -28,7 +28,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 		vas::Base::getInstance().Window() = std::move(mainWindow);
 		vas::Base::getInstance().Renderer() = std::move(mainRenderer);
 
-		vas::SceneManager::getInstance().call(std::make_shared<scene::MainScene>());
+		vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
 		vas::Base::getInstance().startGameLoop();
 		vas::Base::getInstance().cleanAndQuit();
 	}

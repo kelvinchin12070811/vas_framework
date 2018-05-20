@@ -1,18 +1,28 @@
 #pragma once
 #include <vector>
+#include <boost/container/vector.hpp>
 #include <memory>
 #include <string>
 #include "../IRenderAble.hpp"
+#include "../../VASConfig.hpp"
 
-#define VAS_INSERT_VAR(var) std::make_pair(std::string(#var), var)
+#define VAS_INSERT_VAR(var) vas::make_layerData(std::string(#var), var)
+#define VAS_LAYER_DATA(name, var) vas::make_layerData(name, var)
 
 namespace vas
 {
-	class Layers : public IRendererAble
+	class VAS_DECLSPEC Layers : public IRendererAble
 	{
 	public:
 		enum class ShiftDirection : uint8_t { up, down };
-		using LayerData = std::pair<std::string, std::shared_ptr<IRendererAble>>;
+		//using LayerData = std::pair<std::string, std::shared_ptr<IRendererAble>>;
+		struct LayerData
+		{
+			bool visible;
+			std::string name;
+			std::shared_ptr<IRendererAble> instance;
+		};
+	public:
 		Layers();
 		Layers(const Layers& rhs);
 		Layers(Layers&& rhs);
@@ -50,5 +60,9 @@ namespace vas
 		std::vector<LayerData>& getLayerData();
 	private:
 		std::vector<LayerData> layerData;
+		boost::container::vector<bool> layerState;
 	};
+
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<IRendererAble>& instance, bool visible = true);
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<IRendererAble>&& instance, bool visible = true);
 }

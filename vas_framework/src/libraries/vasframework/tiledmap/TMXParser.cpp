@@ -144,12 +144,12 @@ namespace vas
 				if (!tileAnimation.empty())
 				{
 					auto animationFramesData = tileAnimation.children("frame");
-					uint32_t currentTileIndex = animationFramesData.begin()->attribute("tileid").as_uint();
+					uint32_t currentTileIndex = animationFramesData.begin()->attribute("tileid").as_uint() + tmpTileset.firstGid;
 
 					AnimationStrip tempStrip;
 					tempStrip.reserve(std::distance(animationFramesData.begin(), animationFramesData.end()));
 					for (auto& itr : animationFramesData)
-						tempStrip.push_back(itr.attribute("tileid").as_uint());
+						tempStrip.push_back(itr.attribute("tileid").as_uint() + tmpTileset.firstGid);
 
 					auto animationDetial = std::make_pair(
 						std::chrono::milliseconds(animationFramesData.begin()->attribute("duration").as_llong()),

@@ -1,8 +1,10 @@
 #pragma once
 #include "AbstractFrameCountingScene.hpp"
 #include "../../libraries/vasframework/base/Base.hpp"
+#include "../../libraries/vasframework/graphics/Camera.hpp"
 #include "../../libraries/vasframework/graphics/text/StyledText.hpp"
 #include "../../libraries/vasframework/tiledmap/TMXParser.hpp"
+#include "../../libraries/vasframework/tiledmap/MapRenderer.hpp"
 #include "../../libraries/vasframework/manager/InputManager.hpp"
 
 namespace scene
@@ -25,7 +27,9 @@ namespace scene
 	private:
 		std::shared_ptr<vas::StyledText> engineName{ nullptr };
 		vas::TMXParser map;
+		vas::TilesetsBundle tilesets;
 
 		std::vector<boost::signals2::connection> signalsPool;
+		std::vector<std::shared_ptr<vas::MapRenderer>> mapLayers{ nullptr };
 	};
 }
