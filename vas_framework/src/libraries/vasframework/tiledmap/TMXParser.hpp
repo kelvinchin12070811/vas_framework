@@ -28,6 +28,7 @@ namespace vas
 		std::string getFileName() const;
 		const MapProperties& getMapProperties() const;
 		const std::vector<Tileset>& getRequireTilesets() const;
+		sdl::Point getMapSize() const;
 
 	private:
 		void parse() const;

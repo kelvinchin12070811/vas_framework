@@ -71,6 +71,11 @@ namespace vas
 	{
 		return tilesets;
 	}
+
+	sdl::Point TMXParser::getMapSize() const
+	{
+		return sdl::Point(mapProperties.mapWidth * mapProperties.tileWidth, mapProperties.mapHeight * mapProperties.tileHeight);
+	}
 	
 	void TMXParser::parse() const
 	{

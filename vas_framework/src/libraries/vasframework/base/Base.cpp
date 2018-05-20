@@ -117,6 +117,9 @@ namespace vas
 	void Base::cleanAndQuit()
 	{
 		SceneManager::getInstance().clear();
+		ScreenManager::getInstance().screenAboveOverlays.clear();
+		ScreenManager::getInstance().screenOverlays.clear();
+
 		frameCounterUpdater.stop();
 		frameCounterUpdater.TimedOutSignal().disconnect_all_slots();
 		TextureManager::getInstance().clear();

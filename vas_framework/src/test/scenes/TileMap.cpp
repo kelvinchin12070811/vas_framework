@@ -4,6 +4,7 @@
 #include "TileMap.hpp"
 #include "../../libraries/vasframework/util/CommonTools.hpp"
 #include "../../libraries/vasframework/manager/AudioManger.hpp"
+#include "../../libraries/vasframework/manager/ScreenManager.hpp"
 #include "../../libraries/vasframework/sreflex/Util.hpp"
 #include "../../libraries/vasframework/tiledmap/container/TilesetsBundle.hpp"
 
@@ -39,6 +40,10 @@ namespace scene
 
 			vas::Camera::getInstance().move(camMovement);
 		}
+		auto camPos = vas::Camera::getInstance().getPosition();
+		camPos.x = std::clamp(camPos.x, 0.0f, static_cast<float>(map.getMapSize().w() - Camera::getInstance().getSize().w()));
+		camPos.y = std::clamp(camPos.y, 0.0f, static_cast<float>(map.getMapSize().h() - Camera::getInstance().getSize().h()));
+		Camera::getInstance().setPosition(camPos);
 
 		tilesets.tick();
 		AbstractFrameCountingScene::tick();
@@ -54,12 +59,10 @@ namespace scene
 		using namespace std::chrono;
 		vas::Log() << "Scene " << sreflex::getObjectName<TileMap>() << " is called";
 
-		signalsPool.push_back(InputManager::getInstance().mouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3)));
+		vas::Cout() << "Test raw output with endl" << std::endl;
+		vas::Cout() << "Another raw output with unicode word 宮本桜" << std::endl;
 
-		engineName = std::make_shared<StyledText>("VAS Framework v2.0 indev", "assets/fonts/caladea-regular.ttf", zerovector, 24);
-		engineName->setColour(sdl::ColourPresets::white);
-		engineName->setBackgroundColour(sdl::ColourPresets::red);
-		engineName->setBackgroundOffset(Vector2(3.0f, ANGLE_FROM_SECOND_QUATER(45.0)));
+		signalsPool.push_back(InputManager::getInstance().mouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3)));
 
 		map.load("assets/maps/animated map.tmx");
 
@@ -95,7 +98,6 @@ namespace scene
 		{
 			RenderAssistance->insert(VAS_LAYER_DATA("map layer " + boost::lexical_cast<std::string>(index), mapLayers[index]));
 		}
-		RenderAssistance->insert(VAS_INSERT_VAR(engineName));
 	}
 
 	void TileMap::Signal_beforeTerminate()

@@ -25,7 +25,6 @@ namespace scene
 		void on_mouseClicked(vas::MouseButtonIndex index, int x, int y);
 
 	private:
-		std::shared_ptr<vas::StyledText> engineName{ nullptr };
 		vas::TMXParser map;
 		vas::TilesetsBundle tilesets;
 

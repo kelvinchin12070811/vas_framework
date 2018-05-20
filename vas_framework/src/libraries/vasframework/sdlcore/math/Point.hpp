@@ -15,6 +15,11 @@ namespace sdl
 		int x{ 0 };
 		int y{ 0 };
 
+		int& w();
+		const int& w() const;
+		int& h();
+		const int& h() const;
+
 		explicit operator SDL_Point();
 		explicit operator const SDL_Point() const;
 

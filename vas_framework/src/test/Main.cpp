@@ -1,7 +1,8 @@
-﻿#include <Windows.h>
-#include "../libraries/vasframework/base/Base.hpp"
+﻿#include "../libraries/vasframework/base/Base.hpp"
 #include "../libraries/vasframework/manager/SceneManager.hpp"
+#include "../libraries/vasframework/manager/ScreenManager.hpp"
 #include "../libraries/vasframework/util/CommonTools.hpp"
+#include "../libraries/vasframework/graphics/text/StyledText.hpp"
 #include "../libraries/vasframework/sreflex/Util.hpp"
 #include "scenes/MainScene.hpp"
 #include "scenes/TileMap.hpp"
@@ -27,6 +28,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 
 		vas::Base::getInstance().Window() = std::move(mainWindow);
 		vas::Base::getInstance().Renderer() = std::move(mainRenderer);
+
+		{
+			auto textOverlay = std::make_shared<vas::StyledText>("VAS Framework v2.0 indev", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24);
+			textOverlay->setColour(sdl::ColorPresets::white);
+			textOverlay->setBackgroundOffset(vas::Vector2(3.0f, ANGLE_FROM_SECOND_QUATER(45.0)));
+			textOverlay->setStaticOnCamera(true);
+			vas::ScreenManager::getInstance().screenAboveOverlays.insert(VAS_INSERT_VAR(textOverlay));
+		}
 
 		vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
 		vas::Base::getInstance().startGameLoop();

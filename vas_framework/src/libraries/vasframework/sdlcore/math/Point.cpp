@@ -20,6 +20,26 @@ namespace sdl
 	{
 	}
 
+	int & Point::w()
+	{
+		return x;
+	}
+
+	const int & Point::w() const
+	{
+		return x;
+	}
+
+	int & Point::h()
+	{
+		return y;
+	}
+
+	const int & Point::h() const
+	{
+		return y;
+	}
+
 	Point::operator SDL_Point()
 	{
 		return SDL_Point{ x, y };
