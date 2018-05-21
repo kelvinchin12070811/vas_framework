@@ -10,7 +10,7 @@ namespace sdl
 	{
 	}
 
-	Texture::Texture(Renderer & renderer, Surface & surface):
+	Texture::Texture(Renderer & renderer, Surface surface):
 		SDLComponentBase(SDL_CreateTextureFromSurface(static_cast<SDL_Renderer*>(renderer), static_cast<SDL_Surface*>(surface)), &defDeleter)
 	{
 	}

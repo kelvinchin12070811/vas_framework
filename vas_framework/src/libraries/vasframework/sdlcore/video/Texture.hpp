@@ -14,7 +14,7 @@ namespace sdl
 	public:
 		Texture();
 		Texture(Renderer& renderer, uint32_t format, int access, const Point& size);
-		Texture(Renderer& renderer, Surface& surface);
+		Texture(Renderer& renderer, Surface surface);
 		Texture(const Texture& other);
 		Texture(Texture&& other);
 		explicit Texture(SDL_Texture* other, SDLComponentBase::DeleterType deleter = &Texture::notDeleteDeleter);

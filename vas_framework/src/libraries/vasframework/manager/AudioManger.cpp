@@ -66,31 +66,31 @@ namespace vas
 		se.fadeIn(static_cast<uint32_t>(fadeInTime.count()), loop);
 	}
 
-	void AudioManger::stopBGM(std::chrono::milliseconds & fadeOutTime)
+	void AudioManger::stopBGM(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (bgm.isPlaying())
 			bgm.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::stopBGS(std::chrono::milliseconds & fadeOutTime)
+	void AudioManger::stopBGS(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (bgs.isPlaying())
 			bgs.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::stopME(std::chrono::milliseconds & fadeOutTime)
+	void AudioManger::stopME(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (me.isPlaying())
 			me.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::stopSE(std::chrono::milliseconds & fadeOutTime)
+	void AudioManger::stopSE(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (se.isPlaying())
 			se.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::pauseBGM(std::chrono::milliseconds & fadeOutTime)
+	void AudioManger::pauseBGM(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (fadeOutTime.count() == 0)
 		{
@@ -118,7 +118,7 @@ namespace vas
 		});*/
 	}
 
-	void AudioManger::resumeBGM(std::chrono::milliseconds & fadeInTime)
+	void AudioManger::resumeBGM(const std::chrono::milliseconds & fadeInTime)
 	{
 		if (fadeInTime.count() == 0)
 		{

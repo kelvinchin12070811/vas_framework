@@ -25,14 +25,14 @@ namespace vas
 		void playME(const std::string& file, const std::chrono::milliseconds& fadeInTime = std::chrono::milliseconds(0), int loop = 1);
 		void playSE(const std::string& file, const std::chrono::milliseconds& fadeInTime = std::chrono::milliseconds(0), int loop = 1);
 
-		void stopBGM(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
-		void stopBGS(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
-		void stopME(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
-		void stopSE(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
+		void stopBGM(const std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
+		void stopBGS(const std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
+		void stopME(const std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
+		void stopSE(const std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
 
-		void pauseBGM(std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
+		void pauseBGM(const std::chrono::milliseconds& fadeOutTime = std::chrono::milliseconds(0));
 
-		void resumeBGM(std::chrono::milliseconds& fadeInTime = std::chrono::milliseconds(0));
+		void resumeBGM(const std::chrono::milliseconds& fadeInTime = std::chrono::milliseconds(0));
 
 		sdl::mixer::Music& BGM();
 		sdl::mixer::Chunk& BGS();
