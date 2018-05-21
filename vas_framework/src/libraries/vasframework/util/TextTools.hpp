@@ -95,9 +95,9 @@ namespace vas
 			return *this;
 		}
 	private:
-		void outputStream(bool clearBuffer = true);
+		void outputStream();
 	private:
-		std::stringstream ss;
+		static std::stringstream ss;
 	};
 
 	class VAS_DECLSPEC Ceer
@@ -116,9 +116,9 @@ namespace vas
 			return *this;
 		}
 	private:
-		void outputStream(bool clearBuffer = true);
+		void outputStream();
 	private:
-		std::stringstream ss;
+		static std::stringstream ss;
 	};
 
 	class VAS_DECLSPEC Cin

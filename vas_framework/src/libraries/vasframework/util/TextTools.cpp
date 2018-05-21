@@ -114,6 +114,8 @@ namespace vas
 #endif // VAS_WINDOWS_MODE
 	}
 
+	std::stringstream Cout::ss;
+
 	Cout::Cout()
 	{
 #ifdef VAS_WINDOWS_MODE
@@ -123,7 +125,7 @@ namespace vas
 
 	Cout::~Cout()
 	{
-		outputStream(false);
+		outputStream();
 	}
 
 	Cout & Cout::operator<<(std::ostream &(*manipulator)(std::ostream &o))
@@ -140,12 +142,12 @@ namespace vas
 		return *this;
 	}
 
-	void Cout::outputStream(bool clearBuffer)
+	void Cout::outputStream()
 	{
 		auto str = ss.str();
 		if (str.empty()) return;
 		STD_COUT << VAS_STR_2_WSTR(str);
-		if (clearBuffer) ss = std::stringstream();
+		ss.str("");
 	}
 
 	Cin::Cin()
@@ -163,6 +165,8 @@ namespace vas
 		return *this;
 	}
 
+	std::stringstream Ceer::ss;
+
 	Ceer::Ceer()
 	{
 #ifdef VAS_WINDOWS_MODE
@@ -172,7 +176,7 @@ namespace vas
 
 	Ceer::~Ceer()
 	{
-		outputStream(true);
+		outputStream();
 	}
 
 	Ceer & Ceer::operator<<(std::ostream &(*manipulator)(std::ostream &o))
@@ -189,11 +193,11 @@ namespace vas
 		return *this;
 	}
 
-	void Ceer::outputStream(bool clearBuffer)
+	void Ceer::outputStream()
 	{
 		auto str = ss.str();
 		if (str.empty()) return;
 		STD_CEER << VAS_STR_2_WSTR(str);
-		if (clearBuffer) ss = std::stringstream();
+		ss.str("");
 	}
 }
