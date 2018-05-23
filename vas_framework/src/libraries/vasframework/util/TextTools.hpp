@@ -94,6 +94,8 @@ namespace vas
 			ss << rhs;
 			return *this;
 		}
+
+		static std::stringstream& getBufer();
 	private:
 		void outputStream();
 	private:
@@ -115,6 +117,8 @@ namespace vas
 			ss << rhs;
 			return *this;
 		}
+
+		static std::stringstream& getBuffer();
 	private:
 		void outputStream();
 	private:

@@ -12,7 +12,7 @@
 
 namespace vas
 {
-	class Sprite : public IRendererAble
+	class Sprite : public IRenderAble
 	{
 	public:
 		Sprite();

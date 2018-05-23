@@ -11,16 +11,16 @@
 
 namespace vas
 {
-	class VAS_DECLSPEC Layers : public IRendererAble
+	class VAS_DECLSPEC Layers : public IRenderAble
 	{
 	public:
 		enum class ShiftDirection : uint8_t { up, down };
-		//using LayerData = std::pair<std::string, std::shared_ptr<IRendererAble>>;
+		//using LayerData = std::pair<std::string, std::shared_ptr<IRenderAble>>;
 		struct LayerData
 		{
 			bool visible;
 			std::string name;
-			std::shared_ptr<IRendererAble> instance;
+			std::shared_ptr<IRenderAble> instance;
 		};
 	public:
 		Layers();
@@ -49,7 +49,7 @@ namespace vas
 		LayerData& get(size_t index);
 		LayerData& get(const std::string& name);
 
-		LayerData& findWithInstance(IRendererAble* instance);
+		LayerData& findWithInstance(IRenderAble* instance);
 
 		void tick() override;
 		void draw() override;
@@ -63,6 +63,6 @@ namespace vas
 		boost::container::vector<bool> layerState;
 	};
 
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<IRendererAble>& instance, bool visible = true);
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<IRendererAble>&& instance, bool visible = true);
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<IRenderAble>& instance, bool visible = true);
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<IRenderAble>&& instance, bool visible = true);
 }

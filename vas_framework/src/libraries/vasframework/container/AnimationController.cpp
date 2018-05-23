@@ -31,6 +31,13 @@ namespace vas
 		if (frameUpdateTimer == frameUpdateTimer.getMaxTick())
 			frameIndexer++;
 	}
+
+	void AnimationController::reset()
+	{
+		frameIndexer.reset();
+		frameUpdateTimer.reset();
+	}
+
 	AnimationStrip::value_type AnimationController::getCurrentFrame()
 	{
 		return frames[frameIndexer];

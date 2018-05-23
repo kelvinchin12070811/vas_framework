@@ -16,6 +16,8 @@ namespace vas
 		void load(const AnimationStrip& frames, std::chrono::milliseconds updateDelay);
 		void tick();
 
+		void reset();
+
 	public: //getters
 		AnimationStrip::value_type getCurrentFrame();
 		size_t getCurrentFrameIndex();

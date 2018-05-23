@@ -142,6 +142,11 @@ namespace vas
 		return *this;
 	}
 
+	std::stringstream & Cout::getBufer()
+	{
+		return ss;
+	}
+
 	void Cout::outputStream()
 	{
 		auto str = ss.str();
@@ -191,6 +196,11 @@ namespace vas
 			ss << manipulator;
 		}
 		return *this;
+	}
+
+	std::stringstream & Ceer::getBuffer()
+	{
+		return ss;
 	}
 
 	void Ceer::outputStream()

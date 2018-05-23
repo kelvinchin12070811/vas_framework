@@ -2,10 +2,10 @@
 
 namespace vas
 {
-	class IRendererAble
+	class IRenderAble
 	{
 	public:
-		virtual ~IRendererAble() {}
+		virtual ~IRenderAble() {}
 
 		virtual void tick() = 0;
 		virtual void draw() = 0;

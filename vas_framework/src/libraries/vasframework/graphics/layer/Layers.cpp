@@ -163,7 +163,7 @@ namespace vas
 		else return *result;
 	}
 
-	Layers::LayerData& Layers::findWithInstance(IRendererAble * instance)
+	Layers::LayerData& Layers::findWithInstance(IRenderAble * instance)
 	{
 		auto result = std::find_if(layerData.begin(), layerData.end(), [&](LayerData& itr)->bool
 		{
@@ -208,7 +208,7 @@ namespace vas
 	{
 		return layerData;
 	}
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, const std::shared_ptr<IRendererAble>& instance, bool visible)
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, const std::shared_ptr<IRenderAble>& instance, bool visible)
 	{
 		Layers::LayerData data;
 		data.name = name;
@@ -217,7 +217,7 @@ namespace vas
 		return data;
 	}
 
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, std::shared_ptr<IRendererAble>&& instance, bool visible)
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, std::shared_ptr<IRenderAble>&& instance, bool visible)
 	{
 		Layers::LayerData data;
 		data.name = name;
