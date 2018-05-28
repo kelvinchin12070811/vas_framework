@@ -63,6 +63,18 @@ namespace vas
 		boost::container::vector<bool> layerState;
 	};
 
+	template <typename RenderAbleType>
+	Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<RenderAbleType>& instance, bool visible = true)
+	{
+		return make_layerData(name, std::static_pointer_cast<IRenderAble>(instance), visible);
+	}
+
+	template <typename RenderAbleType>
+	Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<RenderAbleType>&& instance, bool visible = true)
+	{
+		return make_layerData(name, std::static_pointer_cast<IRenderAble>(std::move(instance)), visible);
+	}
+
 	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<IRenderAble>& instance, bool visible = true);
 	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<IRenderAble>&& instance, bool visible = true);
 }

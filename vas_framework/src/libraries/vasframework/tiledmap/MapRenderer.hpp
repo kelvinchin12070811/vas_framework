@@ -6,7 +6,7 @@
 
 namespace vas
 {
-	class VAS_DECLSPEC MapRenderer : public IRendererAble
+	class VAS_DECLSPEC MapRenderer : public IRenderAble
 	{
 	public:
 		MapRenderer(TileLayer* layer, const sdl::Point& mapSize, const sdl::Point& tileSize, const TilesetsBundle& bundle);
