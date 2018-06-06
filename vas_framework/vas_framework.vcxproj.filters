@@ -258,6 +258,15 @@
     <ClInclude Include="src\libraries\vasframework\graphics\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\nbt\ITag.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\nbt\NBTCompoundTag.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\vasframework\container\nbt\CommonTag.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCore.cpp">
@@ -435,6 +444,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\libraries\vasframework\graphics\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\vasframework\container\nbt\NBTCompoundTag.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include "../../libraries/vasframework/manager/ScreenManager.hpp"
 #include "../../libraries/vasframework/sreflex/Util.hpp"
 #include "../../libraries/vasframework/tiledmap/container/TilesetsBundle.hpp"
+#include "../../libraries/vasframework/container/nbt/CommonTag.hpp"
 
 using namespace vas;
 using namespace boost::placeholders;
@@ -15,6 +16,13 @@ namespace scene
 {
 	TileMap::TileMap()
 	{
+		Int32Tag tag = 35;
+		tag += 45;
+
+		NBTCompoundTag root;
+		auto player = std::make_shared<NBTCompoundTag>();
+		player->insert("position", std::make_shared<Vector2Tag>(Vector2(64.0f, 48.0f)));
+		root.insert("player", player);
 	}
 
 	TileMap::~TileMap()

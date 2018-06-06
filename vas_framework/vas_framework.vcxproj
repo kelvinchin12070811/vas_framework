@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\container\nbt\CommonTag.hpp" />
+    <ClInclude Include="src\libraries\vasframework\container\nbt\ITag.hpp" />
+    <ClInclude Include="src\libraries\vasframework\container\nbt\NBTCompoundTag.hpp" />
     <ClInclude Include="src\libraries\vasframework\graphics\Camera.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\MapRenderer.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\objclass\AllShape.hpp" />
@@ -102,6 +105,7 @@
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\TilesetsBundle.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\libraries\vasframework\container\nbt\NBTCompoundTag.cpp" />
     <ClCompile Include="src\libraries\vasframework\graphics\Camera.cpp" />
     <ClCompile Include="src\libraries\vasframework\tiledmap\MapRenderer.cpp" />
     <ClCompile Include="src\libraries\vasframework\tiledmap\maplayers\ObjectLayer.cpp" />
