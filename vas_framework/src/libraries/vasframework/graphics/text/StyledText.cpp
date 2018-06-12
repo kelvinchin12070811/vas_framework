@@ -37,10 +37,10 @@ namespace vas
 		foreground->tick();
 	}
 
-	void StyledText::draw()
+	void StyledText::draw(sdl::Renderer* renderer, Camera* camera)
 	{
-		background->draw();
-		foreground->draw();
+		background->draw(renderer, camera);
+		foreground->draw(renderer, camera);
 	}
 
 	void StyledText::move(const Vector2 & movement)

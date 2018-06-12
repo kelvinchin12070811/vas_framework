@@ -141,21 +141,22 @@ namespace vas
 			destination.y = static_cast<int>(position.y);
 	}
 
-	void Sprite::draw()
+	void Sprite::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		if (texture == sdl::emptycomponent) return;
+		if (renderer == nullptr) renderer = &Base::getInstance().Renderer();
+		if (camera == nullptr) camera = &Camera::getInstance();
 
-		auto renderer = Base::getInstance().Renderer();
 		if (staticOnCamera)
 		{
-			if (Camera::getInstance().canSee(destination))
-				renderer.copyEx(texture, &source, &destination, static_cast<double>(angle), origin, rendererFlip);
+			if (camera->canSee(destination))
+				renderer->copyEx(texture, &source, &destination, static_cast<double>(angle), origin, rendererFlip);
 		}
 		else
 		{
-			auto foreginRect = Camera::getInstance().getRectOnCamera(destination);
-			if (Camera::getInstance().canSee(foreginRect))
-				renderer.copyEx(texture, &source, &foreginRect, static_cast<double>(angle), origin, rendererFlip);
+			auto foreginRect = camera->getRectOnCamera(destination);
+			if (camera->canSee(foreginRect))
+				renderer->copyEx(texture, &source, &foreginRect, static_cast<double>(angle), origin, rendererFlip);
 		}
 	}
 }

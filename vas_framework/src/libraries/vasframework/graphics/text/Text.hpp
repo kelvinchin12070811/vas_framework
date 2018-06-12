@@ -19,7 +19,7 @@ namespace vas
 		~Text();
 
 		void tick() override;
-		void draw() override;
+		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;
 
 		void reRender();
 		void reRenderEverything();

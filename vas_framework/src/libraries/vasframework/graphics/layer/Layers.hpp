@@ -52,7 +52,7 @@ namespace vas
 		LayerData& findWithInstance(IRenderAble* instance);
 
 		void tick() override;
-		void draw() override;
+		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;
 
 		Layers& operator=(const Layers& rhs);
 		Layers& operator=(Layers&& rhs);

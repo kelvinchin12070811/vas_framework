@@ -40,9 +40,9 @@ namespace vas
 		Sprite::tick();
 	}
 
-	void Text::draw()
+	void Text::draw(sdl::Renderer* renderer, Camera* camera)
 	{
-		Sprite::draw();
+		Sprite::draw(renderer, camera);
 	}
 
 	void Text::reRender()

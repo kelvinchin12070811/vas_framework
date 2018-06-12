@@ -43,7 +43,7 @@ namespace vas
 		int getHeight() const;
 
 		void tick();
-		void draw();
+		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr);
 
 		Sprite& operator=(const Sprite&) = delete;
 		Sprite& operator=(Sprite&&) = delete;

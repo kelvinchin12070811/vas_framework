@@ -14,7 +14,7 @@ namespace vas
 		~StyledText();
 
 		void tick() override;
-		void draw() override;
+		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;
 
 		void move(const Vector2& movement);
 		void setPosition(const Vector2& position);

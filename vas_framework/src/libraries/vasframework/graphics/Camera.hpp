@@ -30,7 +30,6 @@ namespace vas
 		sdl::Point getSize();
 		double getMultiplyer();
 
-	private:
 		Camera();
 		~Camera();
 	private:

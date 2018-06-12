@@ -27,14 +27,15 @@ namespace vas
 		return;
 	}
 
-	void SpriteSheet::draw()
+	void SpriteSheet::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		return;
 	}
 
-	void SpriteSheet::drawTile(size_t index, const Vector2 & position, bool staticOnCamera, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
+	void SpriteSheet::drawTile(size_t index, const Vector2 & position, sdl::Renderer* renderer, Camera* camera, bool staticOnCamera, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
 	{
-		auto renderer = Base::getInstance().Renderer();
+		if (renderer == nullptr) renderer = &Base::getInstance().Renderer();
+		if (camera == nullptr) camera = &Camera::getInstance();
 
 		sdl::Point tilePos;
 		tilePos.y = index / tileSheetDimension.x; //Calculate y pos of tile
@@ -46,14 +47,14 @@ namespace vas
 
 		if (staticOnCamera)
 		{
-			if (Camera::getInstance().canSee(tileDest))
-				renderer.copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
+			if (camera->canSee(tileDest))
+				renderer->copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
 		}
 		else
 		{
-			tileDest = Camera::getInstance().getRectOnCamera(tileDest);
-			if (Camera::getInstance().canSee(tileDest))
-				renderer.copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
+			tileDest = camera->getRectOnCamera(tileDest);
+			if (camera->canSee(tileDest))
+				renderer->copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
 		}
 	}
 }

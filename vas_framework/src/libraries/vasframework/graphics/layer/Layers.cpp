@@ -183,12 +183,12 @@ namespace vas
 		}
 	}
 
-	void Layers::draw()
+	void Layers::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		for (auto& itr : layerData)
 		{
 			if (!itr.visible) return;
-			if (itr.instance != nullptr) itr.instance->draw();
+			if (itr.instance != nullptr) itr.instance->draw(renderer, camera);
 		}
 	}
 
