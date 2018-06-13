@@ -1,14 +1,6 @@
-﻿#include "../libraries/vasframework/base/Base.hpp"
-#include "../libraries/vasframework/manager/SceneManager.hpp"
-#include "../libraries/vasframework/manager/ScreenManager.hpp"
-#include "../libraries/vasframework/util/CommonTools.hpp"
-#include "../libraries/vasframework/graphics/text/StyledText.hpp"
-#include "../libraries/vasframework/sreflex/Util.hpp"
-#include "scenes/MainScene.hpp"
-#include "scenes/TileMap.hpp"
+﻿#include "Main.hpp"
 
-//int main(int argc, char** argv)
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow)
+int Main::main(std::vector<std::string> args)
 {
 	AllocConsole();
 	freopen("CONIN$", "r+t", stdin);
@@ -33,6 +25,5 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 		//return vas::CommonTools::getInstance().messenger(e.what(), vas::CommonTools::MessageType::error, -1);
 		return -1;
 	}
-
 	return 0;
 }

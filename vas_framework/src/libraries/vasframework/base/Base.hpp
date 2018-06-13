@@ -2,14 +2,21 @@
 #include <array>
 #include <boost/signals2.hpp>
 #include "../VASConfig.hpp"
+#include "../util/TextTools.hpp"
 #include "../sdlcore/SDLCore.hpp"
 #include "../math/Clock.hpp"
 #include "../math/Counter.hpp"
 #include "../math/Timer.hpp"
 
+#ifdef VAS_WINDOWS_MODE
+#include <Windows.h>
+#endif // VAS_WINDOWS_MODE
+
+#ifndef VAS_SDL_ENTRY
 #ifdef main
 #undef main
 #endif // main
+#endif // !VAS_SDL_ENTRY
 
 namespace vas
 {
@@ -68,3 +75,45 @@ namespace vas
 		Timer frameCounterUpdater;
 	};
 }
+
+#ifdef VAS_USE_UNIENTRY
+
+#ifndef VAS_WINDOWS_MODE
+#define VAS_CLASSLOADER_LOAD(launcher) \
+int main(int argc, char** argv)\
+{\
+	std::vector<std::string> args;\
+	args.reserve(argc);\
+	for (int itr = 0; itr < argc; itr++)\
+		args.push_back(argv[itr]);\
+	return launcher::main(std::move(args));\
+}
+#else
+
+#ifdef _CONSOLE
+#define VAS_CLASSLOADER_LOAD(launcher) \
+int wmain(int argc, wchar_t** argv)\
+{\
+	std::vector<std::string> args;\
+	args.reserve(argc);\
+	for (int itr = 0; itr < argc; itr++)\
+		args.push_back(vas::TextTools::wstos(argv[itr]));\
+	return launcher::main(std::move(args));\
+}
+#else
+#define VAS_CLASSLOADER_LOAD(launcher)\
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow)\
+{\
+	std::vector<std::string> args;\
+	{\
+		int argc = 0;\
+		LPWSTR* argv = CommandLineToArgvW(cmdLine, &argc);\
+		args.reserve(argc);\
+		for (int itr = 0; itr < argc; itr++)\
+			args.push_back(vas::TextTools::wstos(argv[itr]));\
+	}\
+	return launcher::main(std::move(args));\
+}
+#endif //_CONSOLE
+#endif // !VAS_WINDOWS_MODE
+#endif // VAS_USE_UNIENTRY

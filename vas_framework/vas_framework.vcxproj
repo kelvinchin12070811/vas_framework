@@ -47,6 +47,7 @@
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\MapProperties.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\container\Tileset.hpp" />
     <ClInclude Include="src\libraries\vasframework\tiledmap\maplayers\AbstractMapLayer.hpp" />
+    <ClInclude Include="src\test\Main.hpp" />
     <ClInclude Include="src\test\scenes\AbstractFrameCountingScene.hpp" />
     <ClInclude Include="src\libraries\vasframework\manager\InputManager.hpp" />
     <ClInclude Include="src\libraries\vasframework\math\Clock.hpp" />

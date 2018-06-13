@@ -17,6 +17,14 @@
 /* Enable SDL_TTF */
 #define VAS_USE_TTF
 
+/* Use SDL Entry Point */
+//#define VAS_SDL_ENTRY
+
+/* Use Uniform Entry Point*/
+#ifndef VAS_SDL_ENTRY
+#define VAS_USE_UNIENTRY
+#endif
+
 /*Configuration end*/
 #endif // !VAS_GLOB_CNFIG
 
