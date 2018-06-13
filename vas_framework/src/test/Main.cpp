@@ -17,29 +17,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 	vas::CommonTools::getInstance().setAssistanceName("宮本サクラ");
 	try
 	{
-		vas::Base::getInstance().init();
-		sdl::Window mainWindow("hello world", sdl::Point(640, 480), sdl::Window::Flags::shown);
-		if (mainWindow == nullptr)
-			throw sdl::SDLCoreException();
-
-		sdl::Renderer mainRenderer(mainWindow, sdl::Renderer::defIndex, sdl::Renderer::RendererFlags::accelerated);
-		if (mainRenderer == nullptr)
-			throw sdl::SDLCoreException();
-
-		vas::Base::getInstance().Window() = std::move(mainWindow);
-		vas::Base::getInstance().Renderer() = std::move(mainRenderer);
-
-		{
+		vas::Base::getInstance().initAndStartAll("VAS Framework Tester", sdl::Point(640, 480), sdl::Window::Flags::shown, []() {
 			auto textOverlay = std::make_shared<vas::StyledText>("VAS Framework v2.0 indev", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24);
 			textOverlay->setColour(sdl::ColorPresets::white);
 			textOverlay->setBackgroundOffset(vas::Vector2(3.0f, ANGLE_FROM_SECOND_QUATER(45.0)));
 			textOverlay->setStaticOnCamera(true);
 			vas::ScreenManager::getInstance().screenAboveOverlays.insert(VAS_INSERT_VAR(textOverlay));
-		}
-
-		vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
-		vas::Base::getInstance().startGameLoop();
-		vas::Base::getInstance().cleanAndQuit();
+			vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
+		});
 	}
 	catch (const std::exception& e)
 	{

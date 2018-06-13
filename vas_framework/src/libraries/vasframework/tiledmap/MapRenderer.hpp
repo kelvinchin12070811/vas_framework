@@ -13,7 +13,7 @@ namespace vas
 		~MapRenderer();
 
 		void tick() override;
-		void draw() override;
+		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;
 
 	public: //Setters
 		void setStaticOnCamera(bool value);

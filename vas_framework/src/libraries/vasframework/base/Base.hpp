@@ -23,6 +23,8 @@ namespace vas
 
 		static Base& getInstance();
 
+		void initAndStartAll(const std::string& windowTitle, const sdl::Point& size, uint32_t flags, std::function<void()> initializer = nullptr);
+
 		void init();
 		void init(size_t fps);
 		void startGameLoop();

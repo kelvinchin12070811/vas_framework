@@ -16,6 +16,23 @@ namespace vas
 		return instance;
 	}
 
+	void Base::initAndStartAll(const std::string & windowTitle, const sdl::Point & size, uint32_t flags, std::function<void()> initializer)
+	{
+		init();
+		mainWindow = sdl::Window(windowTitle, size, flags);
+		if (mainWindow == sdl::emptycomponent)
+			throw sdl::SDLCoreException();
+		mainRenderer = sdl::Renderer(mainWindow, sdl::Renderer::defIndex, sdl::Renderer::RendererFlags::accelerated);
+		if (mainRenderer == sdl::emptycomponent)
+			throw sdl::SDLCoreException();
+
+		if (initializer != nullptr)
+			initializer();
+
+		startGameLoop();
+		cleanAndQuit();
+	}
+
 	void Base::init()
 	{
 		using namespace std::chrono_literals;
