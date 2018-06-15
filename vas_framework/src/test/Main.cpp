@@ -2,10 +2,7 @@
 
 int Main::main(std::vector<std::string> args)
 {
-	AllocConsole();
-	freopen("CONIN$", "r+t", stdin);
-	freopen("CONIN$", "w+t", stdout);
-
+	VAS_ALLOCATE_CONSOLE;
 	vas::CommonTools::getInstance().setAssistanceName("宮本サクラ");
 	try
 	{

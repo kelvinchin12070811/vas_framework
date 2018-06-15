@@ -109,7 +109,7 @@ namespace vas
 		return wstos(buff);
 #else
 		std::string buff;
-		std::getline(cin, buff);
+		std::getline(std::cin, buff);
 		return buff;
 #endif // VAS_WINDOWS_MODE
 	}

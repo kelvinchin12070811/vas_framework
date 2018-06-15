@@ -74,8 +74,8 @@ namespace vas
 #define STD_CIN std::cin
 #define STD_COUT std::cout
 #define STD_CEER std::cerr
-#define VAS_STR_2_WSTR(str)
-#define VAS_WSTR_2_STR(str)
+#define VAS_STR_2_WSTR(str) str
+#define VAS_WSTR_2_STR(str) str
 #define VAS_COMM_STR std::string
 #endif // VAS_WINDOWS_MODE
 

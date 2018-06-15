@@ -77,7 +77,6 @@ namespace vas
 }
 
 #ifdef VAS_USE_UNIENTRY
-
 #ifndef VAS_WINDOWS_MODE
 #define VAS_CLASSLOADER_LOAD(launcher) \
 int main(int argc, char** argv)\
@@ -88,6 +87,8 @@ int main(int argc, char** argv)\
 		args.push_back(argv[itr]);\
 	return launcher::main(std::move(args));\
 }
+
+#define VAS_ALLOCATE_CONSOLE
 #else
 
 #ifdef _CONSOLE
@@ -115,5 +116,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine
 	return launcher::main(std::move(args));\
 }
 #endif //_CONSOLE
+
+#define VAS_ALLOCATE_CONSOLE \
+AllocConsole();\
+freopen("CONIN$", "r+t", stdin);\
+freopen("CONIN$", "w+t", stdout);\
+freopen("CONIN$", "w+t", stderr)
+
 #endif // !VAS_WINDOWS_MODE
 #endif // VAS_USE_UNIENTRY

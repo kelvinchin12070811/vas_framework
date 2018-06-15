@@ -55,7 +55,7 @@ namespace vas
 #ifdef VAS_WINDOWS_MODE
 		HWND windowInstance = nullptr;
 #else
-		sdl::Window windowInstance{ nullptr };
+		sdl::Window windowInstance;
 #endif //VAS_WINDOWS_MODE
 	private:
 		CommonTools();
