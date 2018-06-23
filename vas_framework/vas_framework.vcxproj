@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\libraries\vasframework\util\FileUtil.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\nbt\CommonTag.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\nbt\ITag.hpp" />
     <ClInclude Include="src\libraries\vasframework\container\nbt\NBTCompoundTag.hpp" />
