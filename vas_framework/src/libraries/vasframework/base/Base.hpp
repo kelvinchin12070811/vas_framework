@@ -18,6 +18,11 @@
 #endif // main
 #endif // !VAS_SDL_ENTRY
 
+#ifdef VAS_USE_MULTITHREAD
+#include <thread>
+#include <mutex>
+#endif
+
 namespace vas
 {
 	class VAS_DECLSPEC Base
@@ -65,7 +70,11 @@ namespace vas
 		sdl::Renderer mainRenderer;
 		sdl::Event ev;
 
+#ifndef VAS_USE_MULTITHREAD
 		size_t fps{ 60 };
+#else
+		size_t fps{ 0 };
+#endif // !VAS_USE_MULTITHREAD
 		size_t lastFpsCount{ 0 };
 		Counter fpsCounter;
 		Counter frameIndex;
@@ -73,6 +82,19 @@ namespace vas
 
 		Clock gameLoopClock;
 		Timer frameCounterUpdater;
+
+#ifdef VAS_USE_MULTITHREAD
+	private:
+		std::thread drawThread;
+		size_t tickSpeed{ 20 };
+		std::mutex globalResourcesMutex;
+	public:
+		void setTickSpeed(size_t value);
+		size_t getTickSpeed();
+
+		std::mutex& getResourceMutex();
+	private:
+#endif // VAS_USE_MULTITHREAD
 	};
 }
 

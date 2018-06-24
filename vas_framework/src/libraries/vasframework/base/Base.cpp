@@ -47,8 +47,10 @@ namespace vas
 		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException();
 #endif // VAS_USE_MIXER
 
-
-		frameStayTime = 1000ms / fps;
+		if (fps == 0)
+			frameStayTime = std::chrono::milliseconds::zero();
+		else
+			frameStayTime = 1000ms / fps;
 		frameIndex.setAutoResetLimit(fps);
 
 		frameCounterUpdater.TimedOutSignal().connect(boost::bind(&Base::frameCounter, this));
@@ -82,6 +84,12 @@ namespace vas
 		InputManager::getInstance().init(&ev);
 		while (exec)
 		{
+#ifdef VAS_USE_MULTITHREAD
+			using namespace std::chrono;
+			auto before = steady_clock::now();
+			std::lock_guard<std::mutex> lock(globalResourcesMutex);
+#endif // VAS_USE_MULTITHREAD
+
 			gameLoopClock.justReset();
 			while (ev.pollEvent())
 			{
@@ -118,10 +126,19 @@ namespace vas
 				eventProcessorSignals[1](ev);
 			}
 			if (!exec) break;
-
 			tick();
+
+#ifndef VAS_USE_MULTITHREAD
 			draw();
 			delay();
+#else
+			auto ellapse = steady_clock::now() - before;
+			nanoseconds totalTickTime = nanoseconds(nanoseconds(1s) / nanoseconds(tickSpeed));
+			if (ellapse < totalTickTime)
+			{
+				std::this_thread::sleep_for(totalTickTime - ellapse);
+			}
+#endif // !VAS_USE_MULTITHREAD
 		}
 
 		mainWindow.destroy();
@@ -133,6 +150,10 @@ namespace vas
 
 	void Base::cleanAndQuit()
 	{
+#ifdef VAS_USE_MULTITHREAD
+		if (drawThread.joinable()) drawThread.join();
+#endif // VAS_USE_MULTITHREAD
+
 		SceneManager::getInstance().clear();
 		ScreenManager::getInstance().screenAboveOverlays.clear();
 		ScreenManager::getInstance().screenOverlays.clear();
@@ -229,6 +250,10 @@ namespace vas
 
 	void Base::draw()
 	{
+#ifdef VAS_USE_MULTITHREAD
+		std::lock_guard<std::mutex> locker(globalResourcesMutex);
+#endif // VAS_USE_MULTITHREAD
+
 		mainRenderer.clear();
 		if (!SceneManager::getInstance().isEmpty())
 		{
@@ -238,6 +263,10 @@ namespace vas
 		}
 		ScreenManager::getInstance().draw();
 		mainRenderer.present();
+
+#ifdef VAS_USE_MULTITHREAD
+		delay();
+#endif // VAS_USE_MULTITHREAD
 	}
 
 	void Base::delay()
@@ -249,7 +278,7 @@ namespace vas
 		frameIndex++;
 		fpsCounter++;
 
-		if (crLoopDuration < frameStayTime)
+		if (frameStayTime != frameStayTime.zero() && crLoopDuration < frameStayTime)
 		{
 			std::this_thread::sleep_for(frameStayTime - crLoopDuration - 1ms);
 		}
@@ -260,4 +289,22 @@ namespace vas
 		lastFpsCount = fpsCounter;
 		fpsCounter.reset();
 	}
+
+#ifdef VAS_USE_MULTITHREAD
+	void Base::setTickSpeed(size_t value)
+	{
+		this->tickSpeed = value;
+	}
+
+	size_t Base::getTickSpeed()
+	{
+		return tickSpeed;
+	}
+
+	std::mutex & Base::getResourceMutex()
+	{
+		return globalResourcesMutex;
+	}
+#endif // VAS_USE_MULTITHREAD
+
 }

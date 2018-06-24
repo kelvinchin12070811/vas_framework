@@ -23,6 +23,9 @@
 /* Use Uniform Entry Point*/
 #ifndef VAS_SDL_ENTRY
 #define VAS_USE_UNIENTRY
+
+/* Use multithread, Seperate Tick and Draw to different thread */
+#define VAS_USE_MULTITHREAD
 #endif
 
 /*Configuration end*/
