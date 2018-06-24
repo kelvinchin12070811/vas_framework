@@ -16,7 +16,7 @@
 
 namespace vas
 {
-	class CommonTools
+	class VAS_DECLSPEC CommonTools
 	{
 	public:
 		enum class MessageType : long

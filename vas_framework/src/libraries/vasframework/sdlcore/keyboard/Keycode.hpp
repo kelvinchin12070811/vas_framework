@@ -246,8 +246,8 @@ namespace vas::sdl
 		sleep = SDLK_SLEEP
 	};
 
-	bool VAS_DECLSPEC operator==(SDL_Keycode lhs, Keycode rhs);
-	bool VAS_DECLSPEC operator==(Keycode lhs, SDL_Keycode rhs);
-	bool VAS_DECLSPEC operator!=(SDL_Keycode lhs, Keycode rhs);
-	bool VAS_DECLSPEC operator!=(Keycode lhs, SDL_Keycode rhs);
+	VAS_DECLSPEC bool operator==(SDL_Keycode lhs, Keycode rhs);
+	VAS_DECLSPEC bool operator==(Keycode lhs, SDL_Keycode rhs);
+	VAS_DECLSPEC bool operator!=(SDL_Keycode lhs, Keycode rhs);
+	VAS_DECLSPEC bool operator!=(Keycode lhs, SDL_Keycode rhs);
 }

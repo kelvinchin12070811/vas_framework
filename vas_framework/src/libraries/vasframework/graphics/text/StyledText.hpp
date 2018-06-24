@@ -4,7 +4,7 @@
 #ifdef VAS_USE_TTF
 namespace vas
 {
-	class StyledText : public IRenderAble
+	class VAS_DECLSPEC StyledText : public IRenderAble
 	{
 	public:
 		StyledText();

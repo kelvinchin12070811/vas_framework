@@ -1,11 +1,12 @@
 #pragma once
 #include <SDL_image.h>
+#include "../VASConfig.hpp"
 
 namespace vas::sdl
 {
 	namespace image
 	{
-		struct ImageInitFlags
+		struct VAS_DECLSPEC ImageInitFlags
 		{
 			static const int jpg;
 			static const int png;

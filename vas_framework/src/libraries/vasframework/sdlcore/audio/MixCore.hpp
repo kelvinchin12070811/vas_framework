@@ -119,6 +119,6 @@ namespace vas::sdl
 	}
 }
 
-void __INNER_ON_MUSIC_END();
-void __INNER_ON_CHANNEL_END(int channel);
+void VAS_DECLSPEC __INNER_ON_MUSIC_END();
+void VAS_DECLSPEC __INNER_ON_CHANNEL_END(int channel);
 #endif // VAS_USE_MIXER

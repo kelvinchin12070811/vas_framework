@@ -152,7 +152,6 @@
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Rect.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Point.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\SDLCore.cpp" />
-    <ClCompile Include="src\libraries\vasframework\sdlcore\Video.cpp" />
     <ClCompile Include="src\test\Main.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Window.cpp" />
     <ClCompile Include="src\libraries\vasframework\sdlcore\video\Surface.cpp" />

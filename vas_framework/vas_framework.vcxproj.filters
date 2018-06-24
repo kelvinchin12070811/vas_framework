@@ -281,9 +281,6 @@
     <ClCompile Include="src\test\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libraries\vasframework\sdlcore\Video.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\libraries\vasframework\sdlcore\math\Point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

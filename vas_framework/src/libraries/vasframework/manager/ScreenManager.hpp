@@ -7,7 +7,7 @@
 
 namespace vas
 {
-	class ScreenManager
+	class VAS_DECLSPEC ScreenManager
 	{
 	public:
 		enum class FadingState : uint8_t { none, fade_in, fade_out };

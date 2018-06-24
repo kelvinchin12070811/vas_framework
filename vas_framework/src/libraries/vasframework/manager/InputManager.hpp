@@ -7,7 +7,7 @@ namespace vas
 {
 	using MouseButtonIndex = uint8_t;
 	using MouseWheelDirection = SDL_MouseWheelDirection;
-	class InputManager
+	class VAS_DECLSPEC InputManager
 	{
 	public:
 		static InputManager& getInstance();

@@ -250,8 +250,8 @@ namespace vas::sdl
 		num_scancodes = 512
 	};
 
-	bool VAS_DECLSPEC operator==(SDL_Scancode lhs, Scancode rhs);
-	bool VAS_DECLSPEC operator==(Scancode lhs, SDL_Scancode rhs);
-	bool VAS_DECLSPEC operator!=(SDL_Scancode lhs, Scancode rhs);
-	bool VAS_DECLSPEC operator!=(Scancode lhs, SDL_Scancode rhs);
+	VAS_DECLSPEC bool operator==(SDL_Scancode lhs, Scancode rhs);
+	VAS_DECLSPEC bool operator==(Scancode lhs, SDL_Scancode rhs);
+	VAS_DECLSPEC bool operator!=(SDL_Scancode lhs, Scancode rhs);
+	VAS_DECLSPEC bool operator!=(Scancode lhs, SDL_Scancode rhs);
 }

@@ -4,7 +4,7 @@
 
 namespace vas
 {
-	class PropertyList : public std::vector<Property>
+	class VAS_DECLSPEC PropertyList : public std::vector<Property>
 	{
 	public:
 		PropertyList();

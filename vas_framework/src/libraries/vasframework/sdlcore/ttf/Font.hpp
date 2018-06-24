@@ -14,7 +14,7 @@ namespace vas::sdl
 {
 	namespace ttf
 	{
-		class Font : public SDLComponentBase<TTF_Font, Font>
+		class VAS_DECLSPEC Font : public SDLComponentBase<TTF_Font, Font>
 		{
 		public:
 			Font();

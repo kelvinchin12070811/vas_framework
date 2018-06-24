@@ -9,7 +9,7 @@
 //TODO: Fix more calculation error in Angle
 namespace vas
 {
-	class Angle
+	class VAS_DECLSPEC Angle
 	{
 	public:
 		enum class AngleType { deg, rad };

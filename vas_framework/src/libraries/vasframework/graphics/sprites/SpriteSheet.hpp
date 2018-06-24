@@ -3,7 +3,7 @@
 
 namespace vas
 {
-	class SpriteSheet : public Sprite
+	class VAS_DECLSPEC SpriteSheet : public Sprite
 	{
 	public:
 		SpriteSheet();

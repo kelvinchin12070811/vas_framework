@@ -3,10 +3,11 @@
 #include <string>
 #include <map>
 #include "ITag.hpp"
+#include "../../VASConfig.hpp"
 
 namespace vas
 {
-	class NBTCompoundTag : public ITag
+	class VAS_DECLSPEC NBTCompoundTag : public ITag
 	{
 	public:
 		NBTCompoundTag();
