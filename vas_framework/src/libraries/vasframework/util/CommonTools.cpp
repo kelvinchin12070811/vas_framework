@@ -82,4 +82,10 @@ namespace vas
 		ss << manipulator;
 		return *this;
 	}
+
+	Warn & Warn::operator<<(std::ostream &(*manipulator)(std::ostream &o))
+	{
+		ss << manipulator;
+		return *this;
+	}
 }

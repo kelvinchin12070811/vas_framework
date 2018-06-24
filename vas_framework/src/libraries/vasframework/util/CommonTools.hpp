@@ -103,6 +103,25 @@ namespace vas
 		std::stringstream ss;
 	};
 
+	class Warn
+	{
+	public:
+		Warn() = default;
+		~Warn()
+		{
+			vas::CommonTools::getInstance().messenger(ss, vas::CommonTools::MessageType::warning);
+		}
+		template<typename Type>
+		Warn& operator<<(const Type& rhs)
+		{
+			ss << rhs;
+			return *this;
+		}
+		Warn& operator<<(std::ostream& (*manipulator)(std::ostream& o));
+	private:
+		std::stringstream ss;
+	};
+
 	class Err
 	{
 	public:
