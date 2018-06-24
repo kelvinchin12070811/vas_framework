@@ -51,6 +51,7 @@ namespace vas
 		boost::signals2::signal<void(sdl::Event&)>& EventProcessorSignal(Base::SignalsType::EventProcessor type);
 		const Counter& FrameIndex();
 		size_t getLastFpsCount();
+		size_t getFPS();
 		size_t getRefreshRate();
 		sdl::Event& getEvent();
 	private:
@@ -86,7 +87,7 @@ namespace vas
 #ifdef VAS_USE_MULTITHREAD
 	private:
 		std::thread drawThread;
-		size_t tickSpeed{ 20 };
+		size_t tickSpeed{ 60 };
 		std::mutex globalResourcesMutex;
 	public:
 		void setTickSpeed(size_t value);

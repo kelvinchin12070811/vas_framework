@@ -82,12 +82,23 @@ namespace vas
 			Camera::getInstance().setSize(canvasSize);
 		}
 		InputManager::getInstance().init(&ev);
+
+#ifdef VAS_USE_MULTITHREAD
+		std::once_flag drawThreadStarted;
+		auto drawCallWrapper = [](std::function<void()> drawFunc, const bool* running)
+		{
+			while (*running)
+			{
+				drawFunc();
+			}
+		};
+#endif // VAS_USE_MULTITHREAD
 		while (exec)
 		{
 #ifdef VAS_USE_MULTITHREAD
 			using namespace std::chrono;
 			auto before = steady_clock::now();
-			std::lock_guard<std::mutex> lock(globalResourcesMutex);
+			//std::lock_guard<std::mutex> lock(globalResourcesMutex);
 #endif // VAS_USE_MULTITHREAD
 
 			gameLoopClock.justReset();
@@ -132,6 +143,11 @@ namespace vas
 			draw();
 			delay();
 #else
+			std::call_once(drawThreadStarted, [&](std::thread& drawer, std::function<void()> drawFunc, const bool* running)
+			{
+				drawer = std::thread(drawCallWrapper, drawFunc, running);
+			}, drawThread, std::bind(&Base::draw, this), &exec);
+
 			auto ellapse = steady_clock::now() - before;
 			nanoseconds totalTickTime = nanoseconds(nanoseconds(1s) / nanoseconds(tickSpeed));
 			if (ellapse < totalTickTime)
@@ -214,10 +230,19 @@ namespace vas
 		return lastFpsCount;
 	}
 
-	size_t Base::getRefreshRate()
+	size_t Base::getFPS()
 	{
 		return fps;
 	}
+
+	size_t Base::getRefreshRate()
+	{
+#ifndef VAS_USE_MULTITHREAD
+		return getFPS();
+#else
+		return getTickSpeed();
+#endif // !VAS_USE_MULTITHREAD
+}
 
 	sdl::Event & Base::getEvent()
 	{
