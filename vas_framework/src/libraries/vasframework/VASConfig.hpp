@@ -28,6 +28,10 @@
 /*Configuration end*/
 #endif // !VAS_GLOB_CNFIG
 
+inline std::string getEngineVersion()
+{
+	return "2.1.2";
+}
 
 //Generate library for dll
 #ifdef VAS_GEN_DLL
