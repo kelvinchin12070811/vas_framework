@@ -2,7 +2,7 @@
 #include <SDL_scancode.h>
 #include "../../VASConfig.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	enum class Scancode
 	{

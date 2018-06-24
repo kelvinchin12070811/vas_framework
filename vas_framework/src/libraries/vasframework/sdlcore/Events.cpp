@@ -1,7 +1,7 @@
 #include "Events.hpp"
 #include "boolean_cast.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	const SDL_Event & Event::getInstance() const
 	{

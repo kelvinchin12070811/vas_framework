@@ -22,10 +22,10 @@ namespace scene
 		void Signal_afterSceneCall() override;
 		void Signal_beforeTerminate() override;
 
-		void eventSlot(sdl::Event& ev);
+		void eventSlot(vas::sdl::Event& ev);
 	private:
 		//void eventKeyPressHwnd(sdl::Event& ev, bool isKeyDown);
-		void on_keyPressed(sdl::Keycode key);
+		void on_keyPressed(vas::sdl::Keycode key);
 		void meFinishedPlaying(int channel);
 
 		void faderTrigerer();

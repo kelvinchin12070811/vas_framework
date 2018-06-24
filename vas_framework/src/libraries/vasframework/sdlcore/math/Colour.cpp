@@ -1,6 +1,6 @@
 #include "Colour.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	Colour::Colour()
 	{

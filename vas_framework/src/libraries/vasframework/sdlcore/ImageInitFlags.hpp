@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL_image.h>
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace image
 	{

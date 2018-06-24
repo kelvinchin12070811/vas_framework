@@ -3,7 +3,7 @@
 #include "../VASConfig.hpp"
 #include "boolean_cast.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace rwops
 	{

@@ -1,6 +1,6 @@
 #include "SDLCore.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	std::string getError()
 	{
@@ -43,12 +43,12 @@ namespace sdl
 	}
 }
 
-int sdl::image::init(int flags)
+int vas::sdl::image::init(int flags)
 {
 	return IMG_Init(flags);
 }
 
-void sdl::image::quit()
+void vas::sdl::image::quit()
 {
 	IMG_Quit();
 }

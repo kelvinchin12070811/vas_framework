@@ -2,7 +2,7 @@
 #include "../boolean_cast.hpp"
 #include "Texture.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	const int Renderer::defIndex = -1;
 

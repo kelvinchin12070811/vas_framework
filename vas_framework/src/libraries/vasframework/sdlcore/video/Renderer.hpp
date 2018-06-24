@@ -7,7 +7,7 @@
 #include "../Math.hpp"
 #include "BlendMode.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	class Texture;
 	class VAS_DECLSPEC Renderer : public SDLComponentBase<SDL_Renderer, Renderer>

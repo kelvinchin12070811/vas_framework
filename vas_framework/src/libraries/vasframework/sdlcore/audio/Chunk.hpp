@@ -7,7 +7,7 @@
 #include "../RWops.hpp"
 #include "Fading.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace mixer
 	{

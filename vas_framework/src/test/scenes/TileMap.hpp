@@ -21,7 +21,7 @@ namespace scene
 		void Signal_afterSceneCall() override;
 		void Signal_beforeTerminate() override;
 	private:
-		void on_EventPulsed(sdl::Event& ev);
+		void on_EventPulsed(vas::sdl::Event& ev);
 		void on_mouseClicked(vas::MouseButtonIndex index, int x, int y);
 
 	private:

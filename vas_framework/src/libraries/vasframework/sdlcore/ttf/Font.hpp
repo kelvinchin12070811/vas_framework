@@ -10,7 +10,7 @@
 #include "../math/Colour.hpp"
 #include "../video/Surface.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace ttf
 	{

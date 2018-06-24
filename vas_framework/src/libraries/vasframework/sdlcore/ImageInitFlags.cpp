@@ -1,6 +1,6 @@
 #include "ImageInitFlags.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace image
 	{

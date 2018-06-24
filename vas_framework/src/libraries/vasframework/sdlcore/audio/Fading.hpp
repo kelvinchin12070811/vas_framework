@@ -4,7 +4,7 @@
 #ifdef VAS_USE_MIXER
 #include <SDL_mixer.h>
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace mixer
 	{

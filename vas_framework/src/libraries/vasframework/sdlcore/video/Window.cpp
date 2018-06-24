@@ -1,7 +1,7 @@
 #include "Window.hpp"
 #include "../boolean_cast.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	const uint32_t Window::Flags::fullscreen = 0x00000001;
 	const uint32_t Window::Flags::opengl = 0x00000002;

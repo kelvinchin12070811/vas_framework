@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include "../../VASConfig.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	class VAS_DECLSPEC Point
 	{

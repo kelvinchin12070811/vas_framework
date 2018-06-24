@@ -1,7 +1,7 @@
 #include "KeyboardCore.hpp"
 #include "../boolean_cast.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	sdl::Window getKeyboardFocus()
 	{

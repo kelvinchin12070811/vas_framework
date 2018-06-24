@@ -1,6 +1,6 @@
 #include "Point.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	Point::Point()
 	{

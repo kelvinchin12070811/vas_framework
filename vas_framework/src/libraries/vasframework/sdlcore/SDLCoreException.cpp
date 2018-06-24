@@ -1,7 +1,7 @@
 #include "SDLCoreException.hpp"
 #include <SDL.h>
 
-namespace sdl
+namespace vas::sdl
 {
 	SDLCoreException::SDLCoreException()
 	{

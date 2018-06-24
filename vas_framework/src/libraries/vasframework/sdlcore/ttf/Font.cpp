@@ -1,7 +1,7 @@
 #include "Font.hpp"
 
 #ifdef VAS_USE_TTF
-namespace sdl
+namespace vas::sdl
 {
 	namespace ttf
 	{

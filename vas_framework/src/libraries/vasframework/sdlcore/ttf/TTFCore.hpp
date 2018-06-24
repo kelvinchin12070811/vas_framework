@@ -5,7 +5,7 @@
 #include <SDL_ttf.h>
 #include "Font.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace ttf
 	{

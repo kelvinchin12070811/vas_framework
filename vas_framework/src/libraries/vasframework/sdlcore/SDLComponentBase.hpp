@@ -5,7 +5,7 @@
 //Prototype of static void defDeleter(SDLComponent* instance)
 #define VAS_PROTOTYPE_DEFINE_DEF_DELETER(type) defDeleter(type *instance)
 
-namespace sdl
+namespace vas::sdl
 {
 	//Empty component instance
 	const class EmptyComponent_t

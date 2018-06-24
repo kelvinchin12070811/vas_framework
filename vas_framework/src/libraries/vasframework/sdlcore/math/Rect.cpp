@@ -1,7 +1,7 @@
 #include "Rect.hpp"
 #include "../boolean_cast.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	Rect::Rect()
 	{

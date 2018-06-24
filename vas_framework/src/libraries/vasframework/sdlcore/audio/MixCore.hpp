@@ -8,7 +8,7 @@
 #include "Music.hpp"
 #include "Chunk.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace mixer
 	{

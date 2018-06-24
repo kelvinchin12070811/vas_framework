@@ -1,6 +1,6 @@
 #include "RWops.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace rwops
 	{

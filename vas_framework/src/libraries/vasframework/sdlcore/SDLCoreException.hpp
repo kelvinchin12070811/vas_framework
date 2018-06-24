@@ -2,7 +2,7 @@
 #include <exception>
 #include "../VASConfig.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	class VAS_DECLSPEC SDLCoreException : public std::exception
 	{

@@ -30,6 +30,7 @@ namespace scene
 	
 	void MainScene::tick()
 	{
+		using namespace vas;
 		if (textTest->foreground->getPosition().x >= 640 - textTest->foreground->getWidth())
 			movement.x = -1.0f;
 		else if (textTest->foreground->getPosition().x <= 0)
@@ -39,20 +40,6 @@ namespace scene
 			movement.y = -1.0f;
 		else if (textTest->foreground->getPosition().y <= 0)
 			movement.y = 1.0f;
-
-		/*{
-			vas::Vector2 cameraMovement = vas::zerovector;
-			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::up))
-				cameraMovement.y = -1;
-			else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::down))
-				cameraMovement.y = 1;
-
-			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::left))
-				cameraMovement.x = -1;
-			else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::right))
-				cameraMovement.x = 1;
-			vas::Camera::getInstance().move(cameraMovement);
-		}*/
 
 		if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::up))
 			tilePos.y += -1;
@@ -89,6 +76,7 @@ namespace scene
 
 	void MainScene::Signal_afterSceneCall()
 	{
+		using namespace vas;
 		using namespace std::chrono_literals;
 		vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop).connect(
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
@@ -114,72 +102,42 @@ namespace scene
 
 	void MainScene::Signal_beforeTerminate()
 	{
+		using namespace vas::sdl;
 		vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop).disconnect(
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
 		);
-		sdl::mixer::Signals::onChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
+		mixer::Signals::onChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 		vas::ScreenManager::getInstance().Signal_FadeEnd.disconnect_all_slots();
 	}
 
-	void MainScene::eventSlot(sdl::Event & ev)
+	void MainScene::eventSlot(vas::sdl::Event & ev)
 	{
 	}
 
-	/*void MainScene::eventKeyPressHwnd(sdl::Event&ev, bool isKeyDown)
+	void MainScene::on_keyPressed(vas::sdl::Keycode key)
 	{
-		if (isKeyDown)
-		{
-			if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::backspace))
-			{
-				vas::CommonTools::getInstance().messenger("test event ignoreer");
-				vas::Base::getInstance().IgnoreCloseEventOnce() = true;
-			}
-			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::escape))
-			{
-				vas::CommonTools::getInstance().messenger("Debug, close event triggered by escape");
-				ev.pushEvent(sdl::EventType::quit);
-			}
-			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::m))
-			{
-				vas::AudioManger::getInstance().playME(me);
-			}
-			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::r))
-			{
-				vas::AudioManger::getInstance().BGM().rewind();
-			}
-			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::s))
-				vas::AudioManger::getInstance().stopBGM();
-			else if (vas::InputManager::getInstance().isKeyTriggeredEv(sdl::Keycode::f))
-			{
-				fadeController = !fadeController;
-				faderTrigerer();
-			}
-		}
-	}*/
-
-	void MainScene::on_keyPressed(sdl::Keycode key)
-	{
+		using namespace vas::sdl;
 		switch (key)
 		{
-		case sdl::Keycode::backspace:
+		case Keycode::backspace:
 				vas::CommonTools::getInstance().messenger("test event ignoreer");
 				vas::Base::getInstance().IgnoreCloseEventOnce() = true;
 				break;
-		case sdl::Keycode::escape:
+		case Keycode::escape:
 				vas::CommonTools::getInstance().messenger("Debug, close event triggered by escape");
 				//ev.pushEvent(sdl::EventType::quit);
-				vas::Base::getInstance().getEvent().pushEvent(sdl::EventType::quit);
+				vas::Base::getInstance().getEvent().pushEvent(EventType::quit);
 				break;
-		case sdl::Keycode::m:
+		case Keycode::m:
 				vas::AudioManger::getInstance().playME(me);
 				break;
-		case sdl::Keycode::r:
+		case Keycode::r:
 				vas::AudioManger::getInstance().BGM().rewind();
 				break;
-		case sdl::Keycode::s:
+		case Keycode::s:
 				vas::AudioManger::getInstance().stopBGM();
 				break;
-		case sdl::Keycode::f:
+		case Keycode::f:
 				fadeController = !fadeController;
 				faderTrigerer();
 				break;

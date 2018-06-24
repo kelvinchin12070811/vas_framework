@@ -114,7 +114,7 @@ namespace scene
 			itr.disconnect();
 	}
 
-	void TileMap::on_EventPulsed(sdl::Event & ev)
+	void TileMap::on_EventPulsed(vas::sdl::Event & ev)
 	{
 	}
 

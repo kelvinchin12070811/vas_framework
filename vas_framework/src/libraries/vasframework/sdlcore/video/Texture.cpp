@@ -1,6 +1,6 @@
 #include "Texture.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	Texture::Texture()
 	{

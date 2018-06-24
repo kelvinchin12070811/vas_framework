@@ -1,6 +1,6 @@
 #include "Scancode.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	bool VAS_DECLSPEC operator==(SDL_Scancode lhs, Scancode rhs)
 	{

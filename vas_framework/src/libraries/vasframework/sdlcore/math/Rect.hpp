@@ -3,7 +3,7 @@
 #include <vector>
 #include "Point.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	class VAS_DECLSPEC Rect
 	{

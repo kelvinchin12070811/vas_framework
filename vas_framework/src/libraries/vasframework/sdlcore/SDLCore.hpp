@@ -12,7 +12,7 @@
 #include "Keyboard.hpp"
 #include "ttf/TTFCore.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	VAS_DECLSPEC std::string getError();
 

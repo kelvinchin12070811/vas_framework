@@ -6,7 +6,7 @@
 #include "../Math.hpp"
 #include "../RWops.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	class VAS_DECLSPEC Surface : public SDLComponentBase<SDL_Surface, Surface>
 	{

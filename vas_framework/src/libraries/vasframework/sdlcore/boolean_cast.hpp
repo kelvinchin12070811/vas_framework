@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL.h>
 
-namespace sdl
+namespace vas::sdl
 {
 	inline bool boolean_cast(SDL_bool value)
 	{

@@ -1,6 +1,6 @@
 #include "SDLInitFlags.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	const uint32_t InitFlags::everything = SDL_INIT_EVERYTHING;
 	const uint32_t InitFlags::timer = SDL_INIT_TIMER;

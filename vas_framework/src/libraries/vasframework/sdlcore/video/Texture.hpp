@@ -7,7 +7,7 @@
 #include "../Math.hpp"
 #include "../RWops.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	class VAS_DECLSPEC Texture : public SDLComponentBase<SDL_Texture, Texture>
 	{

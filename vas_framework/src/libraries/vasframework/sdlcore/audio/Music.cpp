@@ -1,7 +1,7 @@
 #include "Music.hpp"
 
 #ifdef VAS_USE_MIXER
-namespace sdl
+namespace vas::sdl
 {
 	namespace mixer
 	{

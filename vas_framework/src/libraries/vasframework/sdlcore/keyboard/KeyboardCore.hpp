@@ -7,7 +7,7 @@
 #include "../video/Window.hpp"
 #include "../math/Rect.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	/**
 	*  \brief Get the window which currently has keyboard focus.

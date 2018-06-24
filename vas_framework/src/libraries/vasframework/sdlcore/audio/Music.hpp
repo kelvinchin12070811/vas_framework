@@ -7,7 +7,7 @@
 #include "../RWops.hpp"
 #include "Flags.hpp"
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace mixer
 	{

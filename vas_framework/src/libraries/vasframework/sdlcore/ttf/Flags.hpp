@@ -4,7 +4,7 @@
 #ifdef VAS_USE_TTF
 #include <SDL_ttf.h>
 
-namespace sdl
+namespace vas::sdl
 {
 	namespace ttf
 	{
