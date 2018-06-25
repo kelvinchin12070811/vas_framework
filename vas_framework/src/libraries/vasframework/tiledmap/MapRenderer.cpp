@@ -29,11 +29,8 @@ namespace vas
 		{
 			for (tilePosition.x = 0; tilePosition.x < mapSize.x; tilePosition.x++)
 			{
-				auto rect = Camera::getInstance().getRectOnCamera(sdl::Rect(
-					static_cast<int>(tilePosition.x), static_cast<int>(tilePosition.y),
-					tileSize.x, tileSize.y
-				) , staticOnCamera);
-				if (Camera::getInstance().canSee(rect))
+				Vector2 targetPos = Vector2(tilePosition) * Vector2(tileSize);
+				if (camera->canSee(targetPos, tileSize))
 				{
 					auto tile = layer->tileAt(tilePosition.x, tilePosition.y);
 					if (tile != 0)
@@ -42,12 +39,12 @@ namespace vas
 						{
 							auto frame = bundle->getAnimatiosData()[tile].getCurrentFrame();
 							auto tileset = bundle->getTile(frame);
-							tileset.second->drawTile(tileset.first, static_cast<Vector2>(tilePosition) * static_cast<Vector2>(tileSize), renderer, camera, staticOnCamera);
+							tileset.second->drawTile(tileset.first, targetPos, renderer, camera, staticOnCamera);
 						}
 						else
 						{
 							auto tileset = bundle->getTile(tile);
-							tileset.second->drawTile(tileset.first, static_cast<Vector2>(tilePosition) * static_cast<Vector2>(tileSize), renderer, camera, staticOnCamera);
+							tileset.second->drawTile(tileset.first, targetPos, renderer, camera, staticOnCamera);
 						}
 					}
 				}

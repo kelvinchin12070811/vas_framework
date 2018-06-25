@@ -12,19 +12,22 @@ namespace vas
 
 	bool Camera::canSee(const sdl::Rect & other)
 	{
-		sdl::Rect cameraRect = { static_cast<int>(position.x), static_cast<int>(position.y), size.x, size.y };
-
-		if (other.x + other.w < cameraRect.x && other.x > cameraRect.x + cameraRect.w &&
-			other.y + other.h < cameraRect.y && other.y > cameraRect.y + cameraRect.h)
-		{
-			return false;
-		}
-		return true;
+		sdl::Rect cameraRect;
+		cameraRect.x = cameraRect.y = 0;
+		cameraRect.w = size.w();
+		cameraRect.h = size.h();
+		
+		if ((other.x + other.w > cameraRect.x) && (other.x <cameraRect.x + cameraRect.w))
+			return true;
+		if ((other.y + other.h > cameraRect.y) && (other.y < cameraRect.y + cameraRect.h))
+			return true;
+		return false;
 	}
 
 	bool Camera::canSee(const Vector2 & other, const sdl::Point & size)
 	{
-		sdl::Rect otherHolder(static_cast<int>(other.x), static_cast<int>(other.y), size.x, size.y);
+		auto pos = getPosOnCamera(other);
+		sdl::Rect otherHolder(static_cast<int>(pos.x), static_cast<int>(pos.y), size.x, size.y);
 		return canSee(otherHolder);
 	}
 
