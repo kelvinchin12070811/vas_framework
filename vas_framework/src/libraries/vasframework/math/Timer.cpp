@@ -38,7 +38,6 @@ namespace vas
 	void Timer::start()
 	{
 		countingState = true;
-		startTime = std::chrono::steady_clock::now();
 		timerThread = std::thread(std::bind(&Timer::threadRuner, this));
 	}
 
@@ -62,13 +61,8 @@ namespace vas
 		{
 			using namespace std;
 			using namespace chrono;
-			auto currentTime = steady_clock::now();
-			auto totalDuration = duration_cast<milliseconds>(currentTime - startTime);
-			if (totalDuration == this->duration)
-			{
-				timeOutSignal();
-				startTime = steady_clock::now();
-			}
+			std::this_thread::sleep_for(duration);
+			timeOutSignal();
 		}
 	}
 }

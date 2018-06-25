@@ -28,7 +28,6 @@ namespace vas
 		void threadRuner();
 
 		bool countingState{ false };
-		std::chrono::time_point<std::chrono::steady_clock> startTime;
 		std::chrono::milliseconds duration{ 0 };
 		std::thread timerThread;
 		boost::signals2::signal<void()> timeOutSignal;
