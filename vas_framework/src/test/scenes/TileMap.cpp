@@ -49,8 +49,8 @@ namespace scene
 			vas::Camera::getInstance().move(camMovement);
 		}
 		auto camPos = vas::Camera::getInstance().getPosition();
-		camPos.x = std::clamp(camPos.x, 0.0f, static_cast<float>(map.getMapSize().w() - Camera::getInstance().getSize().w()));
-		camPos.y = std::clamp(camPos.y, 0.0f, static_cast<float>(map.getMapSize().h() - Camera::getInstance().getSize().h()));
+		//camPos.x = std::clamp(camPos.x, 0.0f, static_cast<float>(map.getMapSize().w() - Camera::getInstance().getSize().w()));
+		//camPos.y = std::clamp(camPos.y, 0.0f, static_cast<float>(map.getMapSize().h() - Camera::getInstance().getSize().h()));
 		Camera::getInstance().setPosition(camPos);
 
 		tilesets.tick();

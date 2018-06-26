@@ -19,7 +19,7 @@ namespace vas::sdl
 			static const FlagsType ogg = 0x00000010;
 			static const FlagsType fluidsynth = 0x00000020;
 			static const FlagsType all = flac | mod | modplug | mp3 | ogg | fluidsynth;
-			static const FlagsType commonType = flac | mp3 | ogg;
+			//static const FlagsType commonType = flac | mp3 | ogg; // For specific reason, SDL_mixer on SDL 2.0.7 don't load ogg
 		};
 
 		struct DefaultValues

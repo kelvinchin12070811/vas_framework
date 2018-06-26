@@ -17,7 +17,8 @@ namespace vas::sdl
 
 		bool init()
 		{
-			return init(MixInitFlags::commonType) != 0;
+			//return init(MixInitFlags::mod) != 0;
+			return true;
 		}
 
 		void quit()

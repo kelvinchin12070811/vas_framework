@@ -47,14 +47,12 @@ namespace vas
 
 		if (staticOnCamera)
 		{
-			if (camera->canSee(tileDest))
-				renderer->copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
+			renderer->copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
 		}
 		else
 		{
 			tileDest = camera->getRectOnCamera(tileDest);
-			if (camera->canSee(tileDest))
-				renderer->copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
+			renderer->copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
 		}
 	}
 }

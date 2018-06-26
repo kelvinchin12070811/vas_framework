@@ -1,4 +1,5 @@
 #pragma once
+#include <unordered_map>
 #include <vector>
 #include "Tileset.hpp"
 #include "../../graphics/sprites/SpriteSheet.hpp"
@@ -17,12 +18,12 @@ namespace vas
 		Tileset* getTileLocatedTilesets(uint32_t index);
 		
 		bool isAnimatedTile(uint32_t index);
-		std::map<uint32_t, AnimationController>& getAnimatiosData();
+		std::unordered_map<uint32_t, AnimationController>& getAnimatiosData();
 
 		void tick();
 	private:
 		std::vector<std::pair<Tileset, std::shared_ptr<SpriteSheet>>> spriteData;
-		std::map<uint32_t, AnimationController> animationsData;
+		std::unordered_map<uint32_t, AnimationController> animationsData;
 		int w;
 		int h;
 	};

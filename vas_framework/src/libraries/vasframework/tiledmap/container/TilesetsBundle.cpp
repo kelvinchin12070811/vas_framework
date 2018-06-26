@@ -36,13 +36,14 @@ namespace vas
 		if (index == 0) return std::make_pair(0, nullptr);
 
 		std::pair<size_t, std::shared_ptr<SpriteSheet>> selectedTile;
-
+		
 		auto result = std::find_if(spriteData.begin(), spriteData.end(),
 			[&](decltype(spriteData)::value_type& itr)->bool
 		{
 			return index >= itr.first.firstGid && index < itr.first.firstGid + itr.first.tileCount;
 		}
 		);
+		
 		if (result == spriteData.end()) return std::make_pair(0, nullptr);
 
 		selectedTile.first = index - result->first.firstGid;
@@ -70,7 +71,7 @@ namespace vas
 		return animationsData.find(index) == animationsData.end() ? false : true;
 	}
 
-	std::map<uint32_t, AnimationController>& TilesetsBundle::getAnimatiosData()
+	std::unordered_map<uint32_t, AnimationController>& TilesetsBundle::getAnimatiosData()
 	{
 		return animationsData;
 	}
