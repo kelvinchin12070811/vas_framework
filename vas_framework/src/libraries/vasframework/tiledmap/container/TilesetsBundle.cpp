@@ -14,14 +14,13 @@ namespace vas
 	{
 		this->w = w;
 		this->h = h;
-		spriteData.reserve(tilesets.size());
 		for (auto& itr : tilesets)
 		{
-			spriteData.push_back(
+			spriteData.insert(std::make_pair(itr.firstGid,
 				std::make_pair(
 					itr,
 					std::make_shared<SpriteSheet>(itr.source.name, sdl::Point(w, h))
-				)
+				))
 			);
 			for (auto& itr2 : itr.tilesWithAnimation)
 			{
@@ -36,34 +35,21 @@ namespace vas
 		if (index == 0) return std::make_pair(0, nullptr);
 
 		std::pair<size_t, std::shared_ptr<SpriteSheet>> selectedTile;
-		
-		auto result = std::find_if(spriteData.begin(), spriteData.end(),
-			[&](decltype(spriteData)::value_type& itr)->bool
-		{
-			return index >= itr.first.firstGid && index < itr.first.firstGid + itr.first.tileCount;
-		}
-		);
-		
-		if (result == spriteData.end()) return std::make_pair(0, nullptr);
+		auto result = spriteData.lower_bound(index);
 
-		selectedTile.first = index - result->first.firstGid;
-		selectedTile.second = result->second;
+		if (result == spriteData.end()) return std::make_pair(0, nullptr);
+		selectedTile.first = index - result->second.first.firstGid;
+		selectedTile.second = result->second.second;
 		return selectedTile;
 	}
 
-	Tileset * TilesetsBundle::getTileLocatedTilesets(uint32_t index)
+	const Tileset * TilesetsBundle::getTileLocatedTilesets(uint32_t index)
 	{
 		if (index == 0) return nullptr;
 
-		auto result = std::find_if(spriteData.begin(), spriteData.end(),
-			[&](decltype(spriteData)::value_type& itr)->bool
-		{
-			return index >= itr.first.firstGid && index < itr.first.firstGid + itr.first.tileCount;
-		}
-		);
+		auto result = spriteData.lower_bound(index);
 		if (result == spriteData.end()) return nullptr;
-
-		return &result->first;
+		return &result->second.first;
 	}
 
 	bool TilesetsBundle::isAnimatedTile(uint32_t index)

@@ -35,10 +35,9 @@ namespace vas
 					auto tile = layer->tileAt(tilePosition.x, tilePosition.y);
 					if (tile != 0)
 					{
-						if (bundle->isAnimatedTile(tile))
+						if (auto targetTile = bundle->getAnimatiosData().find(tile); targetTile != bundle->getAnimatiosData().end())
 						{
-							auto frame = bundle->getAnimatiosData()[tile].getCurrentFrame();
-							auto tileset = bundle->getTile(frame);
+							auto tileset = bundle->getTile(targetTile->second.getCurrentFrame());
 							tileset.second->drawTile(tileset.first, targetPos, renderer, camera, staticOnCamera);
 						}
 						else

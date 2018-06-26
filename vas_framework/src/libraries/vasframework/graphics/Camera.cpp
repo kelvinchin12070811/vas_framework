@@ -12,16 +12,10 @@ namespace vas
 
 	bool Camera::canSee(const sdl::Rect & other)
 	{
-		sdl::Rect cameraRect;
-		cameraRect.x = cameraRect.y = 0;
-		cameraRect.w = size.w();
-		cameraRect.h = size.h();
+		sdl::Rect cameraRect(0, 0, size.w(), size.h());
 		
-		if ((other.x + other.w > cameraRect.x) && (other.x <cameraRect.x + cameraRect.w))
-			return true;
-		if ((other.y + other.h > cameraRect.y) && (other.y < cameraRect.y + cameraRect.h))
-			return true;
-		return false;
+		return ((other.x < cameraRect.x + cameraRect.w) && (other.x + other.w > cameraRect.x) &&
+			(other.y < cameraRect.y + cameraRect.h) && (other.y + other.h > cameraRect.y));
 	}
 
 	bool Camera::canSee(const Vector2 & other, const sdl::Point & size)

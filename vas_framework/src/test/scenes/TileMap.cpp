@@ -8,6 +8,8 @@
 #include "../../libraries/vasframework/sreflex/Util.hpp"
 #include "../../libraries/vasframework/tiledmap/container/TilesetsBundle.hpp"
 #include "../../libraries/vasframework/container/nbt/CommonTag.hpp"
+#include "../../libraries/vasframework/math/Clock.hpp"
+#include "../../libraries/vasframework/util/CommonTools.hpp"
 
 using namespace vas;
 using namespace boost::placeholders;
@@ -49,8 +51,8 @@ namespace scene
 			vas::Camera::getInstance().move(camMovement);
 		}
 		auto camPos = vas::Camera::getInstance().getPosition();
-		//camPos.x = std::clamp(camPos.x, 0.0f, static_cast<float>(map.getMapSize().w() - Camera::getInstance().getSize().w()));
-		//camPos.y = std::clamp(camPos.y, 0.0f, static_cast<float>(map.getMapSize().h() - Camera::getInstance().getSize().h()));
+		camPos.x = std::clamp(camPos.x, 0.0f, static_cast<float>(map.getMapSize().w() - Camera::getInstance().getSize().w()));
+		camPos.y = std::clamp(camPos.y, 0.0f, static_cast<float>(map.getMapSize().h() - Camera::getInstance().getSize().h()));
 		Camera::getInstance().setPosition(camPos);
 
 		tilesets.tick();
