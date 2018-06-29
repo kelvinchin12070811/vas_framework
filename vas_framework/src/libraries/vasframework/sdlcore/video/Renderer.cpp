@@ -273,6 +273,13 @@ namespace vas::sdl
 		return SDL_RenderSetViewport(&*this->componentInstance, &temp) == 0 ? true : false;
 	}
 
+	RendererInfo Renderer::getRendererInfo()
+	{
+		RendererInfo info;
+		SDL_GetRendererInfo(componentInstance.get(), &info);
+		return info;
+	}
+
 	/*Renderer::operator const SDL_Renderer*() const
 	{
 		return &*this->componentInstance;

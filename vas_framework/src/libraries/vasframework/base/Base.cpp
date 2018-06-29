@@ -183,6 +183,11 @@ namespace vas
 		return eventProcessorSignals[static_cast<uint8_t>(type)];
 	}
 
+	boost::signals2::signal<void(size_t)>& Base::getFPSChangedSignal()
+	{
+		return fpsChangedSignals;
+	}
+
 	const Counter & Base::FrameIndex()
 	{
 		return frameIndex;
@@ -191,6 +196,17 @@ namespace vas
 	size_t Base::getLastFpsCount()
 	{
 		return lastFpsCount;
+	}
+
+	void Base::setRefreshRate(size_t value)
+	{
+		using namespace std::chrono_literals;
+		if (fps == value) return;
+		fps = value;
+		frameStayTime = 1000ms / fps;
+		frameIndex.setAutoResetLimit(fps);
+
+		fpsChangedSignals(value);
 	}
 
 	size_t Base::getRefreshRate()

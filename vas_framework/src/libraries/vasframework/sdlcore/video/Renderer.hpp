@@ -9,6 +9,7 @@
 
 namespace vas::sdl
 {
+	using RendererInfo = SDL_RendererInfo;
 	class Texture;
 	class VAS_DECLSPEC Renderer : public SDLComponentBase<SDL_Renderer, Renderer>
 	{
@@ -89,6 +90,8 @@ namespace vas::sdl
 		bool setRenderTarget(Texture& texture);
 		bool setScale(float scaleX, float scaleY);
 		bool setViewPort(Rect& viewPortRect);
+
+		RendererInfo getRendererInfo();
 
 		/*explicit operator const SDL_Renderer*() const;
 		explicit operator SDL_Renderer*();*/

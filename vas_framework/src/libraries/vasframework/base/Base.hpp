@@ -44,8 +44,10 @@ namespace vas
 		sdl::Window& Window();
 		sdl::Renderer& Renderer();
 		boost::signals2::signal<void(sdl::Event&)>& EventProcessorSignal(Base::SignalsType::EventProcessor type);
+		boost::signals2::signal<void(size_t)>& getFPSChangedSignal();
 		const Counter& FrameIndex();
 		size_t getLastFpsCount();
+		void setRefreshRate(size_t value);
 		size_t getRefreshRate();
 		sdl::Event& getEvent();
 	private:
@@ -73,6 +75,8 @@ namespace vas
 
 		Clock gameLoopClock;
 		Timer frameCounterUpdater;
+
+		boost::signals2::signal<void(size_t)> fpsChangedSignals;
 	};
 }
 
