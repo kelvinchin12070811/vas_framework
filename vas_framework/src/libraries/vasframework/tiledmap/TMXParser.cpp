@@ -114,21 +114,21 @@ namespace vas
 		}
 	}
 
-	void TMXParser::prase_mapProperties(pugi::xml_node & node) const
+	void TMXParser::prase_mapProperties(pugi::xml_node node) const
 	{
 		using namespace std;
 		if (!node.empty())
 		{
 			mapProperties.customProperties.reserve(std::distance(node.children().begin(), node.children().end()));
 			auto propertyItr = node.children("property");
-			for (auto& itr = propertyItr.begin(); itr != propertyItr.end(); itr++)
+			for (auto itr = propertyItr.begin(); itr != propertyItr.end(); itr++)
 			{
 				mapProperties.customProperties.push_back(prase_property(*itr));
 			}
 		}
 	}
 
-	void TMXParser::prase_tileset(pugi::xml_node & node) const
+	void TMXParser::prase_tileset(pugi::xml_node node) const
 	{
 		Tileset tmpTileset;
 		tmpTileset.firstGid = node.attribute("firstgid").as_uint();
@@ -167,7 +167,7 @@ namespace vas
 		tilesets.push_back(std::move(tmpTileset));
 	}
 
-	void TMXParser::prase_tilelayer(pugi::xml_node & node) const
+	void TMXParser::prase_tilelayer(pugi::xml_node node) const
 	{
 		using namespace std;
 		string name = node.attribute("name").as_string();
@@ -200,7 +200,7 @@ namespace vas
 		mapData.push_back(std::move(tempLayer));
 	}
 
-	void TMXParser::prase_objectlayer(pugi::xml_node & node) const
+	void TMXParser::prase_objectlayer(pugi::xml_node node) const
 	{
 		std::vector<ObjectData> tempObjList;
 		auto tempLayer = std::make_unique<ObjectLayer>();
@@ -263,7 +263,7 @@ namespace vas
 		mapData.push_back(std::move(tempLayer));
 	}
 
-	Property TMXParser::prase_property(pugi::xml_node & node) const
+	Property TMXParser::prase_property(pugi::xml_node node) const
 	{
 		using namespace std;
 		Property item;
@@ -291,7 +291,7 @@ namespace vas
 		return item;
 	}
 	
-	PropertyList TMXParser::propertiesPraser(pugi::xml_node & node) const
+	PropertyList TMXParser::propertiesPraser(pugi::xml_node node) const
 	{
 		using namespace std;
 		if (!node.empty())
@@ -299,7 +299,7 @@ namespace vas
 			PropertyList list;
 			list.reserve(std::distance(node.children().begin(), node.children().end()));
 			auto propertyItr = node.children("property");
-			for (auto& itr = propertyItr.begin(); itr != propertyItr.end(); itr++)
+			for (auto itr = propertyItr.begin(); itr != propertyItr.end(); itr++)
 			{
 				list.push_back(prase_property(*itr));
 			}

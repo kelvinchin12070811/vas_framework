@@ -32,12 +32,12 @@ namespace vas
 
 	private:
 		void parse() const;
-		void prase_mapProperties(pugi::xml_node& node) const;
-		void prase_tileset(pugi::xml_node& node) const;
-		void prase_tilelayer(pugi::xml_node& node) const;
-		void prase_objectlayer(pugi::xml_node& node) const;
-		Property prase_property(pugi::xml_node& node) const;
-		PropertyList propertiesPraser(pugi::xml_node& node) const;
+		void prase_mapProperties(pugi::xml_node node) const;
+		void prase_tileset(pugi::xml_node node) const;
+		void prase_tilelayer(pugi::xml_node node) const;
+		void prase_objectlayer(pugi::xml_node node) const;
+		Property prase_property(pugi::xml_node node) const;
+		PropertyList propertiesPraser(pugi::xml_node node) const;
 	private:
 		mutable std::vector<std::unique_ptr<AbstractMapLayer>> mapData;
 		mutable std::vector<Tileset> tilesets;
