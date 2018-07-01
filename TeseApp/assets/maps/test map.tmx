@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="base_out_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="../textures/tilesets/base_out_atlas.png" width="1024" height="1024"/>
+  <terraintypes>
+   <terrain name="Dirth path 1" tile="15"/>
+   <terrain name="Pool 1" tile="297"/>
+  </terraintypes>
+  <tile id="16" terrain="0,0,0,"/>
+  <tile id="17" terrain="0,0,,0"/>
+  <tile id="48" terrain="0,,0,0"/>
+  <tile id="49" terrain=",0,0,0"/>
+  <tile id="79" terrain=",,,0"/>
+  <tile id="80" terrain=",,0,0"/>
+  <tile id="81" terrain=",,0,"/>
+  <tile id="111" terrain=",0,,0"/>
+  <tile id="112" terrain="0,0,0,0"/>
+  <tile id="113" terrain="0,,0,"/>
+  <tile id="143" terrain=",0,,"/>
+  <tile id="144" terrain="0,0,,"/>
+  <tile id="145" terrain="0,,,"/>
+  <tile id="298" terrain="1,1,1,"/>
+  <tile id="299" terrain="1,1,,1"/>
+  <tile id="330" terrain="1,,1,1"/>
+  <tile id="331" terrain=",1,1,1"/>
+  <tile id="361" terrain=",,,1"/>
+  <tile id="362" terrain=",,1,1"/>
+  <tile id="363" terrain=",,1,"/>
+  <tile id="393" terrain=",1,,1"/>
+  <tile id="394" terrain="1,1,1,1"/>
+  <tile id="395" terrain="1,,1,"/>
+  <tile id="425" terrain=",1,,"/>
+  <tile id="426" terrain="1,1,,"/>
+  <tile id="427" terrain="1,,,"/>
+ </tileset>
+ <layer name="grass path" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJx9lEEOgDAIBPv/B3V5nh5sgpOhB6IFgWW7mLVWXqvPNp7nnf7jSzsH543aPZ4W37CCP+gd9Mv64y2pZ3Ns5Ns8zOEMPd9iE1cda+R78hKpYTWJlZwQH/kp8bOn3YHV5iwTJ/Rbz0jvmz4mTm86mrQy4ebM5NF4pmasHrFPura9ZJ7p47Y/xE6ObRb7X5AX8klubMfsDh9GcNZp
+  </data>
+ </layer>
+ <layer name="path 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzd00EOQDAQheE6Auew4RwWOAYrrtENjqGX9BaVvExMM2Vnkn8nn5Gqc/+dHg2iL0aLSrRTuY40DjQVzs0xq8WONDrkYzk7scOGN3jaTpqT8tiy7MTJ876/b0Fr9E88F1Bt8PisuQo19I6R3JDwtdkStuYH4//Ctua/vR9P/pv7YZ0LKdg/1A==
+  </data>
+ </layer>
+ <layer name="tree" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAvqGainlmzgGbNBuI5ZJhZC9RTB8T1SHp3Adm7gXgPGebNBeqZB8TzqeS/vUBz9gHxfiqG1ygYBcQAbHmDEkDNvAEAoScNjA==
+  </data>
+ </layer>
+ <layer name="tree top" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAN9jAyMOwF4n2MeBThAH+Aev4C8T8kvXeA7LtAfI8M82SYGBhkgViOiXS92IAN0BxbILajknkxQHNigTiOSuaNgsEDsKVlSsBoWiYfAABsfA83
+  </data>
+ </layer>
+</map>

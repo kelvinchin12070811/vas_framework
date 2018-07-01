@@ -5,10 +5,9 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vas_framework", "vas_framework\vas_framework.vcxproj", "{DA2CB821-0ED2-4937-818F-1035982D248A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeseApp", "TeseApp\TeseApp.vcxproj", "{BA233DC2-780E-49B9-B19E-0C2A27C6851B}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -24,11 +23,22 @@ Global
 		{DA2CB821-0ED2-4937-818F-1035982D248A}.Release|x64.Build.0 = Release|x64
 		{DA2CB821-0ED2-4937-818F-1035982D248A}.Release|x86.ActiveCfg = Release|Win32
 		{DA2CB821-0ED2-4937-818F-1035982D248A}.Release|x86.Build.0 = Release|Win32
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Debug|x64.ActiveCfg = Debug|x64
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Debug|x64.Build.0 = Debug|x64
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Debug|x86.ActiveCfg = Debug|Win32
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Debug|x86.Build.0 = Debug|Win32
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Release|x64.ActiveCfg = Release|x64
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Release|x64.Build.0 = Release|x64
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Release|x86.ActiveCfg = Release|Win32
+		{BA233DC2-780E-49B9-B19E-0C2A27C6851B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {447FDE44-8740-45D9-8484-57CAFA17E0D9}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
