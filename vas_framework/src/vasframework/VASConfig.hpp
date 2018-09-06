@@ -5,28 +5,51 @@
 
 #ifndef VAS_GLOB_CONFIG
 #define VAS_GLOB_CONFIG
+
+/*! \addtogroup compile_time_cfg
+@{
+*/
 /* Generate DLL friendly classes */
 //#define VAS_GEN_DLL
 
-/* Using Windows specific codes */
+/*! Using Windows specific code for some functions to optimize the experience.
+	 It will make the code platfrom specific for Windows only.
+
+	 Default is ON.
+*/
 #define VAS_WINDOWS_MODE
 
-/* Enable SDL_Mixer */
+/*! Use SDL_mixer audio library. Comment out this macro will disable the audio functionality of the library
+	 (VAS Framework use SDL_mixer as its main audio library for audio play back). But the SDL’s audio feature is still valid.
+
+	 Default is ON.
+
+	 \note Disable Audio Module will disable AudioManager too.
+*/
 #define VAS_USE_MIXER
 
-/* Enable SDL_TTF */
+/*! Use SDL_ttf font rendering engine. Disable this will turn off the functionality off text rendering feature such as sdl::TTF.
+
+	 Default is ON.
+*/
 #define VAS_USE_TTF
 
 /* Use SDL Entry Point */
 //#define VAS_SDL_ENTRY
 
-/* Use Uniform Entry Point*/
+/*! @}*/
 #ifndef VAS_SDL_ENTRY
+
+/*! \addtogroup compile_time_cfg
+		@}
+*/
 #define VAS_USE_UNIENTRY
+/*! @}*/
 #endif
 
 /*Configuration end*/
 #endif // !VAS_GLOB_CNFIG
+
 
 inline std::string getEngineVersion()
 {

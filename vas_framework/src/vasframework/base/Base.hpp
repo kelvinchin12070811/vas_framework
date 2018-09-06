@@ -20,6 +20,18 @@
 
 namespace vas
 {
+	/*! \addtogroup vas_framework
+		@{
+	*/
+	/*! \brief The basic class of the framework.
+
+		 Base is the singletone class that drived the skeleton of the framework. It controll the main event loop, signaling and
+		 also handle the main game loop and thread.
+
+		 | Header | Namespace |
+		 | : --- : | : --- : |
+		 | vasframework/base/Base.hpp | vas |
+	*/
 	class VAS_DECLSPEC Base
 	{
 	public:
@@ -129,3 +141,5 @@ freopen("CONIN$", "w+t", stderr)
 
 #endif // !VAS_WINDOWS_MODE
 #endif // VAS_USE_UNIENTRY
+
+/*! @} */ // addtogroup vas_framework

@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\test\scenes\TileMap.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\base\Base.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -264,14 +261,29 @@
     <ClInclude Include="src\vasframework\VASConfig.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\__doxygen__\group\CompileTimeConfiguration.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\__doxygen__\group\Macro.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\__doxygen__\group\vas_framework.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\__doxygen__\page\mainpage.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\__doxygen__\page\lib_license.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\__doxygen__\group\sreflecx.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\test\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\test\scenes\TileMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\vasframework\base\Base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

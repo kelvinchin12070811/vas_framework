@@ -101,6 +101,13 @@
     <ClInclude Include="src\vasframework\tiledmap\TMXParser.hpp" />
     <ClInclude Include="src\vasframework\tiledmap\maplayers\TileLayer.hpp" />
     <ClInclude Include="src\vasframework\tiledmap\container\TilesetsBundle.hpp" />
+    <ClInclude Include="src\__doxygen__\group\CompileTimeConfiguration.hpp" />
+    <ClInclude Include="src\__doxygen__\group\Macro.hpp" />
+    <ClInclude Include="src\__doxygen__\group\sreflecx.hpp" />
+    <ClInclude Include="src\__doxygen__\group\vas_framework.hpp" />
+    <ClInclude Include="src\__doxygen__\page\lib_license.hpp" />
+    <ClInclude Include="src\__doxygen__\page\mainpage.hpp" />
+    <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\container\nbt\NBTCompoundTag.cpp" />
