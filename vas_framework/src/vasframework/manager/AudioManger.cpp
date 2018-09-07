@@ -127,22 +127,22 @@ namespace vas
 		}
 	}
 
-	sdl::mixer::Music & AudioManger::BGM()
+	sdl::mixer::Music AudioManger::BGM()
 	{
 		return bgm;
 	}
 
-	sdl::mixer::Chunk & AudioManger::BGS()
+	sdl::mixer::Chunk AudioManger::BGS()
 	{
 		return bgs;
 	}
 
-	sdl::mixer::Chunk & AudioManger::ME()
+	sdl::mixer::Chunk AudioManger::ME()
 	{
 		return me;
 	}
 
-	sdl::mixer::Chunk & AudioManger::SE()
+	sdl::mixer::Chunk AudioManger::SE()
 	{
 		return se;
 	}

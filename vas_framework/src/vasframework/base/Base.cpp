@@ -153,7 +153,7 @@ namespace vas
 		sdl::quit();
 	}
 
-	const bool & Base::Exec()
+	bool Base::isExecuting()
 	{
 		return exec;
 	}
@@ -161,11 +161,6 @@ namespace vas
 	void Base::setIgnoreCloseEventOnce(bool value)
 	{
 		ignoreCloseEventOnce = value;
-	}
-
-	bool & Base::getIgnoreCloseEventOnce()
-	{
-		return ignoreCloseEventOnce;
 	}
 
 	void Base::setDoubleSceneRendering(bool value)
@@ -184,7 +179,7 @@ namespace vas
 			window = std::move(value);
 	}
 
-	sdl::Window & Base::getWindow()
+	sdl::Window Base::getWindow()
 	{
 		return window;
 	}
@@ -195,7 +190,7 @@ namespace vas
 			renderer = std::move(value);
 	}
 
-	sdl::Renderer & Base::getRenderer()
+	sdl::Renderer Base::getRenderer()
 	{
 		return renderer;
 	}

@@ -58,7 +58,7 @@ namespace vas
 
 			std::unique_ptr<ObjectMap> registry{ nullptr }; /**< [Read Only] Registry that store data
 																about all instance of IObject
-																- accessor
+																- __accessors__
 																	-# std::unique_ptr<ObjectMap>& getRegistry()
 															*/
 		};

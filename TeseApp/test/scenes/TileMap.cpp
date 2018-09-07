@@ -72,7 +72,7 @@ namespace scene
 		vas::Cout() << "Test raw output with endl" << std::endl;
 		vas::Cout() << "Another raw output with unicode word 宮本桜" << std::endl;
 
-		signalsPool.push_back(InputManager::getInstance().MouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3)));
+		signalsPool.push_back(InputManager::getInstance().MouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2)));
 
 		map.load("assets/maps/animated map.tmx");
 

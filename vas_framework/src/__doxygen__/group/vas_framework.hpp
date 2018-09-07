@@ -1,4 +1,4 @@
-/** @defgroup vas_framework VAS Framework Core Library
+/** @defgroup vas_framework VAS Framework Core Library Component
 		@brief The main component of the VAS Framework
 
 		This is the main library that used when working with Virtual Assistant Framework.

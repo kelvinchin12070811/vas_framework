@@ -34,10 +34,10 @@ namespace vas
 
 		void resumeBGM(const std::chrono::milliseconds& fadeInTime = std::chrono::milliseconds(0));
 
-		sdl::mixer::Music& BGM();
-		sdl::mixer::Chunk& BGS();
-		sdl::mixer::Chunk& ME();
-		sdl::mixer::Chunk& SE();
+		sdl::mixer::Music BGM();
+		sdl::mixer::Chunk BGS();
+		sdl::mixer::Chunk ME();
+		sdl::mixer::Chunk SE();
 
 		float getBGMVolume();
 		float getBGSVolume();

@@ -23,7 +23,7 @@ namespace scene
 		void beforeTerminate() override;
 	private:
 		void on_EventPulsed(vas::sdl::Event& ev);
-		void on_mouseClicked(sdl::MouseButtonIndex index, sdl::Point position);
+		void on_mouseClicked(vas::sdl::MouseButtonIndex index, vas::sdl::Point position);
 
 	private:
 		vas::TMXParser map;

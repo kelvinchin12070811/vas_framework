@@ -144,19 +144,19 @@ namespace vas
 	void Sprite::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		if (texture == sdl::emptycomponent) return;
-		if (renderer == nullptr) renderer = &Base::getInstance().getRenderer();
+		sdl::Renderer rendererHolder = (renderer == nullptr) ? Base::getInstance().getRenderer() : *renderer;
 		if (camera == nullptr) camera = &Camera::getInstance();
 
 		if (staticOnCamera)
 		{
 			if (camera->canSee(destination))
-				renderer->copyEx(texture, &source, &destination, static_cast<double>(angle), origin, rendererFlip);
+				rendererHolder.copyEx(texture, &source, &destination, static_cast<double>(angle), origin, rendererFlip);
 		}
 		else
 		{
 			auto foreginRect = camera->getRectOnCamera(destination);
 			if (camera->canSee(foreginRect))
-				renderer->copyEx(texture, &source, &foreginRect, static_cast<double>(angle), origin, rendererFlip);
+				rendererHolder.copyEx(texture, &source, &foreginRect, static_cast<double>(angle), origin, rendererFlip);
 		}
 	}
 }

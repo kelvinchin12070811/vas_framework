@@ -21,7 +21,6 @@ namespace vas
 	void MapRenderer::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		if (layer == nullptr) return;
-		if (renderer == nullptr) renderer = &Base::getInstance().getRenderer();
 		if (camera == nullptr) camera = &Camera::getInstance();
 
 		sdl::Point tilePosition;
