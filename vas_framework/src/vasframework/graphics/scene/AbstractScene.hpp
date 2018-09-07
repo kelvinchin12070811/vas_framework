@@ -35,13 +35,13 @@ namespace vas
 		virtual void draw() = 0;
 
 		// Call to current scene when begin terminate
-		virtual void Signal_beforeTerminate();
+		virtual void beforeTerminate();
 		// Call to previous scene when current scene is terminated
-		virtual void Signal_afterTerminate();
+		virtual void afterTerminate();
 		// Call to current scene when current scene is begin to change
-		virtual void Signal_beforeSceneCall();
+		virtual void beforeSceneCall();
 		// Call to current scene when previous scene changed
-		virtual void Signal_afterSceneCall();
+		virtual void afterSceneCall();
 	protected:
 		bool __isRenderAssistanceEnabled();
 	protected:

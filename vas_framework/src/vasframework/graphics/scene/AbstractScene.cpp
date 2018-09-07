@@ -22,22 +22,22 @@ namespace vas
 			this->__renderAssistance->draw();
 	}
 
-	void AbstractScene::Signal_beforeTerminate()
+	void AbstractScene::beforeTerminate()
 	{
 		return;
 	}
 
-	void AbstractScene::Signal_afterTerminate()
+	void AbstractScene::afterTerminate()
 	{
 		return;
 	}
 
-	void AbstractScene::Signal_beforeSceneCall()
+	void AbstractScene::beforeSceneCall()
 	{
 		return;
 	}
 
-	void AbstractScene::Signal_afterSceneCall()
+	void AbstractScene::afterSceneCall()
 	{
 		return;
 	}

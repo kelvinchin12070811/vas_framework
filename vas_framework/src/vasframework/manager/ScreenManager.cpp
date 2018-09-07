@@ -82,7 +82,7 @@ namespace vas
 		currentState = fadeType;
 		screenOpacityBuffer = static_cast<double>(getScreenOpacity());
 		screenOpacityDelta = 255.0 / static_cast<double>(
-			std::chrono::duration_cast<std::chrono::seconds>(time).count() * Base::getInstance().getRefreshRate()
+			std::chrono::duration_cast<std::chrono::seconds>(time).count() * Base::getInstance().getFPS()
 			);
 		Signal_FadeBegin(fadeType);
 	}
@@ -94,7 +94,7 @@ namespace vas
 
 	ScreenManager::ScreenManager()
 	{
-		masterRenderer = Base::getInstance().Renderer();
+		masterRenderer = Base::getInstance().getRenderer();
 
 		screenMasterOverlay = sdl::Texture(masterRenderer, sdl::Surface(0, sdl::Point(32, 32), 32, 0, 0, 0, 0));
 		screenMasterOverlay.setBlendMod(sdl::BlendMode::blend);

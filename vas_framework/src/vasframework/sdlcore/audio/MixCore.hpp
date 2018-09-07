@@ -15,8 +15,8 @@ namespace vas::sdl
 		class VAS_DECLSPEC Signals
 		{
 		public:
-			static boost::signals2::signal<void()> onMusicFinished;
-			static boost::signals2::signal<void(int)> onChannelFinished;
+			static boost::signals2::signal<void()> MusicFinished;
+			static boost::signals2::signal<void(int)> ChannelFinished;
 		};
 
 		VAS_DECLSPEC int init(int flags);

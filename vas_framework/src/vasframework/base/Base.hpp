@@ -35,11 +35,6 @@ namespace vas
 	class VAS_DECLSPEC Base
 	{
 	public:
-		struct SignalsType
-		{
-			enum class EventProcessor : uint8_t { preEventLoop = 0, PostEventLoop = 1 };
-		};
-
 		static Base& getInstance();
 
 		void initAndStartAll(const std::string& windowTitle, const sdl::Point& size, uint32_t flags, std::function<void()> initializer = nullptr);
@@ -51,16 +46,23 @@ namespace vas
 		void cleanAndQuit();
 
 		const bool& Exec();
-		bool& IgnoreCloseEventOnce();
-		bool& DoubleSceneRendering();
-		sdl::Window& Window();
-		sdl::Renderer& Renderer();
-		boost::signals2::signal<void(sdl::Event&)>& EventProcessorSignal(Base::SignalsType::EventProcessor type);
-		boost::signals2::signal<void(size_t)>& getFPSChangedSignal();
-		const Counter& FrameIndex();
+
+		void setIgnoreCloseEventOnce(bool value);
+		bool& getIgnoreCloseEventOnce();
+
+		void setDoubleSceneRendering(bool value);
+		bool& getDoubleSceneRendering();
+
+		void setWindow(sdl::Window value);
+		sdl::Window& getWindow();
+
+		void setRenderer(sdl::Renderer value);
+		sdl::Renderer& getRenderer();
+
+		size_t getCurFrameIndex();
 		size_t getLastFpsCount();
-		void setRefreshRate(size_t value);
-		size_t getRefreshRate();
+		void setFPS(size_t value);
+		size_t getFPS();
 		sdl::Event& getEvent();
 	private:
 		Base();
@@ -74,9 +76,8 @@ namespace vas
 		bool exec{ true };
 		bool ignoreCloseEventOnce{ false };
 		bool doubleSceneRendering{ false };
-		std::array<boost::signals2::signal<void(sdl::Event&)>, 2> eventProcessorSignals;
-		sdl::Window mainWindow;
-		sdl::Renderer mainRenderer;
+		sdl::Window window;
+		sdl::Renderer renderer;
 		sdl::Event ev;
 
 		size_t fps{ 60 };
@@ -88,7 +89,10 @@ namespace vas
 		Clock gameLoopClock;
 		Timer frameCounterUpdater;
 
-		boost::signals2::signal<void(size_t)> fpsChangedSignals;
+	public: //signals
+		boost::signals2::signal<void(sdl::Event&)> EventBeginProcessed;
+		boost::signals2::signal<void(sdl::Event&)> EventCompleateProcessed;
+		boost::signals2::signal<void(size_t)> FPSChanged;
 	};
 }
 

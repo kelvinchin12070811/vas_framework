@@ -6,6 +6,7 @@
 #include <vasframework/tiledmap/TMXParser.hpp>
 #include <vasframework/tiledmap/MapRenderer.hpp>
 #include <vasframework/manager/InputManager.hpp>
+#include <vasframework/sdlcore/Math.hpp>
 
 namespace scene
 {
@@ -18,11 +19,11 @@ namespace scene
 		void tick() override;
 		void draw() override;
 
-		void Signal_afterSceneCall() override;
-		void Signal_beforeTerminate() override;
+		void afterSceneCall() override;
+		void beforeTerminate() override;
 	private:
 		void on_EventPulsed(vas::sdl::Event& ev);
-		void on_mouseClicked(vas::MouseButtonIndex index, int x, int y);
+		void on_mouseClicked(sdl::MouseButtonIndex index, sdl::Point position);
 
 	private:
 		vas::TMXParser map;

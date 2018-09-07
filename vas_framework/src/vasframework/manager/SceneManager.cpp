@@ -23,7 +23,7 @@ namespace vas
 	{
 		if (callStack.empty()) return;
 
-		callStack.back()->Signal_beforeTerminate();
+		callStack.back()->beforeTerminate();
 		if (!keepLast)
 		{
 			callStack.clear();
@@ -34,29 +34,29 @@ namespace vas
 		callStack.push_back(std::move(lastInstance));
 
 		if (!callStack.empty())
-			callStack.back()->Signal_afterTerminate();
+			callStack.back()->afterTerminate();
 	}
 
 	void SceneManager::call(const std::shared_ptr<AbstractScene>& instance)
 	{
-		if (!callStack.empty()) callStack.back()->Signal_beforeSceneCall();
+		if (!callStack.empty()) callStack.back()->beforeSceneCall();
 		callStack.push_back(instance);
-		callStack.back()->Signal_afterSceneCall();
+		callStack.back()->afterSceneCall();
 	}
 
 	void SceneManager::call(std::shared_ptr<AbstractScene>&& instance)
 	{
-		if (!callStack.empty()) callStack.back()->Signal_beforeSceneCall();
+		if (!callStack.empty()) callStack.back()->beforeSceneCall();
 		callStack.push_back(std::move(instance));
-		callStack.back()->Signal_afterSceneCall();
+		callStack.back()->afterSceneCall();
 	}
 
 	void SceneManager::back()
 	{
 		if (callStack.empty()) return;
-		callStack.back()->Signal_beforeTerminate();
+		callStack.back()->beforeTerminate();
 		callStack.pop_back();
-		if (!callStack.empty()) callStack.back()->Signal_afterTerminate();
+		if (!callStack.empty()) callStack.back()->afterTerminate();
 	}
 
 	std::shared_ptr<AbstractScene> SceneManager::current()

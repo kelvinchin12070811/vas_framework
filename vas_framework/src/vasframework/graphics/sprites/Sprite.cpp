@@ -19,13 +19,13 @@ namespace vas
 			}
 			else
 			{
-				texture.loadImage(Base::getInstance().Renderer(), file);
+				texture.loadImage(Base::getInstance().getRenderer(), file);
 				TextureManager::getInstance().insert(file, texture);
 			}
 		}
 		else
 		{
-			texture.loadImage(Base::getInstance().Renderer(), file);
+			texture.loadImage(Base::getInstance().getRenderer(), file);
 		}
 		if (texture == sdl::emptycomponent)
 			throw sdl::SDLCoreException();
@@ -144,7 +144,7 @@ namespace vas
 	void Sprite::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		if (texture == sdl::emptycomponent) return;
-		if (renderer == nullptr) renderer = &Base::getInstance().Renderer();
+		if (renderer == nullptr) renderer = &Base::getInstance().getRenderer();
 		if (camera == nullptr) camera = &Camera::getInstance();
 
 		if (staticOnCamera)

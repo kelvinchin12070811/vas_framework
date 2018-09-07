@@ -148,13 +148,13 @@ namespace vas
 		switch (renderMode)
 		{
 		case vas::Text::RenderMode::solid:
-			this->texture = sdl::Texture(Base::getInstance().Renderer(), font.renderUTF8Solid(text, textColour));
+			this->texture = sdl::Texture(Base::getInstance().getRenderer(), font.renderUTF8Solid(text, textColour));
 			break;
 		case vas::Text::RenderMode::shaded:
-			this->texture = sdl::Texture(Base::getInstance().Renderer(), font.renderUTF8Shaded(text, textColour, backgroundColour));
+			this->texture = sdl::Texture(Base::getInstance().getRenderer(), font.renderUTF8Shaded(text, textColour, backgroundColour));
 			break;
 		case vas::Text::RenderMode::blended:
-			this->texture = sdl::Texture(Base::getInstance().Renderer(), font.renderUTF8Blended(text, textColour));
+			this->texture = sdl::Texture(Base::getInstance().getRenderer(), font.renderUTF8Blended(text, textColour));
 			break;
 		}
 		this->texture.queryTexture(&this->source.w, &this->source.h);

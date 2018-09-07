@@ -64,7 +64,7 @@ namespace scene
 		AbstractFrameCountingScene::draw();
 	}
 
-	void TileMap::Signal_afterSceneCall()
+	void TileMap::afterSceneCall()
 	{
 		using namespace std::chrono;
 		vas::Log() << "Scene " << sreflex::getObjectName<TileMap>() << " is called";
@@ -72,7 +72,7 @@ namespace scene
 		vas::Cout() << "Test raw output with endl" << std::endl;
 		vas::Cout() << "Another raw output with unicode word 宮本桜" << std::endl;
 
-		signalsPool.push_back(InputManager::getInstance().mouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3)));
+		signalsPool.push_back(InputManager::getInstance().MouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2, _3)));
 
 		map.load("assets/maps/animated map.tmx");
 
@@ -110,7 +110,7 @@ namespace scene
 		}
 	}
 
-	void TileMap::Signal_beforeTerminate()
+	void TileMap::beforeTerminate()
 	{
 		for (auto& itr : signalsPool)
 			itr.disconnect();
@@ -120,13 +120,13 @@ namespace scene
 	{
 	}
 
-	void TileMap::on_mouseClicked(vas::MouseButtonIndex index, int x, int y)
+	void TileMap::on_mouseClicked(sdl::MouseButtonIndex index, sdl::Point position)
 	{
 		switch (index)
 		{
-		case SDL_BUTTON_LEFT:
+		case sdl::MouseButtonIndex::ButtonLeft:
 			//vas::CommonTools::getInstance().messenger((boost::format("Mouse left clicked at: %i , %i") % x % y).str());
-			vas::Log() << boost::format("Mouse left clicked at: %i, %i") % x % y;
+			vas::Log() << boost::format("Mouse left clicked at: %i, %i") % position.x % position.y;
 			break;
 		}
 	}

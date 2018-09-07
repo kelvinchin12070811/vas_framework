@@ -19,11 +19,11 @@ namespace vas
 	void Base::initAndStartAll(const std::string & windowTitle, const sdl::Point & size, uint32_t flags, std::function<void()> initializer)
 	{
 		init();
-		mainWindow = sdl::Window(windowTitle, size, flags);
-		if (mainWindow == sdl::emptycomponent)
+		window = sdl::Window(windowTitle, size, flags);
+		if (window == sdl::emptycomponent)
 			throw sdl::SDLCoreException();
-		mainRenderer = sdl::Renderer(mainWindow, sdl::Renderer::defIndex, sdl::Renderer::RendererFlags::accelerated);
-		if (mainRenderer == sdl::emptycomponent)
+		renderer = sdl::Renderer(window, sdl::Renderer::defIndex, sdl::Renderer::RendererFlags::accelerated);
+		if (renderer == sdl::emptycomponent)
 			throw sdl::SDLCoreException();
 
 		if (initializer != nullptr)
@@ -63,19 +63,19 @@ namespace vas
 
 	void Base::startGameLoop()
 	{
-		if (!mainWindow)
+		if (!window)
 			throw std::runtime_error("Unable to start game loop scene window instance is nullptr");
-		mainWindow.show();
+		window.show();
 
 		frameCounterUpdater.start();
 
-		if (!mainRenderer)
+		if (!renderer)
 			throw std::runtime_error("Unable to start game loop scene renderer instance is nullptr");
 
 		{
-			auto canvasSize = mainRenderer.getLogicalSize();
+			auto canvasSize = renderer.getLogicalSize();
 			if (canvasSize.x == 0 && canvasSize.y == 0)
-				canvasSize = mainWindow.getSize();
+				canvasSize = window.getSize();
 
 			Camera::getInstance().setSize(canvasSize);
 		}
@@ -85,7 +85,7 @@ namespace vas
 			gameLoopClock.justReset();
 			while (ev.pollEvent())
 			{
-				eventProcessorSignals[0](ev);
+				EventBeginProcessed(ev);
 				switch (ev)
 				{
 				case sdl::EventType::quit:
@@ -95,27 +95,27 @@ namespace vas
 						exec = false;
 					break;
 				case sdl::EventType::keydown:
-					InputManager::getInstance().keyPressed(static_cast<sdl::Keycode>(ev.key().keysym.sym));
+					InputManager::getInstance().KeyPressed(static_cast<sdl::Keycode>(ev.key().keysym.sym));
 					break;
 				case sdl::EventType::keyup:
-					InputManager::getInstance().keyReleased(static_cast<sdl::Keycode>(ev.key().keysym.sym));
+					InputManager::getInstance().KeyReleased(static_cast<sdl::Keycode>(ev.key().keysym.sym));
 					break;
 				case sdl::EventType::mousebuttondown:
-					InputManager::getInstance().mouseButtonPressed(ev.button().button, ev.button().x, ev.button().y);
+					InputManager::getInstance().MouseButtonPressed(static_cast<sdl::MouseButtonIndex>(ev.button().button), sdl::Point(ev.button().x, ev.button().y));
 					break;
 				case sdl::EventType::mousebuttonup:
-					InputManager::getInstance().mouseButtonReleased(ev.button().button, ev.button().x, ev.button().y);
+					InputManager::getInstance().MouseButtonReleased(static_cast<sdl::MouseButtonIndex>(ev.button().button), sdl::Point(ev.button().x, ev.button().y));
 					break;
 				case sdl::EventType::mousemotion:
 					InputManager::getInstance().setMousePosition(sdl::Point(ev.motion().x, ev.motion().y));
-					InputManager::getInstance().mouseMoved(ev.motion().x, ev.motion().y);
+					InputManager::getInstance().MouseMoved(ev.motion().x, ev.motion().y);
 					break;
 				case sdl::EventType::mousewheel:
-					InputManager::getInstance().mouseWheelMoved(static_cast<MouseWheelDirection>(ev.wheel().direction), std::abs(ev.wheel().x), std::abs(ev.wheel().y));
+					InputManager::getInstance().MouseWheelMoved(static_cast<sdl::MouseWheelDirection>(ev.wheel().direction), sdl::Point(std::abs(ev.wheel().x), std::abs(ev.wheel().y)));
 					break;
 				}
 				if (!exec) break;
-				eventProcessorSignals[1](ev);
+				EventCompleateProcessed(ev);
 			}
 			if (!exec) break;
 
@@ -124,7 +124,7 @@ namespace vas
 			delay();
 		}
 
-		mainWindow.destroy();
+		window.destroy();
 #ifdef VAS_USE_MIXER
 		sdl::mixer::closeAudio();
 #endif // VAS_USE_MIXER
@@ -158,39 +158,51 @@ namespace vas
 		return exec;
 	}
 
-	bool & Base::IgnoreCloseEventOnce()
+	void Base::setIgnoreCloseEventOnce(bool value)
+	{
+		ignoreCloseEventOnce = value;
+	}
+
+	bool & Base::getIgnoreCloseEventOnce()
 	{
 		return ignoreCloseEventOnce;
 	}
 
-	bool & Base::DoubleSceneRendering()
+	void Base::setDoubleSceneRendering(bool value)
+	{
+		doubleSceneRendering = value;
+	}
+
+	bool & Base::getDoubleSceneRendering()
 	{
 		return doubleSceneRendering;
 	}
 
-	sdl::Window & Base::Window()
+	void Base::setWindow(sdl::Window value)
 	{
-		return mainWindow;
+		if (this->window != value)
+			window = std::move(value);
 	}
 
-	sdl::Renderer & Base::Renderer()
+	sdl::Window & Base::getWindow()
 	{
-		return mainRenderer;
+		return window;
 	}
 
-	boost::signals2::signal<void(sdl::Event&)>& Base::EventProcessorSignal(Base::SignalsType::EventProcessor type)
+	void Base::setRenderer(sdl::Renderer value)
 	{
-		return eventProcessorSignals[static_cast<uint8_t>(type)];
+		if (renderer != value)
+			renderer = std::move(value);
 	}
 
-	boost::signals2::signal<void(size_t)>& Base::getFPSChangedSignal()
+	sdl::Renderer & Base::getRenderer()
 	{
-		return fpsChangedSignals;
+		return renderer;
 	}
 
-	const Counter & Base::FrameIndex()
+	size_t Base::getCurFrameIndex()
 	{
-		return frameIndex;
+		return static_cast<size_t>(frameIndex);
 	}
 
 	size_t Base::getLastFpsCount()
@@ -198,7 +210,7 @@ namespace vas
 		return lastFpsCount;
 	}
 
-	void Base::setRefreshRate(size_t value)
+	void Base::setFPS(size_t value)
 	{
 		using namespace std::chrono_literals;
 		if (fps == value) return;
@@ -206,10 +218,10 @@ namespace vas
 		frameStayTime = 1000ms / fps;
 		frameIndex.setAutoResetLimit(fps);
 
-		fpsChangedSignals(value);
+		FPSChanged(value);
 	}
 
-	size_t Base::getRefreshRate()
+	size_t Base::getFPS()
 	{
 		return fps;
 	}
@@ -245,7 +257,7 @@ namespace vas
 
 	void Base::draw()
 	{
-		mainRenderer.clear();
+		renderer.clear();
 		if (!SceneManager::getInstance().isEmpty())
 		{
 			if (doubleSceneRendering && SceneManager::getInstance().atleast2Scene())
@@ -253,7 +265,7 @@ namespace vas
 			SceneManager::getInstance().current()->draw();
 		}
 		ScreenManager::getInstance().draw();
-		mainRenderer.present();
+		renderer.present();
 	}
 
 	void Base::delay()

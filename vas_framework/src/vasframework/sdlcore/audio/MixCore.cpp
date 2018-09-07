@@ -1,8 +1,8 @@
 #include "MixCore.hpp"
 
 #ifdef VAS_USE_MIXER
-boost::signals2::signal<void()> vas::sdl::mixer::Signals::onMusicFinished{};
-boost::signals2::signal<void(int)> vas::sdl::mixer::Signals::onChannelFinished{};
+boost::signals2::signal<void()> vas::sdl::mixer::Signals::MusicFinished{};
+boost::signals2::signal<void(int)> vas::sdl::mixer::Signals::ChannelFinished{};
 
 namespace vas::sdl
 {
@@ -110,11 +110,11 @@ namespace vas::sdl
 
 void __INNER_ON_MUSIC_END()
 {
-	vas::sdl::mixer::Signals::onMusicFinished();
+	vas::sdl::mixer::Signals::MusicFinished();
 }
 
 void __INNER_ON_CHANNEL_END(int channel)
 {
-	vas::sdl::mixer::Signals::onChannelFinished(channel);
+	vas::sdl::mixer::Signals::ChannelFinished(channel);
 }
 #endif // VAS_USE_MIXER

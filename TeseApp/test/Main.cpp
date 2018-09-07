@@ -14,7 +14,7 @@ int Main::main(std::vector<std::string> args)
 			vas::ScreenManager::getInstance().screenAboveOverlays.insert(VAS_INSERT_VAR(textOverlay));
 			vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
 
-			vas::Base::getInstance().Renderer().setLogicalSize(vas::sdl::Point(640, 480));
+			vas::Base::getInstance().getRenderer().setLogicalSize(vas::sdl::Point(640, 480));
 		});
 	}
 	catch (const std::exception& e)

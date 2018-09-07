@@ -21,7 +21,7 @@ namespace vas
 		using namespace std::chrono_literals;
 		this->frames = frames;
 		this->frameIndexer.setAutoResetLimit(frames.size());
-		std::chrono::milliseconds refreshRateHz = 1000ms / Base::getInstance().getRefreshRate();
+		std::chrono::milliseconds refreshRateHz = 1000ms / Base::getInstance().getFPS();
 		this->frameUpdateTimer.setAutoResetLimit(static_cast<size_t>(updateDelay / refreshRateHz));
 	}
 

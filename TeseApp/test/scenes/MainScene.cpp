@@ -74,17 +74,17 @@ namespace scene
 		testSheet->drawTile(13, tilePos);
 	}
 
-	void MainScene::Signal_afterSceneCall()
+	void MainScene::afterSceneCall()
 	{
 		using namespace vas;
 		using namespace std::chrono_literals;
-		vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop).connect(
+		vas::Base::getInstance().EventBeginProcessed.connect(
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
 		);
 
-		sdl::mixer::Signals::onChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
+		sdl::mixer::Signals::ChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 		vas::ScreenManager::getInstance().Signal_FadeEnd.connect(boost::bind(&MainScene::on_fadeCompleate, this, boost::placeholders::_1));
-		vas::InputManager::getInstance().keyPressed.connect(boost::bind(&MainScene::on_keyPressed, this, boost::placeholders::_1));
+		vas::InputManager::getInstance().KeyPressed.connect(boost::bind(&MainScene::on_keyPressed, this, boost::placeholders::_1));
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector);
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector);
 		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
@@ -100,13 +100,13 @@ namespace scene
 		vas::ScreenManager::getInstance().fadeScreen(vas::ScreenManager::FadingState::fade_in, 5s);
 	}
 
-	void MainScene::Signal_beforeTerminate()
+	void MainScene::beforeTerminate()
 	{
 		using namespace vas::sdl;
-		vas::Base::getInstance().EventProcessorSignal(vas::Base::SignalsType::EventProcessor::preEventLoop).disconnect(
+		vas::Base::getInstance().EventBeginProcessed.disconnect(
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
 		);
-		mixer::Signals::onChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
+		mixer::Signals::ChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
 		vas::ScreenManager::getInstance().Signal_FadeEnd.disconnect_all_slots();
 	}
 
@@ -121,7 +121,7 @@ namespace scene
 		{
 		case Keycode::backspace:
 				vas::CommonTools::getInstance().messenger("test event ignoreer");
-				vas::Base::getInstance().IgnoreCloseEventOnce() = true;
+				vas::Base::getInstance().setIgnoreCloseEventOnce(true);
 				break;
 		case Keycode::escape:
 				vas::CommonTools::getInstance().messenger("Debug, close event triggered by escape");

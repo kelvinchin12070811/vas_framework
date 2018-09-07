@@ -46,7 +46,7 @@ namespace vas
 		}
 
 		/** Return object's name at runtime. This function work with polymorphysm.
-			  @param Any object
+			  @param t Any object
 			  @return Name of the object "Type" with polymorphysm.
 		*/
 		template <typename Type>

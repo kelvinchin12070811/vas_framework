@@ -5,8 +5,6 @@
 
 namespace vas
 {
-	using MouseButtonIndex = uint8_t;
-	using MouseWheelDirection = SDL_MouseWheelDirection;
 	class VAS_DECLSPEC InputManager
 	{
 	public:
@@ -25,13 +23,13 @@ namespace vas
 		uint32_t getMouseState();
 
 	public: // Public members
-		boost::signals2::signal<void(sdl::Keycode)> keyPressed;
-		boost::signals2::signal<void(sdl::Keycode)> keyReleased;
+		boost::signals2::signal<void(sdl::Keycode)> KeyPressed;
+		boost::signals2::signal<void(sdl::Keycode)> KeyReleased;
 
-		boost::signals2::signal<void(MouseButtonIndex, int, int)> mouseButtonPressed;
-		boost::signals2::signal<void(MouseButtonIndex, int, int)> mouseButtonReleased;
-		boost::signals2::signal<void(int, int)> mouseMoved;
-		boost::signals2::signal<void(MouseWheelDirection, int, int)> mouseWheelMoved;
+		boost::signals2::signal<void(sdl::MouseButtonIndex, sdl::Point)> MouseButtonPressed;
+		boost::signals2::signal<void(sdl::MouseButtonIndex, sdl::Point)> MouseButtonReleased;
+		boost::signals2::signal<void(int, int)> MouseMoved;
+		boost::signals2::signal<void(sdl::MouseWheelDirection, sdl::Point)> MouseWheelMoved;
 	private:
 		InputManager();
 		~InputManager();

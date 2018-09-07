@@ -19,8 +19,8 @@ namespace scene
 		void tick() override;
 		void draw() override;
 
-		void Signal_afterSceneCall() override;
-		void Signal_beforeTerminate() override;
+		void afterSceneCall() override;
+		void beforeTerminate() override;
 
 		void eventSlot(vas::sdl::Event& ev);
 	private:

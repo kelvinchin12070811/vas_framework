@@ -9,6 +9,15 @@
 
 namespace vas::sdl
 {
+	enum class MouseButtonIndex : uint8_t
+	{
+		ButtonLeft = 1,
+		ButtonMiddle,
+		ButtonRight,
+		ButtonX1,
+		ButtonX2
+	};
+	using MouseWheelDirection = SDL_MouseWheelDirection;
 	/**
 	*  \brief Get the window which currently has keyboard focus.
 	*/
