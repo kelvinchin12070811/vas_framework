@@ -7,7 +7,7 @@
 	- [SDL_Image](http://www.libsdl.org/projects/sdl_image)
 	- [SDL_Mixer](http://www.libsdl.org/projects/sdl_mixer)
 	- [SDL_TTF](http://www.libsdl.org/projects/sdl_ttf)
-	- [Boost C++ Library](http://www.boost.org)
+	- [Boost C++ Library (Header only)](http://www.boost.org)
 
 	## Git Repository of The Codes
 	- [Virtual Assistant Framework main repository](https://github.com/kelvinchin12070811/vas_framework)

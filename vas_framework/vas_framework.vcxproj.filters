@@ -264,9 +264,6 @@
     <ClInclude Include="src\__doxygen__\group\CompileTimeConfiguration.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\Macro.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\__doxygen__\group\vas_framework.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

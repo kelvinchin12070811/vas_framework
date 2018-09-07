@@ -20,7 +20,7 @@
 #define VAS_WINDOWS_MODE
 
 /*! Use SDL_mixer audio library. Comment out this macro will disable the audio functionality of the library
-	 (VAS Framework use SDL_mixer as its main audio library for audio play back). But the SDL’s audio feature is still valid.
+	 (VAS Framework use SDL_mixer as its main audio library for audio play back). But the SDL's audio feature is still valid.
 
 	 Default is ON.
 
@@ -28,9 +28,11 @@
 */
 #define VAS_USE_MIXER
 
-/*! Use SDL_ttf font rendering engine. Disable this will turn off the functionality off text rendering feature such as sdl::TTF.
+/*! Use SDL_ttf font rendering engine.
 
 	 Default is ON.
+
+	 \note Disable this will turn off the functionality off text rendering feature such as sdl::TTF.
 */
 #define VAS_USE_TTF
 
@@ -50,11 +52,19 @@
 /*Configuration end*/
 #endif // !VAS_GLOB_CNFIG
 
+/** @addtogroup vas_framework
+	 @{
+*/
 
+/** Get current engine version
+		
+	 Definde in: vasframework/VASConfig.hpp
+*/
 inline std::string getEngineVersion()
 {
 	return "2.1.2";
 }
+/** @} */
 
 //Generate library for dll
 #ifdef VAS_GEN_DLL
