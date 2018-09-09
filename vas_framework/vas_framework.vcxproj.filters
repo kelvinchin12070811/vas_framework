@@ -279,6 +279,9 @@
     <ClInclude Include="src\__doxygen__\group\sreflecx.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\__doxygen__\group\managers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">

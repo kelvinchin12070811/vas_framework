@@ -34,7 +34,7 @@ namespace vas
 
 	void SpriteSheet::drawTile(size_t index, const Vector2 & position, sdl::Renderer* renderer, Camera* camera, bool staticOnCamera, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
 	{
-		sdl::Renderer rendererHolder = (renderer == nullptr) ? &Base::getInstance().getRenderer() : *renderer;
+		sdl::Renderer rendererHolder = (renderer == nullptr) ? Base::getInstance().getRenderer() : *renderer;
 		if (camera == nullptr) camera = &Camera::getInstance();
 
 		sdl::Point tilePos;
