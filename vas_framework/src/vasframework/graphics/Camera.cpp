@@ -34,8 +34,8 @@ namespace vas
 	sdl::Rect Camera::getRectOnCamera(const sdl::Rect & rect, bool staticOnCamera)
 	{
 		if (staticOnCamera) return rect;
-		return sdl::Rect(static_cast<int>(rect.x * multiplyer), static_cast<int>(rect.y * multiplyer),
-			static_cast<int>(rect.w * multiplyer), static_cast<int>(rect.h * multiplyer));
+		return sdl::Rect(static_cast<int>(rect.x * multiplier), static_cast<int>(rect.y * multiplier),
+			static_cast<int>(rect.w * multiplier), static_cast<int>(rect.h * multiplier));
 	}
 
 	void Camera::move(const Vector2 & movement)
@@ -51,7 +51,7 @@ namespace vas
 
 	void Camera::zoom(double value)
 	{
-		this->multiplyer *= value;
+		this->multiplier *= value;
 	}
 
 	void Camera::setPosition(const Vector2 & value)
@@ -66,9 +66,9 @@ namespace vas
 			size = value;
 	}
 
-	void Camera::setMultiplyer(double value)
+	void Camera::setMultiplier(double value)
 	{
-		multiplyer = value;
+		multiplier = value;
 	}
 
 	Vector2 Camera::getPosition()
@@ -81,9 +81,9 @@ namespace vas
 		return size;
 	}
 
-	double Camera::getMultiplyer()
+	double Camera::getMultiplier()
 	{
-		return multiplyer;
+		return multiplier;
 	}
 
 	Camera::Camera()

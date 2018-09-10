@@ -82,12 +82,12 @@ namespace vas
 	public: //setters
 		void setPosition(const Vector2& value);
 		void setSize(const sdl::Point& value);
-		void setMultiplyer(double value);
+		void setMultiplier(double value);
 
 	public: //getters
 		Vector2 getPosition();
 		sdl::Point getSize();
-		double getMultiplyer();
+		double getMultiplier();
 
 		Camera();
 		~Camera();
@@ -112,12 +112,12 @@ namespace vas
 					-# sdl::Point getSize()
 		*/
 		sdl::Point size;
-		/** Multiplyer of the camera rect. This attribute state how large the object will been draw on the canvas
+		/** Multiplier of the camera rect. This attribute state how large the object will been draw on the canvas
 			  - __mutators__
-					-# void setSize(double value)
+					-# void setMultiplier(double value)
 			  - __accessors__
-					-# double getSize()
+					-# double getMultiplier()
 		*/
-		double multiplyer{ 1.0 };
+		double multiplier{ 1.0 };
 	};
 }
