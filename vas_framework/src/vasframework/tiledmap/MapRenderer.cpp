@@ -28,7 +28,7 @@ namespace vas
 		{
 			for (tilePosition.x = 0; tilePosition.x < mapSize.x; tilePosition.x++)
 			{
-				Vector2 targetPos = Vector2(tilePosition) * Vector2(tileSize);
+				Vector2 targetPos = static_cast<Vector2>(tilePosition) * static_cast<Vector2>(tileSize);
 				if (camera->canSee(targetPos, tileSize))
 				{
 					auto tile = layer->tileAt(tilePosition.x, tilePosition.y);

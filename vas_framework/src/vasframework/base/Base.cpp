@@ -195,6 +195,11 @@ namespace vas
 		return renderer;
 	}
 
+	vas::Camera & Base::getCamera()
+	{
+		return camera;
+	}
+
 	size_t Base::getCurFrameIndex()
 	{
 		return static_cast<size_t>(frameIndex);

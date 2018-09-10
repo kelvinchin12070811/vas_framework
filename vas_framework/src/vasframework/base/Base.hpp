@@ -7,6 +7,7 @@
 #include "../math/Clock.hpp"
 #include "../math/Counter.hpp"
 #include "../math/Timer.hpp"
+#include "../graphics/Camera.hpp"
 
 #ifdef VAS_WINDOWS_MODE
 #include <Windows.h>
@@ -79,6 +80,8 @@ namespace vas
 		void setRenderer(sdl::Renderer value);
 		sdl::Renderer getRenderer();
 
+		vas::Camera& getCamera();
+
 		/** Get currnet frame index.
 			  @return current frame index number which less than or equal to fps.
 		*/
@@ -122,7 +125,7 @@ namespace vas
 					-# void setWindow(sdl::Window value)
 
 			  - __accessors__
-					-# sdl::Window& getWindow()
+					-# sdl::Window getWindow()
 		*/
 		sdl::Window window;
 		/** [Read & Write] Main render that render all main elements to `window`.
@@ -131,9 +134,15 @@ namespace vas
 					-# void setRenderer(sdl::Renderer value)
 
 			  - __accessors__
-					-# sdl::Renderer& getRenderer()
+					-# sdl::Renderer getRenderer()
 		*/
 		sdl::Renderer renderer;
+		/** [Read Only] Main camera that tell which elements are spoted on the screen.
+
+			  - __accessors__
+					-# vas::Camera& getCamera()
+		*/
+		vas::Camera camera;
 		/** [Read Only] Main event loop that handle all of the event from SDL.
 			  
 			  - __accessors__

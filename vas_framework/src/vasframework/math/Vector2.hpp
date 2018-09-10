@@ -10,9 +10,9 @@ namespace vas
 	{
 	public:
 		Vector2();
+		explicit Vector2(const sdl::Point& point);
 		Vector2(float x, float y);
 		Vector2(float magnitude, const Angle& value);
-		explicit Vector2(const sdl::Point& point);
 		Vector2(const Vector2&) = default;
 		Vector2(Vector2&&) = default;
 		~Vector2();

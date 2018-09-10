@@ -8,6 +8,11 @@ namespace vas
 	{
 	}
 
+	Vector2::Vector2(const sdl::Point & point):
+		x(static_cast<float>(point.x)), y(static_cast<float>(point.y))
+	{
+	}
+
 	Vector2::Vector2(float x, float y):
 		x(x), y(y)
 	{
@@ -56,11 +61,6 @@ namespace vas
 			this->y = -this->y;
 			break;
 		}
-	}
-
-	Vector2::Vector2(const sdl::Point & point):
-		x(static_cast<float>(point.x)), y(static_cast<float>(point.y))
-	{
 	}
 
 	Vector2::~Vector2()

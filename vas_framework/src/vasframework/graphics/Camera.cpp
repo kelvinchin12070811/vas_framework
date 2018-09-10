@@ -6,8 +6,7 @@ namespace vas
 {
 	Camera & Camera::getInstance()
 	{
-		static Camera instance;
-		return instance;
+		return Base::getInstance().getCamera();
 	}
 
 	bool Camera::canSee(const sdl::Rect & other)
@@ -21,7 +20,8 @@ namespace vas
 	bool Camera::canSee(const Vector2 & other, const sdl::Point & size)
 	{
 		auto pos = getPosOnCamera(other);
-		sdl::Rect otherHolder(static_cast<int>(pos.x), static_cast<int>(pos.y), size.x, size.y);
+		sdl::Point otherPos = static_cast<sdl::Point>(other);
+		sdl::Rect otherHolder(otherPos.x, otherPos.y, size.x, size.y);
 		return canSee(otherHolder);
 	}
 
@@ -34,8 +34,8 @@ namespace vas
 	sdl::Rect Camera::getRectOnCamera(const sdl::Rect & rect, bool staticOnCamera)
 	{
 		if (staticOnCamera) return rect;
-		Vector2 position = getPosOnCamera(Vector2(static_cast<float>(rect.x), static_cast<float>(rect.y)));
-		return sdl::Rect(static_cast<int>(position.x), static_cast<int>(position.y), static_cast<int>(rect.w * multiplyer), static_cast<int>(rect.h * multiplyer));
+		return sdl::Rect(static_cast<int>(rect.x * multiplyer), static_cast<int>(rect.y * multiplyer),
+			static_cast<int>(rect.w * multiplyer), static_cast<int>(rect.h * multiplyer));
 	}
 
 	void Camera::move(const Vector2 & movement)
@@ -46,7 +46,7 @@ namespace vas
 
 	void Camera::focusOn(const Vector2 & position)
 	{
-		this->position = position - Vector2(size.x / 2.0f, size.y / 2.0f);
+		this->position = position - (position / 2.0f);
 	}
 
 	void Camera::zoom(double value)

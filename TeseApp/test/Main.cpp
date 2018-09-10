@@ -12,8 +12,8 @@ int Main::main(std::vector<std::string> args)
 			textOverlay->setBackgroundOffset(vas::Vector2(3.0f, ANGLE_FROM_SECOND_QUATER(45.0)));
 			//textOverlay->setStaticOnCamera(true);
 			vas::ScreenManager::getInstance().screenAboveOverlays.insert(VAS_INSERT_VAR(textOverlay));
-			vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
-
+			//vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
+			vas::SceneManager::getInstance().call(std::make_unique<scene::MainScene>());
 			vas::Base::getInstance().getRenderer().setLogicalSize(vas::sdl::Point(640, 480));
 		});
 	}
