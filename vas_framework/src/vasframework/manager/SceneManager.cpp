@@ -37,14 +37,14 @@ namespace vas
 			callStack.back()->afterTerminate();
 	}
 
-	void SceneManager::call(const std::shared_ptr<AbstractScene>& instance)
+	void SceneManager::call(const std::shared_ptr<Scene>& instance)
 	{
 		if (!callStack.empty()) callStack.back()->beforeSceneCall();
 		callStack.push_back(instance);
 		callStack.back()->afterSceneCall();
 	}
 
-	void SceneManager::call(std::shared_ptr<AbstractScene>&& instance)
+	void SceneManager::call(std::shared_ptr<Scene>&& instance)
 	{
 		if (!callStack.empty()) callStack.back()->beforeSceneCall();
 		callStack.push_back(std::move(instance));
@@ -59,29 +59,29 @@ namespace vas
 		if (!callStack.empty()) callStack.back()->afterTerminate();
 	}
 
-	std::shared_ptr<AbstractScene> SceneManager::current()
+	std::shared_ptr<Scene> SceneManager::current()
 	{
 		if (isEmpty())
 			return nullptr;
 		return callStack.back();
 	}
 
-	std::shared_ptr<AbstractScene> SceneManager::previous()
+	std::shared_ptr<Scene> SceneManager::previous()
 	{
 		if (isEmpty() || callStack.size() < 2)
 			return nullptr;
 		return callStack[callStack.size() - 2];
 	}
 
-	std::shared_ptr<AbstractScene> SceneManager::getWithIndex(size_t index)
+	std::shared_ptr<Scene> SceneManager::getWithIndex(size_t index)
 	{
 		if (callStack.empty() || index >= callStack.size()) return nullptr;
 		return callStack[index];
 	}
 
-	std::shared_ptr<AbstractScene> SceneManager::findWithThisPtr(AbstractScene * instance)
+	std::shared_ptr<Scene> SceneManager::findWithThisPtr(Scene * instance)
 	{
-		auto result = std::find_if(callStack.begin(), callStack.end(), [&](const std::shared_ptr<AbstractScene>& value)-> bool
+		auto result = std::find_if(callStack.begin(), callStack.end(), [&](const std::shared_ptr<Scene>& value)-> bool
 		{
 			return value.get() == instance;
 		});

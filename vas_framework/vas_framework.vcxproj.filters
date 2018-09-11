@@ -45,9 +45,6 @@
     <ClInclude Include="src\vasframework\graphics\layer\Layers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\vasframework\graphics\scene\AbstractScene.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\graphics\sprites\Sprite.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -192,12 +189,6 @@
     <ClInclude Include="src\vasframework\sdlcore\Video.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\vasframework\sreflex\IObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\vasframework\sreflex\IObjectAutoRegistrar.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\sreflex\IObjectEntries.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -285,6 +276,24 @@
     <ClInclude Include="src\__doxygen__\group\graphics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\vasframework\container\animationex\AutoControllable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\container\animationex\Animateable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\container\animationex\AnimationControllerEx.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\scene\Scene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\sreflex\IObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\sreflex\IObjectAutoRegistrar.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">
@@ -303,9 +312,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\graphics\layer\Layers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vasframework\graphics\scene\AbstractScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\graphics\sprites\Sprite.cpp">
@@ -450,6 +456,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\util\TextTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\container\animationex\AnimationContorllerEX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\graphics\scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

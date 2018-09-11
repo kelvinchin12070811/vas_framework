@@ -15,12 +15,12 @@ namespace scene
 
 	void AbstractFrameCountingScene::tick()
 	{
-		vas::AbstractScene::tick();
+		vas::Scene::tick();
 		SetConsoleTitle(vas::TextTools::stows((boost::format("Last fps: %d") % vas::Base::getInstance().getLastFpsCount()).str()).c_str());
 	}
 
 	void AbstractFrameCountingScene::draw()
 	{
-		vas::AbstractScene::draw();
+		vas::Scene::draw();
 	}
 }

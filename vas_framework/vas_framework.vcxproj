@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\container\animationex\AnimationControllerEx.hpp" />
+    <ClInclude Include="src\vasframework\container\animationex\Animateable.hpp" />
+    <ClInclude Include="src\vasframework\container\animationex\AutoControllable.hpp" />
     <ClInclude Include="src\vasframework\util\FileUtil.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\CommonTag.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\ITag.hpp" />
@@ -57,7 +60,7 @@
     <ClInclude Include="src\vasframework\manager\SceneManager.hpp" />
     <ClInclude Include="src\vasframework\util\CommonTools.hpp" />
     <ClInclude Include="src\vasframework\graphics\IRenderAble.hpp" />
-    <ClInclude Include="src\vasframework\graphics\scene\AbstractScene.hpp" />
+    <ClInclude Include="src\vasframework\graphics\scene\Scene.hpp" />
     <ClInclude Include="src\vasframework\sreflex\IObjectAutoRegistrar.hpp" />
     <ClInclude Include="src\vasframework\sreflex\IObjectFactory.hpp" />
     <ClInclude Include="src\vasframework\sreflex\IObjectEntries.hpp" />
@@ -111,6 +114,7 @@
     <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\container\animationex\AnimationContorllerEx.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\NBTCompoundTag.cpp" />
     <ClCompile Include="src\vasframework\graphics\Camera.cpp" />
     <ClCompile Include="src\vasframework\tiledmap\MapRenderer.cpp">
@@ -136,7 +140,7 @@
     <ClCompile Include="src\vasframework\sdlcore\keyboard\Scancode.cpp" />
     <ClCompile Include="src\vasframework\manager\SceneManager.cpp" />
     <ClCompile Include="src\vasframework\util\CommonTools.cpp" />
-    <ClCompile Include="src\vasframework\graphics\scene\AbstractScene.cpp" />
+    <ClCompile Include="src\vasframework\graphics\scene\Scene.cpp" />
     <ClCompile Include="src\vasframework\sreflex\IObjectFactory.cpp" />
     <ClCompile Include="src\vasframework\sreflex\IObjectEntries.cpp" />
     <ClCompile Include="src\vasframework\base\Base.cpp" />

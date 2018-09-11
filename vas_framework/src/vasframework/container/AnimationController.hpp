@@ -1,12 +1,13 @@
 #pragma once
 #include <chrono>
+#include "animationex/AutoControllable.hpp"
 #include "../VASConfig.hpp"
 #include "../math/Counter.hpp"
 #include "AnimationStrip.hpp"
 
 namespace vas
 {
-	class VAS_DECLSPEC AnimationController
+	class VAS_DECLSPEC AnimationController : public AutoControllable
 	{
 	public:
 		AnimationController();
@@ -14,7 +15,7 @@ namespace vas
 		~AnimationController();
 
 		void load(const AnimationStrip& frames, std::chrono::milliseconds updateDelay);
-		void tick();
+		void tick() override;
 
 		void reset();
 

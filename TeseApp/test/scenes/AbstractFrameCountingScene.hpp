@@ -1,9 +1,9 @@
 #pragma once
-#include <vasframework/graphics/scene/AbstractScene.hpp>
+#include <vasframework/graphics/scene/Scene.hpp>
 
 namespace scene
 {
-	class AbstractFrameCountingScene : public vas::AbstractScene
+	class AbstractFrameCountingScene : public vas::Scene
 	{
 	public:
 		AbstractFrameCountingScene();

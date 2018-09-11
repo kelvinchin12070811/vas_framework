@@ -25,11 +25,11 @@
 
 namespace vas
 {
-	class VAS_DECLSPEC AbstractScene
+	class VAS_DECLSPEC Scene
 	{
 	public:
-		AbstractScene();
-		virtual ~AbstractScene();
+		Scene();
+		virtual ~Scene();
 
 		virtual void tick() = 0;
 		virtual void draw() = 0;
