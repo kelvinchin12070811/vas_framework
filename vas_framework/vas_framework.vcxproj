@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\base\NotImplementedException.hpp" />
+    <ClInclude Include="src\vasframework\container\animationex\AttrKeyframeAnimation.hpp" />
     <ClInclude Include="src\vasframework\container\animationex\AnimationControllerEx.hpp" />
     <ClInclude Include="src\vasframework\container\animationex\Animateable.hpp" />
     <ClInclude Include="src\vasframework\container\animationex\AutoControllable.hpp" />
@@ -114,6 +116,7 @@
     <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\base\NotImplementedException.cpp" />
     <ClCompile Include="src\vasframework\container\animationex\AnimationContorllerEx.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\NBTCompoundTag.cpp" />
     <ClCompile Include="src\vasframework\graphics\Camera.cpp" />

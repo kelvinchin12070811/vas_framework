@@ -294,6 +294,12 @@
     <ClInclude Include="src\vasframework\sreflex\IObjectAutoRegistrar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\vasframework\container\animationex\AttrKeyframeAnimation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\base\NotImplementedException.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">
@@ -462,6 +468,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\graphics\scene\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\base\NotImplementedException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

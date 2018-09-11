@@ -21,9 +21,10 @@ namespace vas
 				finished = true;
 				return;
 			}
-
 			curAnim = animationList.cbegin();
 		}
+		if ((*curAnim)->done()) curAnim++;
+		(*curAnim)->tick();
 	}
 
 	void AdvAnimController::restart()
