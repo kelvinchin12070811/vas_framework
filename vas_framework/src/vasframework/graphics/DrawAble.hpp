@@ -4,10 +4,10 @@
 
 namespace vas
 {
-	class IRenderAble
+	class DrawAble
 	{
 	public:
-		virtual ~IRenderAble() {}
+		virtual ~DrawAble() {}
 
 		virtual void tick() = 0;
 		virtual void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) = 0;

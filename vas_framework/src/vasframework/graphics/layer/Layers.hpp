@@ -3,7 +3,7 @@
 #include <boost/container/vector.hpp>
 #include <memory>
 #include <string>
-#include "../IRenderAble.hpp"
+#include "../DrawAble.hpp"
 #include "../../VASConfig.hpp"
 
 #define VAS_INSERT_VAR(var) vas::make_layerData(std::string(#var), var)
@@ -11,16 +11,16 @@
 
 namespace vas
 {
-	class VAS_DECLSPEC Layers : public IRenderAble
+	class VAS_DECLSPEC Layers : public DrawAble
 	{
 	public:
 		enum class ShiftDirection : uint8_t { up, down };
-		//using LayerData = std::pair<std::string, std::shared_ptr<IRenderAble>>;
+		//using LayerData = std::pair<std::string, std::shared_ptr<DrawAble>>;
 		struct LayerData
 		{
 			bool visible;
 			std::string name;
-			std::shared_ptr<IRenderAble> instance;
+			std::shared_ptr<DrawAble> instance;
 		};
 	public:
 		Layers();
@@ -49,7 +49,7 @@ namespace vas
 		LayerData& get(size_t index);
 		LayerData& get(const std::string& name);
 
-		LayerData& findWithInstance(IRenderAble* instance);
+		LayerData& findWithInstance(DrawAble* instance);
 
 		void tick() override;
 		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;
@@ -63,6 +63,6 @@ namespace vas
 		boost::container::vector<bool> layerState;
 	};
 
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<IRenderAble>& instance, bool visible = true);
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<IRenderAble>&& instance, bool visible = true);
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<DrawAble>& instance, bool visible = true);
+	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<DrawAble>&& instance, bool visible = true);
 }

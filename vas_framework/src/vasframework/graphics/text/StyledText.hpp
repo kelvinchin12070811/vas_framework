@@ -4,7 +4,7 @@
 #ifdef VAS_USE_TTF
 namespace vas
 {
-	class VAS_DECLSPEC StyledText : public IRenderAble
+	class VAS_DECLSPEC StyledText : public DrawAble
 	{
 	public:
 		StyledText();

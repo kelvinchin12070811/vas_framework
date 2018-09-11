@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "../../graphics/IRenderAble.hpp"
+#include "../../graphics/DrawAble.hpp"
 #include "../GraphicsFlags.hpp"
 #include "../../sdlcore/video/Texture.hpp"
 #include "../../sdlcore/math/Colour.hpp"
@@ -12,7 +12,7 @@
 
 namespace vas
 {
-	class VAS_DECLSPEC Sprite : public IRenderAble
+	class VAS_DECLSPEC Sprite : public DrawAble
 	{
 	public:
 		Sprite();

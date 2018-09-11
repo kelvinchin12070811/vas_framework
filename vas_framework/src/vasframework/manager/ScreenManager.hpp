@@ -17,9 +17,9 @@ namespace vas
 		void tick();
 		void draw();
 
-		//IRenderAble object that will render on top of screen but bellow master overlay
+		//DrawAble object that will render on top of screen but bellow master overlay
 		vas::Layers screenOverlays;
-		//IRenderAble object that will render on top of every thing include master overlay
+		//DrawAble object that will render on top of every thing include master overlay
 		vas::Layers screenAboveOverlays;
 
 		sdl::Colour getMasterOverlayColour();

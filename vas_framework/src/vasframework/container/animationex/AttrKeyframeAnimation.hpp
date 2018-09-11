@@ -2,13 +2,13 @@
 #include <algorithm>
 #include <chrono>
 #include <functional>
-#include "Animateable.hpp"
+#include "AnimateAble.hpp"
 #include "../../VASConfig.hpp"
 
 namespace vas
 {
 	template <typename NumericType>
-	class AttrKeyframeAnimation : public Animateable
+	class AttrKeyframeAnimation : public AnimateAble
 	{
 	public:
 		template <typename Instance, typename Mutator, typename Accessor>
