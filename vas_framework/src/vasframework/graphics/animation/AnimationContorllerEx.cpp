@@ -2,15 +2,15 @@
 
 namespace vas
 {
-	AdvAnimController::AdvAnimController()
+	AnimationControllerEx::AnimationControllerEx()
 	{
 	}
 
-	AdvAnimController::~AdvAnimController()
+	AnimationControllerEx::~AnimationControllerEx()
 	{
 	}
 
-	void AdvAnimController::tick()
+	void AnimationControllerEx::tick()
 	{
 		if (animationList.empty() || finished) return;
 
@@ -27,14 +27,14 @@ namespace vas
 		(*curAnim)->tick();
 	}
 
-	void AdvAnimController::restart()
+	void AnimationControllerEx::restart()
 	{
 		if (animationList.empty()) return;
 		curAnim = animationList.cbegin();
 		finished = false;
 	}
 
-	const Animateable * AdvAnimController::currentAnim() const
+	const AnimateAble * AnimationControllerEx::currentAnim() const
 	{
 		if (animationList.empty())
 			return nullptr;
@@ -42,7 +42,7 @@ namespace vas
 		return curAnim->get();
 	}
 
-	size_t AdvAnimController::currentAnimIndex() const
+	size_t AnimationControllerEx::currentAnimIndex() const
 	{
 		if (animationList.empty())
 			return 0;
@@ -50,17 +50,17 @@ namespace vas
 		return std::distance(animationList.begin(), curAnim);
 	}
 
-	bool AdvAnimController::isFinished() const
+	bool AnimationControllerEx::isFinished() const
 	{
 		return finished;
 	}
 
-	bool AdvAnimController::isLoopingAnim() const
+	bool AnimationControllerEx::isLoopingAnim() const
 	{
 		return loopAnim;
 	}
 
-	void AdvAnimController::setLoopingAnim(bool value)
+	void AnimationControllerEx::setLoopingAnim(bool value)
 	{
 		loopAnim = value;
 	}

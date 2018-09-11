@@ -2,7 +2,7 @@
 #include <string>
 #include <map>
 #include <chrono>
-#include "../../container/AnimationStrip.hpp"
+#include "../../graphics/animation/AnimationStrip.hpp"
 
 namespace vas
 {

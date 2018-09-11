@@ -1,8 +1,8 @@
 #pragma once
 #include <chrono>
-#include "animationex/AutoControllable.hpp"
-#include "../VASConfig.hpp"
-#include "../math/Counter.hpp"
+#include "AutoControllable.hpp"
+#include "../../VASConfig.hpp"
+#include "../../math/Counter.hpp"
 #include "AnimationStrip.hpp"
 
 namespace vas

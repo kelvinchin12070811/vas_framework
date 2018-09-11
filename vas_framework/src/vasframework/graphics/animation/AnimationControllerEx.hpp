@@ -8,16 +8,16 @@
 
 namespace vas
 {
-	class VAS_DECLSPEC AdvAnimController : public AutoControllable
+	class VAS_DECLSPEC AnimationControllerEx : public AutoControllable
 	{
 	public:
-		AdvAnimController();
-		~AdvAnimController();
+		AnimationControllerEx();
+		~AnimationControllerEx();
 
 		void tick() override;
 		void restart();
 
-		const Animateable* currentAnim() const;
+		const AnimateAble* currentAnim() const;
 		size_t currentAnimIndex() const;
 
 	public: //accessors
@@ -30,7 +30,7 @@ namespace vas
 	private:
 		bool finished{ false };
 		bool loopAnim{ false };
-		std::vector<std::unique_ptr<Animateable>> animationList;
-		std::vector<std::unique_ptr<Animateable>>::const_iterator curAnim;
+		std::vector<std::unique_ptr<AnimateAble>> animationList;
+		std::vector<std::unique_ptr<AnimateAble>>::const_iterator curAnim;
 	};
 }

@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include "Tileset.hpp"
 #include "../../graphics/sprites/SpriteSheet.hpp"
-#include "../../container/AnimationController.hpp"
+#include "../../graphics/animation/AnimationController.hpp"
 
 namespace vas
 {
