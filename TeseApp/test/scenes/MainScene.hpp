@@ -6,6 +6,7 @@
 #include <vasframework/graphics/sprites/SpriteSheet.hpp>
 #include <vasframework/manager/ScreenManager.hpp>
 #include <vasframework/graphics/text/StyledText.hpp>
+#include <vasframework/graphics/animation/AnimationControllerEx.hpp>
 #include "AbstractFrameCountingScene.hpp"
 
 namespace scene
@@ -43,5 +44,7 @@ namespace scene
 
 		vas::Vector2 movement{ 1.0f, 1.0f };
 		vas::Vector2 tilePos{ 56, 67 };
+
+		vas::AnimationControllerEx animation;
 	};
 }

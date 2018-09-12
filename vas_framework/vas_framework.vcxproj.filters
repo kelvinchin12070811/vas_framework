@@ -27,12 +27,6 @@
     <ClInclude Include="src\vasframework\container\nbt\NBTCompoundTag.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\vasframework\container\AnimationController.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\vasframework\container\AnimationStrip.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\container\BytesArray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -273,15 +267,6 @@
     <ClInclude Include="src\__doxygen__\group\graphics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\vasframework\container\animationex\AutoControllable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\vasframework\container\animationex\Animateable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\vasframework\container\animationex\AnimationControllerEx.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\graphics\scene\Scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -291,13 +276,31 @@
     <ClInclude Include="src\vasframework\sreflex\IObjectAutoRegistrar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\vasframework\container\animationex\AttrKeyframeAnimation.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\base\NotImplementedException.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\vasframework\graphics\DrawAble.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\animation\AnimateAble.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationController.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationControllerEx.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationStrip.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\animation\AttrKeyframeAnimation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\animation\AutoControllable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationDelay.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -306,9 +309,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\container\nbt\NBTCompoundTag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vasframework\container\AnimationController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\container\Property.cpp">
@@ -464,13 +464,22 @@
     <ClCompile Include="src\vasframework\util\TextTools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\vasframework\container\animationex\AnimationContorllerEX.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\vasframework\graphics\scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\base\NotImplementedException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\graphics\animation\AnimationContorllerEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\graphics\animation\AnimationController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\graphics\animation\AnimationDelay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\graphics\animation\AttrKeyframeAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

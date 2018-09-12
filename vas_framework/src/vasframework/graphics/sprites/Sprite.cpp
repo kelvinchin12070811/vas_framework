@@ -29,7 +29,7 @@ namespace vas
 		}
 		if (texture == sdl::emptycomponent)
 			throw sdl::SDLCoreException();
-
+		texture.setBlendMod(sdl::BlendMode::blend);
 		texture.queryTexture(&source.w, &source.h);
 		destination = source;
 	}

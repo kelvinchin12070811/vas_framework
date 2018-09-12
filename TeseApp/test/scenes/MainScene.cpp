@@ -4,6 +4,8 @@
 #include <vasframework/container/Property.hpp>
 #include <vasframework/manager/AudioManger.hpp>
 #include <vasframework/graphics/Camera.hpp>
+#include <vasframework/graphics/animation/AttrKeyframeAnimation.hpp>
+#include <vasframework/graphics/animation/AnimationDelay.hpp>
 #include "MainScene.hpp"
 
 using namespace std::string_literals;
@@ -14,6 +16,7 @@ namespace scene
 
 	MainScene::MainScene()
 	{
+		using namespace std;
 		CallRenderAssistance;
 		vas::ScreenManager::getInstance().setScreenOpacity(0);
 		vas::Property test1("test1", "test"s);
@@ -22,6 +25,32 @@ namespace scene
 		bool comResult = test3.notEqual<int>(test2);
 		vas::CommonTools::getInstance().messenger(boost::format("compare result: %s"s) % (comResult ? "true"s : "false"s));
 		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
+
+		{
+			auto testSprite2Anim = make_unique<vas::AttrKeyframeAnimation>([this](double value) {
+				auto colour = testSprite2->getOverlay();
+				colour.alpha = static_cast<uint8_t>(value);
+				testSprite2->setOverlay(colour);
+			});
+			testSprite2Anim->setStartValue(0);
+			testSprite2Anim->setStopValue(255.0);
+			testSprite2Anim->setDuration(1s);
+			animation.insertAnimation(move(testSprite2Anim));
+		}
+		animation.insertAnimation(std::make_unique<vas::AnimationDelay>(5s));
+		{
+			auto testSprite2Anim = make_unique<vas::AttrKeyframeAnimation>([this](double value) {
+				auto colour = testSprite2->getOverlay();
+				colour.alpha = static_cast<uint8_t>(value);
+				testSprite2->setOverlay(colour);
+			});
+			testSprite2Anim->setStartValue(255.0);
+			testSprite2Anim->setStopValue(0.0);
+			testSprite2Anim->setDuration(1s);
+			animation.insertAnimation(move(testSprite2Anim));
+		}
+		animation.insertAnimation(make_unique<vas::AnimationDelay>(5s));
+		animation.setLoopingAnim(true);
 	}
 
 	MainScene::~MainScene()
@@ -65,6 +94,7 @@ namespace scene
 			if (auManager.BGM().isPaused())
 				auManager.BGM().resume();
 		}
+		animation.tick();
 		scene::AbstractFrameCountingScene::tick();
 	}
 

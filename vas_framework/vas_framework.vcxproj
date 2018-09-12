@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationDelay.hpp" />
     <ClInclude Include="src\vasframework\base\NotImplementedException.hpp" />
-    <ClInclude Include="src\vasframework\container\animationex\AttrKeyframeAnimation.hpp" />
-    <ClInclude Include="src\vasframework\container\animationex\AnimationControllerEx.hpp" />
-    <ClInclude Include="src\vasframework\container\animationex\AnimateAble.hpp" />
-    <ClInclude Include="src\vasframework\container\animationex\AutoControllable.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\AttrKeyframeAnimation.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationControllerEx.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\AnimateAble.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\AutoControllable.hpp" />
     <ClInclude Include="src\vasframework\util\FileUtil.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\CommonTag.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\ITag.hpp" />
@@ -37,8 +38,8 @@
     <ClInclude Include="src\vasframework\tiledmap\container\objclass\Rectangle.hpp" />
     <ClInclude Include="src\vasframework\tiledmap\container\ObjectData.hpp" />
     <ClInclude Include="src\vasframework\tiledmap\maplayers\ObjectLayer.hpp" />
-    <ClInclude Include="src\vasframework\container\AnimationController.hpp" />
-    <ClInclude Include="src\vasframework\container\AnimationStrip.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationController.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\AnimationStrip.hpp" />
     <ClInclude Include="src\vasframework\container\BytesArray.hpp" />
     <ClInclude Include="src\vasframework\container\PropertyList.hpp" />
     <ClInclude Include="src\vasframework\manager\ScreenManager.hpp" />
@@ -116,16 +117,18 @@
     <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\graphics\animation\AnimationDelay.cpp" />
     <ClCompile Include="src\vasframework\base\NotImplementedException.cpp" />
-    <ClCompile Include="src\vasframework\container\animationex\AnimationContorllerEx.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\AnimationContorllerEx.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\NBTCompoundTag.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\AttrKeyframeAnimation.cpp" />
     <ClCompile Include="src\vasframework\graphics\Camera.cpp" />
     <ClCompile Include="src\vasframework\tiledmap\MapRenderer.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MaxSpeed</Optimization>
       <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</BasicRuntimeChecks>
     </ClCompile>
     <ClCompile Include="src\vasframework\tiledmap\maplayers\ObjectLayer.cpp" />
-    <ClCompile Include="src\vasframework\container\AnimationController.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\AnimationController.cpp" />
     <ClCompile Include="src\vasframework\container\PropertyList.cpp" />
     <ClCompile Include="src\vasframework\manager\ScreenManager.cpp" />
     <ClCompile Include="src\vasframework\manager\AudioManger.cpp" />

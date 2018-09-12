@@ -52,7 +52,7 @@ namespace vas
 		Vector2 position;
 		Angle angle;
 		sdl::Point origin;
-		sdl::Colour overlay;
+		sdl::Colour overlay{ sdl::ColourPresets::white };
 		sdl::Rect source;
 		sdl::Rect destination;
 		sdl::Renderer::Flip rendererFlip{ sdl::Renderer::Flip::none };
