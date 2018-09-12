@@ -47,12 +47,8 @@ namespace vas
 		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException();
 #endif // VAS_USE_MIXER
 
-
-		frameStayTime = 1000ms / fps;
+		timePerTick = 1000000000.0 / fps;
 		frameIndex.setAutoResetLimit(fps);
-
-		frameCounterUpdater.TimedOutSignal().connect(boost::bind(&Base::frameCounter, this));
-		frameCounterUpdater.setInterval(1s);
 	}
 
 	void Base::init(size_t fps)
@@ -63,11 +59,10 @@ namespace vas
 
 	void Base::startGameLoop()
 	{
+		using namespace std::chrono_literals;
 		if (!window)
 			throw std::runtime_error("Unable to start game loop scene window instance is nullptr");
 		window.show();
-
-		frameCounterUpdater.start();
 
 		if (!renderer)
 			throw std::runtime_error("Unable to start game loop scene renderer instance is nullptr");
@@ -80,9 +75,11 @@ namespace vas
 			Camera::getInstance().setSize(canvasSize);
 		}
 		InputManager::getInstance().init(&ev);
+		Clock gameLoopClock;
+		std::chrono::nanoseconds timer(0);
+
 		while (exec)
 		{
-			gameLoopClock.justReset();
 			while (ev.pollEvent())
 			{
 				EventBeginProcessed(ev);
@@ -119,9 +116,24 @@ namespace vas
 			}
 			if (!exec) break;
 
-			tick();
-			draw();
-			delay();
+			auto curTicks = gameLoopClock.reset();
+			deltaTime += curTicks.count() / timePerTick;
+			timer += curTicks;
+
+			if (deltaTime >= 1.0)
+			{
+				tick();
+				draw();
+				frameIndex++;
+				fpsCounter++;
+				deltaTime--;
+			}
+			if (timer >= 1s)
+			{
+				lastFpsCount = static_cast<size_t>(fpsCounter);
+				fpsCounter.reset();
+				timer = 0s;
+			}
 		}
 
 		window.destroy();
@@ -137,8 +149,6 @@ namespace vas
 		ScreenManager::getInstance().screenAboveOverlays.clear();
 		ScreenManager::getInstance().screenOverlays.clear();
 
-		frameCounterUpdater.stop();
-		frameCounterUpdater.TimedOutSignal().disconnect_all_slots();
 		TextureManager::getInstance().clear();
 #ifdef VAS_USE_MIXER
 		AudioManger::getInstance().clear();
@@ -212,10 +222,9 @@ namespace vas
 
 	void Base::setFPS(size_t value)
 	{
-		using namespace std::chrono_literals;
 		if (fps == value) return;
 		fps = value;
-		frameStayTime = 1000ms / fps;
+		timePerTick =  1000000000.0 / fps;
 		frameIndex.setAutoResetLimit(fps);
 
 		FPSChanged(value);
@@ -229,6 +238,11 @@ namespace vas
 	sdl::Event & Base::getEvent()
 	{
 		return ev;
+	}
+
+	double Base::getDeltaTime()
+	{
+		return deltaTime;
 	}
 
 	Base::Base()
@@ -266,26 +280,5 @@ namespace vas
 		}
 		ScreenManager::getInstance().draw();
 		renderer.present();
-	}
-
-	void Base::delay()
-	{
-		using namespace std::chrono_literals;
-		//current loop's used time
-		auto crLoopDuration = std::chrono::duration_cast<std::chrono::milliseconds>(gameLoopClock.currentTick());
-
-		frameIndex++;
-		fpsCounter++;
-
-		if (crLoopDuration < frameStayTime)
-		{
-			std::this_thread::sleep_for(frameStayTime - crLoopDuration - 1ms);
-		}
-	}
-
-	void Base::frameCounter()
-	{
-		lastFpsCount = fpsCounter;
-		fpsCounter.reset();
 	}
 }

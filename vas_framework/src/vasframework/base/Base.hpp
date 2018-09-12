@@ -90,14 +90,13 @@ namespace vas
 		void setFPS(size_t value);
 		size_t getFPS();
 		sdl::Event& getEvent();
+		double getDeltaTime();
 	private:
 		Base();
 		~Base();
 
 		void tick();
 		void draw();
-		void delay();
-		void frameCounter();
 
 		bool exec{ true };
 		/** [Write Only] Ignore close event at once, application will ignore sdl::quit event at once if this attribute is true.
@@ -164,12 +163,11 @@ namespace vas
 					-# size_t getLastFpsCount()
 		*/
 		size_t lastFpsCount{ 0 };
+		double deltaTime{ 0 };
+
 		Counter fpsCounter;
 		Counter frameIndex;
-		std::chrono::milliseconds frameStayTime{ 0 };
-
-		Clock gameLoopClock;
-		Timer frameCounterUpdater;
+		double timePerTick{ 0 };
 
 	public: //signals
 		/** @name Signals
