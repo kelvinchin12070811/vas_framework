@@ -126,7 +126,11 @@ namespace vas
 				draw();
 				frameIndex++;
 				fpsCounter++;
+#ifdef VAS_AUTO_FRAME_PATCH
 				deltaTime--;
+#else
+				deltaTime = 0.0;
+#endif // VAS_AUTO_FRAME_RECOVER
 			}
 			if (timer >= 1s)
 			{

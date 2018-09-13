@@ -36,4 +36,35 @@ Default is OFF.
 	 Default is OFF.
 */
 #define VAS_SDL_ENTRY
+
+/*! Using Windows specific code for some functions to optimize the experience.
+It will make the code platfrom specific for Windows only.
+
+Default is ON.
+*/
+#define VAS_WINDOWS_MODE
+
+/*! Use SDL_mixer audio library. Comment out this macro will disable the audio functionality of the library
+(VAS Framework use SDL_mixer as its main audio library for audio play back). But the SDL's audio feature is still valid.
+
+Default is ON.
+
+\note Disable Audio Module will disable AudioManager too.
+*/
+#define VAS_USE_MIXER
+
+/*! Use SDL_ttf font rendering engine.
+
+Default is ON.
+
+\note Disable this will turn off the functionality off text rendering feature such as sdl::TTF.
+*/
+#define VAS_USE_TTF
+
+/** Auto recover lost frame when enough system resources. This will patch up every frame that skiped when meet frame
+	  rate bottle neck.
+
+	  Default is ON.
+*/
+#define VAS_AUTO_FRAME_PATCH
 /*! @}*/

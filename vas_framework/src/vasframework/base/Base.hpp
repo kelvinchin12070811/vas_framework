@@ -24,7 +24,7 @@ namespace vas
 	/** @addtogroup vas_framework
 		  @{
 	*/
-	/*! \brief The basic class of the framework.
+	/*! \brief The core object of the framework.
 
 		 | Header | Namespace |
 		 | : --- : | : --- : |
@@ -163,6 +163,11 @@ namespace vas
 					-# size_t getLastFpsCount()
 		*/
 		size_t lastFpsCount{ 0 };
+		/** [Read Only] Get difference in time between last frame and current frame.
+			  
+			  - __accessors__
+					-# size_t getDeltaTime()
+		*/
 		double deltaTime{ 0 };
 
 		Counter fpsCounter;
