@@ -15,7 +15,7 @@ namespace vas::sdl
 		{
 		public:
 			Chunk();
-			Chunk(int channel);
+			explicit Chunk(int channel);
 			Chunk(const std::string& file, int channel = -1);
 			Chunk(const Chunk& rhs);
 			Chunk(Chunk&& rhs);

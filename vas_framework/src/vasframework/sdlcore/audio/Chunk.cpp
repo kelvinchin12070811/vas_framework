@@ -21,12 +21,12 @@ namespace vas::sdl
 		}
 
 		Chunk::Chunk(const Chunk & rhs) :
-			SDLComponentBase(rhs.componentInstance)
+			SDLComponentBase(rhs.componentInstance), channel(rhs.channel)
 		{
 		}
 
 		Chunk::Chunk(Chunk && rhs) :
-			SDLComponentBase(std::move(rhs.componentInstance))
+			SDLComponentBase(std::move(rhs.componentInstance)), channel(rhs.channel)
 		{
 		}
 
@@ -184,18 +184,21 @@ namespace vas::sdl
 		Chunk & Chunk::operator=(const Chunk & rhs)
 		{
 			this->componentInstance = rhs.componentInstance;
+			this->channel = rhs.channel;
 			return *this;
 		}
 
 		Chunk & Chunk::operator=(Chunk && rhs)
 		{
 			this->componentInstance = std::move(rhs.componentInstance);
+			this->channel = rhs.channel;
 			return *this;
 		}
 
 		Chunk & Chunk::operator=(std::nullptr_t)
 		{
 			this->componentInstance = nullptr;
+			this->channel = -1;
 			return *this;
 		}
 

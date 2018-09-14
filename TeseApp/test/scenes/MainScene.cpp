@@ -84,15 +84,15 @@ namespace scene
 
 		textTest->move(movement);
 		auto& auManager = vas::AudioManger::getInstance();
-		if (auManager.ME().isPlaying())
+		if (auManager.getME().isPlaying())
 		{
-			if (auManager.BGM().isPlaying())
-				auManager.BGM().pause();
+			if (auManager.getBGM().isPlaying())
+				auManager.getBGM().pause();
 		}
 		else
 		{
-			if (auManager.BGM().isPaused())
-				auManager.BGM().resume();
+			if (auManager.getBGM().isPaused())
+				auManager.getBGM().resume();
 		}
 		animation.tick();
 		scene::AbstractFrameCountingScene::tick();
@@ -162,7 +162,7 @@ namespace scene
 				vas::AudioManger::getInstance().playME(me);
 				break;
 		case Keycode::r:
-				vas::AudioManger::getInstance().BGM().rewind();
+				vas::AudioManger::getInstance().getBGM().rewind();
 				break;
 		case Keycode::s:
 				vas::AudioManger::getInstance().stopBGM();
@@ -176,7 +176,7 @@ namespace scene
 
 	void MainScene::meFinishedPlaying(int channel)
 	{
-		if (channel == vas::AudioManger::getInstance().ME().getChannel())
+		if (channel == vas::AudioManger::getInstance().getME().getChannel())
 			vas::CommonTools::getInstance().messenger("me finished playing");
 	}
 
