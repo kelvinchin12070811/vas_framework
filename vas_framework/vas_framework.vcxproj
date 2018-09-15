@@ -115,6 +115,9 @@
     <ClInclude Include="src\__doxygen__\page\lib_license.hpp" />
     <ClInclude Include="src\__doxygen__\page\mainpage.hpp" />
     <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\StateAnimator.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\TransitionInfo.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\StripAnimation.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\graphics\animation\AnimationDelay.cpp" />
@@ -181,6 +184,9 @@
     <ClCompile Include="src\vasframework\tiledmap\container\TilesetsBundle.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
     </ClCompile>
+    <ClCompile Include="src\vasframework\graphics\animation\StateAnimator.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\TransitionInfo.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\StripAnimation.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>

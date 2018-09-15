@@ -1,6 +1,6 @@
 /*! \mainpage The Documentation of VAS Framework
 	 
-	 Virtual Assistant Framework (vas_framework) is a simple C++ game framework that based on libsdl2.
+	 Virtual Assistant Framework (vas_framework) is a simple C++17 game framework that based on libsdl2.
 
 	 ## External Libraries Needed
 	- [SDL2](http://www.libsdl.org)
