@@ -2,8 +2,9 @@
 
 namespace vas
 {
-	struct AutoControllable
+	class AutoControllable
 	{
 		virtual void tick() = 0;
+		virtual ~AutoControllable() = 0;
 	};
 }

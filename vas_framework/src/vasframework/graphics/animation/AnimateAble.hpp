@@ -2,9 +2,10 @@
 
 namespace vas
 {
-	struct AnimateAble
+	class AnimateAble
 	{
 		virtual void tick() = 0;
 		virtual bool done() const = 0;
+		virtual ~AnimateAble() = 0;
 	};
 }
