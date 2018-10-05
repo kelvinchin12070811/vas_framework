@@ -12,10 +12,6 @@ namespace vas
 		@{ */
 		/*! \brief The interface that all reflectable object need to inherit.
 
-			 | Header | Namespace |
-			 | : --- : | : --- : |
-			 | vasframework/sreflex/IObject.hpp | vas::sreflex |
-
 			 IObject is the interface that all object that need to support reflection to inherit.
 		*/
 		class IObject

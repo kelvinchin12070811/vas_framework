@@ -10,10 +10,6 @@ namespace vas
 			  @{
 		*/
 		/** @brief The factory class that create IObject instance with their name
-			  
-			  | Header | Namespace |
-			  | : --- : | : --- : |
-			  | vasframework/sreflex/IObjectFactory.hpp | vas::sreflex |
 
 			  IObjectFactory class create and return the instance of IObject with their name as how reflection work.
 		*/

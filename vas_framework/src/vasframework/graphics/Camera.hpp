@@ -10,10 +10,6 @@ namespace vas
 	*/
 	/** @brief Camera that spot all of the elements in the game's world and tell which elements to render to Renderer.
 
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/graphics/Camera.hpp | vas |
-
 		  Camera is an object that tell the Renderer what is going to be rendered on the canvas and where it will be. The
 		  Camera also tell the Renderer how to render the objects like its' size.
 
@@ -28,8 +24,8 @@ namespace vas
 	public:
 		/** Get the main instance of the camera use by the framework
 
-			  @warning This function has been depercated scene it have been moved under Base::camera attribute. This function
-			  is keep for backward compability issues. Use Base::getCamera() instead.
+			  @deprecated This function has been moved under Base::camera attribute and it is only keep
+			  for backward compability issues. Use Base::getCamera() instead.
 
 			  @return Main instance of the camera
 		*/

@@ -11,10 +11,6 @@ namespace vas
 	*/
 	/** @brief The texture management object.
 
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/manager/TextureManager.hpp | vas |
-
 		  The TextureManager manage all the cache of the texture. It cached all texture that need to be cached and return it
 		  whenever the application request for the same texture. The texture cache is managed automaticaly by the framework
 		  but users are able to manually controll it too.

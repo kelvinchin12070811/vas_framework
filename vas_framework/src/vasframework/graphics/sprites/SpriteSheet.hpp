@@ -7,9 +7,6 @@ namespace vas
 		  @{
 	*/
 	/** @brief A set of sprites in a collection of a single texture.
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/graphics/sprites/SpriteSheet.hpp | vas |
 
 		  The SpriteSheet is a set of sprites located in a single texture with specified size (width and height).
 	*/

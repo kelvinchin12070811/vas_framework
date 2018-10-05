@@ -26,10 +26,6 @@ namespace vas
 	*/
 	/*! \brief The core object of the framework.
 
-		 | Header | Namespace |
-		 | : --- : | : --- : |
-		 | vasframework/base/Base.hpp | vas |
-
 		 Base is the singletone class that drived the skeleton of the framework. It controll the main event loop, signaling and
 		 also handle the main game loop and thread.
 	*/

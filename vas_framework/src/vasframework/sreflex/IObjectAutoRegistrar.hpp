@@ -10,10 +10,6 @@ namespace vas
 		*/
 		/*! \brief The class that automaticaly register a child of vas::sreflex::IObject.
 
-			 | Header | Namespace |
-			 | : --- : | : --- : |
-			 | vasframework/sreflex/IObjectAutoRegistrar.hpp | vas::sreflex |
-
 			 IObjectAutoRegistrar is a utility that help user to register a child of vas::sreflex::IObject. This class operate by
 			 creating a static instance of it self with the name of the object.
 

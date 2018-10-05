@@ -16,9 +16,6 @@ namespace vas
 		  @{
 	*/
 	/** @brief The spirit of the image and texture.
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/graphics/sprites/Sprite.hpp | vas |
 
 		  A sprite is a non-copyable object(possible with dynamic resource allocation) which represent an image buile from
 		  texture that will be drawn on the renderer.

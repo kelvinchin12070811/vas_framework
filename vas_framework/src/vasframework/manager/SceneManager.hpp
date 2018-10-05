@@ -10,10 +10,6 @@ namespace vas
 		  @{
 	*/
 	/** @brief The game scene magager
-		  
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/manager/SceneManager.hpp | vas |
 
 		  The manager which controll all of the Scene of the game. All of the called scene are store in a "scene call stack",
 		  the scene on the top will always have highest priority to be called by the game loop. The second scene from the

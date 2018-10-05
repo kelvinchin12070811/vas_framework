@@ -31,10 +31,6 @@ namespace vas
 		}
 
 		/** @brief Registry class that maps IObject's children name to their creator function.
-			 
-			 | Header | Namespace |
-			 | : --- : | : --- : |
-			 | vasframework/sreflex/IObjectEntries.hpp | vas::sreflex |
 
 			  This is the singletone class that store key-value pair of IObject children with its' creator function.
 		*/

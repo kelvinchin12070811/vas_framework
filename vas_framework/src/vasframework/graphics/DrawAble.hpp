@@ -8,10 +8,6 @@ namespace vas
 		  @{
 	*/
 	/** @brief The interface of all DrawAble object.
-		  
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/graphics/DrawAble.hpp | vas |
 	*/
 	class DrawAble
 	{/** @} */

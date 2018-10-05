@@ -19,10 +19,6 @@ namespace vas
 		  @{
 	*/
 	/** @brief Scene is the interface of all sceen which will be presented on the screen
-		  
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/graphics/scene/Scene.hpp | vas |
 
 		  The scene class drive the skeleton of the stage and present the contents to the renderer.
 	*/

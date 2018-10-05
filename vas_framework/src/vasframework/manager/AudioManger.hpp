@@ -15,10 +15,6 @@ namespace vas
 		  @{
 	*/
 	/** @brief Managing multichannel audio with only one object.
-		  
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/manager/AudioManager.hpp | vas |
 
 		  AudioManager is a simple audio playback library that build on top of sdl_mixer. AudioManager are able to perform
 		  lots of simple and common ways to manage audio playback and audio streaming. For more advance usage,

@@ -15,10 +15,6 @@ namespace vas
 		  @{
 	*/
 	/** @brief The container of the DrawAble objects in vertical order.
-
-		  | Header | Namespace |
-		  | : --- : | : --- : |
-		  | vasframework/graphics/layer/Layers.hpp | vas |
 	*/
 	class VAS_DECLSPEC Layers : public DrawAble
 	{ /** @} */
