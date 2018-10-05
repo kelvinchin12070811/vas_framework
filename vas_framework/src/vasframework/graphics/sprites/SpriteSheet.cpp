@@ -55,4 +55,14 @@ namespace vas
 			rendererHolder.copyEx(this->texture, &tileSource, &tileDest, static_cast<double>(angle), origin, flip);
 		}
 	}
+
+	size_t SpriteSheet::getTileCount() const
+	{
+		return tileSheetDimension.w() * tileSheetDimension.h();
+	}
+
+	sdl::Point SpriteSheet::getTileSize() const
+	{
+		return tileSize;
+	}
 }

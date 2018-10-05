@@ -2,46 +2,53 @@
 #include "../layer/Layers.hpp"
 #include "../../VASConfig.hpp"
 
-//Main instance of RenderAssistance
 #define RenderAssistance this->__renderAssistance
-//Call RenderAssistance to work
 #define CallRenderAssistance \
 	if (this->__renderAssistance == nullptr) \
 		this->__renderAssistance = std::make_unique<vas::Layers>()
-//Send back RenderAssistance
 #define SendBackRenderAssistance this->__renderAssistance = nullptr
-
-//Check if RenderAssistance is allowed to render
 #define IsRenderAssistanceEnabled this->__isRenderAssistanceEnabled()
-//Check if RenderAssistance is called
 #define IsRenderAssistanceCalled this->__renderAssistance != nullptr
-//Check if RenderAssistance is ready to work
 #define IsRenderAssistanceReady IsRenderAssistanceCalled && IsRenderAssistanceEnabled
-
-//Allow RenderAssistance to render it's contents to scene
 #define EnableRenderAssistance this->__enableRenderAssistance = true
-//Not allow RenderAssistance to render it's contents to scene
 #define DisableRenderAssistance this->__enableRenderAssistance = false
 
 namespace vas
 {
+	/** @addtogroup scene
+		  @{
+	*/
+	/** @brief Scene is the interface of all sceen which will be presented on the screen
+		  
+		  | Header | Namespace |
+		  | : --- : | : --- : |
+		  | vasframework/graphics/scene/Scene.hpp | vas |
+
+		  The scene class drive the skeleton of the stage and present the contents to the renderer.
+	*/
 	class VAS_DECLSPEC Scene
-	{
+	{/** @} */
 	public:
 		Scene();
 		virtual ~Scene();
 
+		/** Tick/update the scene */
 		virtual void tick() = 0;
+		/** Draw/render the scene */
 		virtual void draw() = 0;
 
-		// Call to current scene when begin terminate
+		/** @name Callback signals
+			  @{
+		*/
+		/** Call to current scene when current scene is poped */
 		virtual void beforeTerminate();
-		// Call to previous scene when current scene is terminated
+		/** Call to previous scene after current scene is poped */
 		virtual void afterTerminate();
-		// Call to current scene when current scene is begin to change
+		/** Call to current scene when new scene is called */
 		virtual void beforeSceneCall();
-		// Call to current scene when previous scene changed
+		/** Call to current scene when current scene is loaded */
 		virtual void afterSceneCall();
+		/** @} */
 	protected:
 		bool __isRenderAssistanceEnabled();
 	protected:

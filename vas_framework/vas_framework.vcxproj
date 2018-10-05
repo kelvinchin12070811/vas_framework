@@ -109,7 +109,9 @@
     <ClInclude Include="src\vasframework\tiledmap\container\TilesetsBundle.hpp" />
     <ClInclude Include="src\__doxygen__\group\CompileTimeConfiguration.hpp" />
     <ClInclude Include="src\__doxygen__\group\graphics.hpp" />
+    <ClInclude Include="src\__doxygen__\group\graphics_module\layers.hpp" />
     <ClInclude Include="src\__doxygen__\group\managers.hpp" />
+    <ClInclude Include="src\__doxygen__\group\graphics_module\scene.hpp" />
     <ClInclude Include="src\__doxygen__\group\sreflecx.hpp" />
     <ClInclude Include="src\__doxygen__\group\vas_framework.hpp" />
     <ClInclude Include="src\__doxygen__\page\lib_license.hpp" />
