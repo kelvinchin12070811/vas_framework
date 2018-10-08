@@ -81,26 +81,26 @@ namespace vas
 			(background.get()->*action)(value, update);
 		}
 	public: //properties
-		const Vector2& getBackgroundOffset() const;
-		void setBackgroundOffset(const Vector2& value);
+		const Vector2& getBackgroundOffset() const; /**< Get the offset of background. */
+		void setBackgroundOffset(const Vector2& value); /**< Set the offset of background. */
 
-		int getOutlineSize() const;
-		void setOutlineSize(int value);
+		int getOutlineSize() const; /**< Get text outline size. */
+		void setOutlineSize(int value); /**< Set text outline size. */
 
-		sdl::Colour getColour() const;
-		void setColour(const sdl::Colour& value, bool update = true);
+		sdl::Colour getColour() const; /**< Get colour of foreground text. */
+		void setColour(const sdl::Colour& value, bool update = true); /**< Set colour of foreground text. */
 
-		sdl::Colour getBackgroundColour() const;
-		void setBackgroundColour(const sdl::Colour& value, bool update = true);
+		sdl::Colour getBackgroundColour() const; /**< Get colour of background text. */
+		void setBackgroundColour(const sdl::Colour& value, bool update = true); /**< Set colour of background text. */
 
-		std::string getText() const;
-		void setString(const std::string& value, bool update = true);
+		std::string getText() const; /**< Get text to render. */
+		void setString(const std::string& value, bool update = true); /**< Set text to render. */
 
-		bool isStaticOnCamera() const;
-		void setStaticOnCamera(bool value);
+		bool isStaticOnCamera() const; /**< Is this DrawAble object static on camera? */
+		void setStaticOnCamera(bool value); /**< Set if this DrawAble object static on camera. */
 	public:
-		std::unique_ptr<Text> foreground{ nullptr };
-		std::unique_ptr<Text> background{ nullptr };
+		std::unique_ptr<Text> foreground{ nullptr }; /**< Foreground text.*/
+		std::unique_ptr<Text> background{ nullptr }; /**< Background text. */
 	private:
 		void applyBackgroundOffset();
 	private:
