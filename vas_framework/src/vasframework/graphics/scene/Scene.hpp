@@ -1,5 +1,6 @@
 #pragma once
 #include "../layer/Layers.hpp"
+#include "../../sreflex/ReflectAbleAutoRegistrar.hpp"
 #include "../../VASConfig.hpp"
 
 #define RenderAssistance this->__renderAssistance
@@ -22,7 +23,7 @@ namespace vas
 
 		  The scene class drive the skeleton of the stage and present the contents to the renderer.
 	*/
-	class VAS_DECLSPEC Scene
+	class VAS_DECLSPEC Scene : public sreflex::ReflectAble
 	{/** @} */
 	public:
 		Scene();

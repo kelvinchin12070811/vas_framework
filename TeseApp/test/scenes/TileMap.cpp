@@ -16,6 +16,7 @@ using namespace boost::placeholders;
 
 namespace scene
 {
+	const sreflex::ReflectAbleAutoRegistrar<TileMap> TileMap::__REGISTRAR{};
 	TileMap::TileMap()
 	{
 		Int32Tag tag = 35;

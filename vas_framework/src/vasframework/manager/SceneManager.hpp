@@ -41,6 +41,10 @@ namespace vas
 			  @param instance Scene instance to call, instance will moved.
 		*/
 		void call(std::shared_ptr<Scene>&& instance);
+		/** Call a new scene with its name. The target Scene's child must registered with Simple Reflection Library before called.
+			  @param sceneName Name of the scene.
+		*/
+		void call(const std::string& sceneName);
 		/** Return to previous scene. */
 		void back();
 		/** Get current scene. */

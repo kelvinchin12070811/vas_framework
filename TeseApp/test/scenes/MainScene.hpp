@@ -11,7 +11,7 @@
 
 namespace scene
 {
-	class MainScene : public AbstractFrameCountingScene, public vas::sreflex::ReflectAble
+	class MainScene : public AbstractFrameCountingScene
 	{
 	public:
 		MainScene();

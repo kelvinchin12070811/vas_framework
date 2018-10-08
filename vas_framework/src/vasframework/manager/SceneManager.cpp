@@ -1,5 +1,7 @@
 #include <algorithm>
 #include "SceneManager.hpp"
+#include "../graphics/scene/SceneCallFailed.hpp"
+#include "../sreflex/ReflectAbleFactory.hpp"
 
 namespace vas
 {
@@ -39,6 +41,7 @@ namespace vas
 
 	void SceneManager::call(const std::shared_ptr<Scene>& instance)
 	{
+		if (instance == nullptr) throw vas::SceneCallFailed();
 		if (!callStack.empty()) callStack.back()->beforeSceneCall();
 		callStack.push_back(instance);
 		callStack.back()->afterSceneCall();
@@ -46,9 +49,21 @@ namespace vas
 
 	void SceneManager::call(std::shared_ptr<Scene>&& instance)
 	{
+		if (instance == nullptr) throw vas::SceneCallFailed();
+
 		if (!callStack.empty()) callStack.back()->beforeSceneCall();
 		callStack.push_back(std::move(instance));
 		callStack.back()->afterSceneCall();
+	}
+
+	void SceneManager::call(const std::string & sceneName)
+	{
+		sreflex::ReflectAbleFactory factory;
+		auto instance = factory.createObject(sceneName).release();
+		if (instance == nullptr)
+			throw SceneCallFailed(sceneName);
+		else
+			call(std::shared_ptr<Scene>(dynamic_cast<Scene*>(instance)));
 	}
 
 	void SceneManager::back()

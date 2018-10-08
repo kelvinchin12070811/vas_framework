@@ -324,6 +324,9 @@
     <ClInclude Include="src\vasframework\sreflex\ReflectAbleFactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\vasframework\graphics\scene\SceneCallFailed.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">
@@ -510,6 +513,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\sreflex\ReflectAbleFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\graphics\scene\SceneCallFailed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

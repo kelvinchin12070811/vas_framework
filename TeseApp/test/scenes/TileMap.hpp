@@ -31,5 +31,8 @@ namespace scene
 
 		std::vector<boost::signals2::connection> signalsPool;
 		std::vector<std::shared_ptr<vas::MapRenderer>> mapLayers{ nullptr };
+
+	private:
+		static const vas::sreflex::ReflectAbleAutoRegistrar<TileMap> __REGISTRAR;
 	};
 }

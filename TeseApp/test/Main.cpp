@@ -10,10 +10,8 @@ int Main::main(std::vector<std::string> args)
 			auto textOverlay = std::make_shared<vas::StyledText>("VAS Framework v" + getEngineVersion(), "assets/fonts/caladea-regular.ttf", vas::zerovector, 24);
 			textOverlay->setColour(vas::sdl::ColorPresets::white);
 			textOverlay->setBackgroundOffset(vas::Vector2(3.0f, ANGLE_FROM_SECOND_QUATER(45.0)));
-			//textOverlay->setStaticOnCamera(true);
 			vas::ScreenManager::getInstance().screenAboveOverlays.insert(VAS_INSERT_VAR(textOverlay));
-			//vas::SceneManager::getInstance().call(std::make_shared<scene::TileMap>());
-			vas::SceneManager::getInstance().call(std::make_unique<scene::MainScene>());
+			vas::SceneManager::getInstance().call("scene::MainScene");
 			vas::Base::getInstance().getRenderer().setLogicalSize(vas::sdl::Point(640, 480));
 		});
 	}
