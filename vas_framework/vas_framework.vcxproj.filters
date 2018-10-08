@@ -318,6 +318,12 @@
     <ClInclude Include="src\__doxygen__\group\graphics_module\layers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\__doxygen__\group\math.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\__doxygen__\page\todo_list.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">

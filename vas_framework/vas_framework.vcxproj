@@ -112,10 +112,12 @@
     <ClInclude Include="src\__doxygen__\group\graphics_module\layers.hpp" />
     <ClInclude Include="src\__doxygen__\group\managers.hpp" />
     <ClInclude Include="src\__doxygen__\group\graphics_module\scene.hpp" />
+    <ClInclude Include="src\__doxygen__\group\math.hpp" />
     <ClInclude Include="src\__doxygen__\group\sreflecx.hpp" />
     <ClInclude Include="src\__doxygen__\group\vas_framework.hpp" />
     <ClInclude Include="src\__doxygen__\page\lib_license.hpp" />
     <ClInclude Include="src\__doxygen__\page\mainpage.hpp" />
+    <ClInclude Include="src\__doxygen__\page\todo_list.hpp" />
     <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\StateAnimator.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\TransitionInfo.hpp" />

@@ -14,8 +14,8 @@ namespace vas
 		clampValue();
 	}
 
-	Angle::Angle(double rhs, Angle::AngleType angleType):
-		value(rhs), angleType(angleType)
+	Angle::Angle(double rhs, Angle::AngleType type):
+		value(rhs), angleType(type)
 	{
 		clampValue();
 	}

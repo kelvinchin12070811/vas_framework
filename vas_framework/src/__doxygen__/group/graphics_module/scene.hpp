@@ -14,7 +14,7 @@
 
 	  @brief A helper feature of Scene's children to manage all vas::DrawAble object
 
-	  Defined at vas::Scene, Render Assistance is the main instance of vas::Layer provided by the scene object to help to
+	  Defined at vas::Scene, Render Assistance is the main instance of vas::Layers provided by the scene object to help to
 	  handle DrawAble object.
 
 	  The macro #CallRenderAssistance must be called before using RenderAssistance to draw anything.
