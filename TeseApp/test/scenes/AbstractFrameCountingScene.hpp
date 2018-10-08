@@ -9,7 +9,7 @@ namespace scene
 		AbstractFrameCountingScene();
 		~AbstractFrameCountingScene();
 
-		void tick() = 0;
-		void draw() = 0;
+		void tick();
+		void draw();
 	};
 }

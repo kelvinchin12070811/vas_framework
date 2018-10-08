@@ -12,7 +12,7 @@ using namespace std::string_literals;
 
 namespace scene
 {
-	vas::sreflex::IObjectAutoRegistrar<MainScene> MainScene::_registrar{};
+	vas::sreflex::ReflectAbleAutoRegistrar<MainScene> MainScene::_registrar{};
 
 	MainScene::MainScene()
 	{

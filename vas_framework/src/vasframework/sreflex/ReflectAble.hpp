@@ -12,13 +12,13 @@ namespace vas
 		@{ */
 		/*! \brief The interface that all reflectable object need to inherit.
 
-			 IObject is the interface that all object that need to support reflection to inherit.
+			 ReflectAble is the interface that all object that need to support reflection to inherit.
 		*/
-		class IObject
+		class ReflectAble
 		{
 		public:
-			IObject() {}
-			virtual ~IObject() = 0 {}
+			ReflectAble() {}
+			virtual ~ReflectAble() = 0 {}
 		};
 		/*! @} */
 	}

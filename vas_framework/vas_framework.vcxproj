@@ -64,9 +64,9 @@
     <ClInclude Include="src\vasframework\util\CommonTools.hpp" />
     <ClInclude Include="src\vasframework\graphics\DrawAble.hpp" />
     <ClInclude Include="src\vasframework\graphics\scene\Scene.hpp" />
-    <ClInclude Include="src\vasframework\sreflex\IObjectAutoRegistrar.hpp" />
-    <ClInclude Include="src\vasframework\sreflex\IObjectFactory.hpp" />
-    <ClInclude Include="src\vasframework\sreflex\IObjectEntries.hpp" />
+    <ClInclude Include="src\vasframework\sreflex\ReflectAbleAutoRegistrar.hpp" />
+    <ClInclude Include="src\vasframework\sreflex\ReflectAbleFactory.hpp" />
+    <ClInclude Include="src\vasframework\sreflex\ReflectAbleEntries.hpp" />
     <ClInclude Include="src\vasframework\base\Base.hpp" />
     <ClInclude Include="src\vasframework\math\Counter.hpp" />
     <ClInclude Include="src\vasframework\sdlcore\math\Colour.hpp" />
@@ -93,7 +93,7 @@
     <ClInclude Include="src\vasframework\sdlcore\SDLCore.hpp" />
     <ClInclude Include="src\vasframework\sdlcore\SDLInitFlags.hpp" />
     <ClInclude Include="src\vasframework\sdlcore\Video.hpp" />
-    <ClInclude Include="src\vasframework\sreflex\IObject.hpp" />
+    <ClInclude Include="src\vasframework\sreflex\ReflectAble.hpp" />
     <ClInclude Include="src\vasframework\util\TextTools.hpp" />
     <ClInclude Include="src\vasframework\VASConfig.hpp" />
     <ClInclude Include="src\vasframework\sdlcore\video\Window.hpp" />
@@ -154,8 +154,8 @@
     <ClCompile Include="src\vasframework\manager\SceneManager.cpp" />
     <ClCompile Include="src\vasframework\util\CommonTools.cpp" />
     <ClCompile Include="src\vasframework\graphics\scene\Scene.cpp" />
-    <ClCompile Include="src\vasframework\sreflex\IObjectFactory.cpp" />
-    <ClCompile Include="src\vasframework\sreflex\IObjectEntries.cpp" />
+    <ClCompile Include="src\vasframework\sreflex\ReflectAbleFactory.cpp" />
+    <ClCompile Include="src\vasframework\sreflex\ReflectAbleEntries.cpp" />
     <ClCompile Include="src\vasframework\base\Base.cpp" />
     <ClCompile Include="src\vasframework\math\Counter.cpp" />
     <ClCompile Include="src\vasframework\sdlcore\math\Colour.cpp" />

@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <vasframework/sreflex/IObjectAutoRegistrar.hpp>
+#include <vasframework/sreflex/ReflectAbleAutoRegistrar.hpp>
 #include <vasframework/base/Base.hpp>
 #include <vasframework/manager/InputManager.hpp>
 #include <vasframework/graphics/sprites/SpriteSheet.hpp>
@@ -11,7 +11,7 @@
 
 namespace scene
 {
-	class MainScene : public AbstractFrameCountingScene, public vas::sreflex::IObject
+	class MainScene : public AbstractFrameCountingScene, public vas::sreflex::ReflectAble
 	{
 	public:
 		MainScene();
@@ -33,7 +33,7 @@ namespace scene
 
 		void on_fadeCompleate(vas::ScreenManager::FadingState compleatedState);
 	private:
-		static vas::sreflex::IObjectAutoRegistrar<MainScene> _registrar;
+		static vas::sreflex::ReflectAbleAutoRegistrar<MainScene> _registrar;
 
 		const std::string me = "assets/audios/me/rain1.ogg";
 		std::shared_ptr<vas::Sprite> testSprite{ nullptr };
