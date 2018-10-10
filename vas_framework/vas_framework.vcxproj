@@ -109,6 +109,7 @@
     <ClInclude Include="src\vasframework\tiledmap\maplayers\TileLayer.hpp" />
     <ClInclude Include="src\vasframework\tiledmap\container\TilesetsBundle.hpp" />
     <ClInclude Include="src\__doxygen__\group\CompileTimeConfiguration.hpp" />
+    <ClInclude Include="src\__doxygen__\group\container.hpp" />
     <ClInclude Include="src\__doxygen__\group\graphics.hpp" />
     <ClInclude Include="src\__doxygen__\group\graphics_module\layers.hpp" />
     <ClInclude Include="src\__doxygen__\group\managers.hpp" />

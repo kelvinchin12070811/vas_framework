@@ -11,7 +11,7 @@
 
 namespace vas
 {
-	/** @addtogroup layers
+	/** @addtogroup g_layers
 		  @{
 	*/
 	/** @brief The container of the DrawAble objects in vertical order.
@@ -131,7 +131,7 @@ namespace vas
 		boost::container::vector<bool> layerState;
 	};
 
-	/** @addtogroup layers
+	/** @addtogroup g_layers
 		  @{
 	*/
 	/** Create a new layer data.

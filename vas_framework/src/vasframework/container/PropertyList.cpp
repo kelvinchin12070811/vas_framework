@@ -16,6 +16,11 @@ namespace vas
 	{
 	}
 
+	PropertyList::PropertyList(std::initializer_list<Property> list):
+		super(list)
+	{
+	}
+
 	PropertyList::~PropertyList()
 	{
 	}

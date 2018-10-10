@@ -3,5 +3,9 @@
 
 namespace vas
 {
-	using BytesArray = std::vector<uint8_t>;
+	/** @addtogroup container
+		  @{
+	*/
+	using BytesArray = std::vector<uint8_t>; /** An array of bytes. */
+	/** @} */
 }
