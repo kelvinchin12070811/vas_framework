@@ -37,7 +37,7 @@ namespace vas
 			return result;
 		}
 		
-		/** Return object's name with CVR(Const, Volatile & Refrence)
+		/** Return object's name with CVR(Const, Volatile & reference)
 			  @tparam Type Any object type
 			  @return Name of the object "Type"
 
@@ -77,7 +77,7 @@ namespace vas
 			return boost::typeindex::type_id<Type>();
 		}
 
-		/** Return the object info of an object with CVR(Const, Volatile & Refrence)
+		/** Return the object info of an object with CVR(Const, Volatile & reference)
 			  @tparam Type Any object decalration
 			  @retval boost::typeindex::type_index of the object
 

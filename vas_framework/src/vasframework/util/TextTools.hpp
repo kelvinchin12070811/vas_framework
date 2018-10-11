@@ -26,28 +26,47 @@
 
 namespace vas
 {
+	/** @addtogroup txt_tool
+		  @{
+	*/
+	/** @brief The alternative console IO class.
+		  
+		  The static singletone class that provide basic tools for console IO.
+	*/
 	class VAS_DECLSPEC TextTools
-	{
+	{ /** @} */
 	public:
 #ifdef VAS_WINDOWS_MODE
-		static bool inited;
+		/** @name Windows only members (only avaliable on Windows).*/
+		static bool inited; /**< Determine if the tools is pre initialized. */
 
-		static void initTextTools();
+		static void initTextTools(); /**< Initialize the tools. */
+		/** Convert wide char (UTF-16 encoded) string to multibytes or UTF-8 char string.
+			  @param str Input string.
+			  @param unicode Convert to unicode or not.
+			  @retval std::string UTF-8 encoded string of @p str if @p unicode is true, multibytes char otherwise.
+		*/
 		static std::string wstos(const std::wstring&str, bool unicode = true);
+		/** Convert multibytes or UTF-8 string to UTF-16 string.
+			  @param str Input string.
+			  @param unicode Is the input string encoded in UTF-8 or multibytes.
+			  @retval std::wstring UTF-16 encoded string of @p str.
+		*/
 		static std::wstring stows(const std::string& str, bool unicode = true);
+		/** @} */
 #endif // VAS_WINDOWS_MODE
 
-		static void print(const std::string& str);
-		static void print(const std::ostream& str);
-		static void println(const std::string& str);
-		static void println(const std::ostream& str);
-		static void printf(const boost::format& fStr);
-		static void printfln(const boost::format& fStr);
+		static void print(const std::string& str); /**< Print a string to console. */
+		static void print(const std::ostream& str); /**< Print a std::ostream to console.*/
+		static void println(const std::string& str); /**< Print a string to console and end the line with std::endl. */
+		static void println(const std::ostream& str); /**< Print a std::ostream to console and end the line with std::endl. */
+		static void printf(const boost::format& fStr); /**< Print a boost::format to console. */
+		static void printfln(const boost::format& fStr); /**< Print a boost::format to console and end the line with std::endl. */
 
-		static std::string readln();
+		static std::string readln(); /**< Read a line of string from console. */
 
 		template <typename ReturnType>
-		static ReturnType read();
+		static ReturnType read(); /**< Read any data type of value from console with `cin::operator>>()` (wcin on Windows). */
 	};
 
 	template<typename ReturnType>
@@ -95,7 +114,7 @@ namespace vas
 			return *this;
 		}
 
-		static std::stringstream& getBufer();
+		static std::stringstream& getBuffer();
 	private:
 		void outputStream();
 	private:

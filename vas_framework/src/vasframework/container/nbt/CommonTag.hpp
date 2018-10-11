@@ -47,7 +47,7 @@ namespace vas
 		}
 
 		/** @memberof ValueWrapperTag
-			  Convert wrapper to refrence of ValueType.
+			  Convert wrapper to reference of ValueType.
 		*/
 		operator ValueType&()
 		{
@@ -55,7 +55,7 @@ namespace vas
 		}
 
 		/** @memberof ValueWrapperTag
-			  Convert wrapper to const refrence of ValueType.
+			  Convert wrapper to const reference of ValueType.
 		*/
 		operator const ValueType&() const
 		{
@@ -65,9 +65,7 @@ namespace vas
 		ValueType value;
 	};
 
-	/** @addtogroup nbt_tag
-		  @{
-		  @name Predefined tags
+	/** @name Predefined tags
 		  @{
 	*/
 	using ByteTag = ValueWarpperTag<uint8_t>; /**< Byte tag. */
@@ -86,7 +84,5 @@ namespace vas
 
 	using Vector2Tag = ValueWarpperTag<Vector2>; /**< vas::Vector2 tag. */
 
-	/** @}
-		  @}
-	*/
+	/** @} */
 }

@@ -130,10 +130,6 @@ namespace vas
 		std::vector<LayerData> layerData;
 		boost::container::vector<bool> layerState;
 	};
-
-	/** @addtogroup g_layers
-		  @{
-	*/
 	/** Create a new layer data.
 		  @param name Name of the object.
 		  @param instance Instance of the DrawAble object.
@@ -145,12 +141,11 @@ namespace vas
 	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<DrawAble>& instance, bool visible = true);
 	/** Create a new layer data.
 		  @param name Name of the object.
-		  @param instance Rvalue refrence to the instance of the DrawAble object.
+		  @param instance Rvalue reference to the instance of the DrawAble object.
 		  @param visible Define if the instance need to draw on the renderer or not.
 		  @return Layers::LayerData that contain the information about the object.
 		  
 		  Defined in: vasframework/graphics/layer/Layers.hpp, namespace: vas
 	*/
 	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<DrawAble>&& instance, bool visible = true);
-	/** @} */
 }

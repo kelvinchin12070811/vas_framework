@@ -40,22 +40,22 @@ namespace vas
 
 		/** Find a property with its name. Throw std::out_of_range if failed.
 			  @param name Name of the property.
-			  @return Refrence to the related property.
+			  @return reference to the related property.
 		*/
 		Property& operator[](const std::string& name);
 		/** Find a property with its name. Throw std::out_of_range if failed.
 			 @param name Name of the property.
-			 @return Const refrence to the related property.
+			 @return Const reference to the related property.
 		*/
 		const Property& operator[](const std::string& name) const;
 		/** Find a property with its index. Throw std::out_of_range if failed.
 			 @param index Index of the property.
-			 @return Refrence to the related property.
+			 @return reference to the related property.
 		*/
 		Property& operator[](size_t index);
 		/** Find a property with its index. Throw std::out_of_range if failed.
 			 @param index Index of the property.
-			 @return Const refrence to the related property.
+			 @return Const reference to the related property.
 		*/
 		const Property& operator[](size_t index) const;
 		/** @} */

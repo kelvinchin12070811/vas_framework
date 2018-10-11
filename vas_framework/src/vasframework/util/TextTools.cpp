@@ -142,7 +142,7 @@ namespace vas
 		return *this;
 	}
 
-	std::stringstream & Cout::getBufer()
+	std::stringstream & Cout::getBuffer()
 	{
 		return ss;
 	}

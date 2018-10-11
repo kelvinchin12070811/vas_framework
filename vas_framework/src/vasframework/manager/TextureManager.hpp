@@ -59,7 +59,7 @@ namespace vas
 		/** [Read & Write] The textue cache.
 			  - __accessors__
 					-# std::map<std::string, sdl::Texture>& getCache()\n
-						 This function also act as mutator since it return a refrence.
+						 This function also act as mutator since it return a reference.
 		*/
 		std::map<std::string, sdl::Texture> cache;
 	};

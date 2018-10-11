@@ -237,30 +237,6 @@
     <ClInclude Include="src\vasframework\VASConfig.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\CompileTimeConfiguration.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\vas_framework.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\page\UniformEntryPoint.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\page\mainpage.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\page\lib_license.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\sreflecx.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\managers.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\graphics.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\graphics\scene\Scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -300,18 +276,6 @@
     <ClInclude Include="src\vasframework\graphics\animation\StripAnimation.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\graphics_module\scene.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\graphics_module\layers.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\math.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\page\todo_list.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vasframework\sreflex\ReflectAble.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -325,9 +289,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\vasframework\graphics\scene\SceneCallFailed.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\__doxygen__\group\container.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

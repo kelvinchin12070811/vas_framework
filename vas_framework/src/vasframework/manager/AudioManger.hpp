@@ -1,6 +1,6 @@
 #pragma once
 #include "../VASConfig.hpp"
-//TODO: Fix channel does not refrenced if refrence a channel
+//TODO: Fix channel does not referenced if reference a channel
 #ifdef VAS_USE_MIXER
 #include <array>
 #include <map>
