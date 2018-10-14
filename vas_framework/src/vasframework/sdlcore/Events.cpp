@@ -173,7 +173,7 @@ namespace vas::sdl
 		return boolean_cast(SDL_HasEvents(minType, maxType));
 	}
 
-	bool Event::wait(EventType::type type)
+	bool Event::wait()
 	{
 		return SDL_WaitEvent(&instance) == 1;
 	}

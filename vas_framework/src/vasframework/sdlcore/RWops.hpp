@@ -7,16 +7,21 @@ namespace vas::sdl
 {
 	namespace rwops
 	{
+		/** @addtogroup sdl_basic
+			  @{
+		*/
+		/** @brief RWops type. */
 		struct VAS_DECLSPEC Type
 		{
-			static const uint32_t unknow; /* Unknown stream type */
-			static const uint32_t winFile; /* Win32 file */
-			static const uint32_t stdFile; /* Stdio file */
-			static const uint32_t jniFile; /* Android asset */
-			static const uint32_t memory; /* Memory stream */
-			static const uint32_t readOnlyMemory; /* Read-Only memory stream */
+			static const uint32_t unknow; /**< Unknown stream type */
+			static const uint32_t winFile; /**< Win32 file */
+			static const uint32_t stdFile; /**< Stdio file */
+			static const uint32_t jniFile; /**< Android asset */
+			static const uint32_t memory; /**< Memory stream */
+			static const uint32_t readOnlyMemory; /**< Read-Only memory stream */
 		};
 
+		/** @brief Position of RWops. */
 		struct VAS_DECLSPEC Whence
 		{
 			static const int set; /**< Seek from the beginning of data */
@@ -24,7 +29,7 @@ namespace vas::sdl
 			static const int end; /**< Seek relative to the end of data */
 		};
 
-		using RWops = SDL_RWops;
+		using RWops = SDL_RWops; /**< RWops data type. */
 
 		/**
 		*  Return the size of the file in this rwops, or -1 if unknown
@@ -38,6 +43,7 @@ namespace vas::sdl
 		*  \return the final offset in the data stream, or -1 on error.
 		*/
 		inline int64_t seek(RWops* instance, int64_t offset, int whence) { return SDL_RWseek(instance, offset, whence); };
+		/** Tell offset of the RWops. */
 		inline int64_t tell(RWops* instance, int64_t offset) { return sdl::rwops::seek(instance, 0, sdl::rwops::Whence::cur); };
 
 		/**
@@ -164,5 +170,7 @@ namespace vas::sdl
 			return SDL_WriteBE64(dst, value);
 		}
 		/* @} *//* Write endian functions */
+
+		/** @} */
 	}
 }

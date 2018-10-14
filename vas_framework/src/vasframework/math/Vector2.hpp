@@ -22,7 +22,7 @@ namespace vas
 	public:
 		/** Create a new vector with zero vector. */
 		Vector2();
-		explicit Vector2(const sdl::Point& point);
+		explicit Vector2(const sdl::Point& point); /**< Cast from sdl::Point. */
 		/** Create new instance of Vector2 from coordinate.
 			  @param x X coordinate of the vector.
 			  @param y Y coordinate of the vector.
@@ -71,7 +71,11 @@ namespace vas
 		Vector2& operator=(const Vector2&) = default;
 		Vector2& operator=(Vector2&&) = default;
 
-		explicit operator sdl::Point() const;
+		/** @name Overloaded operators
+			  @{
+		*/
+		explicit operator sdl::Point() const; /**< Cast to sdl::Point. */
+		/** @} */
 	public:
 		float x{ 0 }; /**< x position of the vector on the cartiesain plan. */
 		float y{ 0 }; /**< y position of the vector on the cartiesain plan. */

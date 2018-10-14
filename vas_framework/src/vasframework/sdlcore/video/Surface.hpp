@@ -8,23 +8,30 @@
 
 namespace vas::sdl
 {
+	/** @addtogroup sdl_basic
+		  @{
+	*/
+	/** @brief A collection of pixels used in software blitting. */
 	class VAS_DECLSPEC Surface : public SDLComponentBase<SDL_Surface, Surface>
-	{
+	{ /** @} */
 	public:
-		Surface();
+		Surface(); /**< Create empty surface. */
+		/** Refrence to a SDL_Surface. */
 		explicit Surface(SDL_Surface* refInstance, SDLComponentBase::DeleterType deleter = &Surface::notDeleteDeleter);
+		/** Create new surface with raw rgba mask. */
 		Surface(uint32_t flags, const Point& size, int depth, uint32_t rMask, uint32_t gMask, uint32_t bMask, uint32_t aMask);
 		//Surface(uint32_t flags, const Point& size, int depth, uint32_t format);
+		/** Create RGB surface form @p pixels. */
 		Surface(void* pixels, const Point& size, int depth, int pitch, uint32_t rMask, uint32_t gMask, uint32_t bMask, uint32_t aMask);
 		//Surface(void* pixels, const Point& size, int depth, int pitch, uint32_t format);
 
-		bool lock();
-		void loadBMP(std::string file);
-		void loadBMPRw(sdl::rwops::RWops* src, bool freeSrc = true);
-		void loadImage(const std::string& file);
-		void loadImageRaw(sdl::rwops::RWops* src, bool freeSrc = true);
+		bool lock(); /**< lock the surface. */
+		void loadBMP(std::string file); /**< load only BMP image from @p file. */
+		void loadBMPRw(sdl::rwops::RWops* src, bool freeSrc = true); /**< load only BMP image from memory. */
+		void loadImage(const std::string& file); /**< load any kind of supported image from @p file. */
+		void loadImageRaw(sdl::rwops::RWops* src, bool freeSrc = true); /**< load and supported image from memory. */
 
-		/* Load an image from an SDL data source.
+		/** Load an image from an SDL data source.
 		The 'type' may be one of: "BMP", "GIF", "PNG", etc.
 
 		If the image format supports a transparent pixel, SDL will set the
@@ -34,14 +41,14 @@ namespace vas::sdl
 		*/
 		void loadIMGTypedRW(sdl::rwops::RWops* src, const std::string& type, bool freeSrc = true);
 
-		bool saveBMP(const std::string& file);
-		bool saveBMPRw(sdl::rwops::RWops* dest, bool freeSrc = true);
-		bool savePNG(const std::string& file);
-		bool savePNGRaw(sdl::rwops::RWops* dest, bool freeDst = true);
-		bool setPalette(SDL_Palette* palette);
-		bool setRLE(int flags);
+		bool saveBMP(const std::string& file); /**< save current surface to bmp file at @p file. */
+		bool saveBMPRw(sdl::rwops::RWops* dest, bool freeSrc = true); /**< Dump current surface to bmp in ram. */
+		bool savePNG(const std::string& file); /**< Save current surface to png file. */
+		bool savePNGRaw(sdl::rwops::RWops* dest, bool freeDst = true); /**< dump current surface in memory with png format. */
+		bool setPalette(SDL_Palette* palette); /**< Set the palette use by the surface. */
+		bool setRLE(int flags); /**< Set the RLE acceleration of the surface. */
 
-		void unlock();
+		void unlock(); /**< unlock surface. */
 
 		Surface(const Surface& other);
 		Surface(Surface&& other);

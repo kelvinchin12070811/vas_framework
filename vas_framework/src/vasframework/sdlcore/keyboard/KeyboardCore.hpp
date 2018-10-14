@@ -9,26 +9,30 @@
 
 namespace vas::sdl
 {
+	/** @addtogroup sdl_basic
+		  @{
+	*/
+	/** @brief Mouse button id or index. */
 	enum class MouseButtonIndex : uint8_t
 	{
-		ButtonLeft = 1,
-		ButtonMiddle,
-		ButtonRight,
-		ButtonX1,
-		ButtonX2
+		ButtonLeft = 1, /**< left button. */
+		ButtonMiddle, /**< middle button. */
+		ButtonRight, /**< right button. */
+		ButtonX1, /**< function button 1. */
+		ButtonX2 /**< function button 2. */
 	};
-	using MouseWheelDirection = SDL_MouseWheelDirection;
+	using MouseWheelDirection = SDL_MouseWheelDirection; /**< mouse wheel roll direction. */
 	/**
-	*  \brief Get the window which currently has keyboard focus.
+	*  Get the window which currently has keyboard focus.
 	*/
 	VAS_DECLSPEC sdl::Window getKeyboardFocus();
 
 	/**
-	*  \brief Get a snapshot of the current state of the keyboard.
+	*  Get a snapshot of the current state of the keyboard.
 	*
-	*  \param numkeys if non-NULL, receives the length of the returned array.
+	*  @param numKey if non-NULL, receives the length of the returned array.
 	*
-	*  \return An array of key states. Indexes into this array are obtained by using ::SDL_Scancode values.
+	*  \return An array of key states. Indexes into this array are obtained by using vas::sdl::Scancode values.
 	*
 	*  \b Example:
 	*  \code
@@ -41,39 +45,39 @@ namespace vas::sdl
 	VAS_DECLSPEC const uint8_t* getKeyboardState(int* numKey = nullptr);
 
 	/**
-	*  \brief Get the current key modifier state for the keyboard.
+	*  Get the current key modifier state for the keyboard.
 	*/
 	VAS_DECLSPEC SDL_Keymod getModState();
 
 	/**
-	*  \brief Set the current key modifier state for the keyboard.
+	*  Set the current key modifier state for the keyboard.
 	*
 	*  \note This does not change the keyboard state, only the key modifier flags.
 	*/
 	VAS_DECLSPEC void setModState(SDL_Keymod modstate);
 
 	/**
-	*  \brief Get the key code corresponding to the given scancode according
+	*  Get the key code corresponding to the given scancode according
 	*         to the current keyboard layout.
 	*
-	*  See ::SDL_Keycode for details.
+	*  See vas::sdl::Keycode for details.
 	*
 	*  \sa SDL_GetKeyName()
 	*/
 	VAS_DECLSPEC sdl::Keycode getKeyFromScancode(sdl::Scancode scancode);
 
 	/**
-	*  \brief Get the scancode corresponding to the given key code according to the
+	*  Get the scancode corresponding to the given key code according to the
 	*         current keyboard layout.
 	*
-	*  See ::SDL_Scancode for details.
+	*  See vas::sdl::Scancode for details.
 	*
 	*  \sa SDL_GetScancodeName()
 	*/
 	VAS_DECLSPEC sdl::Scancode getScancodeFromKey(sdl::Keycode keycode);
 
 	/**
-	*  \brief Get a human-readable name for a scancode.
+	*  Get a human-readable name for a scancode.
 	*
 	*  \return A pointer to the name for the scancode.
 	*          If the scancode doesn't have a name, this function returns
@@ -84,7 +88,7 @@ namespace vas::sdl
 	VAS_DECLSPEC std::string getScancodeName(sdl::Scancode scancode);
 
 	/**
-	*  \brief Get a scancode from a human-readable name
+	*  Get a scancode from a human-readable name
 	*
 	*  \return scancode, or SDL_SCANCODE_UNKNOWN if the name wasn't recognized
 	*
@@ -93,7 +97,7 @@ namespace vas::sdl
 	VAS_DECLSPEC sdl::Scancode getScancodeFromName(const std::string& name);
 
 	/**
-	*  \brief Get a human-readable name for a key.
+	*  Get a human-readable name for a key.
 	*
 	*  \return A pointer to a UTF-8 string that stays valid at least until the next
 	*          call to this function. If you need it around any longer, you must
@@ -105,7 +109,7 @@ namespace vas::sdl
 	VAS_DECLSPEC std::string getKeycodeName(sdl::Keycode key);
 
 	/**
-	*  \brief Get a key code from a human-readable name
+	*  Get a key code from a human-readable name
 	*
 	*  \return key code, or SDLK_UNKNOWN if the name wasn't recognized
 	*
@@ -114,7 +118,7 @@ namespace vas::sdl
 	VAS_DECLSPEC sdl::Keycode getKeycodeFromName(const std::string& name);
 
 	/**
-	*  \brief Start accepting Unicode text input events.
+	*  Start accepting Unicode text input events.
 	*         This function will show the on-screen keyboard if supported.
 	*
 	*  \sa SDL_StopTextInput()
@@ -124,7 +128,7 @@ namespace vas::sdl
 	VAS_DECLSPEC void startTextInput();
 
 	/**
-	*  \brief Return whether or not Unicode text input events are enabled.
+	*  Return whether or not Unicode text input events are enabled.
 	*
 	*  \sa SDL_StartTextInput()
 	*  \sa SDL_StopTextInput()
@@ -132,7 +136,7 @@ namespace vas::sdl
 	VAS_DECLSPEC bool isTextInputActive();
 
 	/**
-	*  \brief Stop receiving any text input events.
+	*  Stop receiving any text input events.
 	*         This function will hide the on-screen keyboard if supported.
 	*
 	*  \sa SDL_StartTextInput()
@@ -141,7 +145,7 @@ namespace vas::sdl
 	VAS_DECLSPEC void stopTextInput();
 
 	/**
-	*  \brief Set the rectangle used to type Unicode text inputs.
+	*  Set the rectangle used to type Unicode text inputs.
 	*         This is used as a hint for IME and on-screen keyboard placement.
 	*
 	*  \sa SDL_StartTextInput()
@@ -149,7 +153,7 @@ namespace vas::sdl
 	VAS_DECLSPEC void setTextInputRect(sdl::Rect *rect);
 
 	/**
-	*  \brief Returns whether the platform has some screen keyboard support.
+	*  Returns whether the platform has some screen keyboard support.
 	*
 	*  \return SDL_TRUE if some keyboard support is available else SDL_FALSE.
 	*
@@ -160,7 +164,7 @@ namespace vas::sdl
 	VAS_DECLSPEC bool hasScreenKeyboardSupport();
 
 	/**
-	*  \brief Returns whether the screen keyboard is shown for given window.
+	*  Returns whether the screen keyboard is shown for given window.
 	*
 	*  \param window The window for which screen keyboard should be queried.
 	*

@@ -9,25 +9,31 @@
 
 namespace vas::sdl
 {
+	/** @addtogroup sdl_basic
+		  @{
+	*/
+	/** @brief An efficient driver-specific representation of pixel data. */
 	class VAS_DECLSPEC Texture : public SDLComponentBase<SDL_Texture, Texture>
-	{
+	{ /** @} */
 	public:
-		Texture();
+		Texture(); /**< Create empty instance of texutre. */
+		/**< Create new instance of texture. */
 		Texture(Renderer& renderer, uint32_t format, int access, const Point& size);
-		Texture(Renderer& renderer, Surface surface);
+		Texture(Renderer& renderer, Surface surface); /**< Create texture from surface. */
 		Texture(const Texture& other);
 		Texture(Texture&& other);
+		/** Reference to a SDL_Texture. */
 		explicit Texture(SDL_Texture* other, SDLComponentBase::DeleterType deleter = &Texture::notDeleteDeleter);
 		~Texture();
 
-		bool getAlphaMod(uint8_t* alpha);
-		bool getBlendMod(BlendMode* mode);
-		bool getColorMod(uint8_t* red, uint8_t* green, uint8_t* bule);
+		bool getAlphaMod(uint8_t* alpha); /**< Get alpha mod fo texture, or the opacity. @return true if success. */
+		bool getBlendMod(BlendMode* mode); /**< Get blend mode of the texture. @return true if success. */
+		bool getColorMod(uint8_t* red, uint8_t* green, uint8_t* bule); /**< Get colour mod of texture. @return true if success. */
 
-		void loadImage(Renderer& renderer, const std::string& file);
-		void loadImageRaw(Renderer& renderer, rwops::RWops* src, bool freeSrc = true);
+		void loadImage(Renderer& renderer, const std::string& file); /**< Load from image file directy. */
+		void loadImageRaw(Renderer& renderer, rwops::RWops* src, bool freeSrc = true); /**< Load image from memory directly. */
 
-		/* Load an image from an SDL data source.
+		/** Load an image from an SDL data source.
 		The 'type' may be one of: "BMP", "GIF", "PNG", etc.
 
 		If the image format supports a transparent pixel, SDL will set the
@@ -36,18 +42,30 @@ namespace vas::sdl
 		SDL_SetColorKey(image, SDL_RLEACCEL, image->format->colorkey);
 		*/
 		void loadImageTypedRaw(Renderer& renderer, rwops::RWops* src, const std::string& type, bool freeSrc = true);
-		bool lockTexture(const Rect& rect, void** pixels, int* pitch);
+		bool lockTexture(const Rect& rect, void** pixels, int* pitch); /**< Lock the texture. @return true if success. */
 
-		bool setAlphaMod(uint8_t alpha);
-		bool setBlendMod(BlendMode mode);
-		bool setColorMod(uint8_t red, uint8_t green, uint8_t bule);
+		bool setAlphaMod(uint8_t alpha); /**< Set texture alpha mod. */
+		bool setBlendMod(BlendMode mode); /**< Set texture blend mode. */
+		bool setColorMod(uint8_t red, uint8_t green, uint8_t bule); /**< Set texture colour mod. */
 
-		void unlockTexture();
-		//Note: This is a fairly slow function
+		void unlockTexture(); /**< Unlock texture. */
+		/** Update the texture.
+			  @return true if success.
+			  @note This is a fairly slow function
+		*/
 		bool updateTexture(const Rect& rect, const void* pixels, int pitch);
+		/** Update texture YUV data.
+			  @return true if success.
+		*/
 		bool updateYUVTexture(const Rect& rect, const Uint8* Yplane, int Ypitch, const Uint8* Uplane, int Upitch, const Uint8* Vplane, int Vpitch);
 
+		/** Get the size of the texture.
+			  @return true if success.
+		*/
 		bool queryTexture(int* w, int* h);
+		/** Query texture.
+			  @return ture if success.
+		*/
 		bool queryTexture(uint32_t* format, int* access, int* w, int* h);
 
 		Texture& operator=(const Texture& other);

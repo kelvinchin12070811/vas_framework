@@ -4,20 +4,23 @@
 
 namespace vas::sdl
 {
+	/** @addtogroup sdl_basic
+		  @{
+	*/
+	/** @brief Initialization flags of sdl library.
+		  
+		  The InitFlags is the flags that tell sdl what sub component to init during the initialization of the library.
+	*/
 	struct VAS_DECLSPEC InitFlags
-	{
-		static const uint32_t everything;
-		static const uint32_t timer;
-		static const uint32_t audio;
-		/**< SDL_INIT_VIDEO implies SDL_INIT_EVENTS */
-		static const uint32_t video;
-		/**< SDL_INIT_JOYSTICK implies SDL_INIT_EVENTS */
-		static const uint32_t joystick;
-		static const uint32_t haptic;
-		/**< SDL_INIT_GAMECONTROLLER implies SDL_INIT_JOYSTICK */
-		static const uint32_t gamecontroller;
-		static const uint32_t event;
-		/**< compatibility; this flag is ignored. */
-		static const uint32_t noparachute;
+	{ /** @} */
+		static const uint32_t everything; /**< Init all subsystem. */
+		static const uint32_t timer; /**< Init timer subsystem. */
+		static const uint32_t audio; /**< Init audio subsystem. */
+		static const uint32_t video; /** Init video subsystem, from official docs: SDL_INIT_VIDEO implies SDL_INIT_EVENTS. */
+		static const uint32_t joystick; /**<Init joystick subsystem, from official docs: SDL_INIT_JOYSTICK implies SDL_INIT_EVENTS. */
+		static const uint32_t haptic; /**< Init haptic subsystem. */
+		static const uint32_t gamecontroller; /**< Init gamecontroller subsystem, from official docs: SDL_INIT_GAMECONTROLLER implies SDL_INIT_JOYSTICK */
+		static const uint32_t event; /**< Init event subsystem. */
+		static const uint32_t noparachute; /**< compatibility, this flag is ignored. */
 	};
 }

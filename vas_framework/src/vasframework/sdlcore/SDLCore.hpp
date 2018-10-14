@@ -14,13 +14,18 @@
 
 namespace vas::sdl
 {
-	VAS_DECLSPEC std::string getError();
+	/** @addtogroup sdl_basic
+		  @{
+	*/
+	VAS_DECLSPEC std::string getError(); /**< Get last error message of SDL. */
 
-	VAS_DECLSPEC void delay(uint32_t ms);
-	VAS_DECLSPEC uint32_t getTicks();
+	VAS_DECLSPEC void delay(uint32_t ms); /**< Delay execution in miliseconds. */
+	VAS_DECLSPEC uint32_t getTicks(); /**< Get current ticks in miliseconds. */
 
-	/*return true if success, use sdl::getError() to get last error string
-	origin: SDL_Init(uint32_t)*/
+	/** Init SDL library
+		  @param flags Initialization flags to tell sdl which subsystem to init.
+		  @return true if success.
+	*/
 	VAS_DECLSPEC bool init(uint32_t flags = sdl::InitFlags::everything);
 
 	/**
@@ -31,6 +36,7 @@ namespace vas::sdl
 	*  shutdown a subsystem manually (or call SDL_Quit() to force shutdown).
 	*  If a subsystem is already loaded then this call will
 	*  increase the ref-count and return.
+		@return true if success.
 	*/
 	VAS_DECLSPEC bool initSubSystem(uint32_t flags);
 
@@ -54,7 +60,12 @@ namespace vas::sdl
 
 	namespace image
 	{
+		/** Init sdl_image library.
+			  @param flags image init flags.
+			  @return @p flags if success, 0 if fail.
+		*/
 		VAS_DECLSPEC int init(int flags = ImageInitFlags::all_webp_not_included);
-		VAS_DECLSPEC void quit();
+		VAS_DECLSPEC void quit(); /**< Clear and quit the sdl_image library. */
 	}
+	/** @} */
 }

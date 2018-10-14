@@ -5,4 +5,6 @@
 	- Convert between UNIX time and normal time (local).
 	- Create and read basic ISO 8601 time stamp (without time-zone, UTC & until seconds only).
 	- Get current system time in UNIX, normal  or ISO 8601 format
+
+ -# Empty vas::sdl::Rect constant.
 */

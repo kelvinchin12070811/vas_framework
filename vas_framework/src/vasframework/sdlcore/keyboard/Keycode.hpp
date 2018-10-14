@@ -4,6 +4,10 @@
 
 namespace vas::sdl
 {
+	/** @addtogroup sdl_basic
+		  @{
+	*/
+	/** @brief The SDL virtual key representation. */
 	enum class Keycode
 	{
 		unknow = SDLK_UNKNOWN,
@@ -245,9 +249,14 @@ namespace vas::sdl
 		eject = SDLK_EJECT,
 		sleep = SDLK_SLEEP
 	};
-
+	
+	/** @name Keycode comparison operator
+		  @{
+	*/
 	VAS_DECLSPEC bool operator==(SDL_Keycode lhs, Keycode rhs);
 	VAS_DECLSPEC bool operator==(Keycode lhs, SDL_Keycode rhs);
 	VAS_DECLSPEC bool operator!=(SDL_Keycode lhs, Keycode rhs);
 	VAS_DECLSPEC bool operator!=(Keycode lhs, SDL_Keycode rhs);
+	/** @} */
+	/** @} */
 }

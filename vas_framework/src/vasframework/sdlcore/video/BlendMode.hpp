@@ -3,21 +3,26 @@
 
 namespace vas::sdl
 {
+	/** @addtogroup sdl_basic
+		  @{
+	*/
+	/** @brief Blend modes of sdl::Textuer.
+	*/
 	enum class BlendMode
-	{
-		/**< no blending
+	{ /** @} */
+		/** no blending\n
 		dstRGBA = srcRGBA */
 		none = 0x00000000,
-		/**< alpha blending
-		dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+		/** alpha blending\n
+		dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))\n
 		dstA = srcA + (dstA * (1-srcA)) */
 		blend = 0x00000001,
-		/**< additive blending
-		dstRGB = (srcRGB * srcA) + dstRGB
+		/** additive blending\n
+		dstRGB = (srcRGB * srcA) + dstRGB\n
 		dstA = dstA */
 		add = 0x00000002,
-		/**< color modulate
-		dstRGB = srcRGB * dstRGB
+		/** color modulate\n
+		dstRGB = srcRGB * dstRGB\n
 		dstA = dstA */
 		mod = 0x00000004
 	};
