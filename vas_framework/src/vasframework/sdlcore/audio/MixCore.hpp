@@ -12,32 +12,50 @@ namespace vas::sdl
 {
 	namespace mixer
 	{
+		/** @addtogroup sdl_mixer
+			  @{
+		*/
+		/** @brief Signals fired when mixer related event happened. */
 		class VAS_DECLSPEC Signals
 		{
 		public:
-			static boost::signals2::signal<void()> MusicFinished;
-			static boost::signals2::signal<void(int)> ChannelFinished;
+			static boost::signals2::signal<void()> MusicFinished; /**< vas::sdl::mixer::Music finished playing. */
+			static boost::signals2::signal<void(int)> ChannelFinished; /**< vas::sdl::mixer::Chunk or a channel finished playing.
+																	   With a parameter with type int representing channel num of the event fired.*/
 		};
 
-		VAS_DECLSPEC int init(int flags);
-		VAS_DECLSPEC bool init();
-		VAS_DECLSPEC void quit();
+		VAS_DECLSPEC int init(int flags); /**< Init sdl_mixer library. @return @p flags if success. */
+		VAS_DECLSPEC bool init(); /**< Init sdl_mixer library with default value. @return true if success. */
+		VAS_DECLSPEC void quit(); /**< Clear and quit sdl_mixer library. */
+		/** Open the mixer with certain audio format. @return true if success. */
 		VAS_DECLSPEC bool openAudio(int frequency = DefaultValues::frequency, uint16_t format = DefaultValues::format,
 			int channels = DefaultValues::channelCount, int chunckSize = DefaultValues::chunkSize);
-		VAS_DECLSPEC void closeAudio();
+		VAS_DECLSPEC void closeAudio(); /**< Close the mixer. */
+		/** Dynamically change the number of channels managed by the mixer.
+			  @return new number of allocated channels.
+		*/
 		VAS_DECLSPEC int allocateChannels(int numChannels);
+		/** Find out what the actual audio device parameters are.
+			  @return true if success.
+		*/
 		VAS_DECLSPEC bool querySpec(int *frequency, uint16_t *format, int* channels);
+		/** Set the position of a channel.
+			  @return true if success.
+		*/
 		VAS_DECLSPEC bool setChannelPosition(int channel, int16_t angle, uint8_t distance);
+		/** Set the "distance" of a channel.
+			  @return true if success.
+		*/
 		VAS_DECLSPEC bool setChannelDistance(int channel, int8_t distance);
 
-		/* Set the panning of a channel. The left and right channels are specified
+		/** Set the panning of a channel. The left and right channels are specified
 		*  as integers between 0 and 255, quietest to loudest, respectively.
 		*
 		* Technically, this is just individual volume control for a sample with
 		*  two (stereo) channels, so it can be used for more than just panning.
 		*  If you want real panning, call it like this:
 		*
-		*   Mix_SetPanning(channel, left, 255 - left);
+		*   sdl::mixer::setPanning(channel, left, 255 - left);
 		*
 		* ...which isn't so hard.
 		*
@@ -57,7 +75,7 @@ namespace vas::sdl
 		*/
 		VAS_DECLSPEC bool setPanning(int channel, uint8_t left, uint8_t right);
 
-		/* Causes a channel to reverse its stereo. This is handy if the user has his
+		/** Causes a channel to reverse its stereo. This is handy if the user has his
 		*  speakers hooked up backwards, or you would like to have a minor bit of
 		*  psychedelia in your sound code.  :)  Calling this function with (flip)
 		*  set to non-zero reverses the chunks's usual channels. If (flip) is zero,
@@ -79,38 +97,44 @@ namespace vas::sdl
 		*/
 		VAS_DECLSPEC bool setReverseStereo(int channel, bool flip);
 
-		/* Reserve the first channels (0 -> n-1) for the application, i.e. don't allocate
+		/** Reserve the first channels (0 -> n-1) for the application, i.e. don't allocate
 		them dynamically to the next sample if requested with a -1 value below.
 		Returns the number of reserved channels.
 		*/
 		VAS_DECLSPEC int reserveChannels(int num);
 
-		/* Attach a tag to a channel. A tag can be assigned to several mixer
+		/** Attach a tag to a channel. A tag can be assigned to several mixer
 		channels, to form groups of channels.
 		If 'tag' is -1, the tag is removed (actually -1 is the tag used to
 		represent the group of all the channels).
 		Returns true if everything was OK.
 		*/
 		VAS_DECLSPEC bool groupChannel(int which, int tag);
+		/** Attach a tag to a channels. A tag can be assigned to several mixer
+		channels, to form groups of channels.
+		If 'tag' is -1, the tag is removed (actually -1 is the tag used to
+		represent the group of all the channels).
+		Returns true if everything was OK.
+		*/
 		VAS_DECLSPEC int groupChannels(int from, int to, int tag);
 
-		/* Finds the first available channel in a group of channels,
+		/** Finds the first available channel in a group of channels,
 		returning -1 if none are available.
 		*/
 		VAS_DECLSPEC int groupAvailable(int tag);
 
-		/* Returns the number of channels in a group. This is also a subtle
+		/** Returns the number of channels in a group. This is also a subtle
 		way to get the total number of channels when 'tag' is -1
 		*/
 		VAS_DECLSPEC int groupCount(int tag);
 
-		/* Finds the "oldest" sample playing in a group of channels */
+		/** Finds the "oldest" sample playing in a group of channels */
 		VAS_DECLSPEC int groupOldest(int tag);
 
-		/* Finds the "most recent" (i.e. last) sample playing in a group of channels */
+		/** Finds the "most recent" (i.e. last) sample playing in a group of channels */
 		VAS_DECLSPEC int groupNewer(int tag);
 
-		/* Set the volume in the range of 0-128 of a specific channel or chunk.
+		/** Set the volume in the range of 0-128 of a specific channel or chunk.
 		If the specified channel is -1, set volume for all channels.
 		Returns the original volume.
 		If the specified volume is -1, just return the current volume.
@@ -118,6 +142,7 @@ namespace vas::sdl
 		VAS_DECLSPEC int volume(int channel, int volume);
 	}
 }
+/*** @} */
 
 void VAS_DECLSPEC __INNER_ON_MUSIC_END();
 void VAS_DECLSPEC __INNER_ON_CHANNEL_END(int channel);

@@ -29,7 +29,7 @@ namespace vas::sdl
 	/** @brief The basic component template of all SDL component.
 		  
 		  SDLComponentBase is the basic templated interface of all SDL component. This class provided the basic template
-		  for the component to work. The empty component can represented as vas::sdl::emptycomponnet.
+		  for the component to work. The empty component can represented as vas::sdl::emptycomponent.
 
 		  A SDL component are able to compare itself with each other to determine if they are same or not. It also be able to
 		  reassigend with other instance and the previous one will be deleted when needed. All SDL component use C++

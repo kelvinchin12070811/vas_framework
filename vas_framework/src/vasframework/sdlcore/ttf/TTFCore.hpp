@@ -9,9 +9,13 @@ namespace vas::sdl
 {
 	namespace ttf
 	{
-		VAS_DECLSPEC bool init();
-		VAS_DECLSPEC void quit();
-		VAS_DECLSPEC bool wasInit();
+		/** @addtogroup sdl_ttf
+			  @{
+		*/
+		VAS_DECLSPEC bool init(); /**< Initialize sdl_ttf library. @return true if success. */
+		VAS_DECLSPEC void quit(); /**< Quit the sdl_ttf library. */
+		VAS_DECLSPEC bool wasInit(); /**< Check if the library is initialized. */
+		/** @} */
 	}
 }
 #endif // VAS_USE_TTF

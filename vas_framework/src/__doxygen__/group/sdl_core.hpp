@@ -16,8 +16,22 @@
 	  All related class: \#include <vasframework/sdlcore/SDLCore.hpp>
 */
 
+namespace vas
+{
+	namespace sdl
+	{
+		/** @addtogroup sdl_basic
+			  @{
+		*/
+		const class EmptyComponent_t;
+		/** Define an empty sdl component. */
+		EmptyComponent_t emptycomponent;
+		/** @} */
+	}
+}
+
 /** @defgroup sdl_mixer SDL Mixer Library
-	  @brief Wrapper of sdl_mix library.
+	  @brief Wrapper of sdl_mixer library.
 
 	  All related class: \#include <vasframework/sdlcore/audio/MixCore.hpp>
 */
