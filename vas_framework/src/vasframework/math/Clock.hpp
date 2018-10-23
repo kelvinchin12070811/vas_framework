@@ -14,6 +14,7 @@ namespace vas
 	class VAS_DECLSPEC Clock
 	{ /** @} */
 	public:
+		using DurationType = std::chrono::nanoseconds;
 		Clock();
 		~Clock();
 
