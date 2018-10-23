@@ -38,6 +38,11 @@ namespace vas
 		frameUpdateTimer.reset();
 	}
 
+	void AnimationController::restart()
+	{
+		this->reset();
+	}
+
 	AnimationStrip::value_type AnimationController::getCurrentFrame()
 	{
 		return frames[frameIndexer];
