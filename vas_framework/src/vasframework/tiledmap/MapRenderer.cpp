@@ -23,6 +23,8 @@ namespace vas
 		if (layer == nullptr) return;
 		if (camera == nullptr) camera = &Camera::getInstance();
 
+		if (layer->isHidden()) return;
+
 		sdl::Point tilePosition;
 		for (tilePosition.y = 0; tilePosition.y < mapSize.y; tilePosition.y++)
 		{

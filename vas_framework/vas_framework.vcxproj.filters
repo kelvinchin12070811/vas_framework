@@ -291,6 +291,9 @@
     <ClInclude Include="src\vasframework\graphics\scene\SceneCallFailed.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\__doxygen__\group\tiled_parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">

@@ -7,11 +7,18 @@
 
 namespace vas
 {
+	/** @addtogroup tile_codec
+		  @{
+	*/
+	/** @brief Object to draw on ObjectLayer.
+		  
+		  The information about object that will be display on the ObjectLayer.
+	*/
 	struct ObjectData
-	{
-		std::string name;
-		std::string type;
-		std::unique_ptr<IShape> instance;
-		PropertyList properties;
+	{ /** @} */
+		std::string name; /**< Name of the object. */
+		std::string type; /**< Type of the object. */
+		std::unique_ptr<IShape> instance; /**< The instance of the object's metadatas. */
+		PropertyList properties; /**< Properties of the object. */
 	};
 }

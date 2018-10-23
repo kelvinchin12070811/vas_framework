@@ -111,6 +111,7 @@
     <ClInclude Include="src\vasframework\graphics\animation\StateAnimator.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\TransitionInfo.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\StripAnimation.hpp" />
+    <ClInclude Include="src\__doxygen__\group\tiled_parser.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\graphics\scene\SceneCallFailed.cpp" />

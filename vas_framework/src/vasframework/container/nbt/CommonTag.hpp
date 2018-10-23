@@ -65,7 +65,9 @@ namespace vas
 		ValueType value;
 	};
 
-	/** @name Predefined tags
+	/** @name Predefined tag
+		  
+		  The predefined tag that use with NBT structure. #include <vasframework/container/nbt/CommonTag.hpp> to use them.
 		  @{
 	*/
 	using ByteTag = ValueWarpperTag<uint8_t>; /**< Byte tag. */

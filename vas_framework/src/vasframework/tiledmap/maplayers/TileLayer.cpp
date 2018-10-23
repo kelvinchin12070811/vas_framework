@@ -76,4 +76,9 @@ namespace vas
 	{
 		height = value;
 	}
+
+	void TileLayer::setHidden(bool value)
+	{
+		this->hidden = value;
+	}
 }
