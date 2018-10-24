@@ -6,6 +6,8 @@
 #include <vasframework/graphics/Camera.hpp>
 #include <vasframework/graphics/animation/AttrKeyframeAnimation.hpp>
 #include <vasframework/graphics/animation/AnimationDelay.hpp>
+#include <vasframework/math/Clock.hpp>
+#include <iomanip>
 #include "MainScene.hpp"
 
 using namespace std::string_literals;
@@ -51,6 +53,15 @@ namespace scene
 		}
 		animation.insertAnimation(make_unique<vas::AnimationDelay>(5s));
 		animation.setLoopingAnim(true);
+
+		std::tm curDate = vas::Clock::ISO8601ToTm("19710101T000000Z", vas::Clock::TimeType::local);
+		std::time_t curTime = vas::Clock::tmToTime_t(curDate, vas::Clock::TimeType::local);
+		
+		vas::Log() << curTime;
+		vas::Log() << put_time(&curDate, "%Y-%m-%d %H:%M:%S");
+		vas::Log() << vas::Clock::tmToISO8601(curDate, true, vas::Clock::TimeType::local);
+		vas::Log() << vas::Clock::tmToISO8601(curDate, false, vas::Clock::TimeType::local);
+		vas::Log() << vas::Clock::getTimezoneOffset();
 	}
 
 	MainScene::~MainScene()

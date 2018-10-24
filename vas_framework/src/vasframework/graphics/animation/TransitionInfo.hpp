@@ -6,8 +6,12 @@
 
 namespace vas
 {
+	/** @addtogroup animate
+		  @{
+	*/
+	/***/
 	class VAS_DECLSPEC TransitionInfo
-	{
+	{ /** @} */
 	public:
 		TransitionInfo(const std::string& to, std::function<bool(const std::any&)> condition, bool waitFinish = false);
 		~TransitionInfo();
