@@ -39,52 +39,51 @@ namespace vas
 		return std::chrono::system_clock::to_time_t(resultTm);
 	}
 
-	std::tm Clock::getCurrentCalenderDateTime(TimeType tmType)
+	std::tm Clock::getCurrentCalenderDateTime(Clock::Timezone zone)
 	{
 		time_t crTime = getCurrentUnixTime();
-		//std::tm tmTime = tmType == Clock::TimeType::utc ? *std::gmtime(&crTime) : *std::localtime(&crTime);
 		std::tm tmTime{ 0 };
-		switch (tmType)
+		switch (zone)
 		{
-		case vas::Clock::TimeType::local:
+		case vas::Clock::Timezone::local:
 			localtime_s(&tmTime, &crTime);
 			break;
-		case vas::Clock::TimeType::utc:
+		case vas::Clock::Timezone::utc:
 			gmtime_s(&tmTime, &crTime);
 			break;
 		}
 		return tmTime;
 	}
 
-	std::string Clock::getCurrentISO8601Time(Clock::TimeType tmType, bool withSeperator)
+	std::string Clock::getCurrentISO8601Time(Clock::Timezone zone, bool withSeperator)
 	{
-		std::tm tmTime = getCurrentCalenderDateTime(tmType);
+		std::tm tmTime = getCurrentCalenderDateTime(zone);
 		return tmToISO8601(tmTime, withSeperator);
 	}
 
-	time_t Clock::tmToTime_t(const std::tm & tm, TimeType srcType)
+	time_t Clock::tmToTime_t(const std::tm & tm, Clock::Timezone srcZone)
 	{
 		auto tmCl = tm;
 		time_t result = std::mktime(&tmCl);
-		return srcType == TimeType::utc ? result + getTimezoneOffset() : result;
+		return srcZone == Timezone::utc ? result + getTimezoneOffset() : result;
 	}
 
-	std::tm Clock::time_tToTm(const time_t & time, TimeType desType)
+	std::tm Clock::time_tToTm(const time_t & time, Clock::Timezone desZone)
 	{
 		std::tm tm;
-		switch (desType)
+		switch (desZone)
 		{
-		case vas::Clock::TimeType::local:
+		case vas::Clock::Timezone::local:
 			localtime_s(&tm, &time);
 			break;
-		case vas::Clock::TimeType::utc:
+		case vas::Clock::Timezone::utc:
 			gmtime_s(&tm, &time);
 			break;
 		}
 		return tm;
 	}
 
-	std::string Clock::tmToISO8601(const std::tm & tm, bool seperator, TimeType srcType)
+	std::string Clock::tmToISO8601(const std::tm & tm, bool seperator, Clock::Timezone srcZone)
 	{
 		std::ostringstream timeMaker;
 
@@ -93,17 +92,17 @@ namespace vas
 		else
 			timeMaker << std::put_time(&tm, "%Y%m%dT%H%M%S");
 
-		if (srcType == TimeType::utc)
+		if (srcZone == Timezone::utc)
 			timeMaker << "Z";
 
 		return timeMaker.str();
 	}
 
-	std::tm Clock::ISO8601ToTm(const std::string & iso8601Time, Clock::TimeType desType)
+	std::tm Clock::ISO8601ToTm(const std::string & iso8601Time, Clock::Timezone desZone)
 	{
 		std::string timeStr = iso8601Time;
 		bool withSeperator = timeStr.find('-') != std::string::npos;
-		bool isUTC = ISO8601TimeType(timeStr) == TimeType::utc;
+		bool isUTC = ISO8601Timezone(timeStr) == Timezone::utc;
 		std::tm tm;
 
 		if (!withSeperator) //Convert to with seperator if no seperator
@@ -126,7 +125,7 @@ namespace vas
 		std::istringstream timeMaker(timeStr);
 		timeMaker >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
 
-		if (isUTC && desType == TimeType::local)
+		if (isUTC && desZone == Timezone::local)
 			tm = UTCToLocal(tm);
 
 		return tm;
@@ -143,19 +142,19 @@ namespace vas
 
 	std::tm Clock::UTCToLocal(const std::tm & input)
 	{
-		time_t buffer = tmToTime_t(input, TimeType::utc);
-		return time_tToTm(buffer, TimeType::local);
+		time_t buffer = tmToTime_t(input, Timezone::utc);
+		return time_tToTm(buffer, Timezone::local);
 	}
 
 	std::tm Clock::LocalToUTC(const std::tm & input)
 	{
-		time_t buffer = tmToTime_t(input, TimeType::local);
-		return time_tToTm(buffer, TimeType::utc);
+		time_t buffer = tmToTime_t(input, Timezone::local);
+		return time_tToTm(buffer, Timezone::utc);
 	}
 
-	Clock::TimeType Clock::ISO8601TimeType(std::string_view time)
+	Clock::Timezone Clock::ISO8601Timezone(std::string_view time)
 	{
 		auto result = time.rfind('Z');
-		return result == std::string_view::npos ? TimeType::local : TimeType::utc;
+		return result == std::string_view::npos ? Timezone::local : Timezone::utc;
 	}
 }

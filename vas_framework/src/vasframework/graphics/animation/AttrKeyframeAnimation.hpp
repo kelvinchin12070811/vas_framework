@@ -1,8 +1,8 @@
 #pragma once
 #include <algorithm>
 #include <chrono>
-#include <functional>
 #include "AnimateAble.hpp"
+#include "AttrWrap.hpp"
 #include "../../VASConfig.hpp"
 
 namespace vas
@@ -26,6 +26,7 @@ namespace vas
 					a incomming value which represented as the current value computed. The data type of it must be double.
 		*/
 		AttrKeyframeAnimation(std::function<void(double)> mutator);
+		AttrKeyframeAnimation(std::function<void(double)> mutator, double startVal, double stopVal, std::chrono::nanoseconds duration);
 
 		void setDuration(std::chrono::nanoseconds value);
 		std::chrono::nanoseconds getDuration() const;

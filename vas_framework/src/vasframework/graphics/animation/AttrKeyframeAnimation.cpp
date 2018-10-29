@@ -12,6 +12,11 @@ namespace vas
 	{
 	}
 
+	AttrKeyframeAnimation::AttrKeyframeAnimation(std::function<void(double)> mutator, double startVal, double stopVal, std::chrono::nanoseconds duration):
+		mutator(mutator), startValue(startVal), stopValue(stopVal), duration(duration)
+	{
+	}
+
 	void AttrKeyframeAnimation::setDuration(std::chrono::nanoseconds value)
 	{
 		duration = value;

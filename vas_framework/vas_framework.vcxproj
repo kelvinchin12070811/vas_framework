@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\graphics\animation\AttrWrap.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\TransitionInfo.hpp" />
     <ClInclude Include="src\vasframework\graphics\scene\SceneCallFailed.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\AnimationDelay.hpp" />

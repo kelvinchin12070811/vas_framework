@@ -18,11 +18,6 @@ namespace vas
 		timeOutSignal.disconnect_all_slots();
 	}
 
-	boost::signals2::signal<void()>& Timer::TimedOutSignal()
-	{
-		return timeOutSignal;
-	}
-
 	bool Timer::setInterval(std::chrono::milliseconds interval)
 	{
 		if (countingState) return false;

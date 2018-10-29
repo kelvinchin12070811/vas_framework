@@ -4,13 +4,24 @@
 #include <vasframework/container/Property.hpp>
 #include <vasframework/manager/AudioManger.hpp>
 #include <vasframework/graphics/Camera.hpp>
-#include <vasframework/graphics/animation/AttrKeyframeAnimation.hpp>
 #include <vasframework/graphics/animation/AnimationDelay.hpp>
 #include <vasframework/math/Clock.hpp>
 #include <iomanip>
 #include "MainScene.hpp"
 
 using namespace std::string_literals;
+
+OpacityWrap::OpacityWrap(std::function<void(vas::sdl::Colour)> mutator, std::function<vas::sdl::Colour()> getter):
+	AttrWrap(mutator), getter(getter)
+{
+}
+
+void OpacityWrap::operator()(double value)
+{
+	auto cur = getter();
+	cur.alpha = static_cast<uint8_t>(value);
+	this->mutator(std::move(cur));
+}
 
 namespace scene
 {
@@ -28,39 +39,28 @@ namespace scene
 		vas::CommonTools::getInstance().messenger(boost::format("compare result: %s"s) % (comResult ? "true"s : "false"s));
 		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
 
-		{
-			auto testSprite2Anim = make_unique<vas::AttrKeyframeAnimation>([this](double value) {
-				auto colour = testSprite2->getOverlay();
-				colour.alpha = static_cast<uint8_t>(value);
-				testSprite2->setOverlay(colour);
-			});
-			testSprite2Anim->setStartValue(0);
-			testSprite2Anim->setStopValue(255.0);
-			testSprite2Anim->setDuration(1s);
-			animation.insertAnimation(move(testSprite2Anim));
-		}
+		animation.insertAnimation(std::make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
+			[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
+			[&]() { return testSprite2->getOverlay(); }
+		), 0, 255.0, 1s));
+
 		animation.insertAnimation(std::make_unique<vas::AnimationDelay>(5s));
-		{
-			auto testSprite2Anim = make_unique<vas::AttrKeyframeAnimation>([this](double value) {
-				auto colour = testSprite2->getOverlay();
-				colour.alpha = static_cast<uint8_t>(value);
-				testSprite2->setOverlay(colour);
-			});
-			testSprite2Anim->setStartValue(255.0);
-			testSprite2Anim->setStopValue(0.0);
-			testSprite2Anim->setDuration(1s);
-			animation.insertAnimation(move(testSprite2Anim));
-		}
+
+		animation.insertAnimation(make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
+			[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
+			[&]() { return testSprite2->getOverlay(); }
+		), 255.0, 0.0, 1s));
+
 		animation.insertAnimation(make_unique<vas::AnimationDelay>(5s));
 		animation.setLoopingAnim(true);
 
-		std::tm curDate = vas::Clock::ISO8601ToTm("19710101T000000Z", vas::Clock::TimeType::local);
-		std::time_t curTime = vas::Clock::tmToTime_t(curDate, vas::Clock::TimeType::local);
+		std::tm curDate = vas::Clock::ISO8601ToTm("19710101T000000Z", vas::Clock::Timezone::local);
+		std::time_t curTime = vas::Clock::tmToTime_t(curDate, vas::Clock::Timezone::local);
 		
 		vas::Log() << curTime;
 		vas::Log() << put_time(&curDate, "%Y-%m-%d %H:%M:%S");
-		vas::Log() << vas::Clock::tmToISO8601(curDate, true, vas::Clock::TimeType::local);
-		vas::Log() << vas::Clock::tmToISO8601(curDate, false, vas::Clock::TimeType::local);
+		vas::Log() << vas::Clock::tmToISO8601(curDate, true, vas::Clock::Timezone::local);
+		vas::Log() << vas::Clock::tmToISO8601(curDate, false, vas::Clock::Timezone::local);
 		vas::Log() << vas::Clock::getTimezoneOffset();
 	}
 

@@ -19,12 +19,10 @@ namespace vas
 	class VAS_DECLSPEC Timer
 	{ /** @} */
 	public:
-		Timer();
-		/** Create a timer with */
+		Timer(); /**< Create timer with no interval. */
+		/** Create a timer with interval. */
 		explicit Timer(uint32_t interval);
 		~Timer();
-
-		boost::signals2::signal<void()>& TimedOutSignal();
 
 		/** Set the interval of timer, the timer must stoped when this function is called.
 			  @return true if success.
@@ -45,6 +43,9 @@ namespace vas
 		bool countingState{ false };
 		std::chrono::milliseconds duration{ 0 };
 		std::thread timerThread;
-		boost::signals2::signal<void()> timeOutSignal;
+	public:
+		/** @name Signals */
+		boost::signals2::signal<void()> timeOutSignal; /**< Signal fired when timer timed out. */
+		/** @} */
 	};
 }
