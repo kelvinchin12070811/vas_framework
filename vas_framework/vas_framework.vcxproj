@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vasframework\graphics\animation\AttrWrap.hpp" />
-    <ClInclude Include="src\vasframework\graphics\animation\TransitionInfo.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\state\State.hpp" />
     <ClInclude Include="src\vasframework\graphics\scene\SceneCallFailed.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\AnimationDelay.hpp" />
     <ClInclude Include="src\vasframework\base\NotImplementedException.hpp" />
@@ -110,11 +110,12 @@
     <ClInclude Include="src\vasframework\tiledmap\TMXParser.hpp" />
     <ClInclude Include="src\vasframework\tiledmap\maplayers\TileLayer.hpp" />
     <ClInclude Include="src\vasframework\tiledmap\container\TilesetsBundle.hpp" />
-    <ClInclude Include="src\vasframework\graphics\animation\StateAnimator.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\StripAnimation.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\state\StateAnimator.hpp" />
+    <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\vasframework\graphics\animation\TransitionInfo.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\AnimateAble.cpp" />
     <ClCompile Include="src\vasframework\graphics\scene\SceneCallFailed.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\AnimationDelay.cpp" />
     <ClCompile Include="src\vasframework\base\NotImplementedException.cpp" />
@@ -180,8 +181,9 @@
     <ClCompile Include="src\vasframework\tiledmap\container\TilesetsBundle.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
     </ClCompile>
-    <ClCompile Include="src\vasframework\graphics\animation\StateAnimator.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\StripAnimation.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\state\StateAnimator.cpp" />
+    <ClCompile Include="src\vasframework\graphics\animation\state\StateConditionalTransition.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA2CB821-0ED2-4937-818F-1035982D248A}</ProjectGuid>

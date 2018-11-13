@@ -50,10 +50,6 @@ namespace vas
 		}
 	}
 
-	bool StripAnimation::done() const
-	{
-		return finished;
-	}
 	std::pair<size_t, const SpriteSheet*> StripAnimation::getCurrentFrame() const
 	{
 		auto crFramePtr = *currentFrame;

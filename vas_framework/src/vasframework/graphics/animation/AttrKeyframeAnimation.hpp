@@ -38,7 +38,6 @@ namespace vas
 		double getStopValue() const;
 
 		void tick() override;
-		bool done() const override;
 
 	private:
 		bool finished{ false };

@@ -33,6 +33,7 @@ namespace vas
 	void AnimationControllerEx::restart()
 	{
 		if (animationList.empty()) return;
+		curAnim->reset();
 		curAnim = animationList.begin();
 		finished = false;
 	}

@@ -41,11 +41,6 @@ namespace vas
 		}
 	}
 
-	bool AnimationDelay::done() const
-	{
-		return finished;
-	}
-
 	void AnimationDelay::setDuration(std::chrono::nanoseconds value)
 	{
 		duration = value;

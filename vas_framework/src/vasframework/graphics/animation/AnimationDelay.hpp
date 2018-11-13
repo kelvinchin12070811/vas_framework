@@ -23,7 +23,6 @@ namespace vas
 		~AnimationDelay();
 
 		void tick() override;
-		bool done() const override;
 
 	public: //mutators
 		void setDuration(std::chrono::nanoseconds value);

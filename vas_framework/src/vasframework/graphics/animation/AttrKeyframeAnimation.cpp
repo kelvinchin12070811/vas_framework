@@ -87,9 +87,4 @@ namespace vas
 		mutator(curVal);
 		lastTick = std::chrono::steady_clock::now();
 	}
-
-	bool AttrKeyframeAnimation::done() const
-	{
-		return finished;
-	}
 }

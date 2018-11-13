@@ -13,7 +13,10 @@ namespace vas
 	{ /** @} */
 	public:
 		virtual void tick() = 0 {} /**< Tick or update the animation. */
-		virtual bool done() const = 0 {} /**< Deternime if the animation is finished. */
+		virtual bool done() const final; /**< Deternime if the animation is finished. */
+		virtual void reset(); /**< Reset the animations. */
 		virtual ~AnimateAble() = 0 {}
+	protected:
+		bool finished{ false };
 	};
 }

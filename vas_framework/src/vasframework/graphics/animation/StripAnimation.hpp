@@ -29,15 +29,12 @@ namespace vas
 		void insertFrame(size_t frame, SpriteSheet* spritesheet = nullptr, Clock::DurationType stayTime = Clock::DurationType());
 
 		void tick() override;
-		bool done() const override;
 
 		/** Get current frame shown.
 			  @return Pair of index of frame on the returned SpriteSheet.
 		*/
 		std::pair<size_t, const SpriteSheet*> getCurrentFrame() const;
 	private:
-		bool finished{ false };
-
 		iterator currentFrame;
 		std::unique_ptr<Clock> updateClock;
 	};
