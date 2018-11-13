@@ -82,7 +82,7 @@ namespace vas
 			curVal = stopValue;
 		}
 		if (curVal == stopValue)
-			finished = true;
+			this->finished = true;
 
 		mutator(curVal);
 		lastTick = std::chrono::steady_clock::now();

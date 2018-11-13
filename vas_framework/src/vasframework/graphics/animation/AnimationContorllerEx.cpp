@@ -25,7 +25,8 @@ namespace vas
 		}
 		else
 		{
-			if ((*curAnim)->done()) curAnim++;
+			if ((*curAnim)->done())
+				curAnim++;
 		}
 		if (curAnim != animationList.end()) (*curAnim)->tick();
 	}

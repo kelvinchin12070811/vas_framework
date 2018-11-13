@@ -30,7 +30,6 @@ namespace vas
 	public: //accessors
 		std::chrono::nanoseconds getDuration() const;
 	private:
-		bool finished{ false };
 		/** [Read & Write] Duration that pause added.\n
 				- __mutators__
 					-# void setDuration(std::chrono::nanoseconds value)

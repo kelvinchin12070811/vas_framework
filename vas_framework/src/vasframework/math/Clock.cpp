@@ -1,7 +1,6 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
-#include <map>
 #include "Clock.hpp"
 
 namespace vas
@@ -107,19 +106,18 @@ namespace vas
 
 		if (!withSeperator) //Convert to with seperator if no seperator
 		{
-			std::map<float, char> buffer;
-			for (auto itr = timeStr.begin(); itr != timeStr.end(); itr++)
-				buffer.insert({ static_cast<float>(std::distance(timeStr.begin(), itr)), *itr });
+			std::ostringstream buffer;
+			
+			for (size_t loop = 0; loop < timeStr.length(); loop++)
+			{
+				buffer << timeStr[loop];
+				if (loop == 3 || loop == 5)
+					buffer << "-";
+				else if (loop == 10 || loop == 12)
+					buffer << ":";
+			}
 
-			buffer.insert({ 3.5f, '-' });
-			buffer.insert({ 5.5f, '-' });
-			buffer.insert({ 10.5f, ':' });
-			buffer.insert({ 12.5f, ':' });
-
-			timeStr = "";
-			timeStr.reserve(buffer.size());
-			for (auto itr = buffer.begin(); itr != buffer.end(); itr++)
-				timeStr.push_back(itr->second);
+			timeStr = buffer.str();
 		}
 
 		std::istringstream timeMaker(timeStr);

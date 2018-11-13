@@ -26,7 +26,7 @@ namespace vas
 
 		if (duration == duration.zero())
 		{
-			finishAnim(finished, startTime);
+			finishAnim(this->finished, startTime);
 			return;
 		}
 
@@ -37,7 +37,7 @@ namespace vas
 		
 		if (auto elapsed = std::chrono::steady_clock::now() - startTime; elapsed >= duration)
 		{
-			finishAnim(finished, startTime);
+			finishAnim(this->finished, startTime);
 		}
 	}
 

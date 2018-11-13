@@ -40,7 +40,6 @@ namespace vas
 		void tick() override;
 
 	private:
-		bool finished{ false };
 		double curVal{ 0.0 };
 		/** [Read & Write] Starting value of keyframe.\n
 				- __mutators__

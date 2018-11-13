@@ -28,7 +28,7 @@ namespace vas
 				continue;
 			}
 
-			if (curTransition->getSrcState == curAnim->first && curTransition->achieved(value))
+			if (curTransition->getSrcState() == curAnim->first && curTransition->achieved(value))
 			{
 				auto result = state.find(curTransition->getDestState());
 				if (result != state.end())
