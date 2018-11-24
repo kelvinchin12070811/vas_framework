@@ -36,14 +36,14 @@ Default is OFF.
 /*! Using Windows specific code for some functions to optimize the experience.
 It will make the code platfrom specific for Windows only.
 
-Default is ON.
+ON if on windows platform(if Windows.h exist), off otherwise.
 */
 #define VAS_WINDOWS_MODE
 
 /*! Use SDL_mixer audio library. Comment out this macro will disable the audio functionality of the library
 (VAS Framework use SDL_mixer as its main audio library for audio play back). But the SDL's audio feature is still valid.
 
-Default is ON.
+ON if SDL_mixer library found.
 
 \note Disable Audio Module will disable AudioManager too.
 */
@@ -51,7 +51,7 @@ Default is ON.
 
 /*! Use SDL_ttf font rendering engine.
 
-Default is ON.
+ON if SDL_ttf library found.
 
 \note Disable this will turn off the functionality off text rendering feature such as sdl::TTF.
 */

@@ -7,11 +7,21 @@
 #define VAS_GLOB_CONFIG
 
 //#define VAS_GEN_DLL
-#define VAS_WINDOWS_MODE
-#define VAS_USE_MIXER
-#define VAS_USE_TTF
 //#define VAS_SDL_ENTRY
 #define VAS_AUTO_FRAME_PATCH
+
+//Auto config options
+#if __has_include(<Windows.h>)
+#define VAS_WINDOWS_MODE
+#endif
+
+#if __has_include(<sdl_mixer.h>)
+#define VAS_USE_MIXER
+#endif
+
+#if __has_include(<sdl_ttf.h>)
+#define VAS_USE_TTF
+#endif
 
 #endif // !VAS_GLOB_CNFIG
 
