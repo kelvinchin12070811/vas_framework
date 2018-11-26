@@ -1,4 +1,6 @@
 #pragma once
+#include "NBTSerializer.hpp"
+#include "../../sreflex/Util.hpp"
 
 namespace vas
 {
@@ -14,5 +16,6 @@ namespace vas
 	public:
 		ITag() {}
 		virtual ~ITag() = 0 {}
+		virtual void serialize(const std::string& name, NBTSerializer& serializer) = 0;
 	};
 }

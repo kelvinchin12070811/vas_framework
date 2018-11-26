@@ -297,6 +297,15 @@
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\vasframework\container\nbt\NBTSerializer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\container\nbt\JsonSerializer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vasframework\container\nbt\JsonDeserializer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">
@@ -489,6 +498,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\graphics\animation\AnimateAble.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\container\nbt\JsonSerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\container\nbt\JsonDeserializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

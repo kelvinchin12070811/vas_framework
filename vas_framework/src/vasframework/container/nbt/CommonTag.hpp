@@ -1,7 +1,11 @@
 #pragma once
+#include <algorithm>
+#include <boost/lexical_cast.hpp>
+#include <iterator>
 #include <vector>
 #include "NBTCompoundTag.hpp"
 #include "../../math/Vector2.hpp"
+
 /** @addtogroup container
 	  @{
 */
@@ -35,6 +39,8 @@ namespace vas
 		/** @memberof ValueWrapperTag
 			  Copy constructor.
 		*/
+		ValueWarpperTag() : value(ValueType()) {}
+
 		ValueWarpperTag(const ValueType& value): value(value)
 		{
 		}
@@ -61,28 +67,116 @@ namespace vas
 		{
 			return value;
 		}
+
+		ValueType& get()
+		{
+			return const_cast<ValueType&>(const_cast<const ValueWarpperTag*>(this)->get());
+		}
+		
+		const ValueType& get() const
+		{
+			return value;
+		}
+
+		void serialize(const std::string& name, NBTSerializer& serializer) override
+		{
+			static_assert(std::numeric_limits<int>::is_specialized, "Non numeric data type must specialize member function ValueWarpperTag::serialize");
+			serializer.accept(name, value);
+		}
 	private:
 		ValueType value;
 	};
+
+	template <class T>
+	class ArrayTag : public ITag, public std::vector<T>
+	{
+	public:
+		ArrayTag() = default;
+		~ArrayTag() = default;
+		explicit ArrayTag(size_t size) : std::vector(size)
+		{
+		}
+
+		ArrayTag(std::initializer_list<T> list)
+		{
+			if (!this->empty())
+				this->clear();
+			this->reserve(list.size());
+			for (auto& itr : list)
+				this->push_back(itr);
+		}
+
+		ArrayTag(const ArrayTag& rhs) : std::vector(rhs.begin(), rhs.end())
+		{
+		}
+
+		ArrayTag(ArrayTag&& rhs) noexcept : std::vector(std::make_move_iterator(rhs.begin()), std::make_move_iterator(rhs.end))
+		{
+		}
+
+		void serialize(const std::string& name, NBTSerializer& serializer) override
+		{
+			serializer.arrayStart(name);
+			serializer.arraySizeSetter([this](size_t size) { this->resize(size); });
+			for (size_t itr = 0; itr != this->size(); itr++)
+				serializer.accept(boost::lexical_cast<std::string>(itr), this->at(itr));
+			serializer.arrayEnd();
+		}
+
+		ArrayTag& operator=(const ArrayTag& rhs)
+		{
+			this->clear();
+			this->reserve(rhs.size());
+			std::copy(rhs.begin(), rhs.end(), std::back_inserter(this->begin()));
+			return *this;
+		}
+
+		ArrayTag& operator=(ArrayTag&& rhs) noexcept
+		{
+			this->clear();
+			this->reserve(rhs.size());
+			for (auto& itr : rhs)
+				this->push_back(std::move(itr));
+			rhs.clear();
+			return *this;
+		}
+
+		void swap(ArrayTag& other) noexcept
+		{
+			std::swap_ranges(other.begin(), other.end(), this->begin(), this->end());
+		}
+	};
+
+	template <>
+	void ValueWarpperTag<std::string>::serialize(const std::string& name, NBTSerializer& serializer)
+	{
+		serializer.accept(name, value);
+	}
+
+	template <>
+	void ValueWarpperTag<vas::Vector2>::serialize(const std::string& name, NBTSerializer& serializer)
+	{
+		serializer.arrayStart(name);
+		serializer.accept("0", value.x);
+		serializer.accept("1", value.y);
+		serializer.arrayEnd();
+	}
 
 	/** @name Predefined tag
 		  
 		  The predefined tag that use with NBT structure. #include <vasframework/container/nbt/CommonTag.hpp> to use them.
 		  @{
 	*/
-	using ByteTag = ValueWarpperTag<uint8_t>; /**< Byte tag. */
-	using Int16Tag = ValueWarpperTag<int16_t>; /**< Singed 16 bit int tag. */
-	using Int32Tag = ValueWarpperTag<int32_t>; /**< Singed 32 bit int tag. */
-	using UInt32Tag = ValueWarpperTag<uint32_t>; /**< Unsinged 32 bit int tag. */
-	using Int64Tag = ValueWarpperTag<int64_t>; /**< Singed 64 bit int tag. */
+	using ByteTag = ValueWarpperTag<std::byte>; /**< Byte tag. */
+	using Int16Tag = ValueWarpperTag<std::int16_t>; /**< Signed 16 bit int tag. */
+	using Int32Tag = ValueWarpperTag<std::int32_t>; /**< Signed 32 bit int tag. */
+	using Uint32Tag = ValueWarpperTag<std::uint32_t>; /**< Unsigned 32 bit int tag. */
+	using Int64Tag = ValueWarpperTag<std::int64_t>; /**< Signed 64 bit int tag. */
+	using Uint64Tag = ValueWarpperTag<std::uint64_t>; /**< Unsigned 64 bit tag. */
 	using FloatTag = ValueWarpperTag<float>; /**< Float tag. */
 	using DoubleTag = ValueWarpperTag<double>; /**< Double tag. */
 	using BooleanTag = ValueWarpperTag<bool>; /**< Boolean tag. */
 	using StringTag = ValueWarpperTag<std::string>; /**< String tag. */
-
-	/** Array of data tag. */
-	template <typename T>
-	using ArrayTag = ValueWarpperTag<std::vector<T>>;
 
 	using Vector2Tag = ValueWarpperTag<Vector2>; /**< vas::Vector2 tag. */
 

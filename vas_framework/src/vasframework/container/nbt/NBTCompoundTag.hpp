@@ -37,6 +37,7 @@ namespace vas
 			  @return true if success.
 		*/
 		bool insert(const std::string& name, std::shared_ptr<ITag>&& tag);
+		void serialize(const std::string& name, NBTSerializer& serializer) override;
 	public: //Getters
 		std::map<std::string, std::shared_ptr<ITag>>& getTags();
 

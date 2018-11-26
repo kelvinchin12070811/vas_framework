@@ -11,7 +11,7 @@ int Main::main(std::vector<std::string> args)
 			textOverlay->setColour(vas::sdl::ColorPresets::white);
 			textOverlay->setBackgroundOffset(vas::Vector2(3.0f, ANGLE_FROM_SECOND_QUATER(45.0)));
 			vas::ScreenManager::getInstance().screenAboveOverlays.insert(VAS_INSERT_VAR(textOverlay));
-			vas::SceneManager::getInstance().call("scene::MainScene");
+			vas::SceneManager::getInstance().call("scene::NBTTreeTest");
 			vas::Base::getInstance().getRenderer().setLogicalSize(vas::sdl::Point(640, 480));
 		});
 	}

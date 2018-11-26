@@ -28,6 +28,14 @@ namespace vas
 		return result.second;
 	}
 
+	void NBTCompoundTag::serialize(const std::string & name, NBTSerializer & serializer)
+	{
+		serializer.treeStart(name);
+		for (auto itr = tags.begin(); itr != tags.end(); itr++)
+			itr->second->serialize(itr->first, serializer);
+		serializer.treeEnd();
+	}
+
 	std::map<std::string, std::shared_ptr<ITag>>& NBTCompoundTag::getTags()
 	{
 		return tags;

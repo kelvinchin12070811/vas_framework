@@ -18,7 +18,7 @@ namespace vas
 			{
 				return ReflectAbleEntries::getInstance().getRegistry()->at(objName)();
 			}
-			catch (const std::exception&)
+			catch (const std::out_of_range&)
 			{
 				return nullptr;
 			}

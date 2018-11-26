@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\container\nbt\JsonDeserializer.hpp" />
+    <ClInclude Include="src\vasframework\container\nbt\JsonSerializer.hpp" />
+    <ClInclude Include="src\vasframework\container\nbt\NBTSerializer.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\AttrWrap.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\state\State.hpp" />
     <ClInclude Include="src\vasframework\graphics\scene\SceneCallFailed.hpp" />
@@ -115,6 +118,8 @@
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\container\nbt\JsonDeserializer.cpp" />
+    <ClCompile Include="src\vasframework\container\nbt\JsonSerializer.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\AnimateAble.cpp" />
     <ClCompile Include="src\vasframework\graphics\scene\SceneCallFailed.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\AnimationDelay.cpp" />
@@ -238,7 +243,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\pugixml-1.9\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\rapidjson\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -248,7 +253,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SDL_HOME)\boost_1_66_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.5\include;$(SDK_HOME)\boost_1_62_0;$(SDK_HOME)\zlib128-dll\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\rapidjson\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
