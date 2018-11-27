@@ -15,8 +15,10 @@ namespace vas
 		rapidjson::ParseResult result = doc.Parse(data.str().c_str());
 		if (result.IsError())
 		{
+			std::string jsonStr = data.str();
+			jsonStr.insert(result.Offset(), "->");
 			throw std::runtime_error("JSON parsing error at offset " + boost::lexical_cast<std::string>(result.Offset()) + ": " +
-				rapidjson::GetParseError_En(result.Code()) + "\n\n" + data.str());
+				rapidjson::GetParseError_En(result.Code()) + "\n\n" + jsonStr);
 		}
 	}
 
@@ -27,8 +29,10 @@ namespace vas
 		rapidjson::ParseResult result = doc.Parse(ss.str().c_str());
 		if (result)
 		{
+			std::string jsonStr = ss.str();
+			jsonStr.insert(result.Offset(), "->");
 			throw std::runtime_error("JSON parsing error at offset " + boost::lexical_cast<std::string>(result.Offset()) + ": " +
-				rapidjson::GetParseError_En(result.Code()) + "\n\n" + ss.str());
+				rapidjson::GetParseError_En(result.Code()) + "\n\n" + jsonStr);
 		}
 	}
 
@@ -43,8 +47,10 @@ namespace vas
 		rapidjson::ParseResult result = doc.Parse(ss.str().c_str());
 		if (result)
 		{
+			std::string jsonStr = ss.str();
+			jsonStr.insert(result.Offset(), "->");
 			throw std::runtime_error("JSON parsing error at offset " + boost::lexical_cast<std::string>(result.Offset()) + ": " +
-				rapidjson::GetParseError_En(result.Code()) + "\n\n" + ss.str());
+				rapidjson::GetParseError_En(result.Code()) + "\n\n" + jsonStr);
 		}
 	}
 

@@ -6,8 +6,24 @@ namespace vas
 	{
 	}
 
+	NBTCompoundTag::NBTCompoundTag(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list)
+	{
+		for (auto itr = list.begin(); itr != list.end(); itr++)
+			tags.insert(*itr);
+	}
+
 	NBTCompoundTag::~NBTCompoundTag()
 	{
+	}
+
+	std::unique_ptr<NBTCompoundTag> NBTCompoundTag::create()
+	{
+		return std::make_unique<NBTCompoundTag>();
+	}
+
+	std::unique_ptr<NBTCompoundTag> NBTCompoundTag::create(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list)
+	{
+		return std::make_unique<NBTCompoundTag>(std::move(list));
 	}
 
 	std::shared_ptr<ITag> NBTCompoundTag::at(const std::string & name)

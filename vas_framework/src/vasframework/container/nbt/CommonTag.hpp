@@ -52,6 +52,16 @@ namespace vas
 		{
 		}
 
+		static std::unique_ptr<ValueWarpperTag> create()
+		{
+			return std::make_unique<ValueWarpperTag>();
+		}
+
+		static std::unique_ptr<ValueWarpperTag> create(ValueType value)
+		{
+			return std::make_unique<ValueWarpperTag>(std::move(value));
+		}
+
 		/** @memberof ValueWrapperTag
 			  Convert wrapper to reference of ValueType.
 		*/
@@ -114,6 +124,16 @@ namespace vas
 		{
 		}
 
+		static std::shared_ptr<ArrayTag> create()
+		{
+			return std::make_unique<ArrayTag>();
+		}
+
+		static std::unique_ptr<ArrayTag> create(std::initializer_list<T> list)
+		{
+			return std::make_unique<ArrayTag>(std::move(list));
+		}
+
 		void serialize(const std::string& name, NBTSerializer& serializer) override
 		{
 			serializer.arrayStart(name);
@@ -147,6 +167,16 @@ namespace vas
 		}
 	};
 
+	template<>
+	void ArrayTag<std::shared_ptr<ITag>>::serialize(const std::string& name, NBTSerializer& serializer)
+	{
+		serializer.arrayStart(name);
+		serializer.arraySizeSetter([this](size_t size) { this->resize(size); });
+		for (size_t itr = 0; itr != this->size(); itr++)
+			this->at(itr)->serialize(boost::lexical_cast<std::string>(itr), serializer);
+		serializer.arrayEnd();
+	}
+
 	template <>
 	void ValueWarpperTag<std::string>::serialize(const std::string& name, NBTSerializer& serializer)
 	{
@@ -179,6 +209,8 @@ namespace vas
 	using StringTag = ValueWarpperTag<std::string>; /**< String tag. */
 
 	using Vector2Tag = ValueWarpperTag<Vector2>; /**< vas::Vector2 tag. */
+
+	using ObjectListTag = ArrayTag<std::shared_ptr<ITag>>; /**< Array of NBT tags. */
 
 	/** @} */
 }

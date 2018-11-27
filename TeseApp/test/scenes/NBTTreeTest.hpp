@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
-#include <vasframework/container/nbt/CommonTag.hpp>
-#include <vasframework/container/nbt/NBTCompoundTag.hpp>
+#include <vasframework/container/nbt/NBT.hpp>
 #include "AbstractFrameCountingScene.hpp"
 
 namespace scene

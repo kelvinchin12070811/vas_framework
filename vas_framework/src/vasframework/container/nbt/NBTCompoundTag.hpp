@@ -1,4 +1,5 @@
 #pragma once
+#include <initializer_list>
 #include <memory>
 #include <string>
 #include <map>
@@ -19,8 +20,11 @@ namespace vas
 	{ /** @} */
 	public:
 		NBTCompoundTag();
+		NBTCompoundTag(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list);
 		~NBTCompoundTag();
 
+		static std::unique_ptr<NBTCompoundTag> create();
+		static std::unique_ptr<NBTCompoundTag> create(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list);
 		/** Find a NBT tag with it's name. std::out_of_range thrown if failed.
 			  @param name Name of the NBT tag.
 		*/

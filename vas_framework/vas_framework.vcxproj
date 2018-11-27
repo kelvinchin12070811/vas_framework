@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="src\vasframework\container\nbt\JsonDeserializer.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\JsonSerializer.hpp" />
+    <ClInclude Include="src\vasframework\container\nbt\NBT.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\NBTSerializer.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\AttrWrap.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\state\State.hpp" />
