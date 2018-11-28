@@ -20,6 +20,11 @@ namespace vas
 	{ /** @} */
 	public:
 		NBTCompoundTag();
+		template <class Iterator>
+		NBTCompoundTag(Iterator begin, Iterator end)
+		{
+			std::copy(begin, end, std::inserter(tags, tags.begin()));
+		}
 		NBTCompoundTag(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list);
 		~NBTCompoundTag();
 

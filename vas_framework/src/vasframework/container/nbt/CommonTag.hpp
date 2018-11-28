@@ -107,13 +107,18 @@ namespace vas
 		{
 		}
 
+		template <class Iterator>
+		ArrayTag(Iterator begin, Iterator end)
+		{
+			this->reserve(std::distance(begin, end));
+			std::copy(begin, end, std::back_inserter(*this));
+		}
+
 		ArrayTag(std::initializer_list<T> list)
 		{
-			if (!this->empty())
-				this->clear();
+			if (!this->empty()) this->clear();
 			this->reserve(list.size());
-			for (auto& itr : list)
-				this->push_back(itr);
+			std::copy(list.begin(), list.end(), std::back_inserter(*this));
 		}
 
 		ArrayTag(const ArrayTag& rhs) : std::vector(rhs.begin(), rhs.end())
