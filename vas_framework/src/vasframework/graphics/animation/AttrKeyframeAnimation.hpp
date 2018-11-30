@@ -26,6 +26,14 @@ namespace vas
 					a incomming value which represented as the current value computed. The data type of it must be double.
 		*/
 		AttrKeyframeAnimation(std::function<void(double)> mutator);
+		/** Create animation from object's attribute.
+			 @param mutator Function pointer to the function that call the mutator of the targeted object.
+			 The function must accept a incomming value which represented as the current value computed.
+			 The data type of it must be double.
+			 @param startVal Starting value of keyframe.
+			 @param stopVal Stop value of the keyframe.
+			 @param duration Duration of the animation.
+		*/
 		AttrKeyframeAnimation(std::function<void(double)> mutator, double startVal, double stopVal, std::chrono::nanoseconds duration);
 
 		void setDuration(std::chrono::nanoseconds value);

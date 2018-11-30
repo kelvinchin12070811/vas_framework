@@ -24,6 +24,9 @@ your project).
 export syntax (`__declspec(__dllexport)`).
 
 Default is OFF.
+
+@deprecated The dll export has been depercated and lots of class does not have the tag VAS_DECLSPEC. If
+precompile is must, static library is the prefered way.
 */
 #define VAS_GEN_DLL
 

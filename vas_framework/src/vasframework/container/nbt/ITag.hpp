@@ -16,6 +16,10 @@ namespace vas
 	public:
 		ITag() {}
 		virtual ~ITag() = 0 {}
+		/** Serailize or deserialize the tag.
+			  @param name Name of the tag.
+			  @param serializer Serializer that use to serialize the tag.
+		*/
 		virtual void serialize(const std::string& name, NBTSerializer& serializer) = 0;
 	};
 }

@@ -54,6 +54,11 @@ namespace vas
 		}
 	}
 
+	JsonDeserializer::JsonDeserializer(rapidjson::Document document):
+		doc(std::move(document))
+	{
+	}
+
 	JsonDeserializer::~JsonDeserializer()
 	{
 	}
@@ -96,7 +101,7 @@ namespace vas
 		auto top = stackTrace.top();
 		if (!top.second->IsArray())
 			throw std::logic_error("The element \"" + top.first + "\" is not an array.");
-		setter(top.second->GetArray().Size());
+		if (setter != nullptr) setter(top.second->GetArray().Size());
 	}
 
 	void JsonDeserializer::accept(const std::string & name, std::byte & value)

@@ -6,6 +6,6 @@ namespace vas
 	/** @addtogroup container
 		  @{
 	*/
-	using BytesArray = std::vector<uint8_t>; /** An array of bytes. */
+	using BytesArray = std::vector<std::byte>; /** An array of bytes. */
 	/** @} */
 }

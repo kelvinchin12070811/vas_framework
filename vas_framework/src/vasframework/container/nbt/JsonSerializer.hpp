@@ -1,5 +1,5 @@
 #pragma once
-#if __has_include(<rapidjson/rapidjson.h>)
+#if __has_include(<rapidjson/rapidjson.h>) || defined(DOXYGEN)
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
 #include <sstream>
@@ -8,8 +8,15 @@
 
 namespace vas
 {
+	/** @addtogroup nbt_tag
+		  @{
+	*/
+	/** @brief Json serialization engine for NBT Tags.
+
+		  The JsonSerializer serialize the NBT tags into json document. This class required rapidjson library.
+	*/
 	class JsonSerializer : public NBTSerializer
-	{
+	{ /** @} */
 	public:
 		JsonSerializer();
 		~JsonSerializer() = default;
@@ -34,9 +41,15 @@ namespace vas
 		void accept(const std::string& name, bool& value) override;
 		void accept(const std::string& name, std::string& value) override;
 
+		std::string getJSON() const; /**< Get the JSON string. */
 	private:
 		void append(const std::string& name, rapidjson::Value&& value);
 	private:
+		/** [Read & Write] JSON document of the serialized json.
+				- __accessors__
+					-# rapidjson::Document& getDocument()
+					-# const rapidjson::Document& getDocument() const
+		*/
 		rapidjson::Document document;
 		std::stack<std::pair<std::string, rapidjson::Value>> stackTrace;
 	};

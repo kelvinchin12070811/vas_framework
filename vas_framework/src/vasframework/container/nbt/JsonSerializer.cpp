@@ -1,4 +1,6 @@
 #if __has_include(<rapidjson/rapidjson.h>)
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/prettywriter.h>
 #include "JsonSerializer.hpp"
 
 namespace vas
@@ -123,6 +125,14 @@ namespace vas
 		rapidjson::Value tmp(rapidjson::kStringType);
 		tmp = rapidjson::StringRef(value.c_str());
 		append(name, std::move(tmp));
+	}
+
+	std::string JsonSerializer::getJSON() const
+	{
+		rapidjson::StringBuffer buffer;
+		rapidjson::PrettyWriter<decltype(buffer)> writer(buffer);
+		document.Accept(writer);
+		return buffer.GetString();
 	}
 
 	void JsonSerializer::append(const std::string& name, rapidjson::Value && value)

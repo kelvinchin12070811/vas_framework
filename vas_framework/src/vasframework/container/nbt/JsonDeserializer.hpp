@@ -1,5 +1,5 @@
 #pragma once
-#if __has_include(<rapidjson/rapidjson.h>)
+#if __has_include(<rapidjson/rapidjson.h>) || defined(DOXYGEN)
 #include <fstream>
 #include <stack>
 #include <sstream>
@@ -9,13 +9,34 @@
 
 namespace vas
 {
+	/** @addtogroup nbt_tag
+		  @{
+	*/
+	/** @brief The JSON deserializer of the NBT tags.
+		  
+		  The deserializer that deserialize JSON to the NBT tree, only avaliable if rapidjson library found.
+	*/
 	class JsonDeserializer : public NBTSerializer
-	{
+	{ /** @} */
 	public:
 		JsonDeserializer();
+		/** Construct from JSON data.
+			  @param data JSON data to parse.
+		*/
 		explicit JsonDeserializer(std::ostringstream data);
+		/** Consturct from loaded file
+			  @param input Input file that contain JSON data.
+		*/
 		explicit JsonDeserializer(std::ifstream input);
+		/** Construct by loading file.
+			  @param fileName Name of the file to load.
+		*/
 		explicit JsonDeserializer(const std::string& fileName);
+		/** Construct from JSON document.
+			  @param document JSON document to load.
+			  @note the @p document require user to move its ownership (uncopyable object).
+		*/
+		explicit JsonDeserializer(rapidjson::Document document);
 		~JsonDeserializer();
 
 		void treeStart(const std::string& name) override;

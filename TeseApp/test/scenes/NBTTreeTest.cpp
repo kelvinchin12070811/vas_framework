@@ -57,12 +57,8 @@ namespace scene
 
 		vas::JsonSerializer archiver;
 		tag->serialize("root", archiver);
-		rapidjson::StringBuffer buff;
-		auto& doc = archiver.getDocument();
-		rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buff);
-		doc.Accept(writer);
 
-		vas::Cout() << buff.GetString() << std::endl;
+		vas::Cout() << archiver.getJSON() << std::endl;
 	}
 
 	void NBTTreeTest::deserializeTest()

@@ -20,15 +20,27 @@ namespace vas
 	{ /** @} */
 	public:
 		NBTCompoundTag();
+		/** Initialize NBTCompoundTag with iterator.
+			  @param begin begin hint of iterator.
+			  @param end end hint of iterator.
+		*/
 		template <class Iterator>
 		NBTCompoundTag(Iterator begin, Iterator end)
 		{
 			std::copy(begin, end, std::inserter(tags, tags.begin()));
 		}
+		/** Initialize CompoundTag with initializer_list. */
 		NBTCompoundTag(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list);
 		~NBTCompoundTag();
 
+		/** Create new instance of tag, use with list initialization.
+			  @retval std::unique_ptr<NBTCompoundTag> new instance of tag.
+		*/
 		static std::unique_ptr<NBTCompoundTag> create();
+		/** Create new instance of tag, use with list initialization.
+			  @param list value to initializes the tag.
+			  @retval std::unique_ptr<NBTCompoundTag> new instance of tag.
+		*/
 		static std::unique_ptr<NBTCompoundTag> create(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list);
 		/** Find a NBT tag with it's name. std::out_of_range thrown if failed.
 			  @param name Name of the NBT tag.

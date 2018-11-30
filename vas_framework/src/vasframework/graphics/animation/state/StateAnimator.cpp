@@ -60,7 +60,7 @@ namespace vas
 
 	boost::optional<std::map<std::string, State>::const_iterator> StateAnimator::currentAnimation() const
 	{
-		using ret_type = boost::optional<decltype(state)::const_iterator>;
-		return curAnim == state.end() ? ret_type() : ret_type(curAnim);
+		if (curAnim == state.end()) return boost::none;
+		return curAnim;
 	}
 }
