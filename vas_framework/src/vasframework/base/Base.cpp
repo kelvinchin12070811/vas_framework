@@ -220,9 +220,13 @@ namespace vas
 		args = std::move(arg1);
 	}
 
-	const std::vector<std::string>& Base::getArgs()
+	boost::optional<std::reference_wrapper<const std::vector<std::string>>> Base::getArgs()
 	{
+#ifdef VAS_USE_OOENTRY
 		return args;
+#else
+		return boost::none;
+#endif
 	}
 
 	size_t Base::getCurFrameIndex()
@@ -311,6 +315,6 @@ int SDL_main(int argc, char ** argv)
 		args.push_back(argv[itr]);
 
 	vas::Base::getInstance().fun20181130T171403(std::move(args));
-	return vas::ClassLoader::gt5d_acfg(vas::Base::getInstance().getArgs());
+	return vas::ClassLoader::gt5d_acfg(vas::Base::getInstance().getArgs().get());
 }
 #endif // VAS_USE_OOENTRY

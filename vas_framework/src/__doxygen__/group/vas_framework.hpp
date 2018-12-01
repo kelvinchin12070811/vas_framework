@@ -15,11 +15,4 @@ Defined in: vasframework/VASConfig.hpp
 */
 #define VAS_DECLSPEC
 
-/** Class loader that load the main class, only avaliable if `#VAS_SDL_ENTRY` is not defined.
-This macro generate main function accroding to the settings.
-
-Defined in: vasframework/base/Base.hpp
-*/
-#define VAS_CLASSLOADER_LOAD(launcher)
-
 /** @} */

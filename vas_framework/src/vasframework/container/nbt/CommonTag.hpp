@@ -12,10 +12,27 @@
 /** @defgroup nbt_tag NBT Tag
 	  @brief The NBT Tag system implementation.
 
-	  The NBT(Named Binary Tag) structure is a tree like data structure with multiple data entrys. The idea is originaly from
-	  the game "Minecraft".
+	  The NBT(Named Binary Tag) structure is a serializeable tree like data structure with multiple data entrys. The tree
+	  own the tree or array (also called list) as the brach of the tree and data tags as leaves.
 
-	  The NBT Tag library in vas_framework is vas_framework's implementation of NBT structure in C++.
+	  The core components of NBT tags as bellow are able to included together by the header "vasframework/container/nbt/NBT.hpp"
+	  
+	  - NBTCompoundTag
+	  - ValueWrapperTag
+	  - ArrayTag
+	  - ByteTag
+	  - Int16Tag
+	  - Int32Tag
+	  - Uint32Tag
+	  - Int64Tag
+	  - Uint64Tag
+	  - FloatTag
+	  - DoubleTag
+	  - BooleanTag
+	  - StringTag
+	  - Vector2Tag
+	  - ObjectListTag
+	  - ITag interface
 */
 /** @} */
 namespace vas
@@ -55,8 +72,7 @@ namespace vas
 			return std::make_unique<ValueWrapperTag>();
 		}
 
-		/** @memberof ValueWrapperTag<ValueType>
-			  Create new instance of tag with value, use with list initialization.
+		/** Create new instance of tag with value, use with list initialization.
 			  @param value Value to initialize the tag.
 			  @retval std::unique_ptr<ValueWrapperTag> new instance of tag.
 		*/
@@ -234,7 +250,8 @@ namespace vas
 
 	/** @name Predefined tag
 		  
-		  The predefined tag that use with NBT structure. #include <vasframework/container/nbt/CommonTag.hpp> to use them.
+		  The predefined tag that use with NBT structure. Include header "vasframework/container/nbt/CommonTag.hpp"
+		  to access them.
 		  @{
 	*/
 	using ByteTag = ValueWrapperTag<std::byte>; /**< Byte tag. */

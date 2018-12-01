@@ -20,33 +20,33 @@ your project).
 /*! \addtogroup compile_time_cfg
 @{
 */
-/*! Generate DLL friendly library. This change the value of the macro `VAS_DECLSPEC` from empty to Microsoft specific dll
+/*! Generate DLL friendly library. This change the value of the macro #VAS_DECLSPEC from empty to Microsoft specific dll
 export syntax (`__declspec(__dllexport)`).
 
-Default is OFF.
+Default is undefined.
 
-@deprecated The dll export has been depercated and lots of class does not have the tag VAS_DECLSPEC. If
+@deprecated The dll export has been depercated and lots of class does not have the tag #VAS_DECLSPEC. If
 precompile is must, static library is the prefered way.
 */
 #define VAS_GEN_DLL
 
 /*! Use SDL's entry point (int main(int argc, char** argv) instead of [Object-oriented entry point](ooentry.html).
 	 
-	 Default is OFF.
+	 Default is undefined.
 */
 #define VAS_SDL_ENTRY
 
 /*! Using Windows specific code for some functions to optimize the experience.
 It will make the code platfrom specific for Windows only.
 
-ON if on windows platform(if Windows.h exist), off otherwise.
+defined if on windows platform.
 */
 #define VAS_WINDOWS_MODE
 
 /*! Use SDL_mixer audio library. Comment out this macro will disable the audio functionality of the library
 (VAS Framework use SDL_mixer as its main audio library for audio play back). But the SDL's audio feature is still valid.
 
-ON if SDL_mixer library found.
+defined if SDL_mixer library found.
 
 \note Disable Audio Module will disable AudioManager too.
 */
@@ -54,7 +54,7 @@ ON if SDL_mixer library found.
 
 /*! Use SDL_ttf font rendering engine.
 
-ON if SDL_ttf library found.
+defined if SDL_ttf library found.
 
 \note Disable this will turn off the functionality off text rendering feature such as sdl::TTF.
 */
@@ -63,7 +63,7 @@ ON if SDL_ttf library found.
 /** Auto recover lost frame when enough system resources. This will patch up every frame that skiped when meet frame
 	  rate bottle neck.
 
-	  Default is ON.
+	  Default is defined.
 */
 #define VAS_AUTO_FRAME_PATCH
 /*! @}*/

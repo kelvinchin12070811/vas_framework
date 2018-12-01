@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <boost/optional.hpp>
 #include <boost/signals2.hpp>
 #include "../VASConfig.hpp"
 #include "../util/TextTools.hpp"
@@ -13,7 +14,7 @@
 #include <Windows.h>
 #endif // VAS_WINDOWS_MODE
 
-#ifdef main
+#if defined(main) && !defined(VAS_SDL_ENTRY)
 #undef main
 #endif
 
@@ -77,7 +78,11 @@ namespace vas
 
 		void fun20181130T171403(std::vector<std::string> arg1);
 
-		const std::vector<std::string>& getArgs();
+		/** Get the command line arguments that passed by the operating system.
+			  @retval boost::optional Constant reference to the command line argument. Empty ```boost::optional```
+			  if #VAS_SDL_ENTRY is defined.
+		*/
+		boost::optional<std::reference_wrapper<const std::vector<std::string>>> getArgs();
 
 		/** Get currnet frame index.
 			  @return current frame index number which less than or equal to fps.
@@ -192,9 +197,19 @@ namespace vas
 	};
 
 #if defined(VAS_USE_OOENTRY) || defined(DOXYGEN)
+	/** @addtogroup vas_framework
+	*/
+	/** @brief Manage and load the launcher class.
+
+		  The ClassLoader is the utility that load and execute the main member function of the launcher class.
+	*/
 	class ClassLoader
-	{
+	{ /** @} */
 	public:
+		/** Load the launcher class. Use to initialize the static bool member to make sure it run before main function of
+			  C++ run.
+			  @tparam Launcher Launcher class variant
+		*/
 		template <class Launcher>
 		static bool load()
 		{
@@ -211,11 +226,21 @@ namespace vas
 int SDL_main(int argc, char** argv); //Redefined SDL_main
 #endif
 
-#ifdef VAS_WINDOWS_MODE
+#if defined(VAS_WINDOWS_MODE) || defined(DOXYGEN)
+/** @addtogroup vas_framework
+	  @{
+*/
+/** Allocate console window on Windows subsystem, empty macro on other operating system.
+	  
+	  Defined in: vasframework/base/Base.hpp
+*/
 #define VAS_ALLOCATE_CONSOLE \
 AllocConsole();\
 freopen("CONIN$", "r+t", stdin);\
 freopen("CONIN$", "w+t", stdout);\
 freopen("CONIN$", "w+t", stderr)
 
+/** @} */
+#else
+#define VAS_ALLOCATE_CONSOLE
 #endif // VAS_WINDOWS_MODE
