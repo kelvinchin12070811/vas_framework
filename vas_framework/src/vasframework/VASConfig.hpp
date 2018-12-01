@@ -11,7 +11,7 @@
 #define VAS_AUTO_FRAME_PATCH
 
 //Auto config options
-#if __has_include(<Windows.h>)
+#ifdef WIN32
 #define VAS_WINDOWS_MODE
 #endif
 
@@ -26,7 +26,7 @@
 #endif // !VAS_GLOB_CNFIG
 
 #ifndef VAS_SDL_ENTRY
-#define VAS_USE_UNIENTRY
+#define VAS_USE_OOENTRY
 #endif
 
 /** @addtogroup vas_framework

@@ -11,7 +11,7 @@
 class Main
 {
 public:
-	static int main(std::vector<std::string> args);
+	static int main(const std::vector<std::string>& args);
+private:
+	static const bool __launch;
 };
-
-VAS_CLASSLOADER_LOAD(Main)

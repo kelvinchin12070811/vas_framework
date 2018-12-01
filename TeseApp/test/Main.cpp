@@ -1,6 +1,8 @@
 ﻿#include "Main.hpp"
 
-int Main::main(std::vector<std::string> args)
+const bool Main::__launch{ vas::ClassLoader::load<Main>() };
+
+int Main::main(const std::vector<std::string>& args)
 {
 	VAS_ALLOCATE_CONSOLE;
 	vas::CommonTools::getInstance().setAssistanceName("宮本サクラ");

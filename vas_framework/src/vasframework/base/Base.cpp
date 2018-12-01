@@ -1,3 +1,4 @@
+#include <boost/assert.hpp>
 #include <thread>
 #include "Base.hpp"
 #include "../util/TextTools.hpp"
@@ -214,6 +215,16 @@ namespace vas
 		return camera;
 	}
 
+	void Base::fun20181130T171403(std::vector<std::string> arg1)
+	{
+		args = std::move(arg1);
+	}
+
+	const std::vector<std::string>& Base::getArgs()
+	{
+		return args;
+	}
+
 	size_t Base::getCurFrameIndex()
 	{
 		return static_cast<size_t>(frameIndex);
@@ -286,3 +297,20 @@ namespace vas
 		renderer.present();
 	}
 }
+
+#ifdef VAS_USE_OOENTRY
+int(*vas::ClassLoader::gt5d_acfg)(const std::vector<std::string>&);
+
+int SDL_main(int argc, char ** argv)
+{
+	BOOST_ASSERT_MSG(vas::ClassLoader::gt5d_acfg != nullptr, "Unable to locate launcher class, launcher class not defined.");
+
+	std::vector<std::string> args;
+	args.reserve(argc);
+	for (int itr = 0; itr < argc; itr++)
+		args.push_back(argv[itr]);
+
+	vas::Base::getInstance().fun20181130T171403(std::move(args));
+	return vas::ClassLoader::gt5d_acfg(vas::Base::getInstance().getArgs());
+}
+#endif // VAS_USE_OOENTRY

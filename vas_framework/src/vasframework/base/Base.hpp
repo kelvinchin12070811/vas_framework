@@ -13,11 +13,9 @@
 #include <Windows.h>
 #endif // VAS_WINDOWS_MODE
 
-#ifndef VAS_SDL_ENTRY
 #ifdef main
 #undef main
-#endif // main
-#endif // !VAS_SDL_ENTRY
+#endif
 
 namespace vas
 {
@@ -36,7 +34,6 @@ namespace vas
 			  @return Singletone instance of Base class.
 		*/
 		static Base& getInstance();
-
 		/** Initialize every component and start main game loop with default fps (60 fps)
 			  @param windowTitle Title of the window.
 			  @param size Size of the window.
@@ -77,6 +74,10 @@ namespace vas
 		sdl::Renderer getRenderer();
 
 		vas::Camera& getCamera();
+
+		void fun20181130T171403(std::vector<std::string> arg1);
+
+		const std::vector<std::string>& getArgs();
 
 		/** Get currnet frame index.
 			  @return current frame index number which less than or equal to fps.
@@ -166,10 +167,11 @@ namespace vas
 		*/
 		double deltaTime{ 0 };
 
+		std::vector<std::string> args;
+
 		Counter fpsCounter;
 		Counter frameIndex;
 		double timePerTick{ 0 };
-
 	public: //signals
 		/** @name Signals
 			  @{
@@ -188,54 +190,32 @@ namespace vas
 		boost::signals2::signal<void(size_t)> FPSChanged;
 		/** @} */
 	};
+
+#if defined(VAS_USE_OOENTRY) || defined(DOXYGEN)
+	class ClassLoader
+	{
+	public:
+		template <class Launcher>
+		static bool load()
+		{
+			gt5d_acfg = &Launcher::main;
+			return true;
+		}
+
+		static int(*gt5d_acfg)(const std::vector<std::string>&);
+	};
+#endif // VAS_USE_OOENTRY
 }
 
-#ifdef VAS_USE_UNIENTRY
-#ifndef VAS_WINDOWS_MODE
-#define VAS_CLASSLOADER_LOAD(launcher) \
-int main(int argc, char** argv)\
-{\
-	std::vector<std::string> args;\
-	args.reserve(argc);\
-	for (int itr = 0; itr < argc; itr++)\
-		args.push_back(argv[itr]);\
-	return launcher::main(std::move(args));\
-}
+#ifdef VAS_USE_OOENTRY
+int SDL_main(int argc, char** argv); //Redefined SDL_main
+#endif
 
-#define VAS_ALLOCATE_CONSOLE
-#else
-
-#ifdef _CONSOLE
-#define VAS_CLASSLOADER_LOAD(launcher) \
-int wmain(int argc, wchar_t** argv)\
-{\
-	std::vector<std::string> args;\
-	args.reserve(argc);\
-	for (int itr = 0; itr < argc; itr++)\
-		args.push_back(vas::TextTools::wstos(argv[itr]));\
-	return launcher::main(std::move(args));\
-}
-#else
-#define VAS_CLASSLOADER_LOAD(launcher)\
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLine, int cmdShow)\
-{\
-	std::vector<std::string> args;\
-	{\
-		int argc = 0;\
-		LPWSTR* argv = CommandLineToArgvW(cmdLine, &argc);\
-		args.reserve(argc);\
-		for (int itr = 0; itr < argc; itr++)\
-			args.push_back(vas::TextTools::wstos(argv[itr]));\
-	}\
-	return launcher::main(std::move(args));\
-}
-#endif //_CONSOLE
-
+#ifdef VAS_WINDOWS_MODE
 #define VAS_ALLOCATE_CONSOLE \
 AllocConsole();\
 freopen("CONIN$", "r+t", stdin);\
 freopen("CONIN$", "w+t", stdout);\
 freopen("CONIN$", "w+t", stderr)
 
-#endif // !VAS_WINDOWS_MODE
-#endif // VAS_USE_UNIENTRY
+#endif // VAS_WINDOWS_MODE

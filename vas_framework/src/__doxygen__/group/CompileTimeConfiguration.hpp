@@ -30,7 +30,7 @@ precompile is must, static library is the prefered way.
 */
 #define VAS_GEN_DLL
 
-/*! Use SDL's entry point (int main(int argc, char** argv) instead of [Uniform Entry Point](uni_entry.html).
+/*! Use SDL's entry point (int main(int argc, char** argv) instead of [Object-oriented entry point](ooentry.html).
 	 
 	 Default is OFF.
 */
