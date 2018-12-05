@@ -1,4 +1,5 @@
 #pragma once
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include "../../container/PropertyList.hpp"
 
 namespace vas
@@ -7,7 +8,7 @@ namespace vas
 		  @{
 	*/
 	/** @brief Properties of the map
-		  
+
 		  The basic information of the map.
 	*/
 	struct MapProperties
@@ -19,3 +20,4 @@ namespace vas
 		PropertyList customProperties; /**< Other custom properties of the map. */
 	};
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

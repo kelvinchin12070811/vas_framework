@@ -137,12 +137,14 @@ namespace vas::sdl
 		*/
 		static bool setWindowModalFor(SDL_Window* modalWindow, SDL_Window* parentWindow);
 		
-		/** Default values set of Window. */
+		/** @brief Default values set of Window. */
 		struct DefultValues
 		{
 			static const int posCentered = SDL_WINDOWPOS_CENTERED; /**< Window positioned at center of the screen. */
 			static const int posUndefine = SDL_WINDOWPOS_UNDEFINED; /**< Random position the window. */
 		};
+
+		/** @brief Flags to initialize the Window. */
 		struct Flags
 		{
 			/* !!! FIXME: change this to name = (1<<x). */

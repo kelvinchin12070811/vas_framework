@@ -1,3 +1,4 @@
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <zlib.h>
@@ -13,7 +14,7 @@ namespace vas
 	{
 	}
 
-	TMXParser::TMXParser(const std::string & fileName):
+	TMXParser::TMXParser(const std::string & fileName) :
 		fileName(fileName)
 	{
 		load();
@@ -76,7 +77,7 @@ namespace vas
 	{
 		return sdl::Point(mapProperties.mapWidth * mapProperties.tileWidth, mapProperties.mapHeight * mapProperties.tileHeight);
 	}
-	
+
 	void TMXParser::parse() const
 	{
 		using namespace std;
@@ -101,7 +102,7 @@ namespace vas
 		mapProperties.tileWidth = root.attribute("tilewidth").as_uint();
 		mapProperties.tileHeight = root.attribute("tileheight").as_uint();
 
-		for(auto itr = root.begin(); itr != root.end(); itr++)
+		for (auto itr = root.begin(); itr != root.end(); itr++)
 		{
 			if (static_cast<string>(itr->name()) == "properties")
 				prase_mapProperties(*itr);
@@ -211,7 +212,7 @@ namespace vas
 			ObjectData tempDat;
 			tempDat.name = itr.attribute("name").as_string();
 			tempDat.type = itr.attribute("type").as_string();
-			
+
 			if (auto child = itr.child("ellipse"); child)
 			{
 				auto instance = std::make_unique<Ellipse>();
@@ -228,7 +229,7 @@ namespace vas
 				std::vector<std::string> pointsData;
 				std::vector<Vector2> pointsPosition;
 				boost::split(pointsData, points, [](char c) { return c == ' '; });
-				
+
 				for (auto& itr : pointsData)
 				{
 					std::vector<std::string> buffer;
@@ -258,7 +259,7 @@ namespace vas
 		}
 
 		tempLayer->setName(node.attribute("name").as_string());
-		tempLayer->setObjectList(std::move(tempObjList)); 
+		tempLayer->setObjectList(std::move(tempObjList));
 		tempLayer->setProperties(propertiesPraser(node.child("properties")));
 		mapData.push_back(std::move(tempLayer));
 	}
@@ -290,7 +291,7 @@ namespace vas
 		}
 		return item;
 	}
-	
+
 	PropertyList TMXParser::propertiesPraser(pugi::xml_node node) const
 	{
 		using namespace std;
@@ -308,3 +309,4 @@ namespace vas
 		return PropertyList();
 	}
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

@@ -1,4 +1,5 @@
 #pragma once
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include "IShape.hpp"
 #include "../../../math/Vector2.hpp"
 
@@ -16,3 +17,4 @@ namespace vas
 		int height{ 0 }; /**< Height of ellipse. */
 	};
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

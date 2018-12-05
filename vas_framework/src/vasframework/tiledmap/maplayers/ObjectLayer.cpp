@@ -1,3 +1,4 @@
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include "ObjectLayer.hpp"
 
 namespace vas
@@ -20,3 +21,4 @@ namespace vas
 		return objectList;
 	}
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

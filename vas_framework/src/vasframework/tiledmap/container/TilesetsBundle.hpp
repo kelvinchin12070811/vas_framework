@@ -1,4 +1,5 @@
 #pragma once
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include <map>
 #include <unordered_map>
 #include "Tileset.hpp"
@@ -11,7 +12,7 @@ namespace vas
 		  @{
 	*/
 	/** @brief The bundle ot tilesets that use by a map.
-		  
+
 		  The TilesetsBundle contains tilesets that required to render the map.
 	*/
 	class VAS_DECLSPEC TilesetsBundle
@@ -51,3 +52,4 @@ namespace vas
 		int h;
 	};
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

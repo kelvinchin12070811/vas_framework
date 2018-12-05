@@ -1,3 +1,4 @@
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include "TileLayer.hpp"
 
 namespace vas
@@ -6,12 +7,12 @@ namespace vas
 	{
 	}
 
-	TileLayer::TileLayer(const std::vector<uint32_t>& data, uint32_t width, uint32_t height, uint8_t opacity, bool hidden):
+	TileLayer::TileLayer(const std::vector<uint32_t>& data, uint32_t width, uint32_t height, uint8_t opacity, bool hidden) :
 		tilesData(data), width(width), height(height), opacity(opacity), hidden(hidden)
 	{
 	}
 
-	TileLayer::TileLayer(std::vector<uint32_t>&& data, uint32_t width, uint32_t height, uint8_t opacity, bool hidden):
+	TileLayer::TileLayer(std::vector<uint32_t>&& data, uint32_t width, uint32_t height, uint8_t opacity, bool hidden) :
 		tilesData(std::move(data)), width(width), height(height), opacity(opacity), hidden(hidden)
 	{
 	}
@@ -82,3 +83,4 @@ namespace vas
 		this->hidden = value;
 	}
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

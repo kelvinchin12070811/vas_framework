@@ -1,10 +1,11 @@
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include "MapRenderer.hpp"
 #include "../base/Base.hpp"
 #include "../graphics/Camera.hpp"
 
 namespace vas
 {
-	MapRenderer::MapRenderer(TileLayer* layer, const sdl::Point& mapSize, const sdl::Point& tileSize, const TilesetsBundle& bundle):
+	MapRenderer::MapRenderer(TileLayer* layer, const sdl::Point& mapSize, const sdl::Point& tileSize, const TilesetsBundle& bundle) :
 		layer(layer), mapSize(mapSize), tileSize(tileSize), bundle(const_cast<TilesetsBundle*>(&bundle))
 	{
 	}
@@ -62,3 +63,4 @@ namespace vas
 		return staticOnCamera;
 	}
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

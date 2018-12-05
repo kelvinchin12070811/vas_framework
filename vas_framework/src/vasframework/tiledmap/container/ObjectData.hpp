@@ -1,4 +1,5 @@
 #pragma once
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include <memory>
 #include <string>
 #include "../../math/Vector2.hpp"
@@ -11,7 +12,7 @@ namespace vas
 		  @{
 	*/
 	/** @brief Object to draw on ObjectLayer.
-		  
+
 		  The information about object that will be display on the ObjectLayer.
 	*/
 	struct ObjectData
@@ -22,3 +23,4 @@ namespace vas
 		PropertyList properties; /**< Properties of the object. */
 	};
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

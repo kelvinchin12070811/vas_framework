@@ -1,4 +1,5 @@
 #pragma once
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include <vector>
 #include "maplayers/TileLayer.hpp"
 #include "../graphics/sprites/SpriteSheet.hpp"
@@ -10,7 +11,7 @@ namespace vas
 		  @{
 	*/
 	/** @brief Render one of the layer of map to the renderer.
-		  
+
 		  The MapRenderer render one layer of the specified map to the screen.
 	*/
 	class VAS_DECLSPEC MapRenderer : public DrawAble
@@ -30,12 +31,12 @@ namespace vas
 
 	public: //Setters
 		void setStaticOnCamera(bool value);
-		
+
 	public: //Getters
 		bool isStaticOnCamera();
 
 	private:
-		TileLayer* layer;
+		TileLayer * layer;
 		TilesetsBundle* bundle;
 		sdl::Point mapSize;
 		sdl::Point tileSize;
@@ -48,3 +49,4 @@ namespace vas
 		bool staticOnCamera = false;
 	};
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

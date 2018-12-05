@@ -1,4 +1,5 @@
 #pragma once
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include <string>
 #include <map>
 #include <chrono>
@@ -10,7 +11,7 @@ namespace vas
 		  @{
 	*/
 	/** @brief Tileset source information.
-		  
+
 		  The information of tileset's file.
 	*/
 	struct TilesetSource
@@ -21,7 +22,7 @@ namespace vas
 	};
 
 	/** @brief Tileset metadatas.
-		  
+
 		  The information about the tileset.
 	*/
 	struct Tileset
@@ -34,3 +35,4 @@ namespace vas
 	};
 	/** @} */
 }
+#endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

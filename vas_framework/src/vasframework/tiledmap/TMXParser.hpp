@@ -1,4 +1,5 @@
 #pragma once
+#if (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)
 #include <vector>
 #include <memory>
 #include <pugixml/pugixml.hpp>
@@ -14,7 +15,7 @@ namespace vas
 		  @{
 	*/
 	/** @brief Tiled TMX parser.
-		  
+
 		  TMXParser is a simple parser to read Tiled TMX map. TMXParser also represented as the map it self.
 	*/
 	class VAS_DECLSPEC TMXParser
@@ -79,3 +80,4 @@ namespace vas
 		std::string fileName;
 	};
 }
+#endif
