@@ -19,8 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\pugixml\pugiconfig.hpp" />
-    <ClInclude Include="src\pugixml\pugixml.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\JsonDeserializer.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\JsonSerializer.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\NBT.hpp" />
@@ -121,7 +119,6 @@
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\pugixml\pugixml.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonDeserializer.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonSerializer.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\AnimateAble.cpp" />
