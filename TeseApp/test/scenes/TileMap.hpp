@@ -7,6 +7,7 @@
 #include <vasframework/tiledmap/MapRenderer.hpp>
 #include <vasframework/manager/InputManager.hpp>
 #include <vasframework/sdlcore/Math.hpp>
+#include <vasframework/util/ResourceLoader.hpp>
 
 namespace scene
 {
@@ -28,10 +29,10 @@ namespace scene
 	private:
 		vas::TMXParser map;
 		vas::TilesetsBundle tilesets;
+		vas::ResourceLoader loader;
 
 		std::vector<boost::signals2::connection> signalsPool;
 		std::vector<std::shared_ptr<vas::MapRenderer>> mapLayers{ nullptr };
-
 	private:
 		static const vas::sreflex::ReflectAbleAutoRegistrar<TileMap> __REGISTRAR;
 	};

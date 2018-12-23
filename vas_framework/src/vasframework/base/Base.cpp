@@ -156,7 +156,7 @@ namespace vas
 
 		TextureManager::getInstance().clear();
 #ifdef VAS_USE_MIXER
-		AudioManger::getInstance().clear();
+		AudioManager::getInstance().clear();
 		sdl::mixer::quit();
 #endif // VAS_USE_MIXER
 

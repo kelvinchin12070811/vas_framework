@@ -94,7 +94,7 @@ namespace scene
 		vas::Camera::getInstance().focusOn(tilePos + vas::Vector2(16, 16));
 
 		textTest->move(movement);
-		auto& auManager = vas::AudioManger::getInstance();
+		auto& auManager = vas::AudioManager::getInstance();
 		if (auManager.getME().isPlaying())
 		{
 			if (auManager.getBGM().isPlaying())
@@ -137,7 +137,7 @@ namespace scene
 		RenderAssistance->insert(VAS_INSERT_VAR(testSprite2));
 		RenderAssistance->insert(VAS_INSERT_VAR(textTest));
 
-		vas::AudioManger::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
+		vas::AudioManager::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 		vas::ScreenManager::getInstance().fadeScreen(vas::ScreenManager::FadingState::fade_in, 5s);
 	}
 
@@ -170,13 +170,13 @@ namespace scene
 				vas::Base::getInstance().getEvent().pushEvent(EventType::quit);
 				break;
 		case Keycode::m:
-				vas::AudioManger::getInstance().playME(me);
+				vas::AudioManager::getInstance().playME(me);
 				break;
 		case Keycode::r:
-				vas::AudioManger::getInstance().getBGM().rewind();
+				vas::AudioManager::getInstance().getBGM().rewind();
 				break;
 		case Keycode::s:
-				vas::AudioManger::getInstance().stopBGM();
+				vas::AudioManager::getInstance().stopBGM();
 				break;
 		case Keycode::f:
 				fadeController = !fadeController;
@@ -187,7 +187,7 @@ namespace scene
 
 	void MainScene::meFinishedPlaying(int channel)
 	{
-		if (channel == vas::AudioManger::getInstance().getME().getChannel())
+		if (channel == vas::AudioManager::getInstance().getME().getChannel())
 			vas::CommonTools::getInstance().messenger("me finished playing");
 	}
 

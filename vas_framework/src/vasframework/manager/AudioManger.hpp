@@ -22,7 +22,7 @@ namespace vas
 
 		  @note The AudioManager used up sdl_mixer's music channel and channel 0 - 2 of chunk channel.
 	*/
-	class VAS_DECLSPEC AudioManger
+	class VAS_DECLSPEC AudioManager
 	{ /** @} */
 	public:
 		/** @brief The default value of AudioManager */
@@ -34,7 +34,7 @@ namespace vas
 
 		/** Get the singletone instance of AudioManager
 		*/
-		static AudioManger& getInstance();
+		static AudioManager& getInstance();
 
 		/** Add a chunk to cache.
 			  @param id Unique id of the chunk, can be file name.
@@ -165,8 +165,8 @@ namespace vas
 		/*std::array<float, 1>& getLastVolume();
 		std::array<float, 4>& getVolume();*/
 	private:
-		AudioManger();
-		~AudioManger();
+		AudioManager();
+		~AudioManager();
 
 		std::array<std::string, 4> lastFileName;
 		//std::array<float, 4> volume{ 128.0f, 128.0f, 128.0f, 128.0f };
@@ -176,28 +176,28 @@ namespace vas
 			  - __accessors__
 					-# float getBGMVolume()
 		*/
-		float bgmVolume{ AudioManger::DefValue::MAX_AUDIO };
+		float bgmVolume{ AudioManager::DefValue::MAX_AUDIO };
 		/** [Read & Write] Volume of bgs
 			  - __mutators__
 					-# void setBGSVolume(float volume)
 			  - __accessors__
 					-# float getBGSVolume()
 		*/
-		float bgsVolume{ AudioManger::DefValue::MAX_AUDIO };
+		float bgsVolume{ AudioManager::DefValue::MAX_AUDIO };
 		/** [Read & Write] Volume of me
 			  - __mutators__
 					-# void setMEVolume(float volume)
 			  - __accessors__
 					-# float getMEVolume()
 		*/
-		float meVolume{ AudioManger::DefValue::MAX_AUDIO };
+		float meVolume{ AudioManager::DefValue::MAX_AUDIO };
 		/** [Read & Write] Volume of se
 			- __mutators__
 					-# void setSEVolume(float volume)
 			- __accessors__
 					-# float getSEVolume()
 		*/
-		float seVolume{ AudioManger::DefValue::MAX_AUDIO };
+		float seVolume{ AudioManager::DefValue::MAX_AUDIO };
 		//std::array<float, 1> lastVolume{ 0 };
 
 		/** [Read Only] Current bgm instance

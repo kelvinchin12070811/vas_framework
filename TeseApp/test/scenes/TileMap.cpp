@@ -26,6 +26,11 @@ namespace scene
 		auto player = std::make_shared<NBTCompoundTag>();
 		player->insert("position", std::make_shared<Vector2Tag>(Vector2(64.0f, 48.0f)));
 		root.insert("player", player);
+
+		loader.load({
+				std::make_unique<vas::resource_type::Texture>("assets/textures/639098.jpg"),
+				std::make_unique<vas::resource_type::Music>("assets/audios/bgm/Get_Outside.mp3")
+			});
 	}
 
 	TileMap::~TileMap()
@@ -83,7 +88,7 @@ namespace scene
 		boost::filesystem::path bgmPath = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
 		boost::filesystem::path assetsPath = boost::filesystem::current_path() / "assets/maps";
 		bgmPath = boost::filesystem::absolute(bgmPath, assetsPath).normalize().make_preferred();
-		AudioManger::getInstance().playBGM(bgmPath.string(), 500ms);
+		AudioManager::getInstance().playBGM(bgmPath.string(), 500ms);
 
 		for (auto& itr : const_cast<std::vector<vas::Tileset>&>(map.getRequireTilesets()))
 		{

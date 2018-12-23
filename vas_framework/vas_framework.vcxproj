@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\util\ResourceMetatype.hpp" />
+    <ClInclude Include="src\vasframework\util\ResourceLoader.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\JsonDeserializer.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\JsonSerializer.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\NBT.hpp" />
@@ -119,6 +121,7 @@
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\util\ResourceLoader.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonDeserializer.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonSerializer.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\AnimateAble.cpp" />
@@ -177,6 +180,7 @@
     <ClCompile Include="src\vasframework\sdlcore\video\Surface.cpp" />
     <ClCompile Include="src\vasframework\sdlcore\video\Texture.cpp" />
     <ClCompile Include="src\vasframework\math\Timer.cpp" />
+    <ClCompile Include="src\vasframework\util\ResourceMetatype.cpp" />
     <ClCompile Include="src\vasframework\util\TextTools.cpp" />
     <ClCompile Include="src\vasframework\manager\TextureManager.cpp" />
     <ClCompile Include="src\vasframework\math\Vector2.cpp" />

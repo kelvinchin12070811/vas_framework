@@ -309,10 +309,10 @@
     <ClInclude Include="src\vasframework\container\nbt\NBT.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\pugixml\pugiconfig.hpp">
+    <ClInclude Include="src\vasframework\util\ResourceLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\pugixml\pugixml.hpp">
+    <ClInclude Include="src\vasframework\util\ResourceMetatype.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -515,7 +515,10 @@
     <ClCompile Include="src\vasframework\container\nbt\JsonDeserializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\pugixml\pugixml.cpp">
+    <ClCompile Include="src\vasframework\util\ResourceLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\util\ResourceMetatype.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

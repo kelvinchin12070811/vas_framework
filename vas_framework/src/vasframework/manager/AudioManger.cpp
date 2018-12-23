@@ -8,97 +8,97 @@
 
 using namespace std::chrono_literals;
 
-const float vas::AudioManger::DefValue::MAX_AUDIO = 128.0f;
+const float vas::AudioManager::DefValue::MAX_AUDIO = 128.0f;
 
 namespace vas
 {
-	AudioManger & AudioManger::getInstance()
+	AudioManager & AudioManager::getInstance()
 	{
-		static AudioManger instance;
+		static AudioManager instance;
 		return instance;
 	}
 
-	void AudioManger::cacheChunk(const std::string & id, sdl::mixer::Chunk chunk)
+	void AudioManager::cacheChunk(const std::string & id, sdl::mixer::Chunk chunk)
 	{
 		chunkCache[id] = std::move(chunk);
 	}
 
-	void AudioManger::cacheChunk(const std::string & fileName)
+	void AudioManager::cacheChunk(const std::string & fileName)
 	{
 		sdl::mixer::Chunk temp(fileName);
 		cacheChunk(fileName, std::move(temp));
 	}
 
-	void AudioManger::cacheMusic(const std::string & id, sdl::mixer::Music music)
+	void AudioManager::cacheMusic(const std::string & id, sdl::mixer::Music music)
 	{
 		musicCache[id] = music;
 	}
 
-	void AudioManger::cacheMusic(const std::string & fileName)
+	void AudioManager::cacheMusic(const std::string & fileName)
 	{
 		sdl::mixer::Music temp(fileName);
 		cacheMusic(fileName, std::move(temp));
 	}
 
-	void AudioManger::removeChunkFromCache(const std::string & id)
+	void AudioManager::removeChunkFromCache(const std::string & id)
 	{
 		chunkCache.erase(id);
 	}
 
-	void AudioManger::removeMusicFromCache(const std::string & id)
+	void AudioManager::removeMusicFromCache(const std::string & id)
 	{
 		musicCache.erase(id);
 	}
 
-	sdl::mixer::Chunk AudioManger::getChunkFromCache(const std::string & id)
+	sdl::mixer::Chunk AudioManager::getChunkFromCache(const std::string & id)
 	{
 		auto chunk = chunkCache.find(id);
 		return chunk == chunkCache.end() ? sdl::mixer::Chunk() : chunk->second;
 	}
 
-	sdl::mixer::Music AudioManger::getMusicFromCache(const std::string & id)
+	sdl::mixer::Music AudioManager::getMusicFromCache(const std::string & id)
 	{
 		auto music = musicCache.find(id);
 		return music == musicCache.end() ? sdl::mixer::Music() : music->second;
 	}
 
-	bool AudioManger::isChunkCacheEmpty()
+	bool AudioManager::isChunkCacheEmpty()
 	{
 		return chunkCache.empty();
 	}
 
-	bool AudioManger::isMusicCacheEmpty()
+	bool AudioManager::isMusicCacheEmpty()
 	{
 		return musicCache.empty();
 	}
 
-	size_t AudioManger::chunkCacheSize()
+	size_t AudioManager::chunkCacheSize()
 	{
 		return chunkCache.size();
 	}
 
-	size_t AudioManger::musicCacheSize()
+	size_t AudioManager::musicCacheSize()
 	{
 		return musicCache.size();
 	}
 
-	void AudioManger::clearChunkCache()
+	void AudioManager::clearChunkCache()
 	{
 		chunkCache.clear();
 	}
 
-	void AudioManger::clearMusicCache()
+	void AudioManager::clearMusicCache()
 	{
 		musicCache.clear();
 	}
 
-	void AudioManger::clearAllCache()
+	void AudioManager::clearAllCache()
 	{
 		clearChunkCache();
 		clearMusicCache();
 	}
 
-	void AudioManger::playBGM(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
+	void AudioManager::playBGM(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
 	{
 		if (bgm.isPlaying()) bgm.stop();
 
@@ -118,7 +118,7 @@ namespace vas
 		bgm.fadeIn(static_cast<int>(fadeInTime.count()), loop);
 	}
 
-	void AudioManger::playBGS(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
+	void AudioManager::playBGS(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
 	{
 		if (bgs.isPlaying()) bgs.stop();
 		if (lastFileName[1] != file)
@@ -138,7 +138,7 @@ namespace vas
 		bgs.fadeIn(static_cast<uint32_t>(fadeInTime.count()), loop);
 	}
 
-	void AudioManger::playME(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
+	void AudioManager::playME(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
 	{
 		if (me.isPlaying()) me.stop();
 		if (lastFileName[2] != file)
@@ -158,7 +158,7 @@ namespace vas
 		me.fadeIn(static_cast<uint32_t>(fadeInTime.count()), loop);
 	}
 
-	void AudioManger::playSE(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
+	void AudioManager::playSE(const std::string & file, const std::chrono::milliseconds & fadeInTime, int loop)
 	{
 		if (se.isPlaying()) se.stop();
 		if (lastFileName[3] != file)
@@ -178,31 +178,31 @@ namespace vas
 		se.fadeIn(static_cast<uint32_t>(fadeInTime.count()), loop);
 	}
 
-	void AudioManger::stopBGM(const std::chrono::milliseconds & fadeOutTime)
+	void AudioManager::stopBGM(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (bgm.isPlaying())
 			bgm.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::stopBGS(const std::chrono::milliseconds & fadeOutTime)
+	void AudioManager::stopBGS(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (bgs.isPlaying())
 			bgs.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::stopME(const std::chrono::milliseconds & fadeOutTime)
+	void AudioManager::stopME(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (me.isPlaying())
 			me.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::stopSE(const std::chrono::milliseconds & fadeOutTime)
+	void AudioManager::stopSE(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (se.isPlaying())
 			se.fadeOut(static_cast<int>(fadeOutTime.count()));
 	}
 
-	void AudioManger::pauseBGM(const std::chrono::milliseconds & fadeOutTime)
+	void AudioManager::pauseBGM(const std::chrono::milliseconds & fadeOutTime)
 	{
 		if (fadeOutTime.count() == 0)
 		{
@@ -213,7 +213,7 @@ namespace vas
 		/*fadeWorker = std::thread([&]()->void
 		{
 			using namespace std::chrono_literals;
-			auto& bgm = AudioManger::getInstance().getBGM();
+			auto& bgm = AudioManager::getInstance().getBGM();
 			float volumeDec = bgm.volume(-1) / static_cast<float>(fadeOutTime.count());
 			Clock clock;
 			while (true)
@@ -230,7 +230,7 @@ namespace vas
 		});*/
 	}
 
-	void AudioManger::resumeBGM(const std::chrono::milliseconds & fadeInTime)
+	void AudioManager::resumeBGM(const std::chrono::milliseconds & fadeInTime)
 	{
 		if (fadeInTime.count() == 0)
 		{
@@ -239,71 +239,71 @@ namespace vas
 		}
 	}
 
-	sdl::mixer::Music AudioManger::getBGM()
+	sdl::mixer::Music AudioManager::getBGM()
 	{
 		return bgm;
 	}
 
-	sdl::mixer::Chunk AudioManger::getBGS()
+	sdl::mixer::Chunk AudioManager::getBGS()
 	{
 		return bgs;
 	}
 
-	sdl::mixer::Chunk AudioManger::getME()
+	sdl::mixer::Chunk AudioManager::getME()
 	{
 		return me;
 	}
 
-	sdl::mixer::Chunk AudioManger::getSE()
+	sdl::mixer::Chunk AudioManager::getSE()
 	{
 		return se;
 	}
 
-	float AudioManger::getBGMVolume()
+	float AudioManager::getBGMVolume()
 	{
 		return bgmVolume;
 	}
 
-	float AudioManger::getBGSVolume()
+	float AudioManager::getBGSVolume()
 	{
 		return bgsVolume;
 	}
 
-	float AudioManger::getMEVolume()
+	float AudioManager::getMEVolume()
 	{
 		return meVolume;
 	}
 
-	float AudioManger::getSEVolume()
+	float AudioManager::getSEVolume()
 	{
 		return seVolume;
 	}
 
-	void AudioManger::setBGMVolume(float value)
+	void AudioManager::setBGMVolume(float value)
 	{
-		bgmVolume = boost::algorithm::clamp(value, 0, AudioManger::DefValue::MAX_AUDIO);
+		bgmVolume = boost::algorithm::clamp(value, 0, AudioManager::DefValue::MAX_AUDIO);
 		bgm.volume(static_cast<int>(bgmVolume));
 	}
 
-	void AudioManger::setBGSVolume(float value)
+	void AudioManager::setBGSVolume(float value)
 	{
-		bgsVolume = boost::algorithm::clamp(value, 0, AudioManger::DefValue::MAX_AUDIO);
+		bgsVolume = boost::algorithm::clamp(value, 0, AudioManager::DefValue::MAX_AUDIO);
 		bgs.volume(static_cast<int>(bgsVolume));
 	}
 
-	void AudioManger::setMEVolume(float value)
+	void AudioManager::setMEVolume(float value)
 	{
-		meVolume = boost::algorithm::clamp(value, 0, AudioManger::DefValue::MAX_AUDIO);
+		meVolume = boost::algorithm::clamp(value, 0, AudioManager::DefValue::MAX_AUDIO);
 		me.volume(static_cast<int>(meVolume));
 	}
 
-	void AudioManger::setSEVolume(float value)
+	void AudioManager::setSEVolume(float value)
 	{
-		seVolume = boost::algorithm::clamp(value, 0, AudioManger::DefValue::MAX_AUDIO);
+		seVolume = boost::algorithm::clamp(value, 0, AudioManager::DefValue::MAX_AUDIO);
 		se.volume(static_cast<int>(seVolume));
 	}
 
-	void AudioManger::clear()
+	void AudioManager::clear()
 	{
 		clearAllCache();
 		bgm.destroy();
@@ -312,25 +312,25 @@ namespace vas
 		se.destroy();
 	}
 
-	void AudioManger::tick()
+	void AudioManager::tick()
 	{
 	}
 
-	/*std::array<float, 1>& AudioManger::getLastVolume()
+	/*std::array<float, 1>& AudioManager::getLastVolume()
 	{
 		return lastVolume;
 	}
 
-	std::array<float, 4>& AudioManger::getVolume()
+	std::array<float, 4>& AudioManager::getVolume()
 	{
 		return volume;
 	}*/
 
-	AudioManger::AudioManger()
+	AudioManager::AudioManager()
 	{
 	}
 
-	AudioManger::~AudioManger()
+	AudioManager::~AudioManager()
 	{
 	}
 }
