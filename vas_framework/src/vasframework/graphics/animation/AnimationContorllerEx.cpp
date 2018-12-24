@@ -58,7 +58,16 @@ namespace vas
 	void AnimationControllerEx::insertAnimation(std::unique_ptr<AnimateAble> animation)
 	{
 		animationList.push_back(std::move(animation));
-		if (animationList.size() == 1) curAnim = animationList.begin();
+		if (curAnim != animationList.begin())
+			curAnim = animationList.begin();
+	}
+
+	void AnimationControllerEx::insertAnimations(std::initializer_list<std::unique_ptr<AnimateAble>> animations)
+	{
+		for (auto& itr : animations)
+			animationList.push_back(std::move(const_cast<std::unique_ptr<AnimateAble>&>(itr)));
+		if (curAnim != animationList.begin())
+			curAnim = animationList.begin();
 	}
 
 	void AnimationControllerEx::removeAnimation()

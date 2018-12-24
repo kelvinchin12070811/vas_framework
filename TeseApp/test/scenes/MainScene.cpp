@@ -39,19 +39,18 @@ namespace scene
 		vas::CommonTools::getInstance().messenger(boost::format("compare result: %s"s) % (comResult ? "true"s : "false"s));
 		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
 
-		animation.insertAnimation(std::make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
-			[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
-			[&]() { return testSprite2->getOverlay(); }
-		), 0, 255.0, 1s));
-
-		animation.insertAnimation(std::make_unique<vas::AnimationDelay>(5s));
-
-		animation.insertAnimation(make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
-			[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
-			[&]() { return testSprite2->getOverlay(); }
-		), 255.0, 0.0, 1s));
-
-		animation.insertAnimation(make_unique<vas::AnimationDelay>(5s));
+		animation.insertAnimations({
+			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
+				[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
+				[&]() { return testSprite2->getOverlay(); }
+				), 0, 255.0, 1s),
+			make_unique<vas::AnimationDelay>(5s),
+			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
+				[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
+				[&]() { return testSprite2->getOverlay(); }
+			), 255.0, 0.0, 1s),
+			make_unique<vas::AnimationDelay>(5s)
+		});
 		animation.setLoopingAnim(true);
 
 		std::tm curDate = vas::Clock::ISO8601ToTm("19710101T000000Z", vas::Clock::Timezone::local);

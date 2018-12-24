@@ -31,6 +31,7 @@ namespace vas
 			  @param animation Instance of animation.
 		*/
 		void insertAnimation(std::unique_ptr<AnimateAble> animation);
+		void insertAnimations(std::initializer_list<std::unique_ptr<AnimateAble>> animations);
 		/** Remove animation at the back. */
 		void removeAnimation();
 		/** Clear all animation. */
@@ -67,6 +68,6 @@ namespace vas
 					-# std::list<std::unique_ptr<AnimateAble>>& getAnimationList()
 		*/
 		std::list<std::unique_ptr<AnimateAble>> animationList;
-		std::list<std::unique_ptr<AnimateAble>>::iterator curAnim;
+		std::list<std::unique_ptr<AnimateAble>>::iterator curAnim{ animationList.begin() };
 	};
 }
