@@ -31,6 +31,9 @@ namespace vas
 			  @param animation Instance of animation.
 		*/
 		void insertAnimation(std::unique_ptr<AnimateAble> animation);
+		/** Insert animations with initializer_list
+			  @param animations Instances of animations in initializer list.
+		*/
 		void insertAnimations(std::initializer_list<std::unique_ptr<AnimateAble>> animations);
 		/** Remove animation at the back. */
 		void removeAnimation();
