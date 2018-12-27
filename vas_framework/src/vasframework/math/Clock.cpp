@@ -10,10 +10,6 @@ namespace vas
 	{
 	}
 
-	Clock::~Clock()
-	{
-	}
-
 	std::chrono::nanoseconds Clock::reset()
 	{
 		auto prev = startTime;
@@ -99,16 +95,16 @@ namespace vas
 
 	std::tm Clock::ISO8601ToTm(const std::string & iso8601Time, Clock::Timezone desZone)
 	{
-		std::string timeStr = iso8601Time;
-		bool withSeperator = timeStr.find('-') != std::string::npos;
-		bool isUTC = ISO8601Timezone(timeStr) == Timezone::utc;
+		std::string timeStr{ iso8601Time };
+		bool withSeperator{ timeStr.find('-') != std::string::npos };
+		bool isUTC{ ISO8601Timezone(timeStr) == Timezone::utc };
 		std::tm tm;
 
 		if (!withSeperator) //Convert to with seperator if no seperator
 		{
 			std::ostringstream buffer;
 			
-			for (size_t loop = 0; loop < timeStr.length(); loop++)
+			for (size_t loop{ 0 }; loop < timeStr.length(); loop++)
 			{
 				buffer << timeStr[loop];
 				if (loop == 3 || loop == 5)
@@ -120,7 +116,7 @@ namespace vas
 			timeStr = buffer.str();
 		}
 
-		std::istringstream timeMaker(timeStr);
+		std::istringstream timeMaker{ timeStr };
 		timeMaker >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
 
 		if (isUTC && desZone == Timezone::local)
@@ -132,7 +128,7 @@ namespace vas
 	time_t Clock::getTimezoneOffset()
 	{
 		time_t utc = 1234567890;
-		std::tm zone_conv = { 0 };
+		std::tm zone_conv{ 0 };
 
 		gmtime_s(&zone_conv, &utc);
 		return utc - mktime(&zone_conv);
@@ -140,13 +136,13 @@ namespace vas
 
 	std::tm Clock::UTCToLocal(const std::tm & input)
 	{
-		time_t buffer = tmToTime_t(input, Timezone::utc);
+		time_t buffer{ tmToTime_t(input, Timezone::utc) };
 		return time_tToTm(buffer, Timezone::local);
 	}
 
 	std::tm Clock::LocalToUTC(const std::tm & input)
 	{
-		time_t buffer = tmToTime_t(input, Timezone::local);
+		time_t buffer{ tmToTime_t(input, Timezone::local) };
 		return time_tToTm(buffer, Timezone::utc);
 	}
 

@@ -28,7 +28,7 @@ namespace vas
 		*/
 		Property(const std::string& name, boost::any&& value);
 		Property(const Property& rhs);
-		Property(Property&& rhs);
+		Property(Property&& rhs) noexcept;
 		~Property();
 
 		const boost::typeindex::type_index type() const; /**< Get the type of the data stored. */
@@ -63,12 +63,12 @@ namespace vas
 		operator const boost::any&() const; /**< Convert to boost::any implicitly with const modifier. */
 		
 		Property& operator=(const Property& rhs);
-		Property& operator=(Property&& rhs);
+		Property& operator=(Property&& rhs) noexcept;
 		/** @name Overloaded operators
 			  @{
 		*/
 		Property& operator=(const boost::any& rhs); /**< Assign a boost::any to property. */
-		Property& operator=(boost::any&& rhs); /**< Move a boost::any to property. */
+		Property& operator=(boost::any&& rhs) noexcept; /**< Move a boost::any to property. */
 		/** @} */
 
 		//Compare function, function as 'operator=='
@@ -105,7 +105,7 @@ namespace vas
 	inline bool Property::isEqual(const Property & rhs) const
 	{
 		using namespace std::string_literals;
-		if (this->type() != boost::typeindex::type_id<T>()) throw std::runtime_error("Unable to compate different type of value: "s + sreflex::simpliflyObjectNameCpy(this->type().pretty_name()) + " != " + sreflex::getObjectName<T>());
+		if (this->type() != boost::typeindex::type_id<T>()) throw std::runtime_error{ "Unable to compate different type of value: "s + sreflex::simpliflyObjectNameCpy(this->type().pretty_name()) + " != " + sreflex::getObjectName<T>() };
 		if (this->type() != rhs.type()) return false;
 		if (*this->get<T>() != *rhs.get<T>()) return false;
 		return true;
@@ -115,7 +115,7 @@ namespace vas
 	inline bool Property::notEqual(const Property & rhs) const
 	{
 		using namespace std::string_literals;
-		if (this->type() != boost::typeindex::type_id<T>()) throw std::runtime_error("Unable to compate different type of value: "s + sreflex::simpliflyObjectNameCpy(this->type().pretty_name()) + " != " + sreflex::getObjectName<T>());
+		if (this->type() != boost::typeindex::type_id<T>()) throw std::runtime_error{ "Unable to compate different type of value: "s + sreflex::simpliflyObjectNameCpy(this->type().pretty_name()) + " != " + sreflex::getObjectName<T>() };
 		if (this->type() != rhs.type()) return true;
 		if (*this->get<T>() != *rhs.get<T>()) return true;
 		return false;

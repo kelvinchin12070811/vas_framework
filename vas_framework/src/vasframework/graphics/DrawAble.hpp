@@ -12,7 +12,7 @@ namespace vas
 	class DrawAble
 	{/** @} */
 	public:
-		virtual ~DrawAble() {}
+		virtual ~DrawAble() = 0;
 
 		/** Tick this DrawAble object. */
 		virtual void tick() = 0;
@@ -22,4 +22,6 @@ namespace vas
 		*/
 		virtual void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) = 0;
 	};
+
+	inline DrawAble::~DrawAble() = default;
 }

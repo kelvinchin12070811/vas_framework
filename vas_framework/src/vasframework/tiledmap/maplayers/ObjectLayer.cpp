@@ -3,14 +3,6 @@
 
 namespace vas
 {
-	ObjectLayer::ObjectLayer()
-	{
-	}
-
-	ObjectLayer::~ObjectLayer()
-	{
-	}
-
 	void ObjectLayer::setObjectList(std::vector<ObjectData>&& value)
 	{
 		objectList = std::move(value);

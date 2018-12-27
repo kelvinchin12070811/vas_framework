@@ -4,10 +4,6 @@
 
 namespace vas
 {
-	Sprite::Sprite()
-	{
-	}
-
 	Sprite::Sprite(const std::string & file, const Vector2 & position, const sdl::Point & origin, BufferMode bfMode):
 		filePath(file), position(position), origin(origin)
 	{
@@ -28,14 +24,10 @@ namespace vas
 			texture.loadImage(Base::getInstance().getRenderer(), file);
 		}
 		if (texture == sdl::emptycomponent)
-			throw sdl::SDLCoreException();
+			throw sdl::SDLCoreException{};
 		texture.setBlendMod(sdl::BlendMode::blend);
 		texture.queryTexture(&source.w, &source.h);
 		destination = source;
-	}
-
-	Sprite::~Sprite()
-	{
 	}
 
 	void Sprite::move(const Vector2 & movement)
@@ -144,7 +136,7 @@ namespace vas
 	void Sprite::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		if (texture == sdl::emptycomponent) return;
-		sdl::Renderer rendererHolder = (renderer == nullptr) ? Base::getInstance().getRenderer() : *renderer;
+		sdl::Renderer rendererHolder{ (renderer == nullptr) ? Base::getInstance().getRenderer() : *renderer };
 		if (camera == nullptr) camera = &Camera::getInstance();
 
 		if (staticOnCamera)

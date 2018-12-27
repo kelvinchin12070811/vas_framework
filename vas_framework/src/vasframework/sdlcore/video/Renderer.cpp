@@ -1,15 +1,16 @@
+#include <algorithm>
 #include "Renderer.hpp"
 #include "../boolean_cast.hpp"
 #include "Texture.hpp"
 
 namespace vas::sdl
 {
-	const int Renderer::defIndex = -1;
+	const int Renderer::defIndex{ -1 };
 
-	const uint32_t Renderer::RendererFlags::software = 0x00000001;
-	const uint32_t Renderer::RendererFlags::accelerated = 0x00000002;
-	const uint32_t Renderer::RendererFlags::presentvsync = 0x00000004;
-	const uint32_t Renderer::RendererFlags::targettexture = 0x00000008;
+	const uint32_t Renderer::RendererFlags::software{ 0x00000001 };
+	const uint32_t Renderer::RendererFlags::accelerated{ 0x00000002 };
+	const uint32_t Renderer::RendererFlags::presentvsync{ 0x00000004 };
+	const uint32_t Renderer::RendererFlags::targettexture{ 0x00000008 };
 
 	Renderer::Renderer()
 	{
@@ -101,8 +102,9 @@ namespace vas::sdl
 	{
 		std::vector<SDL_Point> desPoints;
 		desPoints.reserve(points.size());
-		for (auto itr = points.begin(); itr != points.end(); itr++)
-			desPoints.push_back(static_cast<SDL_Point>(*itr));
+		std::transform(points.begin(), points.end(), std::back_inserter(desPoints), [](Point& itr) {
+			return static_cast<SDL_Point>(itr);
+		});
 
 		return SDL_RenderDrawPoints(&*this->componentInstance, desPoints.data(), static_cast<int>(desPoints.size())) == 0 ? true : false;
 	}
@@ -120,8 +122,9 @@ namespace vas::sdl
 	{
 		std::vector<SDL_Rect> desRects;
 		desRects.reserve(rects.size());
-		for (auto itr = rects.begin(); itr != rects.end(); itr++)
-			desRects.push_back(static_cast<SDL_Rect>(*itr));
+		std::transform(rects.begin(), rects.end(), std::back_inserter(desRects), [](Rect& itr) {
+			return static_cast<SDL_Rect>(itr);
+		});
 
 		return SDL_RenderDrawRects(&*this->componentInstance, desRects.data(), static_cast<int>(desRects.size())) == 0 ? true : false;
 	}

@@ -20,7 +20,7 @@ namespace vas::sdl
 
 	sdl::CommonEvent Event::common()
 	{
-		return sdl::CommonEvent();
+		return instance.common;
 	}
 
 	sdl::WindowEvent Event::window()

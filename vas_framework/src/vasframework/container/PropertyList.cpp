@@ -11,7 +11,7 @@ namespace vas
 	{
 	}
 
-	PropertyList::PropertyList(PropertyList && rhs) :
+	PropertyList::PropertyList(PropertyList && rhs) noexcept :
 		super(std::move(rhs))
 	{
 	}
@@ -37,11 +37,11 @@ namespace vas
 			return itr.getName() == name;
 		});
 
-		if (result == this->end()) throw std::out_of_range("cannot find property \"" + name + "\"");
+		if (result == this->end()) throw std::out_of_range{ "cannot find property \"" + name + "\"" };
 		return *result;
 	}
 
-	PropertyList & PropertyList::operator=(PropertyList && rhs)
+	PropertyList & PropertyList::operator=(PropertyList && rhs) noexcept
 	{
 		super::operator=(std::move(rhs));
 		return *this;

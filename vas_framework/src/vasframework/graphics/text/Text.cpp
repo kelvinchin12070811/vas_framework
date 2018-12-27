@@ -5,10 +5,6 @@
 
 namespace vas
 {
-	Text::Text()
-	{
-	}
-
 	Text::Text(const std::string & text, const std::string & font, const Vector2 & position, int fontSize, bool init) :
 		text(text), fontPath(font), fontSize(fontSize)
 	{
@@ -28,11 +24,6 @@ namespace vas
 	{
 		this->renderMode = renderMode;
 		if (init) initText();
-	}
-
-
-	Text::~Text()
-	{
 	}
 
 	void Text::tick()

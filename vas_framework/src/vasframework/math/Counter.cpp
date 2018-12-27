@@ -2,16 +2,8 @@
 
 namespace vas
 {
-	Counter::Counter()
-	{
-	}
-
 	Counter::Counter(size_t autoResetLimit):
 		autoResetLimit(autoResetLimit)
-	{
-	}
-
-	Counter::~Counter()
 	{
 	}
 

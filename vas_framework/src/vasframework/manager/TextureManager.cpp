@@ -11,19 +11,19 @@ namespace vas
 	sdl::Texture TextureManager::get(const std::string & id)
 	{
 		auto result = cache.find(id);
-		if (result == cache.end()) return sdl::Texture();
+		if (result == cache.end()) return sdl::Texture{};
 		return result->second;
 	}
 
 	bool TextureManager::insert(const std::string & id, const sdl::Texture & instance)
 	{
-		auto result = cache.insert(std::make_pair(id, instance));
+		auto result = cache.insert({ id, instance });
 		return result.second;
 	}
 
 	bool TextureManager::insert(const std::string & id, sdl::Texture && instance)
 	{
-		auto result = cache.insert(std::make_pair(id, std::move(instance)));
+		auto result = cache.insert({ id, std::move(instance) });
 		return result.second;
 	}
 

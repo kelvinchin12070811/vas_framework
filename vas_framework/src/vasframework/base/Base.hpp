@@ -94,8 +94,8 @@ namespace vas
 		sdl::Event& getEvent();
 		double getDeltaTime();
 	private:
-		Base();
-		~Base();
+		Base() = default;
+		~Base() = default;
 
 		void tick();
 		void draw();

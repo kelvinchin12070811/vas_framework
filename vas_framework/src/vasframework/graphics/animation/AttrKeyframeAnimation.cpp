@@ -54,7 +54,7 @@ namespace vas
 		{
 			finished = false;
 			curVal = startValue;
-			lastTick = std::chrono::steady_clock::time_point();
+			lastTick = std::chrono::steady_clock::time_point{};
 		}
 		std::chrono::nanoseconds diff(0);
 		//check if it is first start
@@ -71,8 +71,8 @@ namespace vas
 
 		if (duration != duration.zero())
 		{
-			double deltaValue = stopValue - startValue;
-			double rate = (static_cast<double>(diff.count()) / static_cast<double>(duration.count())) * deltaValue;
+			double deltaValue{ stopValue - startValue };
+			double rate{ (static_cast<double>(diff.count()) / static_cast<double>(duration.count())) * deltaValue };
 			curVal = deltaValue >= 0 ?
 				std::clamp(curVal + rate, startValue, stopValue) :
 				std::clamp(curVal + rate, stopValue, startValue);

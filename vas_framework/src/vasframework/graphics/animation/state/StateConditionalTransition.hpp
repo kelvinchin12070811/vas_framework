@@ -49,7 +49,6 @@ namespace vas
 			  or implement your own validator.
 		*/
 		StateConditionalTransition(const std::string& srcState, const std::string& destState, std::function<bool(const std::any&)> validator);
-		~StateConditionalTransition();
 		/** Chect if the state's condition achived or not. */
 		bool achieved(const std::any& cdVar) const;
 

@@ -19,7 +19,12 @@ namespace vas
 	public:
 		using ArraySizeSetter = std::function<void(size_t)>; /**< Function object to resize the target array container. */
 	public:
-		virtual ~NBTSerializer() = 0{}
+		NBTSerializer() = default;
+		NBTSerializer(const NBTSerializer&) = default;
+		NBTSerializer(NBTSerializer&&) noexcept = default;
+		NBTSerializer& operator=(const NBTSerializer&) = default;
+		NBTSerializer& operator=(NBTSerializer&&) noexcept = default;
+		virtual ~NBTSerializer() = 0;
 		/** Begin tree structure.
 			  @param name Name of the tree.
 		*/
@@ -46,4 +51,6 @@ namespace vas
 		virtual void accept(const std::string& name, bool& value) = 0; /**< Accept bool. */
 		virtual void accept(const std::string& name, std::string& value) = 0; /**< Accept std::string. */
 	};
+
+	inline NBTSerializer::~NBTSerializer() = default;
 }

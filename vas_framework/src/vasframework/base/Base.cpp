@@ -20,12 +20,12 @@ namespace vas
 	void Base::initAndStartAll(const std::string & windowTitle, const sdl::Point & size, uint32_t flags, std::function<void()> initializer)
 	{
 		init();
-		window = sdl::Window(windowTitle, size, flags);
+		window = sdl::Window{ windowTitle, size, flags };
 		if (window == sdl::emptycomponent)
-			throw sdl::SDLCoreException();
-		renderer = sdl::Renderer(window, sdl::Renderer::defIndex, sdl::Renderer::RendererFlags::accelerated);
+			throw sdl::SDLCoreException{};
+		renderer = sdl::Renderer{ window, sdl::Renderer::defIndex, sdl::Renderer::RendererFlags::accelerated };
 		if (renderer == sdl::emptycomponent)
-			throw sdl::SDLCoreException();
+			throw sdl::SDLCoreException{};
 
 		if (initializer != nullptr)
 			initializer();
@@ -37,15 +37,15 @@ namespace vas
 	void Base::init()
 	{
 		using namespace std::chrono_literals;
-		if (!sdl::init()) throw sdl::SDLCoreException();
-		if (!sdl::image::init()) throw sdl::SDLCoreException();
+		if (!sdl::init()) throw sdl::SDLCoreException{};
+		if (!sdl::image::init()) throw sdl::SDLCoreException{};
 #ifdef VAS_USE_TTF
-		if (!sdl::ttf::init()) throw sdl::SDLCoreException();
+		if (!sdl::ttf::init()) throw sdl::SDLCoreException{};
 #endif // VAS_USE_TTF
 
 #ifdef VAS_USE_MIXER
-		if (!sdl::mixer::init()) throw sdl::SDLCoreException();
-		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException();
+		if (!sdl::mixer::init()) throw sdl::SDLCoreException{};
+		if (!sdl::mixer::openAudio()) throw sdl::SDLCoreException{};
 #endif // VAS_USE_MIXER
 
 		timePerTick = 1000000000.0 / fps;
@@ -62,12 +62,11 @@ namespace vas
 	{
 		using namespace std::chrono_literals;
 		if (!window)
-			throw std::runtime_error("Unable to start game loop scene window instance is nullptr");
+			throw std::runtime_error{ "Unable to start game loop scene window instance is nullptr" };
 		window.show();
 
 		if (!renderer)
-			throw std::runtime_error("Unable to start game loop scene renderer instance is nullptr");
-
+			throw std::runtime_error{ "Unable to start game loop scene renderer instance is nullptr" };
 		{
 			auto canvasSize = renderer.getLogicalSize();
 			if (canvasSize.x == 0 && canvasSize.y == 0)
@@ -77,7 +76,7 @@ namespace vas
 		}
 		InputManager::getInstance().init(&ev);
 		Clock gameLoopClock;
-		std::chrono::nanoseconds timer(0);
+		std::chrono::nanoseconds timer{ 0 };
 
 		while (exec)
 		{
@@ -99,17 +98,20 @@ namespace vas
 					InputManager::getInstance().KeyReleased(static_cast<sdl::Keycode>(ev.key().keysym.sym));
 					break;
 				case sdl::EventType::mousebuttondown:
-					InputManager::getInstance().MouseButtonPressed(static_cast<sdl::MouseButtonIndex>(ev.button().button), sdl::Point(ev.button().x, ev.button().y));
+					InputManager::getInstance().MouseButtonPressed(static_cast<sdl::MouseButtonIndex>(ev.button().button),
+						sdl::Point{ ev.button().x, ev.button().y });
 					break;
 				case sdl::EventType::mousebuttonup:
-					InputManager::getInstance().MouseButtonReleased(static_cast<sdl::MouseButtonIndex>(ev.button().button), sdl::Point(ev.button().x, ev.button().y));
+					InputManager::getInstance().MouseButtonReleased(static_cast<sdl::MouseButtonIndex>(ev.button().button),
+						sdl::Point{ ev.button().x, ev.button().y });
 					break;
 				case sdl::EventType::mousemotion:
-					InputManager::getInstance().setMousePosition(sdl::Point(ev.motion().x, ev.motion().y));
+					InputManager::getInstance().setMousePosition(sdl::Point{ ev.motion().x, ev.motion().y });
 					InputManager::getInstance().MouseMoved(ev.motion().x, ev.motion().y);
 					break;
 				case sdl::EventType::mousewheel:
-					InputManager::getInstance().MouseWheelMoved(static_cast<sdl::MouseWheelDirection>(ev.wheel().direction), sdl::Point(std::abs(ev.wheel().x), std::abs(ev.wheel().y)));
+					InputManager::getInstance().MouseWheelMoved(static_cast<sdl::MouseWheelDirection>(ev.wheel().direction),
+						sdl::Point{ std::abs(ev.wheel().x), std::abs(ev.wheel().y) });
 					break;
 				}
 				if (!exec) break;
@@ -264,14 +266,6 @@ namespace vas
 		return deltaTime;
 	}
 
-	Base::Base()
-	{
-	}
-
-	Base::~Base()
-	{
-	}
-
 	void Base::tick()
 	{
 		InputManager::getInstance().tick();
@@ -311,7 +305,7 @@ int SDL_main(int argc, char ** argv)
 
 	std::vector<std::string> args;
 	args.reserve(argc);
-	for (int itr = 0; itr < argc; itr++)
+	for (int itr{ 0 }; itr < argc; itr++)
 		args.push_back(argv[itr]);
 
 	vas::Base::getInstance().fun20181130T171403(std::move(args));

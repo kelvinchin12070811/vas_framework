@@ -93,7 +93,7 @@ namespace scene
 		vas::Cout() << "test json:" << std::endl;
 		vas::Cout() << json << std::endl;
 
-		std::ostringstream ss(json);
+		std::ostringstream ss{ json };
 		vas::JsonDeserializer unpack(std::move(ss));
 		tag->serialize("root", unpack);
 
@@ -101,7 +101,7 @@ namespace scene
 		tag->serialize("root", pack);
 
 		rapidjson::StringBuffer buff;
-		rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buff);
+		rapidjson::PrettyWriter<rapidjson::StringBuffer> writer{ buff };
 		pack.getDocument().Accept(writer);
 
 		vas::Cout() << std::endl;

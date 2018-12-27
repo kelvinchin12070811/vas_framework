@@ -18,8 +18,7 @@ namespace vas
 	class StripAnimation : public AnimateAble, public std::list<std::tuple<size_t, SpriteSheet*, Clock::DurationType>>
 	{ /** @} */
 	public:
-		StripAnimation(); /**< Create animation. */
-		~StripAnimation();
+		StripAnimation() = default; /**< Create animation. */
 
 		/** Insert frame to back.
 			  @param frame Index of frame on spritesheet.

@@ -4,10 +4,6 @@
 #ifdef VAS_USE_TTF
 namespace vas
 {
-	StyledText::StyledText()
-	{
-	}
-
 	StyledText::StyledText(const std::string & text, const std::string & font, const Vector2 & position, int fontSize, bool init)
 	{
 		foreground = std::make_unique<Text>(text, font, position, fontSize, init);
@@ -24,11 +20,6 @@ namespace vas
 	{
 		foreground = std::make_unique<Text>(text, font, position, fontSize, textColour, renderMode, init);
 		background = std::make_unique<Text>(text, font, position, fontSize, sdl::ColourPresets::black, renderMode, init);
-	}
-
-
-	StyledText::~StyledText()
-	{
 	}
 
 	void StyledText::tick()
@@ -73,7 +64,7 @@ namespace vas
 		if (getOutlineSize() == value) return;
 		background->getFont().setFontOutlineSize(value);
 		background->reRender();
-		setBackgroundOffset(vas::Vector2(static_cast<float>(-value), static_cast<float>(-value)));
+		setBackgroundOffset({ static_cast<float>(-value), static_cast<float>(-value) });
 	}
 
 	sdl::Colour StyledText::getColour() const

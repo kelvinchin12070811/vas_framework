@@ -11,10 +11,14 @@ namespace vas::sdl
 	class VAS_DECLSPEC Point
 	{ /** @} */
 	public:
-		Point(); /**< Empty point(0, 0). */
+		Point() = default; /**< Empty point(0, 0). */
 		Point(int x, int y); /**< Create point from coordinate. */
 		explicit Point(const SDL_Point& point);
-		~Point();
+		Point(const Point&) = default;
+		Point(Point&&) = default;
+		Point& operator=(const Point&) = default;
+		Point& operator=(Point&&) = default;
+		~Point() {}
 
 		int x{ 0 }; /**< x position of point. */
 		int y{ 0 }; /**< y position of point. */

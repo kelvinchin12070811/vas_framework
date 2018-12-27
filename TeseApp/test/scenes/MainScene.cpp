@@ -32,23 +32,23 @@ namespace scene
 		using namespace std;
 		CallRenderAssistance;
 		vas::ScreenManager::getInstance().setScreenOpacity(0);
-		vas::Property test1("test1", "test"s);
-		vas::Property test2("test2", 0xCC50);
+		vas::Property test1{ "test1", "test"s };
+		vas::Property test2{ "test2", 0xCC50 };
 		vas::Property test3(test2);
-		bool comResult = test3.notEqual<int>(test2);
-		vas::CommonTools::getInstance().messenger(boost::format("compare result: %s"s) % (comResult ? "true"s : "false"s));
+		bool comResult{ test3.notEqual<int>(test2) };
+		vas::CommonTools::getInstance().messenger(boost::format{ "compare result: %s"s } % (comResult ? "true"s : "false"s));
 		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
 
 		animation.insertAnimations({
-			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
+			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap{
 				[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
 				[&]() { return testSprite2->getOverlay(); }
-				), 0, 255.0, 1s),
+				}, 0, 255.0, 1s),
 			make_unique<vas::AnimationDelay>(5s),
-			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap(
+			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap{
 				[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
 				[&]() { return testSprite2->getOverlay(); }
-			), 255.0, 0.0, 1s),
+			}, 255.0, 0.0, 1s),
 			make_unique<vas::AnimationDelay>(5s)
 		});
 		animation.setLoopingAnim(true);
@@ -90,7 +90,7 @@ namespace scene
 		else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::right))
 			tilePos.x += 1;
 
-		vas::Camera::getInstance().focusOn(tilePos + vas::Vector2(16, 16));
+		vas::Camera::getInstance().focusOn(tilePos + vas::Vector2{16.0f, 16.0f});
 
 		textTest->move(movement);
 		auto& auManager = vas::AudioManager::getInstance();
@@ -127,10 +127,10 @@ namespace scene
 		vas::InputManager::getInstance().KeyPressed.connect(boost::bind(&MainScene::on_keyPressed, this, boost::placeholders::_1));
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector);
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector);
-		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point(32, 32));
+		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point{ 32, 32 });
 		textTest = std::make_shared<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24, sdl::ColourPresets::white);
 		textTest->setStaticOnCamera(true);
-		textTest->setBackgroundOffset(vas::Vector2(3.0f, vas::Angle(45.0 + 90.0)));
+		textTest->setBackgroundOffset(vas::Vector2{ 3.0f, vas::Angle{ 45.0 + 90.0 } });
 
 		RenderAssistance->insert(VAS_INSERT_VAR(testSprite));
 		RenderAssistance->insert(VAS_INSERT_VAR(testSprite2));

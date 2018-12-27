@@ -2,16 +2,8 @@
 
 namespace vas
 {
-	AnimationDelay::AnimationDelay()
-	{
-	}
-
 	AnimationDelay::AnimationDelay(std::chrono::nanoseconds duration):
 		duration(duration)
-	{
-	}
-
-	AnimationDelay::~AnimationDelay()
 	{
 	}
 
@@ -21,7 +13,7 @@ namespace vas
 
 		auto finishAnim = [](bool& finTag, std::chrono::steady_clock::time_point& tp)->void {
 			finTag = true;
-			tp = std::chrono::steady_clock::time_point();
+			tp = std::chrono::steady_clock::time_point{};
 		};
 
 		if (duration == duration.zero())

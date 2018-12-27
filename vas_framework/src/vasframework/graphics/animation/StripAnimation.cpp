@@ -2,14 +2,6 @@
 
 namespace vas
 {
-	StripAnimation::StripAnimation()
-	{
-	}
-
-	StripAnimation::~StripAnimation()
-	{
-	}
-
 	void StripAnimation::insertFrame(size_t frame, SpriteSheet * spritesheet, Clock::DurationType stayTime)
 	{
 		if (spritesheet == nullptr)
@@ -18,7 +10,7 @@ namespace vas
 		if (stayTime == stayTime.zero())
 			stayTime = std::get<2>(this->back());
 
-		this->push_back(std::make_tuple(frame, spritesheet, stayTime));
+		this->push_back({ frame, spritesheet, stayTime });
 	}
 
 	void StripAnimation::tick()
@@ -53,6 +45,6 @@ namespace vas
 	std::pair<size_t, const SpriteSheet*> StripAnimation::getCurrentFrame() const
 	{
 		auto crFramePtr = *currentFrame;
-		return std::make_pair(std::get<0>(crFramePtr), std::get<1>(crFramePtr));
+		return { std::get<0>(crFramePtr), std::get<1>(crFramePtr) };
 	}
 }

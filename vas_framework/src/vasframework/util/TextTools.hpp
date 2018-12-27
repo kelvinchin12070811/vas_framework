@@ -4,7 +4,9 @@
 #include <sstream>
 #include <boost/format.hpp>
 
-//#define VAS_TEXTTOOLS_INDIE_MODE
+#if !__has_include("../VASConfig.hpp")
+#define VAS_TEXTTOOLS_INDIE_MODE
+#endif
 
 #ifndef VAS_TEXTTOOLS_INDIE_MODE
 #include "../VASConfig.hpp"
@@ -14,7 +16,9 @@
 #endif
 
 #else
+#ifdef WIN32
 #define VAS_WINDOWS_MODE
+#endif
 
 #ifdef VAS_WINDOWS_MODE
 #define VAS_DECLSPEC __declspec(dllexport)
@@ -102,6 +106,10 @@ namespace vas
 	{
 	public:
 		Cout();
+		Cout(const Cout&) = delete;
+		Cout(Cout&&) = delete;
+		Cout& operator=(const Cout&) = delete;
+		Cout& operator=(Cout&&) = delete;
 		~Cout();
 
 		inline static decltype(STD_COUT)& getWrapedStream() { return STD_COUT; }
@@ -125,6 +133,10 @@ namespace vas
 	{
 	public:
 		Ceer();
+		Ceer(const Ceer&) = delete;
+		Ceer(Ceer&&) = delete;
+		Ceer& operator=(const Ceer&) = delete;
+		Ceer& operator=(Ceer&&) = delete;
 		~Ceer();
 
 		inline static decltype(STD_CEER)& getWrapedStream() { return STD_CEER; }
@@ -148,6 +160,10 @@ namespace vas
 	{
 	public:
 		Cin();
+		Cin(const Cin&) = delete;
+		Cin(Cin&&) = delete;
+		Cin& operator=(const Cin&) = delete;
+		Cin& operator=(Cin&&) = delete;
 		inline static decltype(STD_CIN)& getWrapedStream() { return STD_CIN; }
 
 		template<typename Type>

@@ -24,7 +24,6 @@ namespace vas
 			  @param bundle Tilesets that use to render the map.
 		*/
 		MapRenderer(TileLayer* layer, const sdl::Point& mapSize, const sdl::Point& tileSize, const TilesetsBundle& bundle);
-		~MapRenderer();
 
 		void tick() override;
 		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;

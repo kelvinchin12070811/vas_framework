@@ -21,7 +21,7 @@ namespace vas
 	{
 	}
 
-	Property::Property(Property && rhs):
+	Property::Property(Property && rhs) noexcept:
 		name(std::move(rhs.name)), value(std::move(rhs.value))
 	{
 	}
@@ -77,7 +77,7 @@ namespace vas
 		return *this;
 	}
 
-	Property & Property::operator=(Property && rhs)
+	Property & Property::operator=(Property && rhs) noexcept
 	{
 		this->name = std::move(rhs.name);
 		this->value = std::move(rhs.value);
@@ -90,7 +90,7 @@ namespace vas
 		return *this;
 	}
 
-	Property & Property::operator=(boost::any && rhs)
+	Property & Property::operator=(boost::any && rhs) noexcept
 	{
 		this->value = std::move(rhs);
 		return *this;

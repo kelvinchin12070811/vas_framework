@@ -29,7 +29,7 @@ namespace vas
 
 	void JsonSerializer::arrayStart(const std::string & name)
 	{
-		rapidjson::Value list(rapidjson::kArrayType);
+		rapidjson::Value list{ rapidjson::kArrayType };
 		stackTrace.push({ name, std::move(list) });
 	}
 
@@ -60,55 +60,55 @@ namespace vas
 
 	void JsonSerializer::accept(const std::string & name, std::byte & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = static_cast<std::int32_t>(value);
 		append(name, std::move(tmp));
 	}
 
 	void JsonSerializer::accept(const std::string & name, std::int16_t & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = static_cast<std::int32_t>(value);
 		append(name, std::move(tmp));
 	}
 
 	void JsonSerializer::accept(const std::string & name, std::int32_t & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = value;
 		append(name, std::move(tmp));
 	}
 
 	void JsonSerializer::accept(const std::string & name, std::uint32_t & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = value;
 		append(name, std::move(tmp));
 	}
 	void JsonSerializer::accept(const std::string & name, std::int64_t & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = value;
 		append(name, std::move(tmp));
 	}
 
 	void JsonSerializer::accept(const std::string & name, std::uint64_t & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = value;
 		append(name, std::move(tmp));
 	}
 
 	void JsonSerializer::accept(const std::string & name, float & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = value;
 		append(name, std::move(tmp));
 	}
 
 	void JsonSerializer::accept(const std::string & name, double & value)
 	{
-		rapidjson::Value tmp(rapidjson::kNumberType);
+		rapidjson::Value tmp{ rapidjson::kNumberType };
 		tmp = value;
 		append(name, std::move(tmp));
 	}
@@ -122,7 +122,7 @@ namespace vas
 
 	void JsonSerializer::accept(const std::string & name, std::string & value)
 	{
-		rapidjson::Value tmp(rapidjson::kStringType);
+		rapidjson::Value tmp{ rapidjson::kStringType };
 		tmp = rapidjson::StringRef(value.c_str());
 		append(name, std::move(tmp));
 	}
@@ -130,7 +130,7 @@ namespace vas
 	std::string JsonSerializer::getJSON() const
 	{
 		rapidjson::StringBuffer buffer;
-		rapidjson::PrettyWriter<decltype(buffer)> writer(buffer);
+		rapidjson::PrettyWriter<decltype(buffer)> writer{ buffer };
 		document.Accept(writer);
 		return buffer.GetString();
 	}
@@ -139,7 +139,7 @@ namespace vas
 	{
 		if (stackTrace.empty())
 		{
-			document.AddMember(rapidjson::Value(name.c_str(), name.length(), document.GetAllocator()),
+			document.AddMember({ name.c_str(), name.length(), document.GetAllocator() },
 				std::move(value), document.GetAllocator());
 		}
 		else
@@ -151,7 +151,7 @@ namespace vas
 			}
 			else
 			{
-				stackTrace.top().second.AddMember(rapidjson::Value(name.c_str(), name.length(), document.GetAllocator()),
+				stackTrace.top().second.AddMember({ name.c_str(), name.length(), document.GetAllocator() },
 					std::move(value), document.GetAllocator());
 			}
 		}

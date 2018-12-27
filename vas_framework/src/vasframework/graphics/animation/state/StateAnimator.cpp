@@ -7,10 +7,6 @@ namespace vas
 		curAnim = state.begin();
 	}
 
-	StateAnimator::~StateAnimator()
-	{
-	}
-
 	void StateAnimator::setConditionalVar(const std::string & name, std::any value)
 	{
 		auto begin = cdVar2TransitionMap.lower_bound(name);
@@ -18,7 +14,7 @@ namespace vas
 
 		for (auto itr = begin; itr != end; itr++)
 		{
-			StateConditionalTransition* curTransition = nullptr;
+			StateConditionalTransition* curTransition{ nullptr };
 			try
 			{
 				curTransition = &transitionsList.at(itr->second);

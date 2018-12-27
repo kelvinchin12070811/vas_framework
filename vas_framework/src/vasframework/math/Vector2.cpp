@@ -4,10 +4,6 @@
 
 namespace vas
 {
-	Vector2::Vector2()
-	{
-	}
-
 	Vector2::Vector2(const sdl::Point & point):
 		x(static_cast<float>(point.x)), y(static_cast<float>(point.y))
 	{
@@ -63,13 +59,9 @@ namespace vas
 		}
 	}
 
-	Vector2::~Vector2()
-	{
-	}
-
 	float Vector2::magnitude() const
 	{
-		return magnitude(Vector2(0, 0));
+		return magnitude({ 0, 0 });
 	}
 
 	float Vector2::magnitude(const Vector2 & rhs) const
@@ -84,7 +76,7 @@ namespace vas
 
 	Angle Vector2::angle() const
 	{
-		Vector2 temp = *this;
+		Vector2 temp{ *this };
 		temp.x = std::fabsf(temp.x);
 		temp.y = std::fabsf(temp.y);
 
@@ -94,16 +86,16 @@ namespace vas
 		switch (quater)
 		{
 		case 1:
-			return Angle(atan(temp.x / temp.y), Angle::AngleType::rad).toDegree();
+			return Angle{ atan(temp.x / temp.y), Angle::AngleType::rad }.toDegree();
 			break;
 		case 2:
-			return Angle(atan(temp.y / temp.x), Angle::AngleType::rad).toDegree() + Angle(90.0);
+			return Angle{ atan(temp.y / temp.x), Angle::AngleType::rad }.toDegree() + Angle(90.0);
 			break;
 		case 3:
-			return Angle(atan(temp.x / temp.y), Angle::AngleType::rad).toDegree() + Angle(180.0);
+			return Angle{ atan(temp.x / temp.y), Angle::AngleType::rad }.toDegree() + Angle(180.0);
 			break;
 		case 4:
-			return Angle(atan(temp.y / temp.x), Angle::AngleType::rad).toDegree() + Angle(270.0);
+			return Angle{ atan(temp.y / temp.x), Angle::AngleType::rad }.toDegree() + Angle(270.0);
 			break;
 		}
 		return 0.0f;
@@ -133,25 +125,25 @@ namespace vas
 
 	Vector2 Vector2::operator*(const Vector2 & rhs) const
 	{
-		Vector2 result(this->x * rhs.x, this->y * rhs.y);
+		Vector2 result{ this->x * rhs.x, this->y * rhs.y };
 		return result;
 	}
 
 	Vector2 Vector2::operator*(float rhs) const
 	{
-		Vector2 result(this->x * rhs, this->y * rhs);
+		Vector2 result{ this->x * rhs, this->y * rhs };
 		return result;
 	}
 
 	Vector2 Vector2::operator/(const Vector2 & rhs) const
 	{
-		Vector2 result(this->x / rhs.x, this->y / rhs.y);
+		Vector2 result{ this->x / rhs.x, this->y / rhs.y };
 		return result;
 	}
 
 	Vector2 Vector2::operator/(float rhs) const
 	{
-		Vector2 result(this->x / rhs, this->y / rhs);
+		Vector2 result{ this->x / rhs, this->y / rhs };
 		return result;
 	}
 
@@ -199,7 +191,7 @@ namespace vas
 
 	Vector2::operator sdl::Point() const
 	{
-		return sdl::Point(static_cast<int>(x), static_cast<int>(y));
+		return sdl::Point{ static_cast<int>(x), static_cast<int>(y) };
 	}
 
 	uint8_t Vector2::getQuaterId() const

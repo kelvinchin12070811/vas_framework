@@ -14,9 +14,8 @@ namespace vas
 	class SceneCallFailed : std::exception
 	{ /** @} */
 	public:
-		SceneCallFailed();
+		SceneCallFailed() = default;
 		explicit SceneCallFailed(const std::string& sceneName);
-		~SceneCallFailed();
 
 		/** Get the discription of this exception. */
 		const char* what() const override;

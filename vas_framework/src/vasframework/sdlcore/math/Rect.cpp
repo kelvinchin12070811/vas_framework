@@ -3,26 +3,13 @@
 
 namespace vas::sdl
 {
-	Rect::Rect()
-	{
-	}
-
 	Rect::Rect(int x, int y, int w, int h):
 		x(x), y(y), w(w), h(h)
 	{
 	}
 
-	Rect::Rect(const Rect & rect):
-		Rect(rect.x, rect.y, rect.w, rect.h)
-	{
-	}
-
 	Rect::Rect(SDL_Rect rect):
 		x(rect.x), y(rect.y), w(rect.w), h(rect.h)
-	{
-	}
-
-	Rect::~Rect()
 	{
 	}
 
@@ -54,7 +41,7 @@ namespace vas::sdl
 	bool Rect::enclosePoints(const std::vector<Point>& points, Rect * result) const
 	{
 		auto clip = static_cast<SDL_Rect>(*this);
-		SDL_Rect resultRaw = { 0 };
+		SDL_Rect resultRaw{ 0 };
 		std::vector<SDL_Point> pointsRaw;
 		pointsRaw.reserve(points.size());
 
@@ -83,15 +70,6 @@ namespace vas::sdl
 	{
 		return (this->x != rhs.x) || (this->y != rhs.y) ||
 			(this->w != rhs.w) || (this->h != rhs.h);
-	}
-
-	Rect & Rect::operator=(const Rect & rhs)
-	{
-		this->x = rhs.x;
-		this->y = rhs.y;
-		this->w = rhs.w;
-		this->h = rhs.h;
-		return *this;
 	}
 
 	Rect & Rect::operator=(const SDL_Rect & rhs)

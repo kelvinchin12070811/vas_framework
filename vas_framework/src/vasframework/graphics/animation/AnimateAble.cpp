@@ -11,4 +11,6 @@ namespace vas
 	{
 		finished = true;
 	}
+
+	AnimateAble::~AnimateAble() = default;
 }

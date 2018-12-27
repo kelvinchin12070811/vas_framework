@@ -19,12 +19,12 @@ namespace scene
 	const sreflex::ReflectAbleAutoRegistrar<TileMap> TileMap::__REGISTRAR{};
 	TileMap::TileMap()
 	{
-		Int32Tag tag = 35;
+		Int32Tag tag{ 35 };
 		tag += 45;
 
 		NBTCompoundTag root;
 		auto player = std::make_shared<NBTCompoundTag>();
-		player->insert("position", std::make_shared<Vector2Tag>(Vector2(64.0f, 48.0f)));
+		player->insert("position", std::make_shared<Vector2Tag>(Vector2{ 64.0f, 48.0f }));
 		root.insert("player", player);
 
 		loader.load({
@@ -92,7 +92,7 @@ namespace scene
 
 		for (auto& itr : const_cast<std::vector<vas::Tileset>&>(map.getRequireTilesets()))
 		{
-			boost::filesystem::path path = boost::filesystem::absolute(itr.source.name, assetsPath).normalize().make_preferred();
+			boost::filesystem::path path{ boost::filesystem::absolute(itr.source.name, assetsPath).normalize().make_preferred() };
 			itr.source.name = path.string();
 		}
 
@@ -104,8 +104,8 @@ namespace scene
 			if (auto layerData = dynamic_cast<vas::TileLayer*>(itr.get()); layerData != nullptr)
 			{
 				mapLayers.push_back(std::make_shared<vas::MapRenderer>(layerData,
-					sdl::Point(map.getMapProperties().mapWidth, map.getMapProperties().mapHeight),
-					sdl::Point(map.getMapProperties().tileWidth, map.getMapProperties().tileHeight),
+					sdl::Point{ static_cast<int>(map.getMapProperties().mapWidth), static_cast<int>(map.getMapProperties().mapHeight) },
+					sdl::Point{ static_cast<int>(map.getMapProperties().tileWidth), static_cast<int>(map.getMapProperties().tileHeight) },
 					tilesets));
 			}
 		}
@@ -132,7 +132,7 @@ namespace scene
 		{
 		case sdl::MouseButtonIndex::ButtonLeft:
 			//vas::CommonTools::getInstance().messenger((boost::format("Mouse left clicked at: %i , %i") % x % y).str());
-			vas::Log() << boost::format("Mouse left clicked at: %i, %i") % position.x % position.y;
+			vas::Log() << boost::format{ "Mouse left clicked at: %i, %i" } % position.x % position.y;
 			break;
 		}
 	}

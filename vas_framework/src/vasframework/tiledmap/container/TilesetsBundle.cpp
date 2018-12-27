@@ -3,14 +3,6 @@
 
 namespace vas
 {
-	TilesetsBundle::TilesetsBundle()
-	{
-	}
-
-	TilesetsBundle::~TilesetsBundle()
-	{
-	}
-
 	void TilesetsBundle::load(const std::vector<Tileset>& tilesets, int w, int h)
 	{
 		this->w = w;
@@ -20,12 +12,12 @@ namespace vas
 			spriteData.insert(std::make_pair(itr.firstGid,
 				std::make_pair(
 					itr,
-					std::make_shared<SpriteSheet>(itr.source.name, sdl::Point(w, h))
+					std::make_shared<SpriteSheet>(itr.source.name, sdl::Point{ w, h })
 				))
 			);
 			for (auto& itr2 : itr.tilesWithAnimation)
 			{
-				AnimationController controller(itr2.second.second, itr2.second.first);
+				AnimationController controller{ itr2.second.second, itr2.second.first };
 				animationsData.insert(std::make_pair(itr2.first, std::move(controller)));
 			}
 		}
@@ -33,12 +25,12 @@ namespace vas
 
 	std::pair<size_t, std::shared_ptr<SpriteSheet>> TilesetsBundle::getTile(uint32_t index)
 	{
-		if (index == 0) return std::make_pair(0, nullptr);
+		if (index == 0) return { 0, nullptr };
 
 		std::pair<size_t, std::shared_ptr<SpriteSheet>> selectedTile;
 		auto result = spriteData.lower_bound(index);
 
-		if (result == spriteData.end()) return std::make_pair(0, nullptr);
+		if (result == spriteData.end()) return { 0, nullptr };
 		selectedTile.first = index - result->second.first.firstGid;
 		selectedTile.second = result->second.second;
 		return selectedTile;

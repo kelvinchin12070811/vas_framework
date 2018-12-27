@@ -2,10 +2,6 @@
 
 namespace vas::sdl
 {
-	Point::Point()
-	{
-	}
-
 	Point::Point(int x, int y):
 		x(x), y(y)
 	{
@@ -13,10 +9,6 @@ namespace vas::sdl
 
 	Point::Point(const SDL_Point & point):
 		x(point.x), y(point.y)
-	{
-	}
-
-	Point::~Point()
 	{
 	}
 
@@ -62,17 +54,17 @@ namespace vas::sdl
 
 	Point Point::operator+(const Point & rhs) const
 	{
-		return Point(this->x + rhs.x, this->y + rhs.y);
+		return Point{ this->x + rhs.x, this->y + rhs.y };
 	}
 
 	Point Point::operator-(const Point & rhs) const
 	{
-		return Point(this->x - rhs.x, this->y - rhs.y);
+		return Point{ this->x - rhs.x, this->y - rhs.y };
 	}
 
 	Point Point::operator*(const Point & rhs) const
 	{
-		return Point(this->x * rhs.x, this->y * rhs.y);
+		return Point{ this->x * rhs.x, this->y * rhs.y };
 	}
 
 	Point Point::operator/(const Point & rhs) const

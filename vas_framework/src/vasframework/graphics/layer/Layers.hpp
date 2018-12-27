@@ -45,10 +45,10 @@ namespace vas
 			std::shared_ptr<DrawAble> instance; /**< Shared instance of the object. */
 		};
 	public:
-		Layers();
+		Layers() = default;
 		Layers(const Layers& rhs);
-		Layers(Layers&& rhs);
-		~Layers();
+		Layers(Layers&& rhs) noexcept;
+		~Layers() = default;
 
 		/** Insert new instance of DrawAble into the list.
 			  @param data LayerData of the object.
@@ -119,7 +119,7 @@ namespace vas
 		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;
 
 		Layers& operator=(const Layers& rhs);
-		Layers& operator=(Layers&& rhs);
+		Layers& operator=(Layers&& rhs) noexcept;
 
 		std::vector<LayerData>& getLayerData();
 	private:

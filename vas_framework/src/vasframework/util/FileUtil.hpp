@@ -32,7 +32,7 @@ namespace vas
 	*/
 	inline std::vector<uint8_t> readAllBinary(std::istream& stream)
 	{
-		size_t fileSize = 0;
+		size_t fileSize{ 0 };
 		stream.seekg(std::istream::end);
 		fileSize = stream.tellg();
 		stream.seekg(std::istream::beg);
@@ -50,7 +50,7 @@ namespace vas
 		std::ifstream input;
 		input.open(fileName);
 		if (!input.is_open())
-			return std::stringstream();
+			return std::stringstream{};
 		return readAll(input);
 	}
 
@@ -63,7 +63,7 @@ namespace vas
 		std::ifstream input;
 		input.open(fileName, std::ios::binary);
 		if (!input.is_open())
-			return std::vector<uint8_t>();
+			return std::vector<uint8_t>{};
 		return readAllBinary(input);
 	}
 	/** @} */

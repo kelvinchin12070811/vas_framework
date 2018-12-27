@@ -155,7 +155,7 @@ namespace vas::sdl
 	template<typename SDLComponentType, typename SDLComponentRawType>
 	SDLComponentType createComponent(SDLComponentRawType* instance, std::function<void(SDLComponentRawType*)> deleter = &SDLComponentType::defDeleter)
 	{
-		return SDLComponentType(instance, deleter);
+		return SDLComponentType{ instance, deleter };
 	}
 
 	template<typename SDLComponentRawType>

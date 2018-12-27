@@ -18,8 +18,7 @@ namespace vas
 	class VAS_DECLSPEC TilesetsBundle
 	{ /**< @} */
 	public:
-		TilesetsBundle(); /**< Create empty bundle. */
-		~TilesetsBundle();
+		TilesetsBundle() = default; /**< Create empty bundle. */
 		/** load from a raw data of tilesets.
 			  @param tilesets Tilesets data.
 			  @param w Width of the individual tile.

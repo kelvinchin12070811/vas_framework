@@ -21,7 +21,13 @@ namespace vas
 	{ /** @} */
 	public:
 		/** Create a new vector with zero vector. */
-		Vector2();
+		Vector2() = default;
+		Vector2(const Vector2&) = default;
+		Vector2(Vector2&&) = default;
+		Vector2& operator=(const Vector2&) = default;
+		Vector2& operator=(Vector2&&) = default;
+		~Vector2() {}
+
 		explicit Vector2(const sdl::Point& point); /**< Cast from sdl::Point. */
 		/** Create new instance of Vector2 from coordinate.
 			  @param x X coordinate of the vector.
@@ -33,9 +39,6 @@ namespace vas
 			  @param value Angle of the vector line.
 		*/
 		Vector2(float magnitude, const Angle& value);
-		Vector2(const Vector2&) = default;
-		Vector2(Vector2&&) = default;
-		~Vector2();
 
 		/** Get the magnitude of vector from origin(0, 0). */
 		float magnitude() const;
@@ -67,9 +70,6 @@ namespace vas
 		const Vector2& operator/=(float rhs); /**< Divide this vector with a factor. */
 
 		/** @} */
-
-		Vector2& operator=(const Vector2&) = default;
-		Vector2& operator=(Vector2&&) = default;
 
 		/** @name Overloaded operators
 			  @{

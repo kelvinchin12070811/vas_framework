@@ -11,7 +11,7 @@ namespace vas
 
 	bool Camera::canSee(const sdl::Rect & other)
 	{
-		sdl::Rect cameraRect(0, 0, size.w(), size.h());
+		sdl::Rect cameraRect{ 0, 0, size.w(), size.h() };
 		
 		return ((other.x < cameraRect.x + cameraRect.w) && (other.x + other.w > cameraRect.x) &&
 			(other.y < cameraRect.y + cameraRect.h) && (other.y + other.h > cameraRect.y));
@@ -19,9 +19,7 @@ namespace vas
 
 	bool Camera::canSee(const Vector2 & other, const sdl::Point & size)
 	{
-		auto pos = getPosOnCamera(other);
-		sdl::Point otherPos = static_cast<sdl::Point>(other);
-		sdl::Rect otherHolder(otherPos.x, otherPos.y, size.x, size.y);
+		sdl::Rect otherHolder{ static_cast<int>(other.x), static_cast<int>(other.y), size.x, size.y };
 		return canSee(otherHolder);
 	}
 
@@ -34,8 +32,8 @@ namespace vas
 	sdl::Rect Camera::getRectOnCamera(const sdl::Rect & rect, bool staticOnCamera)
 	{
 		if (staticOnCamera) return rect;
-		return sdl::Rect(static_cast<int>(rect.x * multiplier), static_cast<int>(rect.y * multiplier),
-			static_cast<int>(rect.w * multiplier), static_cast<int>(rect.h * multiplier));
+		return sdl::Rect{ static_cast<int>((rect.x * multiplier) - this->position.x), static_cast<int>((rect.y * multiplier) - this->position.y),
+			static_cast<int>(rect.w * multiplier), static_cast<int>(rect.h * multiplier) };
 	}
 
 	void Camera::move(const Vector2 & movement)
@@ -84,13 +82,5 @@ namespace vas
 	double Camera::getMultiplier()
 	{
 		return multiplier;
-	}
-
-	Camera::Camera()
-	{
-	}
-
-	Camera::~Camera()
-	{
 	}
 }

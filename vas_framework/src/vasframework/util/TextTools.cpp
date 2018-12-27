@@ -12,7 +12,7 @@
 namespace vas
 {
 #ifdef VAS_WINDOWS_MODE
-	bool TextTools::inited = false;
+	bool TextTools::inited{ false };
 
 	void TextTools::initTextTools()
 	{
@@ -25,28 +25,28 @@ namespace vas
 
 	std::string TextTools::wstos(const std::wstring & str, bool unicode)
 	{
-		if (str.empty()) return std::string();
-		uint32_t unicodeCP = unicode ? CP_UTF8 : CP_ACP;
-		int newLength = 0;
-		int oriLength = static_cast<int>(str.length() + 1);
+		if (str.empty()) return std::string{};
+		uint32_t unicodeCP{ static_cast<uint32_t>(unicode ? CP_UTF8 : CP_ACP) };
+		int newLength{ 0 };
+		int oriLength{ static_cast<int>(str.length() + 1) };
 		newLength = WideCharToMultiByte(unicodeCP, 0, str.c_str(), oriLength, nullptr, 0, nullptr, nullptr);
-		if (newLength == 0) return std::string();
+		if (newLength == 0) return std::string{};
 		std::unique_ptr<char[]> mbstr = std::make_unique<char[]>(newLength);
 		WideCharToMultiByte(unicodeCP, 0, str.c_str(), oriLength, mbstr.get(), newLength, nullptr, nullptr);
-		return std::string(mbstr.get());
+		return std::string{ mbstr.get() };
 	}
 
 	std::wstring TextTools::stows(const std::string & str, bool unicode)
 	{
-		if (str.empty()) return std::wstring();
-		uint32_t unicodeCP = unicode ? CP_UTF8 : CP_ACP;
-		int newLength = 0;
-		int oriLength = str.length() + 1;
+		if (str.empty()) return std::wstring{};
+		uint32_t unicodeCP{ static_cast<uint32_t>(unicode ? CP_UTF8 : CP_ACP) };
+		int newLength{ 0 };
+		int oriLength{ static_cast<int>(str.length() + 1) };
 		newLength = MultiByteToWideChar(unicodeCP, 0, str.c_str(), oriLength, nullptr, 0);
-		if (newLength == 0) return std::wstring();
+		if (newLength == 0) return std::wstring{};
 		std::unique_ptr<wchar_t[]> wstr = std::make_unique<wchar_t[]>(newLength);
 		MultiByteToWideChar(unicodeCP, 0, str.c_str(), oriLength, wstr.get(), newLength);
-		return std::wstring(wstr.get());
+		return std::wstring{ wstr.get() };
 	}
 #endif // VAS_WINDOWS_MODE
 
@@ -62,7 +62,7 @@ namespace vas
 
 	void TextTools::print(const std::ostream & str)
 	{
-		print(dynamic_cast<const std::stringstream&>(str).str());
+		print(static_cast<const std::stringstream&>(str).str());
 	}
 
 	void TextTools::println(const std::string & str)

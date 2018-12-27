@@ -18,9 +18,7 @@ namespace vas
 	class VAS_DECLSPEC AnimationControllerEx : public AutoControllable
 	{ /** @} */
 	public:
-		AnimationControllerEx(); /**< Create empty animation controller. */
-		~AnimationControllerEx();
-
+		AnimationControllerEx() = default; /**< Create empty controller. */
 		void tick() override;
 		void restart() override;
 

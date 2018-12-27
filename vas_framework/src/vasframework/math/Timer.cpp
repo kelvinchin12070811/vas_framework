@@ -3,9 +3,6 @@
 
 namespace vas
 {
-	Timer::Timer()
-	{
-	}
 	Timer::Timer(uint32_t interval):
 		duration(interval), countingState(false)
 	{
@@ -33,7 +30,7 @@ namespace vas
 	void Timer::start()
 	{
 		countingState = true;
-		timerThread = std::thread(std::bind(&Timer::threadRuner, this));
+		timerThread = std::thread{ std::bind(&Timer::threadRuner, this) };
 	}
 
 	void Timer::stop()
@@ -41,7 +38,7 @@ namespace vas
 		if (countingState == false) return;
 		countingState = false;
 		if (!timerThread.joinable())
-			throw std::runtime_error("Timer thread is unjoinable.");
+			throw std::runtime_error{ "Timer thread is unjoinable." };
 		timerThread.join();
 	}
 

@@ -10,10 +10,6 @@ namespace vas
 	{
 	}
 
-	MapRenderer::~MapRenderer()
-	{
-	}
-
 	void MapRenderer::tick()
 	{
 		//bundle->tick();
@@ -32,7 +28,7 @@ namespace vas
 			for (tilePosition.x = 0; tilePosition.x < mapSize.x; tilePosition.x++)
 			{
 				Vector2 targetPos = static_cast<Vector2>(tilePosition) * static_cast<Vector2>(tileSize);
-				if (camera->canSee(targetPos, tileSize))
+				if (camera->canSee(camera->getPosOnCamera(targetPos, staticOnCamera), tileSize))
 				{
 					auto tile = layer->tileAt(tilePosition.x, tilePosition.y);
 					if (tile != 0)

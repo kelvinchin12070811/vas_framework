@@ -15,7 +15,7 @@ namespace vas
 	class VAS_DECLSPEC StyledText : public DrawAble
 	{ /** @} */
 	public:
-		StyledText();
+		StyledText() = default;
 		/** Construct new StyledText.
 			  @param text String of text that need to render.
 			  @param font Font type file's name that use to render the text, ttf and otf are supported.
@@ -43,7 +43,6 @@ namespace vas
 			  @param init Determin if init and pre-render the text to texture after the creation of the text or not.
 		*/
 		StyledText(const std::string& text, const std::string& font, const Vector2& position, int fontSize, const sdl::Colour& textColour, Text::RenderMode renderMode, bool init = true);
-		~StyledText();
 
 		void tick() override;
 		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;

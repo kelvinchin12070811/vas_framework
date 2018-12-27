@@ -3,16 +3,8 @@
 
 namespace vas
 {
-	SceneCallFailed::SceneCallFailed()
-	{
-	}
-
 	SceneCallFailed::SceneCallFailed(const std::string& sceneName):
 		sceneName(sceneName)
-	{
-	}
-
-	SceneCallFailed::~SceneCallFailed()
 	{
 	}
 

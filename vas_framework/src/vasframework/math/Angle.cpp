@@ -4,10 +4,6 @@
 
 namespace vas
 {
-	Angle::Angle()
-	{
-	}
-
 	Angle::Angle(const Angle & rhs):
 		value(rhs.value)
 	{
@@ -20,20 +16,16 @@ namespace vas
 		clampValue();
 	}
 
-	Angle::~Angle()
-	{
-	}
-
 	Angle Angle::toRadian() const
 	{
 		using namespace boost::math;
-		return Angle((value / 180) * constants::pi<double>(), AngleType::rad);
+		return Angle{ (value / 180) * constants::pi<double>(), AngleType::rad };
 	}
 
 	Angle Angle::toDegree() const
 	{
 		using namespace boost::math;
-		return Angle((value / constants::pi<double>()) * 180, AngleType::deg);
+		return { (value / constants::pi<double>()) * 180, AngleType::deg };
 	}
 
 	Angle::AngleType Angle::getAngleType() const
@@ -81,56 +73,56 @@ namespace vas
 
 	Angle Angle::operator+(const Angle & rhs) const
 	{
-		Angle result(this->value + rhs.value);
+		Angle result{ this->value + rhs.value };
 		result.clampValue();
 		return result;
 	}
 
 	Angle Angle::operator-(const Angle & rhs) const
 	{
-		Angle result(this->value - rhs.value);
+		Angle result{ this->value - rhs.value };
 		result.clampValue();
 		return result;
 	}
 
 	Angle Angle::operator*(const Angle & rhs) const
 	{
-		Angle result(this->value * rhs.value);
+		Angle result{ this->value * rhs.value };
 		result.clampValue();
 		return result;
 	}
 
 	Angle Angle::operator/(const Angle & rhs) const
 	{
-		Angle result(this->value / rhs.value);
+		Angle result{ this->value / rhs.value };
 		result.clampValue();
 		return result;
 	}
 
 	Angle Angle::operator+(double rhs) const
 	{
-		Angle result(this->value + rhs);
+		Angle result{ this->value + rhs };
 		result.clampValue();
 		return result;
 	}
 
 	Angle Angle::operator-(double rhs) const
 	{
-		Angle result(this->value - rhs);
+		Angle result{ this->value - rhs };
 		result.clampValue();
 		return result;
 	}
 
 	Angle Angle::operator*(double rhs) const
 	{
-		Angle result(this->value * rhs);
+		Angle result{ this->value * rhs };
 		result.clampValue();
 		return result;
 	}
 
 	Angle Angle::operator/(double rhs) const
 	{
-		Angle result(this->value / rhs);
+		Angle result{ this->value / rhs };
 		result.clampValue();
 		return result;
 	}

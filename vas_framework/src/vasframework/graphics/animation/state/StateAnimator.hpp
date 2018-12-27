@@ -14,7 +14,6 @@ namespace vas
 	{ /** @} */
 	public:
 		StateAnimator();
-		~StateAnimator();
 
 		/** Set the conditional variable. This action might trigger transition of animation.
 			  @param name Name of the conditional variable.

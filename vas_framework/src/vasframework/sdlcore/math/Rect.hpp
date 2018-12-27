@@ -12,11 +12,10 @@ namespace vas::sdl
 	class VAS_DECLSPEC Rect
 	{ /** @} */
 	public:
-		Rect(); /**< Create empty rect. */
+		Rect() = default; /**< Create empty rect. */
 		Rect(int x, int y, int w, int h); /**< Create Rect with value. */
-		Rect(const Rect& rect);
-		explicit Rect(SDL_Rect rect);
-		~Rect();
+		explicit Rect(SDL_Rect rect); /**< Create Rect from SDL_Rect. */
+
 		int x{ 0 }; /**< x position of rect. */
 		int y{ 0 }; /**< y position of rect. */
 		int w{ 0 }; /**< width of rect. */
@@ -56,8 +55,7 @@ namespace vas::sdl
 		bool operator==(const Rect& rhs) const; /**< Compare two rect if is equal. */
 		bool operator!=(const Rect& rhs) const; /**< Compare two rect if is not equal. */
 		/** @} */
-		Rect& operator=(const Rect& rhs);
-		Rect& operator=(const SDL_Rect& rhs);
+		Rect& operator=(const SDL_Rect& rhs); /**< Assign with SDL_Rect. */
 		/** @name Overloaded operators*/
 		operator SDL_Rect(); /**< Cast to SDL_Rect. */
 		operator const SDL_Rect() const; /**< Cast to const SDL_Rect. */

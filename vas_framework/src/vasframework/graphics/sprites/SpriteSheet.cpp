@@ -4,10 +4,6 @@
 
 namespace vas
 {
-	SpriteSheet::SpriteSheet()
-	{
-	}
-
 	SpriteSheet::SpriteSheet(const std::string & file, const sdl::Point & tileSize, const Vector2 & position,
 		const sdl::Point & origin, BufferMode bfMode):
 		Sprite(file, position, origin, bfMode), tileSize(tileSize)
@@ -16,10 +12,6 @@ namespace vas
 		this->destination.h = this->tileSize.y;
 
 		tileSheetDimension = sdl::Point(source.w / tileSize.x, source.h / tileSize.y);
-	}
-
-	SpriteSheet::~SpriteSheet()
-	{
 	}
 
 	void SpriteSheet::tick()
@@ -34,7 +26,7 @@ namespace vas
 
 	void SpriteSheet::drawTile(size_t index, const Vector2 & position, sdl::Renderer* renderer, Camera* camera, bool staticOnCamera, const sdl::Point & origin, const vas::Angle & angle, sdl::Renderer::Flip flip)
 	{
-		sdl::Renderer rendererHolder = (renderer == nullptr) ? Base::getInstance().getRenderer() : *renderer;
+		sdl::Renderer rendererHolder{ (renderer == nullptr) ? Base::getInstance().getRenderer() : *renderer };
 		if (camera == nullptr) camera = &Camera::getInstance();
 
 		sdl::Point tilePos;
@@ -42,8 +34,8 @@ namespace vas
 		tilePos.x = index - (tilePos.y * tileSheetDimension.x); //Calculate x pos of tile scene y pos is getted
 		tilePos *= tileSize; //Convert it back to pixel based position
 
-		tileSource = sdl::Rect(tilePos.x, tilePos.y, tileSize.x, tileSize.y);
-		tileDest = sdl::Rect(static_cast<int>(position.x), static_cast<int>(position.y), tileSize.x, tileSize.y);
+		tileSource = sdl::Rect{ tilePos.x, tilePos.y, tileSize.x, tileSize.y };
+		tileDest = sdl::Rect{ static_cast<int>(position.x), static_cast<int>(position.y), tileSize.x, tileSize.y };
 
 		if (staticOnCamera)
 		{

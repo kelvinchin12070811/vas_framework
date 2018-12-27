@@ -3,26 +3,26 @@
 
 namespace vas::sdl
 {
-	const uint32_t Window::Flags::fullscreen = 0x00000001;
-	const uint32_t Window::Flags::opengl = 0x00000002;
-	const uint32_t Window::Flags::shown = 0x00000004;
-	const uint32_t Window::Flags::hidden = 0x00000008;
-	const uint32_t Window::Flags::borderless = 0x00000010;
-	const uint32_t Window::Flags::resizable = 0x00000020;
-	const uint32_t Window::Flags::minimized = 0x00000040;
-	const uint32_t Window::Flags::maximized = 0x00000080;
-	const uint32_t Window::Flags::input_grabbed = 0x00000100;
-	const uint32_t Window::Flags::input_focus = 0x00000200;
-	const uint32_t Window::Flags::mouse_focus = 0x00000400;
-	const uint32_t Window::Flags::fullscreen_desktop = (fullscreen | 0x00001000);
-	const uint32_t Window::Flags::foreign = 0x00000800;
-	const uint32_t Window::Flags::allow_highdpi = 0x00002000;
-	const uint32_t Window::Flags::mouse_capture = 0x00004000;
-	const uint32_t Window::Flags::always_on_top = 0x00008000;
-	const uint32_t Window::Flags::skip_taskbar = 0x00010000;
-	const uint32_t Window::Flags::utility = 0x00020000;
-	const uint32_t Window::Flags::tooltip = 0x00040000;
-	const uint32_t Window::Flags::popup_menu = 0x00080000;
+	const uint32_t Window::Flags::fullscreen{ 0x00000001 };
+	const uint32_t Window::Flags::opengl{ 0x00000002 };
+	const uint32_t Window::Flags::shown{ 0x00000004 };
+	const uint32_t Window::Flags::hidden{ 0x00000008 };
+	const uint32_t Window::Flags::borderless{ 0x00000010 };
+	const uint32_t Window::Flags::resizable{ 0x00000020 };
+	const uint32_t Window::Flags::minimized{ 0x00000040 };
+	const uint32_t Window::Flags::maximized{ 0x00000080 };
+	const uint32_t Window::Flags::input_grabbed{ 0x00000100 };
+	const uint32_t Window::Flags::input_focus{ 0x00000200 };
+	const uint32_t Window::Flags::mouse_focus{ 0x00000400 };
+	const uint32_t Window::Flags::fullscreen_desktop{ fullscreen | 0x00001000 };
+	const uint32_t Window::Flags::foreign{ 0x00000800 };
+	const uint32_t Window::Flags::allow_highdpi{ 0x00002000 };
+	const uint32_t Window::Flags::mouse_capture{ 0x00004000 };
+	const uint32_t Window::Flags::always_on_top{ 0x00008000 };
+	const uint32_t Window::Flags::skip_taskbar{ 0x00010000 };
+	const uint32_t Window::Flags::utility{ 0x00020000 };
+	const uint32_t Window::Flags::tooltip{ 0x00040000 };
+	const uint32_t Window::Flags::popup_menu{ 0x00080000 };
 
 	Window::Window()
 	{

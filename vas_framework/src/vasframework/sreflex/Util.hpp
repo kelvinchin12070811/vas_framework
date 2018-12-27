@@ -13,7 +13,7 @@
 
 	  Defined in: vasframework/sreflex/Util.hpp
 */
-#define SREFLEX_CODE2STR(code) std::string(#code)
+#define SREFLEX_CODE2STR(code) std::string{ #code }
 /** @} */
 
 namespace vas

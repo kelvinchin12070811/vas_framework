@@ -15,8 +15,7 @@ namespace vas::sdl
 	class VAS_DECLSPEC SDLCoreException : public std::exception
 	{ /** @} */
 	public:
-		SDLCoreException();
-		~SDLCoreException();
+		SDLCoreException() = default;
 		char const* what() const override; /**< Get the error message of the SDL library. See official docs for SDL_GetError() for more information. */
 	};
 }

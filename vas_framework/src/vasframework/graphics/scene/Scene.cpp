@@ -2,14 +2,6 @@
 
 namespace vas
 {
-	Scene::Scene()
-	{
-	}
-
-	Scene::~Scene()
-	{
-	}
-
 	void Scene::tick()
 	{
 		if (IsRenderAssistanceReady)

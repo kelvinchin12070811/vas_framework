@@ -14,6 +14,8 @@ namespace vas
 	public:
 		virtual void tick() = 0 {} /**< Tick or update the controller. */
 		virtual void restart() = 0 {} /**< Restart the controller. */
-		virtual ~AutoControllable() = 0 {}
+		virtual ~AutoControllable() = 0;
 	};
+
+	inline AutoControllable::~AutoControllable() = default;
 }

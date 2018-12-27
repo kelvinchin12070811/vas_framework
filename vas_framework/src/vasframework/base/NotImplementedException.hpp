@@ -12,8 +12,7 @@ namespace vas
 	class VAS_DECLSPEC NotImplementedException : public std::exception
 	{ /** @} */
 	public:
-		NotImplementedException();
-		~NotImplementedException();
+		NotImplementedException() = default;
 		/** Get the error message. */
 		const char* what() const override;
 	};

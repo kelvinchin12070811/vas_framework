@@ -85,8 +85,8 @@ namespace vas
 		sdl::Point getSize();
 		double getMultiplier();
 
-		Camera();
-		~Camera();
+		Camera() = default;
+		~Camera() = default;
 
 		Camera(const Camera&) = delete;
 		Camera(Camera&&) = delete;

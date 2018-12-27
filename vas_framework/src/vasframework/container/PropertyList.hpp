@@ -16,7 +16,7 @@ namespace vas
 	public:
 		PropertyList();
 		PropertyList(const PropertyList& rhs);
-		PropertyList(PropertyList&& rhs);
+		PropertyList(PropertyList&& rhs) noexcept;
 		PropertyList(std::initializer_list<Property> list); /**< Create a PropertyList with initializer_list. */
 		~PropertyList();
 
@@ -32,7 +32,7 @@ namespace vas
 		const Property& find(const std::string& name) const;
 
 		PropertyList& operator=(const PropertyList&) = default;
-		PropertyList& operator=(PropertyList&& rhs);
+		PropertyList& operator=(PropertyList&& rhs) noexcept;
 		/** @name Overloaded operators
 			  @{
 		*/

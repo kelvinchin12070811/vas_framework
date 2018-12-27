@@ -13,7 +13,11 @@ namespace vas
 	class VAS_DECLSPEC AbstractMapLayer
 	{ /** @} */
 	public:
-		AbstractMapLayer();
+		AbstractMapLayer() = default;
+		AbstractMapLayer(const AbstractMapLayer&) = default;
+		AbstractMapLayer(AbstractMapLayer&&) noexcept = default;
+		AbstractMapLayer& operator=(const AbstractMapLayer&) = default;
+		AbstractMapLayer& operator=(AbstractMapLayer&&) noexcept = default;
 		virtual ~AbstractMapLayer() = 0;
 
 		virtual std::string getName() const;
@@ -37,5 +41,7 @@ namespace vas
 		*/
 		PropertyList properties;
 	};
+
+	inline AbstractMapLayer::~AbstractMapLayer() = default;
 }
 #endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

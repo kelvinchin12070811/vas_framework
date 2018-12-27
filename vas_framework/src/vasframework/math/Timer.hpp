@@ -19,9 +19,13 @@ namespace vas
 	class VAS_DECLSPEC Timer
 	{ /** @} */
 	public:
-		Timer(); /**< Create timer with no interval. */
+		Timer() = default; /**< Create timer with no interval. */
 		/** Create a timer with interval. */
 		explicit Timer(uint32_t interval);
+		Timer(const Timer&) = delete;
+		Timer(Timer&&) = default;
+		Timer& operator=(const Timer&) = delete;
+		Timer& operator=(Timer&&) = default;
 		~Timer();
 
 		/** Set the interval of timer, the timer must stoped when this function is called.

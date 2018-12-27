@@ -12,7 +12,7 @@ namespace vas
 	class VAS_DECLSPEC TileLayer : public AbstractMapLayer
 	{ /** @} */
 	public:
-		TileLayer(); /**< Create new empty layer. */
+		TileLayer() = default; /**< Create new empty layer. */
 		/** Create layer from raw data
 			  @param data Map data of the layer.
 			  @param width Layer width.
@@ -29,7 +29,6 @@ namespace vas
 			  @param hidden Determine if the map is shown on the screen.
 		*/
 		TileLayer(std::vector<uint32_t>&& data, uint32_t width, uint32_t height, uint8_t opacity, bool hidden);
-		~TileLayer();
 
 		uint32_t tileAt(size_t index) const; /**< Get the tile at the given index. */
 		uint32_t tileAt(int x, int y) const; /**< Get the tile at the given position. */
@@ -77,7 +76,7 @@ namespace vas
 			  @note The default map renderer will not process the map with this attribute. Implement your own class by extending
 			  the MapRenderer class if you need to work with it.
 		*/
-		uint8_t opacity;
+		uint8_t opacity{ 255 };
 		/** [Read & Write] Determine if the layer is hidden.\n
 				- __mutators__
 					-# void setHidden(bool value)

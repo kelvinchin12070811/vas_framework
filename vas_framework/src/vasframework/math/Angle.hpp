@@ -41,14 +41,13 @@ namespace vas
 			rad /**< radian. */
 		};
 	public:
-		Angle();
+		Angle() = default;
 		Angle(const Angle& rhs);
 		/** Construct new instance of Angle.
 			  @param rhs Value of the angle.
 			  @param type Type of the angle.
 		*/
 		Angle(double rhs, AngleType type = Angle::AngleType::deg);
-		~Angle();
 
 		Angle toRadian() const; /**< Convert current Angle to radian. */
 		Angle toDegree() const; /**< Convert current Angle to degree. */

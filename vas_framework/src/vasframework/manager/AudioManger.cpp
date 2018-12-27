@@ -8,7 +8,7 @@
 
 using namespace std::chrono_literals;
 
-const float vas::AudioManager::DefValue::MAX_AUDIO = 128.0f;
+const float vas::AudioManager::DefValue::MAX_AUDIO{ 128.0f };
 
 namespace vas
 {
@@ -36,7 +36,7 @@ namespace vas
 
 	void AudioManager::cacheMusic(const std::string & fileName)
 	{
-		sdl::mixer::Music temp(fileName);
+		sdl::mixer::Music temp{ fileName };
 		cacheMusic(fileName, std::move(temp));
 	}
 
@@ -53,13 +53,13 @@ namespace vas
 	sdl::mixer::Chunk AudioManager::getChunkFromCache(const std::string & id)
 	{
 		auto chunk = chunkCache.find(id);
-		return chunk == chunkCache.end() ? sdl::mixer::Chunk() : chunk->second;
+		return chunk == chunkCache.end() ? sdl::mixer::Chunk{} : chunk->second;
 	}
 
 	sdl::mixer::Music AudioManager::getMusicFromCache(const std::string & id)
 	{
 		auto music = musicCache.find(id);
-		return music == musicCache.end() ? sdl::mixer::Music() : music->second;
+		return music == musicCache.end() ? sdl::mixer::Music{} : music->second;
 	}
 
 	bool AudioManager::isChunkCacheEmpty()
@@ -111,7 +111,7 @@ namespace vas
 			else
 			{
 				bgm.load(file);
-				if (bgm == sdl::emptycomponent) throw sdl::SDLCoreException();
+				if (bgm == sdl::emptycomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[0] = file;
 		}
@@ -131,7 +131,7 @@ namespace vas
 			else
 			{
 				bgs.load(file);
-				if (bgs == sdl::emptycomponent) throw sdl::SDLCoreException();
+				if (bgs == sdl::emptycomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[1] = file;
 		}
@@ -151,7 +151,7 @@ namespace vas
 			else
 			{
 				me.load(file);
-				if (me == sdl::emptycomponent) throw sdl::SDLCoreException();
+				if (me == sdl::emptycomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[2] = file;
 		}
@@ -171,7 +171,7 @@ namespace vas
 			else
 			{
 				se.load(file);
-				if (se == sdl::emptycomponent) throw sdl::SDLCoreException();
+				if (se == sdl::emptycomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[3] = file;
 		}

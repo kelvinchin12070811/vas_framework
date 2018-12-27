@@ -3,10 +3,6 @@
 
 namespace vas
 {
-	TileLayer::TileLayer()
-	{
-	}
-
 	TileLayer::TileLayer(const std::vector<uint32_t>& data, uint32_t width, uint32_t height, uint8_t opacity, bool hidden) :
 		tilesData(data), width(width), height(height), opacity(opacity), hidden(hidden)
 	{
@@ -14,10 +10,6 @@ namespace vas
 
 	TileLayer::TileLayer(std::vector<uint32_t>&& data, uint32_t width, uint32_t height, uint8_t opacity, bool hidden) :
 		tilesData(std::move(data)), width(width), height(height), opacity(opacity), hidden(hidden)
-	{
-	}
-
-	TileLayer::~TileLayer()
 	{
 	}
 

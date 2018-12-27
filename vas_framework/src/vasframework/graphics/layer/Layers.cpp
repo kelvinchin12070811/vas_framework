@@ -6,21 +6,13 @@
 
 namespace vas
 {
-	Layers::Layers()
-	{
-	}
-
 	Layers::Layers(const Layers & rhs):
 		layerData(rhs.layerData)
 	{
 	}
 
-	Layers::Layers(Layers && rhs):
+	Layers::Layers(Layers && rhs) noexcept:
 		layerData(std::move(rhs.layerData))
-	{
-	}
-
-	Layers::~Layers()
 	{
 	}
 
@@ -71,16 +63,16 @@ namespace vas
 
 	size_t Layers::shift(size_t index, Layers::ShiftDirection direction, size_t count)
 	{
-		if (index >= layerData.size()) throw std::logic_error((boost::format("Cannot shift item at %i because this layer only contain %i item(s)") % index % layerData.size()).str());
+		if (index >= layerData.size()) throw std::logic_error{ (boost::format{ "Cannot shift item at %i because this layer only contain %i item(s)" } % index % layerData.size()).str() };
 
-		size_t newPos = index;
+		size_t newPos{ index };
 		switch (direction)
 		{
 		case vas::Layers::ShiftDirection::up:
 			if (index == 0) return index; // Don't shift if the item is already on the very top
 
 			//newPos = boost::algorithm::clamp(newPos - count, 0, layerData.size());
-			for (size_t i = 0; i < count; i++)
+			for (size_t i{ 0 }; i < count; i++)
 			{
 				if (newPos == layerData.size() - 1) break;
 				newPos++;
@@ -93,7 +85,7 @@ namespace vas
 			//newPos = boost::algorithm::clamp(newPos + count, 0, layerData.size());
 			newPos = layerData.size() - 1 - newPos;
 			index = layerData.size() - 1 - index;
-			for (size_t i = 0; i < count; i++)
+			for (size_t i{ 0 }; i < count; i++)
 			{
 				if (newPos == 0) break;
 				newPos--;
@@ -144,9 +136,9 @@ namespace vas
 	{
 		if (index >= layerData.size())
 		{
-			throw std::logic_error((
-				boost::format("The index require which is %i is greather or equal to the total count of data which is %i")
-				% index % layerData.size()).str());
+			throw std::logic_error{ (
+				boost::format{"The index require which is %i is greather or equal to the total count of data which is %i"}
+				% index % layerData.size()).str() };
 		}
 		return layerData[index];
 	}
@@ -159,7 +151,7 @@ namespace vas
 		});
 
 		if (result == layerData.end())
-			throw std::logic_error((boost::format("No instance of \"%s\" found") % name).str());
+			throw std::logic_error{ (boost::format("No instance of \"%s\" found") % name).str() };
 		else return *result;
 	}
 
@@ -171,7 +163,7 @@ namespace vas
 		});
 
 		if (result == layerData.end())
-			throw std::logic_error("Could not find instance");
+			throw std::logic_error{ "Could not find instance" };
 		else return *result;
 	}
 
@@ -198,7 +190,7 @@ namespace vas
 		return *this;
 	}
 
-	Layers & Layers::operator=(Layers && rhs)
+	Layers & Layers::operator=(Layers && rhs) noexcept
 	{
 		layerData = std::move(rhs.layerData);
 		return *this;

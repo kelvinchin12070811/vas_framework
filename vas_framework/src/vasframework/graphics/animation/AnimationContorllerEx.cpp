@@ -2,14 +2,6 @@
 
 namespace vas
 {
-	AnimationControllerEx::AnimationControllerEx()
-	{
-	}
-
-	AnimationControllerEx::~AnimationControllerEx()
-	{
-	}
-
 	void AnimationControllerEx::tick()
 	{
 		if (animationList.empty() || finished) return;

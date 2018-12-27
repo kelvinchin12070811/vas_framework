@@ -34,7 +34,7 @@ namespace vas
 
 	int CommonTools::messenger(const std::ostream & message, CommonTools::MessageType messType, int rtnValue)
 	{
-		return messenger(dynamic_cast<const std::stringstream&>(message).str(), messType, rtnValue);
+		return messenger(static_cast<const std::stringstream&>(message).str(), messType, rtnValue);
 	}
 
 	int CommonTools::messenger(const boost::format& message, CommonTools::MessageType messType, int rtnValue)

@@ -25,7 +25,7 @@ namespace vas
 	class VAS_DECLSPEC Sprite : public DrawAble
 	{ /** @} */
 	public:
-		Sprite();
+		Sprite() = default;
 		/** Create new sprite.
 			  @param file Unique id or file name of the texture.
 			  @param position Position of the sprite on renderer.
@@ -35,7 +35,7 @@ namespace vas
 		Sprite(const std::string& file, const Vector2& position, const sdl::Point& origin = sdl::Point(), BufferMode bfMode = BufferMode::buffered);
 		Sprite(const Sprite&) = delete;
 		Sprite(Sprite&&) = delete;
-		virtual ~Sprite();
+		virtual ~Sprite() = default;
 
 		/** Move the sprite.
 			  @param movement Steps (in pixel) which the sprite will move.
@@ -123,6 +123,6 @@ namespace vas
 				- __accessors__
 					-# bool isStaticOnCamera() const
 		*/
-		bool staticOnCamera = false;
+		bool staticOnCamera{ false };
 	};
 }

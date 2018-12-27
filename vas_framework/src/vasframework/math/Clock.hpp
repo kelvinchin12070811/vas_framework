@@ -22,7 +22,6 @@ namespace vas
 			utc /**< UTC zone +0 time. */
 		};
 		Clock(); /**< Create and start counting time (first reset). */
-		~Clock();
 
 		/** Reset the clock and return the currnet elapsed time since last reset.
 			  @retval std::chrono::nanoseconds time elapsed in nanoseconds.

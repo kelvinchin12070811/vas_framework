@@ -10,18 +10,10 @@
 
 namespace vas
 {
-	TMXParser::TMXParser()
-	{
-	}
-
 	TMXParser::TMXParser(const std::string & fileName) :
 		fileName(fileName)
 	{
 		load();
-	}
-
-	TMXParser::~TMXParser()
-	{
 	}
 
 	void TMXParser::load(const std::string & fileName)
@@ -75,7 +67,10 @@ namespace vas
 
 	sdl::Point TMXParser::getMapSize() const
 	{
-		return sdl::Point(mapProperties.mapWidth * mapProperties.tileWidth, mapProperties.mapHeight * mapProperties.tileHeight);
+		return {
+			static_cast<int>(mapProperties.mapWidth * mapProperties.tileWidth),
+			static_cast<int>(mapProperties.mapHeight * mapProperties.tileHeight)
+		};
 	}
 
 	void TMXParser::parse() const
@@ -85,17 +80,17 @@ namespace vas
 		{
 			auto result = mapDoc.load_file(fileName.c_str());
 			if (result.status != pugi::xml_parse_status::status_ok)
-				throw std::runtime_error(result.description());
+				throw std::runtime_error{ result.description() };
 		}
 		auto root = mapDoc.first_child();
 		if (static_cast<string>(root.name()) != "map"s)
-			throw std::runtime_error("Cannot parse \"" + fileName + "\". It might not a proper tmx map file");
+			throw std::runtime_error{ "Cannot parse \"" + fileName + "\". It might not a proper tmx map file" };
 
 		if (static_cast<string>(root.attribute("orientation").as_string()) != "orthogonal")
-			throw std::runtime_error("This parser can only read orthogonal map");
+			throw std::runtime_error{ "This parser can only read orthogonal map" };
 
 		if (static_cast<string>(root.attribute("renderorder").as_string()) != "right-down")
-			throw std::runtime_error("This parser can only read map that render from left to right, top to bottom");
+			throw std::runtime_error{ "This parser can only read map that render from left to right, top to bottom" };
 
 		mapProperties.mapWidth = root.attribute("width").as_uint();
 		mapProperties.mapHeight = root.attribute("height").as_uint();
@@ -150,7 +145,7 @@ namespace vas
 				if (!tileAnimation.empty())
 				{
 					auto animationFramesData = tileAnimation.children("frame");
-					uint32_t currentTileIndex = animationFramesData.begin()->attribute("tileid").as_uint() + tmpTileset.firstGid;
+					uint32_t currentTileIndex{ animationFramesData.begin()->attribute("tileid").as_uint() + tmpTileset.firstGid };
 
 					AnimationStrip tempStrip;
 					tempStrip.reserve(std::distance(animationFramesData.begin(), animationFramesData.end()));
@@ -158,10 +153,10 @@ namespace vas
 						tempStrip.push_back(itr.attribute("tileid").as_uint() + tmpTileset.firstGid);
 
 					auto animationDetial = std::make_pair(
-						std::chrono::milliseconds(animationFramesData.begin()->attribute("duration").as_llong()),
+						std::chrono::milliseconds{ animationFramesData.begin()->attribute("duration").as_llong() },
 						std::move(tempStrip)
 					);
-					tmpTileset.tilesWithAnimation.insert(std::make_pair(currentTileIndex, std::move(animationDetial)));
+					tmpTileset.tilesWithAnimation.insert({ currentTileIndex, std::move(animationDetial) });
 				}
 			}
 		}
@@ -171,28 +166,28 @@ namespace vas
 	void TMXParser::prase_tilelayer(pugi::xml_node node) const
 	{
 		using namespace std;
-		string name = node.attribute("name").as_string();
-		uint32_t width = node.attribute("width").as_uint();
-		uint32_t height = node.attribute("height").as_uint();
-		uint8_t opacity = static_cast<uint8_t>(node.attribute("opacity").as_float(1.0f) * std::numeric_limits<uint8_t>::max());
-		bool hidden = node.attribute("visible").as_int(1) == 0;
+		string name{ node.attribute("name").as_string() };
+		uint32_t width{ node.attribute("width").as_uint() };
+		uint32_t height{ node.attribute("height").as_uint() };
+		uint8_t opacity{ static_cast<uint8_t>(node.attribute("opacity").as_float(1.0f) * std::numeric_limits<uint8_t>::max()) };
+		bool hidden{ node.attribute("visible").as_int(1) == 0 };
 		std::vector<uint32_t> layerDataExtr(width * height);
 
 		auto data = node.child("data");
 		if (!data.empty())
 		{
 			if (static_cast<string>(data.attribute("encoding").as_string()) != "base64")
-				throw std::runtime_error("This parser currently only support map data that encode in base64.");
+				throw std::runtime_error{ "This parser currently only support map data that encode in base64." };
 			if (static_cast<string>(data.attribute("compression").as_string()) != "zlib")
-				throw std::runtime_error("The map data should be compressed using zlib!");
+				throw std::runtime_error{ "The map data should be compressed using zlib!" };
 
 			//Parse data
-			std::string layerData = data.text().as_string();
+			std::string layerData{ data.text().as_string() };
 			boost::algorithm::trim(layerData);
 			BytesArray layerDataDecode;
 			layerDataDecode = base64::decode(layerData);
 
-			uLongf targetSize = sizeof(uint32_t) * layerDataExtr.size();
+			uLongf targetSize{ sizeof(uint32_t) * layerDataExtr.size() };
 			uncompress(reinterpret_cast<Bytef*>(layerDataExtr.data()), &targetSize, layerDataDecode.data(), layerDataDecode.size());
 		}
 		auto tempLayer = std::make_unique<TileLayer>(std::move(layerDataExtr), width, height, opacity, hidden);
@@ -216,7 +211,7 @@ namespace vas
 			if (auto child = itr.child("ellipse"); child)
 			{
 				auto instance = std::make_unique<Ellipse>();
-				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
+				instance->position = Vector2{ itr.attribute("x").as_float(), itr.attribute("y").as_float() };
 				instance->width = itr.attribute("width").as_int();
 				instance->height = itr.attribute("height").as_int();
 				tempDat.instance = std::move(instance);
@@ -224,7 +219,7 @@ namespace vas
 			else if (child = itr.child("polyline"); child)
 			{
 				auto instance = std::make_unique<Polyline>();
-				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
+				instance->position = Vector2{ itr.attribute("x").as_float(), itr.attribute("y").as_float() };
 				std::string points = child.attribute("points").as_string();
 				std::vector<std::string> pointsData;
 				std::vector<Vector2> pointsPosition;
@@ -234,7 +229,7 @@ namespace vas
 				{
 					std::vector<std::string> buffer;
 					boost::split(buffer, itr, [](char c) { return c == ','; });
-					pointsPosition.push_back(Vector2(boost::lexical_cast<float>(buffer[0]), boost::lexical_cast<float>(buffer[1])));
+					pointsPosition.push_back(Vector2{ boost::lexical_cast<float>(buffer[0]), boost::lexical_cast<float>(buffer[1]) });
 				}
 				instance->line = std::move(pointsPosition);
 				tempDat.instance = std::move(instance);
@@ -246,7 +241,7 @@ namespace vas
 			else
 			{
 				auto instance = std::make_unique<Rectangle>();
-				instance->position = Vector2(itr.attribute("x").as_float(), itr.attribute("y").as_float());
+				instance->position = Vector2{ itr.attribute("x").as_float(), itr.attribute("y").as_float() };
 				instance->width = itr.attribute("width").as_int();
 				instance->height = itr.attribute("height").as_int();
 				tempDat.instance = std::move(instance);
@@ -270,7 +265,7 @@ namespace vas
 		Property item;
 		item.setName(node.attribute("name").as_string());
 
-		std::string type = node.attribute("type").as_string();
+		std::string type{ node.attribute("type").as_string() };
 		if (type == "string" || "file")
 			item = static_cast<string>(node.attribute("value").as_string());
 		else if (type == "bool")
@@ -281,13 +276,13 @@ namespace vas
 			item = node.attribute("value").as_int();
 		else if (type == "color")
 		{
-			std::string colourValue = node.attribute("value").as_string();
-			item = sdl::Colour(
+			std::string colourValue{ node.attribute("value").as_string() };
+			item = sdl::Colour{
 				boost::lexical_cast<uint8_t>(colourValue.substr(3, 2)),
 				boost::lexical_cast<uint8_t>(colourValue.substr(5, 2)),
 				boost::lexical_cast<uint8_t>(colourValue.substr(7, 2)),
 				boost::lexical_cast<uint8_t>(colourValue.substr(1, 2))
-			);
+			};
 		}
 		return item;
 	}
@@ -306,7 +301,7 @@ namespace vas
 			}
 			return list;
 		}
-		return PropertyList();
+		return PropertyList{};
 	}
 }
 #endif // (__has_include(<pugixml/pugiconfig.hpp>) && __has_include(<zlib.h>)) || defined(DOXYGEN)

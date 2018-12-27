@@ -19,7 +19,7 @@ namespace vas
 	class JsonDeserializer : public NBTSerializer
 	{ /** @} */
 	public:
-		JsonDeserializer();
+		JsonDeserializer() = default;
 		/** Construct from JSON data.
 			  @param data JSON data to parse.
 		*/
@@ -37,7 +37,6 @@ namespace vas
 			  @note the @p document require user to move its ownership (uncopyable object).
 		*/
 		explicit JsonDeserializer(rapidjson::Document document);
-		~JsonDeserializer();
 
 		void treeStart(const std::string& name) override;
 		void treeEnd() override;

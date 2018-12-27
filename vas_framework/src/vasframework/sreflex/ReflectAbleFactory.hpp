@@ -16,9 +16,7 @@ namespace vas
 		class VAS_DECLSPEC ReflectAbleFactory
 		{
 		public:
-			ReflectAbleFactory();
-			~ReflectAbleFactory();
-
+			ReflectAbleFactory() = default;
 			/** Create and return an instance of ReflectAble with its name.
 				  @param objName Object name that need to create using reflection, the object must be a child of ReflectAble interface.
 				  @retval New instance of ReflectAble if success, nullptr if failed.

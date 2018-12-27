@@ -30,7 +30,7 @@ namespace vas
 			blended /**< Blended text. */
 		};
 	public:
-		Text();
+		Text() = default;
 		/** Create new instance of Text.
 			  @param text String of text that need to render.
 			  @param font Font type file's name that use to render the text, ttf and otf are supported.
@@ -58,7 +58,6 @@ namespace vas
 			  @param init Determin if init and pre-render the text to texture after the creation of the text or not.
 		*/
 		Text(const std::string& text, const std::string& font, const Vector2& position, int fontSize, const sdl::Colour& textColour, Text::RenderMode renderMode, bool init = true);
-		~Text();
 
 		void tick() override;
 		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;

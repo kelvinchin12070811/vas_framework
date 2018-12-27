@@ -7,10 +7,6 @@ namespace vas
 	{
 	}
 
-	StateConditionalTransition::~StateConditionalTransition()
-	{
-	}
-
 	bool StateConditionalTransition::achieved(const std::any & cdVar) const
 	{
 		return validator == nullptr ? false : validator(cdVar);

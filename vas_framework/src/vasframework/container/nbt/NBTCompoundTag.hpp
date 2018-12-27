@@ -19,7 +19,7 @@ namespace vas
 	class VAS_DECLSPEC NBTCompoundTag : public ITag
 	{ /** @} */
 	public:
-		NBTCompoundTag();
+		NBTCompoundTag() = default;
 		/** Initialize NBTCompoundTag with iterator.
 			  @param begin begin hint of iterator.
 			  @param end end hint of iterator.
@@ -31,7 +31,6 @@ namespace vas
 		}
 		/** Initialize CompoundTag with initializer_list. */
 		NBTCompoundTag(std::initializer_list<std::pair<std::string, std::shared_ptr<ITag>>> list);
-		~NBTCompoundTag();
 
 		/** Create new instance of tag, use with list initialization.
 			  @retval std::unique_ptr<NBTCompoundTag> new instance of tag.

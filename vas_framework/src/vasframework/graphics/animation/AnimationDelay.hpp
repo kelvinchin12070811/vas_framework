@@ -15,12 +15,11 @@ namespace vas
 	class VAS_DECLSPEC AnimationDelay : public AnimateAble
 	{ /** @} */
 	public:
-		AnimationDelay(); /**< Create empty animation, no delay. */
+		AnimationDelay() = default; /**< Create empty animation, no delay. */
 		/** Create an animation with delay of @p duration.
 			  @param duration Duration that the pause added.
 		*/
 		explicit AnimationDelay(std::chrono::nanoseconds duration);
-		~AnimationDelay();
 
 		void tick() override;
 

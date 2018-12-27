@@ -16,12 +16,11 @@ namespace vas
 	{ /** @} */
 	public:
 		/** Create Counter with default limit. */
-		Counter();
+		Counter() = default;
 		/** Create Counter with user specified limit.
 			  @param autoResetLimit Ticks that when the counter reset it self.
 		*/
 		explicit Counter(size_t autoResetLimit);
-		~Counter();
 
 		/** Set the limit ticks of the counter.
 			  @param autoResetLimit new ticks limit.

@@ -13,9 +13,7 @@ namespace vas
 	class VAS_DECLSPEC ObjectLayer : public AbstractMapLayer
 	{ /** @} */
 	public:
-		ObjectLayer();
-		~ObjectLayer();
-
+		ObjectLayer() = default;
 	public: // Setters
 		void setObjectList(std::vector<ObjectData>&& value);
 	public: // Getters

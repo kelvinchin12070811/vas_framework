@@ -26,8 +26,8 @@ namespace vas
 	class VAS_DECLSPEC Scene : public sreflex::ReflectAble
 	{/** @} */
 	public:
-		Scene();
-		virtual ~Scene();
+		Scene() = default;
+		virtual ~Scene() = default;
 
 		/** Tick/update the scene */
 		virtual void tick() = 0;

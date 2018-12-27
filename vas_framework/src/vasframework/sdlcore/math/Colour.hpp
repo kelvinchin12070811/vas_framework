@@ -11,11 +11,15 @@ namespace vas::sdl
 	class VAS_DECLSPEC Colour
 	{
 	public:
-		Colour(); /**< Create empty colour. Default is black. */
+		Colour() = default; /**< Create empty colour. Default is black. */
+		Colour(const Colour&) = default;
+		Colour(Colour&&) = default;
+		Colour& operator=(const Colour&) = default;
+		Colour& operator=(Colour&&) = default;
+		~Colour() {}
 		/** Create colour from rgb or rgba value. */
 		Colour(uint8_t red, uint8_t green, uint8_t bule, uint8_t alpha = 255);
 		explicit Colour(SDL_Colour rhs); /**< Cast from SDL_Colour or SDL_Color. */
-		~Colour();
 
 		bool operator==(const Colour& rhs) const;
 		bool operator!=(const Colour& rhs) const;

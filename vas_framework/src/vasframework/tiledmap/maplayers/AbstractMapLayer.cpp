@@ -3,14 +3,6 @@
 
 namespace vas
 {
-	AbstractMapLayer::AbstractMapLayer()
-	{
-	}
-
-	AbstractMapLayer::~AbstractMapLayer()
-	{
-	}
-
 	std::string AbstractMapLayer::getName() const
 	{
 		return name;

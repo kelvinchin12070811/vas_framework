@@ -19,8 +19,6 @@ namespace vas
 	{ /** @} */
 	public:
 		JsonSerializer();
-		~JsonSerializer() = default;
-
 		void treeStart(const std::string& name) override;
 		void treeEnd() override;
 		void arrayStart(const std::string& name) override;

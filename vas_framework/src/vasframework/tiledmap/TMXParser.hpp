@@ -21,9 +21,8 @@ namespace vas
 	class VAS_DECLSPEC TMXParser
 	{ /** @} */
 	public:
-		TMXParser(); /**< Create empty parser. */
+		TMXParser() = default; /**< Create empty parser. */
 		TMXParser(const std::string& fileName); /**< Load from a file. @param fileName File to load. */
-		~TMXParser();
 
 		/** Load TMX map form a file.
 			  @param fileName File to load.

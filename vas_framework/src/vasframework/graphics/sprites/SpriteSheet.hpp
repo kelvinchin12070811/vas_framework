@@ -13,7 +13,7 @@ namespace vas
 	class VAS_DECLSPEC SpriteSheet : public Sprite
 	{ /** @} */
 	public:
-		SpriteSheet();
+		SpriteSheet() = default;
 		/** Create an new SpriteSheet.
 			  @param file Unique ID or file name of the texture.
 			  @param tileSize Size of the individual tile.
@@ -25,7 +25,6 @@ namespace vas
 			const sdl::Point& origin = sdl::Point(), BufferMode bfMode = BufferMode::buffered);
 		SpriteSheet(const SpriteSheet&) = delete;
 		SpriteSheet(SpriteSheet&&) = delete;
-		~SpriteSheet();
 
 		/** tick this DrawAble object.
 			  @note this function have no function since ticking the entire sprite sheets make no sense.

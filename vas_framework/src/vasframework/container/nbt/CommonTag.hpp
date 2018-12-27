@@ -53,14 +53,14 @@ namespace vas
 	{ /** @} */
 	public:
 		using TagType = ValueType; /**< bType of the wrapper emulated. */
-		ValueWrapperTag() : value(ValueType()) {}
+		ValueWrapperTag() = default;
 		/** Copy constructor. */
-		ValueWrapperTag(const ValueType& value): value(value)
+		ValueWrapperTag(const ValueType& value) : value(value)
 		{
 		}
 
 		/** Move constructor. */
-		ValueWrapperTag(ValueType&& value): value(std::move(value))
+		ValueWrapperTag(ValueType&& value) : value(std::move(value))
 		{
 		}
 
@@ -111,7 +111,7 @@ namespace vas
 			serializer.accept(name, value);
 		}
 	private:
-		ValueType value;
+		ValueType value{};
 	};
 
 	/** @addtogroup nbt_tag
@@ -125,7 +125,6 @@ namespace vas
 	{ /** @} */
 	public:
 		ArrayTag() = default;
-		~ArrayTag() = default;
 		/** Create array with specified size.
 			  @param size Size of the array.
 		*/
@@ -147,7 +146,11 @@ namespace vas
 		/** Initialize array with initializer list. */
 		ArrayTag(std::initializer_list<T> list)
 		{
-			if (!this->empty()) this->clear();
+			if (!this->empty())
+			{
+				this->clear();
+				this->shrink_to_fit();
+			}
 			this->reserve(list.size());
 			std::copy(list.begin(), list.end(), std::back_inserter(*this));
 		}
@@ -173,7 +176,7 @@ namespace vas
 		*/
 		static std::unique_ptr<ArrayTag> create(std::initializer_list<T> list)
 		{
-			return std::make_unique<ArrayTag>(std::move(list));
+			return std::make_unique<ArrayTag>(list);
 		}
 
 		void serialize(const std::string& name, NBTSerializer& serializer) override
@@ -190,6 +193,7 @@ namespace vas
 		ArrayTag& operator=(const ArrayTag& rhs)
 		{
 			this->clear();
+			this->shrink_to_fit();
 			this->reserve(rhs.size());
 			std::copy(rhs.begin(), rhs.end(), std::back_inserter(this->begin()));
 			return *this;
@@ -218,7 +222,7 @@ namespace vas
 	{
 		serializer.arrayStart(name);
 		serializer.arraySizeSetter([this](size_t size) { this->resize(size); });
-		for (size_t itr = 0; itr != this->size(); itr++)
+		for (size_t itr{ 0 }; itr != this->size(); itr++)
 			this->at(itr)->serialize(boost::lexical_cast<std::string>(itr), serializer);
 		serializer.arrayEnd();
 	}

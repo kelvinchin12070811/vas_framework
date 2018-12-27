@@ -19,13 +19,12 @@ namespace vas
 	{ /** @} */
 	public:
 		/** Create empty controller. */
-		AnimationController();
+		AnimationController() = default;
 		/** Create animation controller with data.
 			  @param frames Frames of an animation.
 			  @param updateDelay Time for each frame to stay on the screen.
 		*/
 		AnimationController(const AnimationStrip& frames, std::chrono::milliseconds updateDelay);
-		~AnimationController();
 
 		/** Load the animation.
 			  @param frames Frames of an animation.

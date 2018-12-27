@@ -3,17 +3,9 @@
 
 namespace vas
 {
-	AnimationController::AnimationController()
-	{
-	}
-
 	AnimationController::AnimationController(const AnimationStrip & frames, std::chrono::milliseconds updateDelay)
 	{
 		load(frames, updateDelay);
-	}
-
-	AnimationController::~AnimationController()
-	{
 	}
 
 	void AnimationController::load(const AnimationStrip & frames, std::chrono::milliseconds updateDelay)
@@ -21,7 +13,7 @@ namespace vas
 		using namespace std::chrono_literals;
 		this->frames = frames;
 		this->frameIndexer.setAutoResetLimit(frames.size());
-		std::chrono::milliseconds refreshRateHz = 1000ms / Base::getInstance().getFPS();
+		std::chrono::milliseconds refreshRateHz{ 1000ms / Base::getInstance().getFPS() };
 		this->frameUpdateTimer.setAutoResetLimit(static_cast<size_t>(updateDelay / refreshRateHz));
 	}
 
