@@ -5,6 +5,8 @@
 
 namespace vas
 {
+	const size_t SceneManager::MinStackCount;
+
 	SceneManager & SceneManager::getInstance()
 	{
 		static SceneManager instance;
@@ -25,32 +27,34 @@ namespace vas
 	{
 		if (callStack.empty()) return;
 
-		callStack.back()->beforeTerminate();
 		if (!keepLast)
 		{
+			callStack.back()->beforeTerminate();
 			callStack.clear();
-			return;
 		}
-		auto lastInstance = callStack.back();
-		callStack.clear();
-		callStack.push_back(std::move(lastInstance));
+		else
+		{
+			auto lastInstance = callStack.back();
+			callStack.clear();
+			callStack.push_back(std::move(lastInstance));
 
-		if (!callStack.empty())
-			callStack.back()->afterTerminate();
+			if (!callStack.empty())
+				callStack.back()->afterTerminate();
+		}
+
+		if (callStack.capacity() > SceneManager::MinStackCount * 3)
+		{
+			for (int loop{ 0 }; loop < 10; loop++)
+				callStack.push_back(nullptr);
+			callStack.shrink_to_fit();
+			for (int loop{ 0 }; loop < 10; loop++)
+				callStack.pop_back();
+		}
 	}
 
-	void SceneManager::call(const std::shared_ptr<Scene>& instance)
+	void SceneManager::call(std::shared_ptr<Scene> instance)
 	{
 		if (instance == nullptr) throw vas::SceneCallFailed{};
-		if (!callStack.empty()) callStack.back()->beforeSceneCall();
-		callStack.push_back(instance);
-		callStack.back()->afterSceneCall();
-	}
-
-	void SceneManager::call(std::shared_ptr<Scene>&& instance)
-	{
-		if (instance == nullptr) throw vas::SceneCallFailed{};
-
 		if (!callStack.empty()) callStack.back()->beforeSceneCall();
 		callStack.push_back(std::move(instance));
 		callStack.back()->afterSceneCall();
@@ -59,11 +63,11 @@ namespace vas
 	void SceneManager::call(const std::string & sceneName)
 	{
 		sreflex::ReflectAbleFactory factory;
-		auto instance = factory.createObject(sceneName).release();
+		auto instance = factory.createObject(sceneName);
 		if (instance == nullptr)
 			throw SceneCallFailed{ sceneName };
 		else
-			call(std::shared_ptr<Scene>(dynamic_cast<Scene*>(instance)));
+			call(std::shared_ptr<Scene>(dynamic_cast<Scene*>(instance.release())));
 	}
 
 	void SceneManager::back()
@@ -72,6 +76,12 @@ namespace vas
 		callStack.back()->beforeTerminate();
 		callStack.pop_back();
 		if (!callStack.empty()) callStack.back()->afterTerminate();
+
+		if (auto capacity = callStack.capacity();
+		capacity > SceneManager::MinStackCount && capacity > callStack.size() * 3 && callStack.size() > SceneManager::MinStackCount)
+		{
+				callStack.shrink_to_fit();
+		}
 	}
 
 	std::shared_ptr<Scene> SceneManager::current()
@@ -85,7 +95,7 @@ namespace vas
 	{
 		if (isEmpty() || callStack.size() < 2)
 			return nullptr;
-		return callStack[callStack.size() - 2];
+		return *(callStack.rbegin()++);
 	}
 
 	std::shared_ptr<Scene> SceneManager::getWithIndex(size_t index)
@@ -110,8 +120,14 @@ namespace vas
 		return callStack.size();
 	}
 
+	size_t SceneManager::capacity()
+	{
+		return callStack.capacity();
+	}
+
 	SceneManager::SceneManager()
 	{
+		callStack.reserve(10);
 	}
 
 	SceneManager::~SceneManager()

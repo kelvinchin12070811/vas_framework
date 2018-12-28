@@ -47,5 +47,8 @@
     <ClInclude Include="test\scenes\NBTTreeTest.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="test\scenes\EmptyScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

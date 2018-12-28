@@ -1,4 +1,5 @@
 ﻿#include "Main.hpp"
+#include "scenes/EmptyScene.hpp"
 
 const bool Main::__launch{ vas::ClassLoader::load<Main>() };
 
@@ -8,6 +9,23 @@ int Main::main(const std::vector<std::string>& args)
 	vas::CommonTools::getInstance().setAssistanceName("宮本サクラ");
 	try
 	{
+		{ //Call stack memory management test.
+			vas::Log() << "Before: " << vas::SceneManager::getInstance().capacity();
+
+			for (int loop{ 0 }; loop < 10; loop++)
+				vas::SceneManager::getInstance().emplaceCall<scene::EmptyScene>();
+
+			vas::Log() << "Emulated 10 scenes called: " << vas::SceneManager::getInstance().capacity();
+
+			for (int loop{ 0 }; loop < 30; loop++)
+				vas::SceneManager::getInstance().emplaceCall<scene::EmptyScene>();
+
+			vas::Log() << "Emulated 30 scenes called: " << vas::SceneManager::getInstance().capacity();
+
+			vas::SceneManager::getInstance().clear();
+			vas::Log() << "Emulated scenes cleared returned: " << vas::SceneManager::getInstance().capacity();
+			vas::Log() << "current  call count: " << vas::SceneManager::getInstance().instanceCount();
+		}
 		vas::Base::getInstance().initAndStartAll("VAS Framework Tester", { 640, 480 }, vas::sdl::Window::Flags::resizable, []() {
 			auto textOverlay = std::make_shared<vas::StyledText>("VAS Framework v" + getEngineVersion(), "assets/fonts/caladea-regular.ttf", vas::zerovector, 24);
 			textOverlay->setStaticOnCamera(true);

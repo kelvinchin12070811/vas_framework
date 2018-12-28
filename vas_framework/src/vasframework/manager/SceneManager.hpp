@@ -36,11 +36,20 @@ namespace vas
 		/** Call a new scene and push it into scene call stack.
 			  @param instance Scene instance to call.
 		*/
-		void call(const std::shared_ptr<Scene>& instance);
-		/** Call a new scene and push it into scene call stack.
-			  @param instance Scene instance to call, instance will moved.
+		void call(std::shared_ptr<Scene> instance);
+		/** Create a new instance and pushing it into the call stack, Parameters passed will be forwarded to the
+			  consstructor of targeted scene.
+
+			  @tparam GenericScene Targeted Scene data type.
+			  @tparam Args Variadic arguments (or parameters) types of arguments.
+			  @param args Arguments that forwarded to the constructor of the targeted Scene.
 		*/
-		void call(std::shared_ptr<Scene>&& instance);
+		template <class GenericScene, class... Args>
+		void emplaceCall(Args&&... args)
+		{
+			auto ptr = new GenericScene(std::forward(args)...);
+			this->call(std::shared_ptr<vas::Scene>(static_cast<vas::Scene*>(ptr)));
+		}
 		/** Call a new scene with its name. The target Scene's child must registered with Simple Reflection Library before called.
 			  @param sceneName Name of the scene.
 		*/
@@ -65,10 +74,14 @@ namespace vas
 			  @return Call count of scene call stack.
 		*/
 		size_t instanceCount();
+		/** Capacity that allocated for call stack. */
+		size_t capacity();
 	private:
 		SceneManager();
 		~SceneManager();
 
 		std::vector<std::shared_ptr<Scene>> callStack;
+	private:
+		static const size_t MinStackCount{ 10 };
 	};
 }

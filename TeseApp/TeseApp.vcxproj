@@ -163,6 +163,7 @@
     <ClCompile Include="test\scenes\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="test\scenes\EmptyScene.hpp" />
     <ClInclude Include="test\scenes\NBTTreeTest.hpp" />
     <ClInclude Include="test\Main.hpp" />
     <ClInclude Include="test\scenes\AbstractFrameCountingScene.hpp" />
