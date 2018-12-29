@@ -76,6 +76,8 @@ namespace vas
 		size_t instanceCount();
 		/** Capacity that allocated for call stack. */
 		size_t capacity();
+
+		void forceGC(); /**< Force SceneManager to release unused memory. */
 	private:
 		SceneManager();
 		~SceneManager();

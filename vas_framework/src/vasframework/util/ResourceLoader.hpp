@@ -44,7 +44,7 @@ namespace vas
 
 			 - __mutators__
 				-# void setFreeResources(bool value)
-			- __accessors__
+			 - __accessors__
 				-# bool isFreeResources() const
 		*/
 		bool freeResources;

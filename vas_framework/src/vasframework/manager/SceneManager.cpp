@@ -77,11 +77,8 @@ namespace vas
 		callStack.pop_back();
 		if (!callStack.empty()) callStack.back()->afterTerminate();
 
-		if (auto capacity = callStack.capacity();
-		capacity > SceneManager::MinStackCount && capacity > callStack.size() * 3 && callStack.size() > SceneManager::MinStackCount)
-		{
-				callStack.shrink_to_fit();
-		}
+		if (auto capacity = callStack.capacity(); capacity > SceneManager::MinStackCount && capacity > callStack.size() * 3)
+			forceGC();
 	}
 
 	std::shared_ptr<Scene> SceneManager::current()
@@ -123,6 +120,26 @@ namespace vas
 	size_t SceneManager::capacity()
 	{
 		return callStack.capacity();
+	}
+
+	void SceneManager::forceGC()
+	{
+		if (callStack.capacity() > SceneManager::MinStackCount)
+		{
+			if (size_t size{ callStack.size() }; size >= SceneManager::MinStackCount)
+			{
+				callStack.shrink_to_fit();
+			}
+			else
+			{
+				size_t padding = SceneManager::MinStackCount - size;
+				for (size_t i{ 0 }; i < padding; i++)
+					callStack.push_back(nullptr);
+				callStack.shrink_to_fit();
+				for (size_t i{ 0 }; i < padding; i++)
+					callStack.pop_back();
+			}
+		}
 	}
 
 	SceneManager::SceneManager()

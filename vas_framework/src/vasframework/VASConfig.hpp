@@ -15,11 +15,11 @@
 #define VAS_WINDOWS_MODE
 #endif
 
-#if __has_include(<sdl_mixer.h>)
+#if __has_include(<sdl_mixer.h>) || defined(DOXYGEN)
 #define VAS_USE_MIXER
 #endif
 
-#if __has_include(<sdl_ttf.h>)
+#if __has_include(<sdl_ttf.h>) || defined(DOXYGEN)
 #define VAS_USE_TTF
 #endif
 

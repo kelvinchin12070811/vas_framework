@@ -22,7 +22,8 @@ int Main::main(const std::vector<std::string>& args)
 
 			vas::Log() << "Emulated 30 scenes called: " << vas::SceneManager::getInstance().capacity();
 
-			vas::SceneManager::getInstance().clear();
+			for (int loop{ 0 }; loop < 40; loop++)
+				vas::SceneManager::getInstance().back();
 			vas::Log() << "Emulated scenes cleared returned: " << vas::SceneManager::getInstance().capacity();
 			vas::Log() << "current  call count: " << vas::SceneManager::getInstance().instanceCount();
 		}
