@@ -54,11 +54,11 @@ namespace vas
 		return masterOverlayColour;
 	}
 
-	void ScreenManager::setMasterOverlayColour(const sdl::Colour & colour)
+	void ScreenManager::setMasterOverlayColour(sdl::Colour colour)
 	{
 		if (masterOverlayColour != colour)
 		{
-			masterOverlayColour = colour;
+			masterOverlayColour = std::move(colour);
 			screenMasterOverlay.setColorMod(masterOverlayColour.red, masterOverlayColour.green, masterOverlayColour.bule);
 			screenMasterOverlay.setAlphaMod(255 - masterOverlayColour.alpha);
 		}
@@ -84,7 +84,7 @@ namespace vas
 		screenOpacityDelta = 255.0 / static_cast<double>(
 			std::chrono::duration_cast<std::chrono::seconds>(time).count() * Base::getInstance().getFPS()
 			);
-		Signal_FadeBegin(fadeType);
+		FadeBegin(fadeType);
 	}
 
 	ScreenManager::FadingState ScreenManager::getCurrentFadingState()
@@ -122,7 +122,7 @@ namespace vas
 			if (screenOpacityBuffer == 255.0f)
 			{
 				currentState = ScreenManager::FadingState::none;
-				Signal_FadeEnd(ScreenManager::FadingState::fade_in);
+				FadeEnd(ScreenManager::FadingState::fade_in);
 			}
 			break;
 		case vas::ScreenManager::FadingState::fade_out:
@@ -135,7 +135,7 @@ namespace vas
 			if (screenOpacityBuffer == 0.0f)
 			{
 				currentState = ScreenManager::FadingState::none;
-				Signal_FadeEnd(ScreenManager::FadingState::fade_out);
+				FadeEnd(ScreenManager::FadingState::fade_out);
 			}
 			break;
 		}

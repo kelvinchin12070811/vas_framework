@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "InputManager.hpp"
 
 namespace vas
@@ -23,14 +24,32 @@ namespace vas
 		return keyState[static_cast<SDL_Scancode>(key)] != 0;
 	}
 
-	void InputManager::setMousePosition(sdl::Point && value)
+	bool InputManager::isKeysTriggered(std::initializer_list<sdl::Scancode> keys)
+	{
+		for (auto itr = keys.begin(); itr != keys.end(); itr++)
+			if (!isKeyTriggered(*itr)) return false;
+
+		return true;
+	}
+
+	void InputManager::__setMousePosition(sdl::Point value)
 	{
 		currentMousePosition = std::move(value);
+	}
+
+	void InputManager::__setRealMousePosition(sdl::Point value)
+	{
+		currentRealMousePosition = std::move(value);
 	}
 
 	sdl::Point InputManager::getMousePosition()
 	{
 		return currentMousePosition;
+	}
+
+	sdl::Point InputManager::getRealMousePosition()
+	{
+		return currentRealMousePosition;
 	}
 
 	sdl::Point InputManager::getMousePositionRaw()

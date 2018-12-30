@@ -106,12 +106,13 @@ namespace vas
 						sdl::Point{ ev.button().x, ev.button().y });
 					break;
 				case sdl::EventType::mousemotion:
-					InputManager::getInstance().setMousePosition(sdl::Point{ ev.motion().x, ev.motion().y });
+					InputManager::getInstance().__setMousePosition({ ev.motion().x, ev.motion().y });
+					InputManager::getInstance().__setRealMousePosition({ ev.motion().xrel, ev.motion().yrel });
 					InputManager::getInstance().MouseMoved(ev.motion().x, ev.motion().y);
 					break;
 				case sdl::EventType::mousewheel:
 					InputManager::getInstance().MouseWheelMoved(static_cast<sdl::MouseWheelDirection>(ev.wheel().direction),
-						sdl::Point{ std::abs(ev.wheel().x), std::abs(ev.wheel().y) });
+						sdl::Point{ ev.wheel().x, ev.wheel().y });
 					break;
 				}
 				if (!exec) break;

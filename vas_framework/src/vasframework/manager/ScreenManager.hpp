@@ -7,34 +7,77 @@
 
 namespace vas
 {
+	/** @addtogroup managers
+		  @{
+	*/
+	/** @brief The screen controller.
+		  
+		  ScreenManager is the manager object that control the state of the screen. This included all textures that will
+		  be drawn on top of all sceen. The ScreenManager managing a set of DrawAble objects that will be draw on
+		  top of all objects and also manage the master overlay which is the screen object.
+
+		  The master overlay is a generated texture with black background colour which typicaly transperent (with the
+		  opacity of 0). The opacity of the screen object is inverted compare to other textures' colour mod. For example,
+		  when the screen have the opacity of 255, the master overlay's opacity will be set to 0.
+
+		  The ScreenManager are able to accept and manage two seperated layers of DrawAble object which will be
+		  draw on top of everything which is screen overlays and screen above overlays. The screen overlays' object will
+		  drawn on top of all scene and bellow the master overlay, however screen above overlays will be draw on top
+		  of all object included master overlay.
+	*/
 	class VAS_DECLSPEC ScreenManager
-	{
+	{ /** @} */
 	public:
-		enum class FadingState : uint8_t { none, fade_in, fade_out };
+		/** Fadding state of the screen. */
+		enum class FadingState : uint8_t {
+			none, /**< No fadding effect */
+			fade_in, /**< Fadding screen in (alpha 0 -> 255) */
+			fade_out /**< Fadding screen out (alpha 255 -> 0) */
+		};
 	public:
 		static ScreenManager& getInstance();
 
 		void tick();
 		void draw();
 
-		//DrawAble object that will render on top of screen but bellow master overlay
+		/** DrawAble object that will render on top of screen but bellow master overlay. */
 		vas::Layers screenOverlays;
-		//DrawAble object that will render on top of every thing include master overlay
+		/** DrawAble object that will render on top of everything include master overlay. */
 		vas::Layers screenAboveOverlays;
 
-		sdl::Colour getMasterOverlayColour();
-		void setMasterOverlayColour(const sdl::Colour& colour);
+		sdl::Colour getMasterOverlayColour(); /**< Get the colour of master overlay. */
+		void setMasterOverlayColour(sdl::Colour colour); /**< Set the colour of master overlay. */
 
-		uint8_t getScreenOpacity();
-		void setScreenOpacity(uint8_t value);
+		uint8_t getScreenOpacity(); /**< Get the screen opacity. */
+		void setScreenOpacity(uint8_t value); /**< Set the screen opacity. */
 
+		/** Fade the screen.
+			  @param fadeType Type of fading.
+			  @param time Duration of fading in miliseconds.
+		*/
 		void fadeScreen(ScreenManager::FadingState fadeType, const std::chrono::milliseconds& time);
 
-		ScreenManager::FadingState getCurrentFadingState();
+		ScreenManager::FadingState getCurrentFadingState(); /**< Get current fading state. */
 	public:
-		bool WaitFadingCompleate{ false };
-		boost::signals2::signal<void(ScreenManager::FadingState)> Signal_FadeBegin;
-		boost::signals2::signal<void(ScreenManager::FadingState)> Signal_FadeEnd;
+		bool WaitFadingCompleate{ false }; /**< Halt the ticking process untill the fadding process compleate if true. */
+		/** @name Signals
+			  @{
+		*/
+		/** Fired when screen fading begin.
+				
+			Arguments:
+			-# __ScreenManager::FadingState__\n
+				State of the fading process.
+		*/
+		boost::signals2::signal<void(ScreenManager::FadingState)> FadeBegin;
+		/** Fired when screen fading end.
+
+			Arguments:
+			-# __ScreenManager::FadingState__\n
+				State of the fading process.
+		*/
+		boost::signals2::signal<void(ScreenManager::FadingState)> FadeEnd;
+		/** @} */
 	private:
 		ScreenManager();
 		~ScreenManager();
