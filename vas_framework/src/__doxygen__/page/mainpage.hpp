@@ -15,5 +15,5 @@
 
 	## License of The Library
 	All of the source codes that located under the repository of the Virtual Assistant Framework are licensed under 
-	_BSD 3__ License as stated at [here](lib_license.html).
+	__The Mozilla Public License 2.0__ as stated at [here](lib_license.html).
 */

@@ -15,6 +15,8 @@ comment or uncomment the "#define" syntax that representing the setting.
 \note If you don't whant to use sdl_ttf or sdl_mixer for some reason.
 Turning them off will keep your dependency lower (you don't neet to include and link sdl_mixer or sdl_ttf into
 your project).
+
+\note The file VASConfig.hpp is licensed under BSD 3 - Clause instead of MPL 2.0
 */
 
 /*! \addtogroup compile_time_cfg
