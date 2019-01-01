@@ -53,7 +53,7 @@ namespace vas
 	std::string Clock::getCurrentISO8601Time(Clock::Timezone zone, bool withSeperator)
 	{
 		std::tm tmTime = getCurrentCalenderDateTime(zone);
-		return tmToISO8601(tmTime, withSeperator);
+		return tmToISO8601(tmTime, withSeperator, zone);
 	}
 
 	time_t Clock::tmToTime_t(const std::tm & tm, Clock::Timezone srcZone)

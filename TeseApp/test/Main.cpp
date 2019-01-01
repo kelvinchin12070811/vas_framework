@@ -6,7 +6,7 @@ const bool Main::__launch{ vas::ClassLoader::load<Main>() };
 int Main::main(const std::vector<std::string>& args)
 {
 	VAS_ALLOCATE_CONSOLE;
-	vas::CommonTools::getInstance().setAssistanceName("宮本サクラ");
+	//vas::CommonTools::getInstance().setAssistanceName("宮本サクラ");
 	try
 	{
 		{ //Call stack memory management test.

@@ -123,7 +123,7 @@ namespace scene
 		);
 
 		sdl::mixer::Signals::ChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
-		vas::ScreenManager::getInstance().Signal_FadeEnd.connect(boost::bind(&MainScene::on_fadeCompleate, this, boost::placeholders::_1));
+		vas::ScreenManager::getInstance().FadeEnd.connect(boost::bind(&MainScene::on_fadeCompleate, this, boost::placeholders::_1));
 		vas::InputManager::getInstance().KeyPressed.connect(boost::bind(&MainScene::on_keyPressed, this, boost::placeholders::_1));
 		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector);
 		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector);
@@ -147,7 +147,7 @@ namespace scene
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
 		);
 		mixer::Signals::ChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
-		vas::ScreenManager::getInstance().Signal_FadeEnd.disconnect_all_slots();
+		vas::ScreenManager::getInstance().FadeEnd.disconnect_all_slots();
 	}
 
 	void MainScene::eventSlot(vas::sdl::Event & ev)

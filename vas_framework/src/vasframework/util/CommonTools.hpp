@@ -90,10 +90,12 @@ namespace vas
 			int rtnValue = 0
 		);
 
-		void setAssistanceName(const std::string& value);
-		std::string getAssistanceName();
+		void setConsolePrefix(const std::string& value);
+		std::string getConsolePrefix();
 
 		std::function<void(const std::string&, CommonTools::MessageType, int)>& Loggingfunction();
+
+		void setMessTypeStr(std::array<std::string, 4> value);
 #ifdef VAS_WINDOWS_MODE
 		HWND windowInstance = nullptr;
 #else
@@ -103,20 +105,26 @@ namespace vas
 		CommonTools();
 		~CommonTools();
 
-		/** [Read & Write] Assistance name of the console.
+		/** [Read & Write] Prefix of the console output. Timestamp will be outputed if empty.
 
 			- __mutators__
-				-# void setAssistanceName(const std::string& value)
+				-# void setConsolePrefix(const std::string& value)
 			- __accessors__
-				-# std::string getAssistanceName()
+				-# std::string getConsolePrefix()
 		*/
-		std::string assistanceName = "Debug";
+		std::string consolePrefix = "";
 		/** [Read & Write] Logger function of messenger. use to handle additional task.
 			
 			- __mutaors & accessors__
 				-# std::function<void(const std::string&, CommonTools::MessageType, int)>& Loggingfunction()
 		*/
 		std::function<void(const std::string&, CommonTools::MessageType, int)> loggingFunction = nullptr;
+		/** [Write Only] Stringnified message type name.
+			  
+			  - __mutators__
+				-# void setMessTypeStr(std::array<std::string, 4> value)
+		*/
+		std::array<std::string, 4> messTypeStr{ "ERROR", "INFO", "LOG", "WARN" };
 	};
 
 	/* @addtogroup util

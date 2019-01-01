@@ -1,5 +1,5 @@
 #include "CommonTools.hpp"
-
+#include "../math/Clock.hpp"
 
 namespace vas
 {
@@ -12,13 +12,33 @@ namespace vas
 	int CommonTools::messenger(const std::string & message, CommonTools::MessageType messType, int rtnValue)
 	{
 		if (loggingFunction != nullptr) loggingFunction(message, messType, rtnValue);
-		TextTools::printfln(boost::format("%s: %s") % this->assistanceName % message);
-		
+		decltype(messTypeStr)::const_pointer messInfo{ nullptr };
+		switch (messType)
+		{
+		case CommonTools::MessageType::error:
+			messInfo = &messTypeStr[0];
+			break;
+		case CommonTools::MessageType::info:
+			messInfo = &messTypeStr[1];
+			break;
+		case CommonTools::MessageType::log:
+			messInfo = &messTypeStr[2];
+			break;
+		case CommonTools::MessageType::warning:
+			messInfo = &messTypeStr[3];
+			break;
+		}
+
+		if (this->consolePrefix.empty())
+			TextTools::printfln(boost::format("%s [%s]: %s") % Clock::getCurrentISO8601Time(Clock::Timezone::local) % (*messInfo) % message);
+		else
+			TextTools::printfln(boost::format("%s [%s]: %s") % this->consolePrefix % messInfo % message);
+
 		if (messType != CommonTools::MessageType::log && messType != CommonTools::MessageType::info)
 		{
 #ifdef VAS_WINDOWS_MODE
 			MessageBeep(static_cast<UINT>(messType));
-			MessageBox(windowInstance, TextTools::stows(message).c_str(), TextTools::stows(assistanceName).c_str(), static_cast<UINT>(messType));
+			MessageBox(windowInstance, TextTools::stows(message).c_str(), TextTools::stows(consolePrefix).c_str(), static_cast<UINT>(messType));
 #else
 			SDL_MessageBoxFlags flags;
 			if (messType == CommonTools::MessageType::error)
@@ -26,7 +46,7 @@ namespace vas
 			else if (messType == CommonTools::MessageType::warning)
 				flags = SDL_MessageBoxFlags::SDL_MESSAGEBOX_INFORMATION;
 
-			SDL_ShowSimpleMessageBox(flags, this->assistanceName.c_str(), message.c_str(), static_cast<SDL_Window*>(windowInstance));
+			SDL_ShowSimpleMessageBox(flags, this->consolePrefix.c_str(), message.c_str(), static_cast<SDL_Window*>(windowInstance));
 #endif // VAS_WINDOWS_MODE
 		}
 		return rtnValue;
@@ -42,19 +62,24 @@ namespace vas
 		return messenger(message.str(), messType, rtnValue);
 	}
 
-	void CommonTools::setAssistanceName(const std::string & value)
+	void CommonTools::setConsolePrefix(const std::string & value)
 	{
-		this->assistanceName = value;
+		this->consolePrefix = value;
 	}
 
-	std::string CommonTools::getAssistanceName()
+	std::string CommonTools::getConsolePrefix()
 	{
-		return assistanceName;
+		return consolePrefix;
 	}
 
 	std::function<void(const std::string&, CommonTools::MessageType, int)>& CommonTools::Loggingfunction()
 	{
 		return loggingFunction;
+	}
+
+	void CommonTools::setMessTypeStr(std::array<std::string, 4> value)
+	{
+		messTypeStr = std::move(value);
 	}
 
 	CommonTools::CommonTools()
