@@ -11,69 +11,65 @@
 
 namespace vas
 {
-	Layers::Layers(const Layers & rhs):
+	bool Layer::autoGC{ true };
+	size_t Layer::minLayerCount{ 10 };
+
+	Layer::Layer(const Layer & rhs):
 		layerData(rhs.layerData)
 	{
 	}
 
-	Layers::Layers(Layers && rhs) noexcept:
+	Layer::Layer(Layer && rhs) noexcept:
 		layerData(std::move(rhs.layerData))
 	{
 	}
 
-	void Layers::insert(const LayerData & data, size_t pos)
+	Layer::LayerData& Layer::insert(LayerData data, size_t pos)
 	{
-		if (pos != SIZE_MAX && pos < layerData.size())
+		if (pos != std::numeric_limits<size_t>::max() && pos < layerData.size())
 		{
-			layerData.insert(layerData.begin() + pos, data);
-		}
-		else
-		{
-			layerData.push_back(data);
-		}
-	}
-
-	void Layers::insert(LayerData && data, size_t pos)
-	{
-		if (pos != SIZE_MAX && pos < layerData.size())
-		{
-			layerData.insert(layerData.begin() + pos, std::move(data));
+			return *(layerData.insert(layerData.begin() + pos, std::move(data)));
 		}
 		else
 		{
 			layerData.push_back(std::move(data));
+			return layerData.back();
 		}
 	}
 
-	void Layers::remove()
+	void Layer::remove()
 	{
 		layerData.pop_back();
+
+		if (!Layer::autoGC) return;
+
+		if (auto cap = layerData.capacity();  cap > Layer::minLayerCount && cap > Layer::minLayerCount * 3)
+			forceGC();
 	}
 
-	void Layers::remove(const std::string & name)
+	void Layer::remove(const DrawAble * instance)
 	{
-		auto result = std::find_if(layerData.begin(), layerData.end(), [&](LayerData& itr)->bool
-		{
-			return itr.name == name;
+		auto result = std::find_if(layerData.begin(), layerData.end(), [&](decltype(layerData)::const_reference itr) {
+			return itr.instance.get() == instance;
 		});
 		if (result == layerData.end()) return;
 		remove(std::distance(layerData.begin(), result));
 	}
 
-	void Layers::remove(size_t index)
+	void Layer::remove(size_t index)
 	{
 		if (index >= layerData.size()) return;
 		layerData.erase(layerData.begin() + index);
 	}
 
-	size_t Layers::shift(size_t index, Layers::ShiftDirection direction, size_t count)
+	size_t Layer::shift(size_t index, Layer::ShiftDirection direction, size_t count)
 	{
 		if (index >= layerData.size()) throw std::logic_error{ (boost::format{ "Cannot shift item at %i because this layer only contain %i item(s)" } % index % layerData.size()).str() };
 
 		size_t newPos{ index };
 		switch (direction)
 		{
-		case vas::Layers::ShiftDirection::up:
+		case vas::Layer::ShiftDirection::up:
 			if (index == 0) return index; // Don't shift if the item is already on the very top
 
 			//newPos = boost::algorithm::clamp(newPos - count, 0, layerData.size());
@@ -84,7 +80,7 @@ namespace vas
 			}
 			std::rotate(this->begin() + newPos, this->begin() + index, this->begin() + index + 1);
 			break;
-		case vas::Layers::ShiftDirection::down:
+		case vas::Layer::ShiftDirection::down:
 			if (index == layerData.size() - 1) return index; // Don't shift if the item is already on the very bottom
 			auto oriIndex = index;
 			//newPos = boost::algorithm::clamp(newPos + count, 0, layerData.size());
@@ -102,42 +98,64 @@ namespace vas
 		return newPos;
 	}
 
-	void Layers::clear()
+	void Layer::clear()
 	{
 		layerData.clear();
+		forceGC();
 	}
 
-	size_t Layers::size()
+	size_t Layer::size()
 	{
 		return layerData.size();
 	}
 
-	bool Layers::isEmpty()
+	bool Layer::isEmpty()
 	{
 		return layerData.empty();
 	}
 
-	std::vector<Layers::LayerData>::iterator Layers::begin()
+	void Layer::forceGC()
+	{
+		if (layerData.capacity() <= Layer::minLayerCount * 3) return;
+
+		if (auto size = layerData.size(); size > Layer::minLayerCount)
+		{
+			layerData.shrink_to_fit();
+		}
+		else
+		{
+			auto padding = Layer::minLayerCount - size;
+			for (size_t i{ 0 }; i < padding; i++)
+				layerData.push_back({ nullptr, false });
+
+			layerData.shrink_to_fit();
+
+			for (size_t i{ 0 }; i < padding; i++)
+				layerData.pop_back();
+		}
+	}
+
+	std::vector<Layer::LayerData>::iterator Layer::begin()
 	{
 		return layerData.begin();
 	}
 
-	std::vector<Layers::LayerData>::iterator Layers::end()
+	std::vector<Layer::LayerData>::iterator Layer::end()
 	{
 		return layerData.end();
 	}
 
-	std::vector<Layers::LayerData>::reverse_iterator Layers::rbegin()
+	std::vector<Layer::LayerData>::reverse_iterator Layer::rbegin()
 	{
 		return layerData.rbegin();
 	}
 
-	std::vector<Layers::LayerData>::reverse_iterator Layers::rend()
+	std::vector<Layer::LayerData>::reverse_iterator Layer::rend()
 	{
 		return layerData.rend();
 	}
 
-	Layers::LayerData & Layers::get(size_t index)
+	Layer::LayerData & Layer::get(size_t index)
 	{
 		if (index >= layerData.size())
 		{
@@ -148,19 +166,7 @@ namespace vas
 		return layerData[index];
 	}
 
-	Layers::LayerData & Layers::get(const std::string & name)
-	{
-		auto result = std::find_if(layerData.begin(), layerData.end(), [&](LayerData& itr)->bool
-		{
-			return itr.name == name;
-		});
-
-		if (result == layerData.end())
-			throw std::logic_error{ (boost::format("No instance of \"%s\" found") % name).str() };
-		else return *result;
-	}
-
-	Layers::LayerData& Layers::findWithInstance(DrawAble * instance)
+	Layer::LayerData& Layer::get(DrawAble * instance)
 	{
 		auto result = std::find_if(layerData.begin(), layerData.end(), [&](LayerData& itr)->bool
 		{
@@ -172,7 +178,27 @@ namespace vas
 		else return *result;
 	}
 
-	void Layers::tick()
+	std::optional<size_t> Layer::indexOf(DrawAble * instance)
+	{
+		auto result = std::find_if(layerData.begin(), layerData.end(), [&](decltype(layerData)::reference itr) {
+			return itr.instance.get() == instance;
+		});
+		if (result == layerData.end()) return std::nullopt;
+		
+		return { std::distance(layerData.begin(), result) };
+	}
+
+	void Layer::setAutoGC(bool value)
+	{
+		Layer::autoGC = value;
+	}
+
+	void Layer::setMinLayerCount(size_t value)
+	{
+		Layer::minLayerCount = value;
+	}
+
+	void Layer::tick()
 	{
 		for (auto& itr : layerData)
 		{
@@ -180,7 +206,7 @@ namespace vas
 		}
 	}
 
-	void Layers::draw(sdl::Renderer* renderer, Camera* camera)
+	void Layer::draw(sdl::Renderer* renderer, Camera* camera)
 	{
 		for (auto& itr : layerData)
 		{
@@ -189,37 +215,25 @@ namespace vas
 		}
 	}
 
-	Layers & Layers::operator=(const Layers & rhs)
+	Layer & Layer::operator=(const Layer & rhs)
 	{
 		layerData = rhs.layerData;
 		return *this;
 	}
 
-	Layers & Layers::operator=(Layers && rhs) noexcept
+	Layer & Layer::operator=(Layer && rhs) noexcept
 	{
 		layerData = std::move(rhs.layerData);
 		return *this;
 	}
 
-	std::vector<Layers::LayerData>& Layers::getLayerData()
+	std::vector<Layer::LayerData>& Layer::getLayerData()
 	{
 		return layerData;
 	}
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, const std::shared_ptr<DrawAble>& instance, bool visible)
-	{
-		Layers::LayerData data;
-		data.name = name;
-		data.instance = instance;
-		data.visible = visible;
-		return data;
-	}
 
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string & name, std::shared_ptr<DrawAble>&& instance, bool visible)
+	Layer::LayerData::LayerData(std::shared_ptr<DrawAble> instance, bool visible):
+		instance(std::move(instance)), visible(visible)
 	{
-		Layers::LayerData data;
-		data.name = name;
-		data.instance = std::move(instance);
-		data.visible = visible;
-		return data;
 	}
 }

@@ -1,9 +1,11 @@
 #pragma once
+#include <deque>
 #include <memory>
 #include <vasframework/sreflex/ReflectAbleAutoRegistrar.hpp>
 #include <vasframework/base/Base.hpp>
 #include <vasframework/manager/InputManager.hpp>
 #include <vasframework/graphics/sprites/SpriteSheet.hpp>
+#include <vasframework/graphics/layer/Layers.hpp>
 #include <vasframework/manager/ScreenManager.hpp>
 #include <vasframework/graphics/text/StyledText.hpp>
 #include <vasframework/graphics/animation/AnimationControllerEx.hpp>
@@ -51,9 +53,12 @@ namespace scene
 		std::shared_ptr<vas::StyledText> textTest{ nullptr };
 		bool fadeController{ false };
 
+		vas::Layer rootLayer;
 		vas::Vector2 movement{ 1.0f, 1.0f };
 		vas::Vector2 tilePos{ 56, 67 };
 
 		vas::AnimationControllerEx animation;
+
+		std::deque<boost::signals2::scoped_connection> conmng;
 	};
 }

@@ -3,35 +3,28 @@
 //License, v. 2.0. If a copy of the MPL was not distributed with this
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
-#include "Scene.hpp"
+#include "SceneRefWrap.hpp"
 
 namespace vas
 {
-	void Scene::tick()
+	SceneRefWrap::SceneRefWrap(std::shared_ptr<Scene> scene, bool tickable, bool drawable) :
+		scene(std::move(scene)), tickable(tickable), drawable(drawable)
 	{
 	}
 
-	void Scene::draw()
+	void SceneRefWrap::tick()
 	{
+		if (tickable)
+		{
+			scene->tick();
+		}
 	}
 
-	void Scene::beforeTerminate()
+	void SceneRefWrap::draw(sdl::Renderer * renderer, Camera * camera)
 	{
-		return;
-	}
-
-	void Scene::afterTerminate()
-	{
-		return;
-	}
-
-	void Scene::beforeSceneCall()
-	{
-		return;
-	}
-
-	void Scene::afterSceneCall()
-	{
-		return;
+		if (drawable)
+		{
+			scene->draw();
+		}
 	}
 }

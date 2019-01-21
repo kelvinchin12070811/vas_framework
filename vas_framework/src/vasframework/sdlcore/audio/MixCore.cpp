@@ -22,7 +22,8 @@ namespace vas::sdl
 
 		bool init()
 		{
-			//return init(MixInitFlags::mod) != 0;
+			Mix_HookMusicFinished(&__INNER_ON_MUSIC_END);
+			Mix_ChannelFinished(&__INNER_ON_CHANNEL_END);
 			return true;
 		}
 

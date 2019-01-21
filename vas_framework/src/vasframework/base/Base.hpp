@@ -5,8 +5,9 @@
 //======================================================================
 #pragma once
 #include <array>
-#include <boost/optional.hpp>
+//#include <boost/optional.hpp>
 #include <boost/signals2.hpp>
+#include <optional>
 #include "../VASConfig.hpp"
 #include "../util/TextTools.hpp"
 #include "../sdlcore/SDLCore.hpp"
@@ -70,9 +71,6 @@ namespace vas
 
 		void setIgnoreCloseEventOnce(bool value);
 
-		void setDoubleSceneRendering(bool value);
-		bool& getDoubleSceneRendering();
-
 		void setWindow(sdl::Window value);
 		sdl::Window getWindow();
 
@@ -87,7 +85,7 @@ namespace vas
 			  @retval boost::optional Constant reference to the command line argument. Empty ```boost::optional```
 			  if #VAS_SDL_ENTRY is defined.
 		*/
-		boost::optional<std::reference_wrapper<const std::vector<std::string>>> getArgs();
+		std::optional<std::reference_wrapper<const std::vector<std::string>>> getArgs();
 
 		/** Get currnet frame index.
 			  @return current frame index number which less than or equal to fps.
@@ -113,18 +111,6 @@ namespace vas
 					-# void setIgnoreCloseEventOnce(bool value)
 		*/
 		bool ignoreCloseEventOnce{ false };
-		/** [Read & Write] If true the library will draw previous and current scene together which current scene will draw on
-			  top of previous scene.
-
-			  @note this attribute will not ticking previous scene therefore all element of previous scene will be forzen.
-
-			  - __mutators__
-					-# void setDoubleSceneRendering(bool value)
-
-			  - __accessors__
-					-# bool& getDoubleSceneRendering()
-		*/
-		bool doubleSceneRendering{ false };
 		/** [Read & Write] Main window that all main elements to display on.
 
 			  - __mutators__

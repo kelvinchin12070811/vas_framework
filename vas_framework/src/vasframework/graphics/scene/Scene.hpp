@@ -4,24 +4,12 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
-#include "../layer/Layers.hpp"
 #include "../../sreflex/ReflectAbleAutoRegistrar.hpp"
 #include "../../VASConfig.hpp"
 
-#define RenderAssistance this->__renderAssistance
-#define CallRenderAssistance \
-	if (this->__renderAssistance == nullptr) \
-		this->__renderAssistance = std::make_unique<vas::Layers>()
-#define SendBackRenderAssistance this->__renderAssistance = nullptr
-#define IsRenderAssistanceEnabled this->__isRenderAssistanceEnabled()
-#define IsRenderAssistanceCalled this->__renderAssistance != nullptr
-#define IsRenderAssistanceReady IsRenderAssistanceCalled && IsRenderAssistanceEnabled
-#define EnableRenderAssistance this->__enableRenderAssistance = true
-#define DisableRenderAssistance this->__enableRenderAssistance = false
-
 namespace vas
 {
-	/** @addtogroup scene
+	/** @addtogroup graphics
 		  @{
 	*/
 	/** @brief Scene is the interface of all sceen which will be presented on the screen
@@ -51,10 +39,5 @@ namespace vas
 		/** Call to current scene when current scene is loaded */
 		virtual void afterSceneCall();
 		/** @} */
-	protected:
-		bool __isRenderAssistanceEnabled();
-	protected:
-		std::unique_ptr<Layers> __renderAssistance{ nullptr };
-		bool __enableRenderAssistance{ true };
 	};
 }

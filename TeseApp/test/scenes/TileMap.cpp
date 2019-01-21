@@ -54,20 +54,18 @@ namespace scene
 			if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::lshift))
 				camMovement *= 4;
 
-			vas::Camera::getInstance().move(camMovement);
+			vas::Camera::getInstance().move(camMovement, vas::zerovector, static_cast<vas::Vector2>(map.getMapSize()));
 		}
-		auto camPos = vas::Camera::getInstance().getPosition();
-		camPos.x = std::clamp(camPos.x, 0.0f, static_cast<float>(map.getMapSize().w() - Camera::getInstance().getSize().w()));
-		camPos.y = std::clamp(camPos.y, 0.0f, static_cast<float>(map.getMapSize().h() - Camera::getInstance().getSize().h()));
-		Camera::getInstance().setPosition(camPos);
 
 		tilesets.tick();
 		AbstractFrameCountingScene::tick();
+		rootLayer.tick();
 	}
 
 	void TileMap::draw()
 	{
 		AbstractFrameCountingScene::draw();
+		rootLayer.draw();
 	}
 
 	void TileMap::afterSceneCall()
@@ -78,11 +76,10 @@ namespace scene
 		vas::Cout() << "Test raw output with endl" << std::endl;
 		vas::Cout() << "Another raw output with unicode word 宮本桜" << std::endl;
 
-		signalsPool.push_back(InputManager::getInstance().MouseButtonPressed.connect(boost::bind(&TileMap::on_mouseClicked, this, _1, _2)));
+		signalsPool.emplace_back(InputManager::getInstance().MouseButtonPressed.connect([this](auto _1, auto _2) { this->on_mouseClicked(_1, _2); }));
 
 		map.load("assets/maps/animated map.tmx");
 
-		CallRenderAssistance;
 		auto bgm = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
 
 		boost::filesystem::path bgmPath = *map.getMapProperties().customProperties["startup bgm"].get<std::string>();
@@ -103,23 +100,17 @@ namespace scene
 			if (itr->getName() == "$!collisions") continue;
 			if (auto layerData = dynamic_cast<vas::TileLayer*>(itr.get()); layerData != nullptr)
 			{
-				mapLayers.push_back(std::make_shared<vas::MapRenderer>(layerData,
+				rootLayer.emplaceInsert<vas::MapRenderer>(layerData,
 					sdl::Point{ static_cast<int>(map.getMapProperties().mapWidth), static_cast<int>(map.getMapProperties().mapHeight) },
 					sdl::Point{ static_cast<int>(map.getMapProperties().tileWidth), static_cast<int>(map.getMapProperties().tileHeight) },
-					tilesets));
+					tilesets);
 			}
-		}
-		
-		for (size_t index = 0; index < mapLayers.size(); index++)
-		{
-			RenderAssistance->insert(VAS_LAYER_DATA("map layer " + boost::lexical_cast<std::string>(index), mapLayers[index]));
 		}
 	}
 
 	void TileMap::beforeTerminate()
 	{
-		for (auto& itr : signalsPool)
-			itr.disconnect();
+		signalsPool.clear();
 	}
 
 	void TileMap::on_EventPulsed(vas::sdl::Event & ev)

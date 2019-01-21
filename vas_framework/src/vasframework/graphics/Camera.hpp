@@ -68,6 +68,12 @@ namespace vas
 			  @param movement The motion vector of the camera.
 		*/
 		void move(const Vector2& movement);
+		/** Move the position of camera with a boundary.
+			  @param movement The motion vector of the camera.
+			  @param min Minimum position of the camera.
+			  @param max Maximum position of the camera.
+		*/
+		void move(const Vector2& movement, const Vector2& min, const Vector2& max);
 		/** Let camera focus on certain object's position.
 			  @param position The position of the object need to be focus.
 
@@ -75,6 +81,14 @@ namespace vas
 			  adjustment to fit your object.
 		*/
 		void focusOn(const Vector2& position);
+		/** Let camera focus on certain object's position in a boundary.
+			  @param position The position of the object need to be focus.
+			  @param min Minimum position of the camera.
+			  @param max Maximum position of the camera.
+			  @note This function will not focus on the exact center of the object, top left corner instead. Make your own
+			  adjustment to fit your object.
+		*/
+		void focusOn(const Vector2& position, const Vector2& min, const Vector2& max);
 		/** Zoom in or out on the camera, using simple multipication calculation.
 			  @param value Amout of factor that need to zoom in, larger then 1 for larger, in between 0 - 1 for smaller.
 		*/

@@ -60,6 +60,10 @@
 #define VAS_USE_OOENTRY
 #endif
 
+#ifdef VAS_WINDOWS_MODE
+#define NOMINMAX
+#endif
+
 /** @addtogroup vas_framework
 	 @{
 */

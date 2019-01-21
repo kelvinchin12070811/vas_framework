@@ -32,8 +32,8 @@ int Main::main(const std::vector<std::string>& args)
 			textOverlay->setStaticOnCamera(true);
 			textOverlay->setColour(vas::sdl::ColorPresets::white);
 			textOverlay->setBackgroundOffset(vas::Vector2{ 3.0f, ANGLE_FROM_SECOND_QUATER(45.0) });
-			vas::ScreenManager::getInstance().screenAboveOverlays.insert(VAS_INSERT_VAR(textOverlay));
-			vas::SceneManager::getInstance().call("scene::NBTTreeTest");
+			vas::ScreenManager::getInstance().screenAboveOverlays.insert({ textOverlay });
+			vas::SceneManager::getInstance().call("scene::TileMap");
 			vas::Base::getInstance().getRenderer().setLogicalSize(vas::sdl::Point{ 640, 480 });
 		});
 	}

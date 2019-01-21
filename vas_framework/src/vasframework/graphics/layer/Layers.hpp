@@ -6,13 +6,12 @@
 #pragma once
 #include <vector>
 #include <boost/container/vector.hpp>
+#include <functional>
 #include <memory>
+#include <optional>
 #include <string>
 #include "../DrawAble.hpp"
 #include "../../VASConfig.hpp"
-
-#define VAS_INSERT_VAR(var) vas::make_layerData(std::string(#var), var)
-#define VAS_LAYER_DATA(name, var) vas::make_layerData(name, var)
 
 namespace vas
 {
@@ -21,7 +20,7 @@ namespace vas
 	*/
 	/** @brief The container of the DrawAble objects in vertical order.
 	*/
-	class VAS_DECLSPEC Layers : public DrawAble
+	class VAS_DECLSPEC Layer : public DrawAble
 	{ /** @} */
 	public:
 		/** The direction of the shifting of the other objects. */
@@ -32,7 +31,7 @@ namespace vas
 		
 		/** @brief Structure of the information of the layer's DrawAble object.
 			  
-			  A data type of vas::Layers
+			  A data type of vas::Layer
 
 			  Creation of this sturcture can be done by using these helper functions and macros:
 			  
@@ -45,33 +44,45 @@ namespace vas
 		*/
 		struct LayerData
 		{
+			/** Construct new instance
+				  @param instance Instance of DrawAble object.
+				  @param visible Determin if the object is visible 
+			*/
+			LayerData(std::shared_ptr<DrawAble> instance, bool visible = true);
 			bool visible; /**< Determine if the object is going to render on the renderer or not. */
-			std::string name; /**< Name of the object. Unique id are recomanded. */
 			std::shared_ptr<DrawAble> instance; /**< Shared instance of the object. */
 		};
 	public:
-		Layers() = default;
-		Layers(const Layers& rhs);
-		Layers(Layers&& rhs) noexcept;
-		~Layers() = default;
+		Layer() = default;
+		Layer(const Layer& rhs);
+		Layer(Layer&& rhs) noexcept;
+		~Layer() = default;
 
 		/** Insert new instance of DrawAble into the list.
 			  @param data LayerData of the object.
 			  @param pos Position hint to insert the object, insert at the back if maximum of size_t.
 		*/
-		void insert(const LayerData& data, size_t pos = SIZE_MAX);
-		/** Insert new instance of DrawAble into the list.
-			  @param data LayerData of the object.
-			  @param pos Position hint to insert the object, insert at the back if maximum of size_t.
+		LayerData& insert(LayerData data, size_t pos = (std::numeric_limits<size_t>::max)());
+		/** Create and insert new instance of DrawAble object into the list.
+			  @tparam GenericDrawAbleObj DrawAble objects' type.
+			  @tparam Args Variadic parameters type.
+			  @param args Parameters that forward to the constructor of the GenericDrawAbleObj.
+			  @retval std::pair of reference to LayerData(first) and convertion function to std::shared_ptr(second).
 		*/
-		void insert(LayerData&& data, size_t pos = SIZE_MAX);
+		template <class GenericDrawAbleObj, class... Args>
+		std::pair<LayerData&, std::function<std::shared_ptr<GenericDrawAbleObj>()>> emplaceInsert(Args&&... args)
+		{
+			auto ptr = new GenericDrawAbleObj(std::forward<Args>(args)...);
+			auto& result = this->insert({ std::shared_ptr<DrawAble>(static_cast<DrawAble*>(ptr)) });
+			return { result, [&]() { return std::static_pointer_cast<GenericDrawAbleObj>(result.instance); } };
+		}
 		
 		/** Remove the last object. */
 		void remove();
-		/** Remove the object by given name.
-			  @param name Name of the object.
+		/** Remove the object by given instance.
+			  @param instance Instance of the object.
 		*/
-		void remove(const std::string& name);
+		void remove(const DrawAble* instance);
 		/** Remove the object by given index.
 			  @param index Index of the object.
 		*/
@@ -83,7 +94,7 @@ namespace vas
 			  @param count Distance of the new index from current.
 			  @return New index of the object.
 		*/
-		size_t shift(size_t index, Layers::ShiftDirection direction, size_t count);
+		size_t shift(size_t index, Layer::ShiftDirection direction, size_t count);
 
 		/** Clear the layer. */
 		void clear();
@@ -94,13 +105,15 @@ namespace vas
 		*/
 		bool isEmpty();
 
+		void forceGC();
+
 		/** @name Iterators
 			  @{
 		*/
-		std::vector<Layers::LayerData>::iterator begin(); /**< begin of the iterator. */
-		std::vector<Layers::LayerData>::iterator end(); /**< end of the iterator. */
-		std::vector<Layers::LayerData>::reverse_iterator rbegin(); /**< rbegin of the iterator. */
-		std::vector<Layers::LayerData>::reverse_iterator rend(); /**< rend of the iterator. */
+		std::vector<Layer::LayerData>::iterator begin(); /**< begin of the iterator. */
+		std::vector<Layer::LayerData>::iterator end(); /**< end of the iterator. */
+		std::vector<Layer::LayerData>::reverse_iterator rbegin(); /**< rbegin of the iterator. */
+		std::vector<Layer::LayerData>::reverse_iterator rend(); /**< rend of the iterator. */
 		/** @} */
 
 		/** Get the object at given index.
@@ -108,23 +121,24 @@ namespace vas
 			  @return LayerData of the object.
 		*/
 		LayerData& get(size_t index);
-		/** Get the object at given name.
-			  @param name Name of the object.
-			  @return LayerData of the object.
-		*/
-		LayerData& get(const std::string& name);
-
-		/** Find the object with an instance of it.
+		/** Get the object with an instance of it.
 			  @param instance Raw pointer(observation pointer) to the object.
 			  @return LayerData of the object.
 		*/
-		LayerData& findWithInstance(DrawAble* instance);
+		LayerData& get(DrawAble* instance);
+		/** Get the index of the object with an instance of it.
+			  @param instance Instance of object to search.
+		*/
+		std::optional<size_t> indexOf(DrawAble* instance);
+
+		static void setAutoGC(bool value);
+		static void setMinLayerCount(size_t value);
 
 		void tick() override;
 		void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) override;
 
-		Layers& operator=(const Layers& rhs);
-		Layers& operator=(Layers&& rhs) noexcept;
+		Layer& operator=(const Layer& rhs);
+		Layer& operator=(Layer&& rhs) noexcept;
 
 		std::vector<LayerData>& getLayerData();
 	private:
@@ -133,24 +147,15 @@ namespace vas
 					 -# std::vector<LayerData>& getLayerData()
 		*/
 		std::vector<LayerData> layerData;
-		boost::container::vector<bool> layerState;
+		/** [Write Only] Determin if the layer will auto release free memory.
+				- __mutators__
+					-# static void setAutoGC(bool value)
+		*/
+		static bool autoGC;
+		/** [Write Only] Determin the minimum number of layers that can be stored without reallocate memory.
+				- __mutators__
+					-# static void setMinLayerCount(size_t value)
+		*/
+		static size_t minLayerCount;
 	};
-	/** Create a new layer data.
-		  @param name Name of the object.
-		  @param instance Instance of the DrawAble object.
-		  @param visible Define if the instance need to draw on the renderer or not.
-		  @return Layers::LayerData that contain the information about the object.
-
-		  Defined in: vasframework/graphics/layer/Layers.hpp, namespace: vas
-	*/
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, const std::shared_ptr<DrawAble>& instance, bool visible = true);
-	/** Create a new layer data.
-		  @param name Name of the object.
-		  @param instance Rvalue reference to the instance of the DrawAble object.
-		  @param visible Define if the instance need to draw on the renderer or not.
-		  @return Layers::LayerData that contain the information about the object.
-		  
-		  Defined in: vasframework/graphics/layer/Layers.hpp, namespace: vas
-	*/
-	VAS_DECLSPEC Layers::LayerData make_layerData(const std::string& name, std::shared_ptr<DrawAble>&& instance, bool visible = true);
 }

@@ -53,12 +53,27 @@ namespace vas
 		float gradient(const Vector2& rhs = Vector2()) const;
 		/** Get the angle of the vector line from the origin. */
 		Angle angle() const;
+		/** Get the unit vector(normalized vector) of this vector. */
+		Vector2 normalize() const;
+		/** Get the vector with absolute value(no negative number) from this vector. */
+		Vector2 absolute() const;
+		/** Linear interpolation algorithm.
+			  @param from Starting point of lerp algorithm.
+			  @param to Ending point of lerp algorithm.
+			  @param speed speed of moving point, must in between 0 and 1 (outside this range will be clampped).
+			  @return Current position on @p speed.
+		*/
+		static Vector2 lerp(const Vector2& from, const Vector2& to, float speed);
 
 		/** @name Overloaded operators
 			  @{
 		*/
 		bool operator==(const Vector2& rhs) const; /**< Determine if both of the vectors with same value. */
 		bool operator!=(const Vector2& rhs) const; /**< Determine if both vectors does not with same value. */
+		bool operator<(const Vector2& rhs) const; /**< Determine if rhs is less than this. */
+		bool operator<=(const Vector2& rhs) const; /**< Determine if rhs is less than or equal to this. */
+		bool operator>(const Vector2& rhs) const; /**< Determine if rhs is greather than this. */
+		bool operator>= (const Vector2& rhs) const; /**< Determine if rhs is greather than or equal to this. */
 
 		Vector2 operator+(const Vector2& rhs) const; /**< Add two vector and return a new instance of vector of result. */
 		Vector2 operator-(const Vector2& rhs) const; /**< Minus two vector and return a new instance of vector of result. */
@@ -73,7 +88,6 @@ namespace vas
 		const Vector2& operator*=(float rhs); /**< Multiply this vector with a factor. */
 		const Vector2& operator/=(const Vector2& rhs); /**< Divide this vector with other vector. */
 		const Vector2& operator/=(float rhs); /**< Divide this vector with a factor. */
-
 		/** @} */
 
 		/** @name Overloaded operators

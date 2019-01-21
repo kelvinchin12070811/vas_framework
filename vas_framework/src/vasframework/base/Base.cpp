@@ -228,12 +228,12 @@ namespace vas
 		args = std::move(arg1);
 	}
 
-	boost::optional<std::reference_wrapper<const std::vector<std::string>>> Base::getArgs()
+	std::optional<std::reference_wrapper<const std::vector<std::string>>> Base::getArgs()
 	{
 #ifdef VAS_USE_OOENTRY
-		return args;
+		return { args };
 #else
-		return boost::none;
+		return std::nullopt;
 #endif
 	}
 
@@ -293,8 +293,6 @@ namespace vas
 		renderer.clear();
 		if (!SceneManager::getInstance().isEmpty())
 		{
-			if (doubleSceneRendering && SceneManager::getInstance().atleast2Scene())
-				SceneManager::getInstance().previous()->draw();
 			SceneManager::getInstance().current()->draw();
 		}
 		ScreenManager::getInstance().draw();
@@ -315,6 +313,6 @@ int SDL_main(int argc, char ** argv)
 		args.push_back(argv[itr]);
 
 	vas::Base::getInstance().fun20181130T171403(std::move(args));
-	return vas::ClassLoader::gt5d_acfg(vas::Base::getInstance().getArgs().get());
+	return vas::ClassLoader::gt5d_acfg(vas::Base::getInstance().getArgs()->get());
 }
 #endif // VAS_USE_OOENTRY

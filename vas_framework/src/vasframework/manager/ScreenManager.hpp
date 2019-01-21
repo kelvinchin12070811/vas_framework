@@ -46,9 +46,9 @@ namespace vas
 		void draw();
 
 		/** DrawAble object that will render on top of screen but bellow master overlay. */
-		vas::Layers screenOverlays;
+		vas::Layer screenOverlays;
 		/** DrawAble object that will render on top of everything include master overlay. */
-		vas::Layers screenAboveOverlays;
+		vas::Layer screenAboveOverlays;
 
 		sdl::Colour getMasterOverlayColour(); /**< Get the colour of master overlay. */
 		void setMasterOverlayColour(sdl::Colour colour); /**< Set the colour of master overlay. */

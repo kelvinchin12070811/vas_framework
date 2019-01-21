@@ -3,6 +3,7 @@
 //License, v. 2.0. If a copy of the MPL was not distributed with this
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
+#include <algorithm>
 #include <cmath>
 #include "Vector2.hpp"
 #include "Angle.hpp"
@@ -106,6 +107,22 @@ namespace vas
 		return 0.0f;
 	}
 
+	Vector2 Vector2::normalize() const
+	{
+		return (*this) / this->magnitude();
+	}
+
+	Vector2 Vector2::absolute() const
+	{
+		return Vector2{ std::abs(this->x), std::abs(this->y) };
+	}
+
+	Vector2 Vector2::lerp(const Vector2 & from, const Vector2 & to, float speed)
+	{
+		speed = std::clamp(speed, 0.0f, 1.0f);
+		return (from * (1 - speed)) + (to * speed);
+	}
+
 	bool Vector2::operator==(const Vector2 & rhs) const
 	{
 		return (x == rhs.x) && (y == rhs.y);
@@ -114,6 +131,26 @@ namespace vas
 	bool Vector2::operator!=(const Vector2 & rhs) const
 	{
 		return (x != rhs.x) || (y != rhs.y);
+	}
+
+	bool Vector2::operator<(const Vector2 & rhs) const
+	{
+		return (this->x < rhs.x) && (this->y < rhs.y);
+	}
+
+	bool Vector2::operator<=(const Vector2 & rhs) const
+	{
+		return (this->x <= rhs.x) && (this->y <= rhs.y);
+	}
+
+	bool Vector2::operator>(const Vector2 & rhs) const
+	{
+		return (this->x > rhs.x) && (this->y > rhs.y);
+	}
+
+	bool Vector2::operator>=(const Vector2 & rhs) const
+	{
+		return (this->x >= rhs.x) && (this->y >= rhs.y);
 	}
 
 	Vector2 Vector2::operator+(const Vector2 & rhs) const

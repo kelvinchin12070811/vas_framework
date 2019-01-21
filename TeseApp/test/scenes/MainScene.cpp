@@ -30,7 +30,6 @@ namespace scene
 	MainScene::MainScene()
 	{
 		using namespace std;
-		CallRenderAssistance;
 		vas::ScreenManager::getInstance().setScreenOpacity(0);
 		vas::Property test1{ "test1", "test"s };
 		vas::Property test2{ "test2", 0xCC50 };
@@ -90,7 +89,10 @@ namespace scene
 		else if (vas::InputManager::getInstance().isKeyTriggered(sdl::Scancode::right))
 			tilePos.x += 1;
 
-		vas::Camera::getInstance().focusOn(tilePos + vas::Vector2{16.0f, 16.0f});
+		auto& camera = vas::Base::getInstance().getCamera();
+
+		camera.focusOn(vas::Vector2::lerp(camera.getPosition() + (static_cast<vas::Vector2>(camera.getSize()) / 2),
+			tilePos + vas::Vector2{ 16.0f, 16.0f }, 0.1f), vas::zerovector, { 800, 800 });
 
 		textTest->move(movement);
 		auto& auManager = vas::AudioManager::getInstance();
@@ -106,11 +108,13 @@ namespace scene
 		}
 		animation.tick();
 		scene::AbstractFrameCountingScene::tick();
+		rootLayer.tick();
 	}
 
 	void MainScene::draw()
 	{
 		scene::AbstractFrameCountingScene::draw();
+		rootLayer.draw();
 		testSheet->drawTile(13, tilePos);
 	}
 
@@ -118,23 +122,22 @@ namespace scene
 	{
 		using namespace vas;
 		using namespace std::chrono_literals;
-		vas::Base::getInstance().EventBeginProcessed.connect(
+		/*vas::Base::getInstance().EventBeginProcessed.connect(
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
-		);
+		);*/
 
-		sdl::mixer::Signals::ChannelFinished.connect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
-		vas::ScreenManager::getInstance().FadeEnd.connect(boost::bind(&MainScene::on_fadeCompleate, this, boost::placeholders::_1));
-		vas::InputManager::getInstance().KeyPressed.connect(boost::bind(&MainScene::on_keyPressed, this, boost::placeholders::_1));
-		testSprite = std::make_shared<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector);
-		testSprite2 = std::make_shared<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector);
-		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point{ 32, 32 });
-		textTest = std::make_shared<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24, sdl::ColourPresets::white);
+		conmng.emplace_back(vas::Base::getInstance().EventBeginProcessed.connect([this](auto _1) { this->eventSlot(_1); }));
+		conmng.emplace_back(sdl::mixer::Signals::ChannelFinished.connect([this](auto _1) { this->meFinishedPlaying(_1); }));
+		conmng.emplace_back(vas::ScreenManager::getInstance().FadeEnd.connect([this](auto _1) { this->on_fadeCompleate(_1); }));
+		conmng.emplace_back(vas::InputManager::getInstance().KeyPressed.connect([this](auto _1) {this->on_keyPressed(_1); }));
+
+		testSprite = rootLayer.emplaceInsert<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector).second();
+		testSprite2 = rootLayer.emplaceInsert<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector).second();
+		textTest = rootLayer.emplaceInsert<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24, sdl::ColourPresets::white).second();
+		
 		textTest->setStaticOnCamera(true);
 		textTest->setBackgroundOffset(vas::Vector2{ 3.0f, vas::Angle{ 45.0 + 90.0 } });
-
-		RenderAssistance->insert(VAS_INSERT_VAR(testSprite));
-		RenderAssistance->insert(VAS_INSERT_VAR(testSprite2));
-		RenderAssistance->insert(VAS_INSERT_VAR(textTest));
+		testSheet = std::make_shared<vas::SpriteSheet>("assets/textures/tilesets/sandwater.png", sdl::Point{ 32, 32 });
 
 		vas::AudioManager::getInstance().playBGM("assets/audios/bgm/聞こえていますか僕らの声が.mp3");
 		vas::ScreenManager::getInstance().fadeScreen(vas::ScreenManager::FadingState::fade_in, 5s);
@@ -142,12 +145,10 @@ namespace scene
 
 	void MainScene::beforeTerminate()
 	{
-		using namespace vas::sdl;
+		/*using namespace vas::sdl;
 		vas::Base::getInstance().EventBeginProcessed.disconnect(
 			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
-		);
-		mixer::Signals::ChannelFinished.disconnect(boost::bind(&MainScene::meFinishedPlaying, this, boost::placeholders::_1));
-		vas::ScreenManager::getInstance().FadeEnd.disconnect_all_slots();
+		);*/
 	}
 
 	void MainScene::eventSlot(vas::sdl::Event & ev)

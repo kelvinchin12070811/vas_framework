@@ -47,9 +47,23 @@ namespace vas
 		position += movement;
 	}
 
+	void Camera::move(const Vector2 & movement, const Vector2 & min, const Vector2 & max)
+	{
+		move(movement);
+		position.x = std::clamp(position.x, min.x, max.x - size.w());
+		position.y = std::clamp(position.y, min.y, max.y - size.h());
+	}
+
 	void Camera::focusOn(const Vector2 & position)
 	{
-		this->position = position - (position / 2.0f);
+		this->position = position - (static_cast<Vector2>(size) / 2);
+	}
+
+	void Camera::focusOn(const Vector2 & position, const Vector2 & min, const Vector2 & max)
+	{
+		focusOn(position);
+		this->position.x = std::clamp(this->position.x, min.x, max.x - size.w());
+		this->position.y = std::clamp(this->position.y, min.y, max.y - size.h());
 	}
 
 	void Camera::zoom(double value)

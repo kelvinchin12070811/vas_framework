@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\graphics\scene\SceneRefWrap.hpp" />
     <ClInclude Include="src\vasframework\util\ResourceMetatype.hpp" />
     <ClInclude Include="src\vasframework\util\ResourceLoader.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\JsonDeserializer.hpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\graphics\scene\SceneRefWrap.cpp" />
     <ClCompile Include="src\vasframework\util\ResourceLoader.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonDeserializer.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonSerializer.cpp" />
