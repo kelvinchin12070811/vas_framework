@@ -9,7 +9,7 @@
 
 namespace vas
 {
-	/** @addtogroup vas_framework
+	/** @addtogroup graphics
 		  @{
 	*/
 	/** @brief Scene call failed.
