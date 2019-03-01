@@ -106,7 +106,7 @@ namespace vas::sdl
 				  colorkey, giving a transparent background, and the 1 pixel is set
 				  to the text color.  The glyph is rendered without any padding or
 				  centering in the X direction, and aligned normally in the Y direction.
-				  This function returns the new surface, or vas::sdl::emptycomponent if there was an error.
+				  This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
 			*/
 			Surface renderGlyphSolid(uint16_t ch, const Colour& foreground);
 			/** Create an 8-bit palettized surface and render the given glyph at
@@ -114,7 +114,7 @@ namespace vas::sdl
 				  colorkey, giving a transparent background, and the 1 pixel is set
 				  to the text color.  The glyph is rendered without any padding or
 				  centering in the X direction, and aligned normally in the Y direction.
-				  This function returns the new surface, or vas::sdl::emptycomponent if there was an error.
+				  This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
 			*/
 			Surface renderGlyphShaded(uint16_t ch, const Colour& foreground, const Colour& background);
 			/** Create an 8-bit palettized surface and render the given glyph at
@@ -122,7 +122,7 @@ namespace vas::sdl
 				  colorkey, giving a transparent background, and the 1 pixel is set
 				  to the text color.  The glyph is rendered without any padding or
 				  centering in the X direction, and aligned normally in the Y direction.
-				  This function returns the new surface, or vas::sdl::emptycomponent if there was an error.
+				  This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
 			*/
 			Surface renderGlyphBlended(uint16_t ch, const Colour& foreground);
 

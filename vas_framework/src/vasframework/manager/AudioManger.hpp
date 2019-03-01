@@ -72,12 +72,12 @@ namespace vas
 
 		/** Return a chunk in cache.
 			  @param id Unique id of a cache.
-			  @return sdl::mixer::Chunk corresponded to the id, sdl::emptycomponent if resource not located.
+			  @return sdl::mixer::Chunk corresponded to the id, sdl::nullcomponent if resource not located.
 		*/
 		sdl::mixer::Chunk getChunkFromCache(const std::string& id);
 		/** Return a music in cache.
 			  @param id Unique id of a cache.
-			  @return sdl::mixer::Music corresponded to the id, sdl::emptycomponent if resource not located.
+			  @return sdl::mixer::Music corresponded to the id, sdl::nullcomponent if resource not located.
 		*/
 		sdl::mixer::Music getMusicFromCache(const std::string& id);
 

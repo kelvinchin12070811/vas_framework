@@ -7,6 +7,7 @@
 
 #ifdef VAS_USE_TTF
 #include "../../base/Base.hpp"
+#include "../../manager/FontCacheManager.hpp"
 
 namespace vas
 {
@@ -131,7 +132,13 @@ namespace vas
 	{
 		if (!inited)
 		{
-			font.openFont(fontPath, fontSize);
+			if (FontCacheManager::getInstance().hasFont(fontPath, fontSize))
+				font = FontCacheManager::getInstance().getFont(fontPath, fontSize);
+			else
+			{
+				font.openFont(fontPath, fontSize);
+				FontCacheManager::getInstance().insertFont(fontPath, fontSize, font);
+			}
 			renderTexture();
 			inited = true;
 		}
@@ -139,7 +146,7 @@ namespace vas
 
 	void Text::renderTexture()
 	{
-		if (font == sdl::emptycomponent)
+		if (font == sdl::nullcomponent)
 			throw sdl::SDLCoreException();
 		switch (renderMode)
 		{

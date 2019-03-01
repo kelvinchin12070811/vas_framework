@@ -28,7 +28,7 @@ namespace vas
 
 		/** Get a cached textrue via it's assigned id.
 			  @param id Pre-assigned id that represent a texture.
-			  @return Cached instance if success, sdl::emptycomponent if failed.
+			  @return Cached instance if success, sdl::nullcomponent if failed.
 		*/
 		sdl::Texture get(const std::string& id);
 		/** Insert an instance of texture into the texture cache.

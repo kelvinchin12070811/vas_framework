@@ -12,6 +12,7 @@
 #include "../manager/TextureManager.hpp"
 #include "../manager/InputManager.hpp"
 #include "../manager/AudioManger.hpp"
+#include "../manager/FontCacheManager.hpp"
 #include "../graphics/Camera.hpp"
 
 namespace vas
@@ -26,10 +27,10 @@ namespace vas
 	{
 		init();
 		window = sdl::Window{ windowTitle, size, flags };
-		if (window == sdl::emptycomponent)
+		if (window == sdl::nullcomponent)
 			throw sdl::SDLCoreException{};
 		renderer = sdl::Renderer{ window, sdl::Renderer::defIndex, sdl::Renderer::RendererFlags::accelerated };
-		if (renderer == sdl::emptycomponent)
+		if (renderer == sdl::nullcomponent)
 			throw sdl::SDLCoreException{};
 
 		if (initializer != nullptr)
@@ -169,6 +170,8 @@ namespace vas
 #endif // VAS_USE_MIXER
 
 #ifdef VAS_USE_TTF
+		if (!FontCacheManager::getInstance().isFontCacheEmpty())
+			FontCacheManager::getInstance().clearFont();
 		sdl::ttf::quit();
 #endif // VAS_USE_TTF
 
@@ -184,16 +187,6 @@ namespace vas
 	void Base::setIgnoreCloseEventOnce(bool value)
 	{
 		ignoreCloseEventOnce = value;
-	}
-
-	void Base::setDoubleSceneRendering(bool value)
-	{
-		doubleSceneRendering = value;
-	}
-
-	bool & Base::getDoubleSceneRendering()
-	{
-		return doubleSceneRendering;
 	}
 
 	void Base::setWindow(sdl::Window value)

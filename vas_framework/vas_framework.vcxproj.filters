@@ -318,6 +318,9 @@
     <ClInclude Include="src\vasframework\graphics\scene\SceneRefWrap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\vasframework\manager\FontCacheManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\vasframework\base\Base.cpp">
@@ -525,6 +528,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vasframework\graphics\scene\SceneRefWrap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vasframework\manager\FontCacheManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

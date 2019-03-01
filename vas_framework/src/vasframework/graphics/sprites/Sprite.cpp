@@ -28,7 +28,7 @@ namespace vas
 		{
 			texture.loadImage(Base::getInstance().getRenderer(), file);
 		}
-		if (texture == sdl::emptycomponent)
+		if (texture == sdl::nullcomponent)
 			throw sdl::SDLCoreException{};
 		texture.setBlendMod(sdl::BlendMode::blend);
 		texture.queryTexture(&source.w, &source.h);
@@ -140,7 +140,7 @@ namespace vas
 
 	void Sprite::draw(sdl::Renderer* renderer, Camera* camera)
 	{
-		if (texture == sdl::emptycomponent) return;
+		if (texture == sdl::nullcomponent) return;
 		sdl::Renderer rendererHolder{ (renderer == nullptr) ? Base::getInstance().getRenderer() : *renderer };
 		if (camera == nullptr) camera = &Camera::getInstance();
 

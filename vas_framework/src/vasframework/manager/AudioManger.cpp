@@ -109,14 +109,14 @@ namespace vas
 
 		if (lastFileName[0] != file)
 		{
-			if (auto& music = getMusicFromCache(file); music != sdl::emptycomponent)
+			if (auto& music = getMusicFromCache(file); music != sdl::nullcomponent)
 			{
 				bgm = music;
 			}
 			else
 			{
 				bgm.load(file);
-				if (bgm == sdl::emptycomponent) throw sdl::SDLCoreException{};
+				if (bgm == sdl::nullcomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[0] = file;
 		}
@@ -128,7 +128,7 @@ namespace vas
 		if (bgs.isPlaying()) bgs.stop();
 		if (lastFileName[1] != file)
 		{
-			if (auto& chunk = getChunkFromCache(file); chunk != sdl::emptycomponent)
+			if (auto& chunk = getChunkFromCache(file); chunk != sdl::nullcomponent)
 			{
 				bgs = chunk;
 				bgs.setChannel(0);
@@ -136,7 +136,7 @@ namespace vas
 			else
 			{
 				bgs.load(file);
-				if (bgs == sdl::emptycomponent) throw sdl::SDLCoreException{};
+				if (bgs == sdl::nullcomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[1] = file;
 		}
@@ -148,7 +148,7 @@ namespace vas
 		if (me.isPlaying()) me.stop();
 		if (lastFileName[2] != file)
 		{
-			if (auto& chunk = getChunkFromCache(file); chunk != sdl::emptycomponent)
+			if (auto& chunk = getChunkFromCache(file); chunk != sdl::nullcomponent)
 			{
 				me = chunk;
 				me.setChannel(1);
@@ -156,7 +156,7 @@ namespace vas
 			else
 			{
 				me.load(file);
-				if (me == sdl::emptycomponent) throw sdl::SDLCoreException{};
+				if (me == sdl::nullcomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[2] = file;
 		}
@@ -168,7 +168,7 @@ namespace vas
 		if (se.isPlaying()) se.stop();
 		if (lastFileName[3] != file)
 		{
-			if (auto& chunk = getChunkFromCache(file); chunk != sdl::emptycomponent)
+			if (auto& chunk = getChunkFromCache(file); chunk != sdl::nullcomponent)
 			{
 				se = chunk;
 				se.setChannel(2);
@@ -176,7 +176,7 @@ namespace vas
 			else
 			{
 				se.load(file);
-				if (se == sdl::emptycomponent) throw sdl::SDLCoreException{};
+				if (se == sdl::nullcomponent) throw sdl::SDLCoreException{};
 			}
 			lastFileName[3] = file;
 		}

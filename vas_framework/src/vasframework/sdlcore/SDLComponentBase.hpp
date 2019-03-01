@@ -17,24 +17,24 @@ namespace vas::sdl
 	*/
 	/** @brief Empty component instance.
 		  
-		  Represent an empty component instance. The operator used is vas::sdl::emptycomponent. Besides,
+		  Represent an empty component instance. The operator used is vas::sdl::nullcomponent. Besides,
 		  C++'s operator nullptr also represent as an empty component instance.
 
 		  Just like nullptr The emptycomponent also have a data type (EmptyComponent_t).
 	*/
-	const class EmptyComponent_t
+	const class NullComponent_t
 	{
 	public:
 		operator std::nullptr_t() const
 		{
 			return nullptr;
 		}
-	} emptycomponent = {};
+	} nullcomponent = {};
 
 	/** @brief The basic component template of all SDL component.
 		  
 		  SDLComponentBase is the basic templated interface of all SDL component. This class provided the basic template
-		  for the component to work. The empty component can represented as vas::sdl::emptycomponent.
+		  for the component to work. The empty component can represented as vas::sdl::nullcomponent.
 
 		  A SDL component are able to compare itself with each other to determine if they are same or not. It also be able to
 		  reassigend with other instance and the previous one will be deleted when needed. All SDL component use C++

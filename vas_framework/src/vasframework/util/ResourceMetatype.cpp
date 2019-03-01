@@ -26,7 +26,7 @@ namespace vas
 		{
 			sdl::mixer::Music cache;
 			cache.load(path);
-			if (cache == sdl::emptycomponent) throw sdl::SDLCoreException();
+			if (cache == sdl::nullcomponent) throw sdl::SDLCoreException();
 			AudioManager::getInstance().cacheMusic(id, std::move(cache));
 		}
 
@@ -44,7 +44,7 @@ namespace vas
 		{
 			sdl::mixer::Chunk cache;
 			cache.load(path);
-			if (cache == sdl::emptycomponent) throw sdl::SDLCoreException();
+			if (cache == sdl::nullcomponent) throw sdl::SDLCoreException();
 			AudioManager::getInstance().cacheChunk(id, std::move(cache));
 		}
 
@@ -62,7 +62,7 @@ namespace vas
 		{
 			sdl::Texture cache;
 			cache.loadImage(Base::getInstance().getRenderer(), path);
-			if (cache == sdl::emptycomponent) throw sdl::SDLCoreException();
+			if (cache == sdl::nullcomponent) throw sdl::SDLCoreException();
 			TextureManager::getInstance().insert(id, std::move(cache));
 		}
 
