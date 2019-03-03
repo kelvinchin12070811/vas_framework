@@ -22,7 +22,7 @@ namespace vas::sdl
 		/** @brief The internal format for an audio chunk.
 			  @note If the channel index is set to -1, the first free channel will be use to play the audio.
 		*/
-		class VAS_DECLSPEC Chunk : public SDLComponentBase<Mix_Chunk, Chunk>
+		class VAS_DECLSPEC Chunk
 		{ /** @} */
 		public:
 			Chunk(); /**< create empty chunk. */
@@ -32,11 +32,11 @@ namespace vas::sdl
 				  @param channel allocate channel to chunk.
 			*/
 			Chunk(const std::string& file, int channel = -1);
-			Chunk(const Chunk& rhs);
-			Chunk(Chunk&& rhs);
-			/**< Reference from Mix_Chunk. */
-			explicit Chunk(Mix_Chunk* instance, SDLComponentBase::DeleterType deleter = &notDeleteDeleter);
-			~Chunk();
+			/** Reference from Mix_Chunk.
+				  @param instance Instance of raw component.
+				  @param owner Determine if this is one of the owner of @p instance.
+			*/
+			explicit Chunk(Mix_Chunk* instance, bool owner = false);
 
 			/** Load from a file.
 				  @param file File to load.
@@ -103,6 +103,9 @@ namespace vas::sdl
 			*/
 			int volume(int volumeLevel);
 
+			void destroy(); /**< Destroy instance. */
+			bool isNull(); /**< Check if instance is nullcomponent. */
+
 			/** @name Public common functions.
 				  The common functions to controll the entier system of the mixer.
 				  @{
@@ -116,17 +119,23 @@ namespace vas::sdl
 			static bool isPlaying(int channel); /**< Determine if a channel is playing. */
 			static void stop(int channel); /**< Stop(Halt) a channel. */
 			static void stopGroup(int tag); /**< Stop entire group. */
+			static Chunk getChunk(int channel); /**< Get chunk that playing on a specified channel. */
 			/** @} */
 
-			static Chunk getChunk(int channel); /**< Get chunk that playing on a specified channel. */
+			/** @name Overloaded operators
+				  @{
+			*/
+			explicit operator Mix_Chunk*(); /**< Cast to raw component. */
+			Chunk& operator=(NullComponent_t);
 
-			Chunk& operator=(const Chunk& rhs);
-			Chunk& operator=(Chunk&& rhs);
-			Chunk& operator=(std::nullptr_t);
-
-			static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(Mix_Chunk);
+			bool operator==(const Chunk& rhs); /**< Compare if two instance are equal. */
+			bool operator!=(const Chunk& rhs); /**< Compare if two instance are not equal. */
+			bool operator==(NullComponent_t); /**< Determine if instance is nullcomponent. */
+			bool operator!=(NullComponent_t); /**< Determine if instance is not nullcomponent. */
+			/** @} */
 		private:
 			int channel{ -1 };
+			std::shared_ptr<Mix_Chunk> componentInstance;
 		};
 	}
 }

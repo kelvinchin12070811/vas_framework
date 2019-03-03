@@ -22,12 +22,12 @@ namespace vas::sdl
 	}
 
 	Renderer::Renderer(Window & window, int index, uint32_t flags):
-		SDLComponentBase(SDL_CreateRenderer(static_cast<SDL_Window*>(window), index, flags), &defDeleter)
+		componentInstance(SDL_CreateRenderer(static_cast<SDL_Window*>(window), index, flags), &SDL_DestroyRenderer)
 	{
 	}
 
-	Renderer::Renderer(SDL_Surface * surface , SDLComponentBase::DeleterType deleter):
-		SDLComponentBase(SDL_CreateSoftwareRenderer(surface), deleter)
+	Renderer::Renderer(SDL_Surface * surface) :
+		componentInstance(SDL_CreateSoftwareRenderer(surface))
 	{
 	}
 
@@ -36,23 +36,10 @@ namespace vas::sdl
 	{
 	}
 
-	Renderer::Renderer(SDL_Renderer * renderer):
-		SDLComponentBase(renderer, &notDeleteDeleter)
+	Renderer::Renderer(SDL_Renderer * renderer, bool owner)
 	{
-	}
-
-	Renderer::Renderer(const Renderer & other):
-		SDLComponentBase(other)
-	{
-	}
-
-	Renderer::Renderer(Renderer && other):
-		SDLComponentBase(std::move(other))
-	{
-	}
-
-	Renderer::~Renderer()
-	{
+		if (owner) componentInstance = std::shared_ptr<SDL_Renderer>{ renderer, &SDL_DestroyRenderer };
+		else componentInstance = std::shared_ptr<SDL_Renderer>{ renderer, [](SDL_Renderer* i) { return; } };
 	}
 
 	bool Renderer::clear()
@@ -288,32 +275,45 @@ namespace vas::sdl
 		return info;
 	}
 
-	/*Renderer::operator const SDL_Renderer*() const
+	void Renderer::destroy()
 	{
-		return &*this->componentInstance;
+		componentInstance = nullptr;
+	}
+
+	bool Renderer::isNull()
+	{
+		return componentInstance == nullptr;
 	}
 
 	Renderer::operator SDL_Renderer*()
 	{
-		return const_cast<SDL_Renderer*>(this->operator const SDL_Renderer *());
-	}*/
+		return componentInstance.get();
+	}
 
-	Renderer& Renderer::operator=(const Renderer & other)
+	Renderer & Renderer::operator=(NullComponent_t)
 	{
-		this->componentInstance = other.componentInstance;
+		destroy();
 		return *this;
 	}
 
-	Renderer& Renderer::operator=(Renderer && other)
+	bool Renderer::operator==(const Renderer & rhs)
 	{
-		this->componentInstance = std::move(other.componentInstance);
-		return *this;
+		return componentInstance == rhs.componentInstance;
 	}
 
-	Renderer & Renderer::operator=(std::nullptr_t)
+	bool Renderer::operator==(NullComponent_t)
 	{
-		this->componentInstance = nullptr;
-		return *this;
+		return isNull();
+	}
+
+	bool Renderer::operator!=(const Renderer & rhs)
+	{
+		return !operator==(rhs);
+	}
+
+	bool Renderer::operator!=(NullComponent_t)
+	{
+		return !operator==(nullcomponent);
 	}
 
 	SDL_Renderer * Renderer::getRendererFromWindow(SDL_Window * window)
@@ -324,10 +324,5 @@ namespace vas::sdl
 	SDL_Renderer * Renderer::getRendererFromWindow(Window & window)
 	{
 		return getRendererFromWindow(static_cast<SDL_Window*>(window));
-	}
-
-	void Renderer::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Renderer)
-	{
-		SDL_DestroyRenderer(instance);
 	}
 }

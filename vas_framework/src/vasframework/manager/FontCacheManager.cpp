@@ -28,10 +28,12 @@ namespace vas
 		return fonts.insert({ { id, size }, std::move(font) }).second;
 	}
 
-	sdl::ttf::Font FontCacheManager::getFont(const std::string & id, uint32_t size)
+	boost::optional<sdl::ttf::Font> FontCacheManager::getFont(const std::string & id, uint32_t size)
 	{
 		auto result = fonts.find({ id, size });
-		return result == fonts.end() ? sdl::ttf::Font{} : result->second;
+		if (result == fonts.end()) return boost::none;
+		
+		return result->second;
 	}
 
 	void FontCacheManager::clearFont(const std::string & id, uint32_t size)
@@ -43,6 +45,7 @@ namespace vas
 	{
 		fonts.clear();
 	}
+
 	bool FontCacheManager::isFontCacheEmpty()
 	{
 		return fonts.empty();

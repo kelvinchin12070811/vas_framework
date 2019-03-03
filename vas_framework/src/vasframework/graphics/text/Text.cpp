@@ -133,7 +133,7 @@ namespace vas
 		if (!inited)
 		{
 			if (FontCacheManager::getInstance().hasFont(fontPath, fontSize))
-				font = FontCacheManager::getInstance().getFont(fontPath, fontSize);
+				font = *FontCacheManager::getInstance().getFont(fontPath, fontSize);
 			else
 			{
 				font.openFont(fontPath, fontSize);

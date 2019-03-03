@@ -43,7 +43,7 @@ namespace vas
 					itr.instance->tick();
 			}
 
-		if (masterOverlayColour.alpha != 0 && screenMasterOverlay != nullptr)
+		if (masterOverlayColour.alpha != 0 && screenMasterOverlay != sdl::nullcomponent)
 			masterRenderer.copy(screenMasterOverlay, nullptr, nullptr);
 
 		if (!screenAboveOverlays.isEmpty())

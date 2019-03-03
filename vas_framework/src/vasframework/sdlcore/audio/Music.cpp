@@ -19,23 +19,10 @@ namespace vas::sdl
 			load(file);
 		}
 
-		Music::Music(const Music & other) :
-			SDLComponentBase(other.componentInstance)
+		Music::Music(Mix_Music * other, bool owner)
 		{
-		}
-
-		Music::Music(Music && other) :
-			SDLComponentBase(std::move(other.componentInstance))
-		{
-		}
-
-		Music::Music(Mix_Music * other) :
-			SDLComponentBase(other, &notDeleteDeleter)
-		{
-		}
-
-		Music::~Music()
-		{
+			if (owner) componentInstance = std::shared_ptr<Mix_Music>{ other, &Mix_FreeMusic };
+			else componentInstance = std::shared_ptr<Mix_Music>{ other, [](Mix_Music* i) { return; } };
 		}
 
 		MusicType Music::getMusicType()
@@ -45,7 +32,7 @@ namespace vas::sdl
 
 		void Music::load(const std::string & file)
 		{
-			this->componentInstance = createRawComponent<Mix_Music>(Mix_LoadMUS(file.c_str()), &defDeleter);
+			this->componentInstance = std::shared_ptr<Mix_Music>{ Mix_LoadMUS(file.c_str()), &Mix_FreeMusic };
 		}
 
 		void Music::loadRaw(sdl::rwops::RWops * src, bool freeSrc)
@@ -55,7 +42,7 @@ namespace vas::sdl
 
 		void Music::loadRawTyped(sdl::rwops::RWops * src, MusicType type, bool freeSrc)
 		{
-			this->componentInstance = createRawComponent<Mix_Music>(Mix_LoadMUSType_RW(src, static_cast<Mix_MusicType>(type), freeSrc ? 1 : 0), &defDeleter);
+			this->componentInstance = std::shared_ptr<Mix_Music>{ Mix_LoadMUSType_RW(src, static_cast<Mix_MusicType>(type), freeSrc ? 1 : 0), &Mix_FreeMusic };
 		}
 
 		void Music::fadeIn(int duration, int loops)
@@ -126,27 +113,45 @@ namespace vas::sdl
 			return Mix_VolumeMusic(volume);
 		}
 
-		Music & Music::operator=(const Music & rhs)
+		void Music::destroy()
 		{
-			this->componentInstance = rhs.componentInstance;
-			return *this;
+			componentInstance = nullptr;
 		}
 
-		Music & Music::operator=(Music && rhs)
+		bool Music::isNull()
 		{
-			this->componentInstance = std::move(rhs.componentInstance);
-			return *this;
+			return componentInstance == nullptr;
 		}
 
-		Music & Music::operator=(std::nullptr_t)
+		Music::operator Mix_Music*()
 		{
-			this->componentInstance = nullptr;
+			return componentInstance.get();
+		}
+		
+		Music & Music::operator=(NullComponent_t)
+		{
+			componentInstance = nullptr;
 			return *this;
 		}
-
-		void Music::VAS_PROTOTYPE_DEFINE_DEF_DELETER(Mix_Music)
+		
+		bool Music::operator==(const Music & rhs)
 		{
-			Mix_FreeMusic(instance);
+			return componentInstance == rhs.componentInstance;
+		}
+		
+		bool Music::operator==(NullComponent_t)
+		{
+			return isNull();
+		}
+		
+		bool Music::operator!=(const Music & rhs)
+		{
+			return !operator==(rhs);
+		}
+		
+		bool Music::operator!=(NullComponent_t)
+		{
+			return !operator==(nullcomponent);
 		}
 	}
 }

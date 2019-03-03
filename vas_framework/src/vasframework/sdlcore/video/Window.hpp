@@ -18,7 +18,7 @@ namespace vas::sdl
 	*/
 	/** @brief The window that display everything.
 	*/
-	class VAS_DECLSPEC Window : public SDLComponentBase<SDL_Window, Window>
+	class VAS_DECLSPEC Window
 	{ /** @} */
 	public:
 		Window(); /**< Create empty window. */
@@ -37,16 +37,13 @@ namespace vas::sdl
 		Window(const std::string& title, const Point& size, uint32_t flags);
 		/** Reference to a raw SDL_Window.
 			  @param refInstance Instance to reference.
-			  @param deleter Deleter use to destroy the instance. Default not to destroy the instance.
+			  @param owner Determine if the component own the instance or not. Handle memory management automaticaly if true.
 		*/
-		explicit Window(SDL_Window* refInstance, SDLComponentBase::DeleterType deleter = &Window::notDeleteDeleter);
+		explicit Window(SDL_Window* refInstance, bool owner = false);
 		/** Create window from data.
 			  @param data window data.
 		*/
 		explicit Window(const void* data);
-		Window(const Window& other);
-		Window(Window&& other);
-		~Window();
 
 		/** Get the border size of the window.
 			  @param top Output of top position.
@@ -127,9 +124,19 @@ namespace vas::sdl
 		*/
 		bool updateSurfaceRects(const std::vector<SDL_Rect>& rects);
 
-		Window& operator=(const Window& other);
-		Window& operator=(Window&& other);
-		Window& operator=(std::nullptr_t);
+		bool isNull();
+		/** @name Overloaded operators
+			  @{
+		*/
+		bool operator==(const Window& other); /**< Compare if two instances are equal. */
+		bool operator!=(const Window& other); /**< Compare if two instances are not equal. */
+		bool operator==(NullComponent_t); /**< Compare if this instance is equal to nullcomponent. */
+		bool operator!=(NullComponent_t); /**< Compare if this instance is not equal to nullcomponent. */
+
+		Window& operator=(NullComponent_t); /**< Destroy by set to null. */
+		explicit operator SDL_Window*();
+		/** @} */
+		void destroy(); /**< Destroy window */
 		
 		static SDL_Window* getGrabbedWindow(); /**< Get the grabbed window.
 																						   @retval SDL_Window Raw SDL_Window instance of grabbed window. */
@@ -175,6 +182,6 @@ namespace vas::sdl
 			static const uint32_t popup_menu; /**< window should be treated as a popup menu */
 		};
 
-		static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Window);
+		std::shared_ptr<SDL_Window> componentInstance;
 	};
 }

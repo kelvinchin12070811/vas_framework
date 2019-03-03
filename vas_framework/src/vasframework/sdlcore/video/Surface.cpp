@@ -11,30 +11,21 @@ namespace vas::sdl
 	{
 	}
 
-	Surface::Surface(SDL_Surface * refInstance, SDLComponentBase::DeleterType deleter) :
-		SDLComponentBase(refInstance, deleter)
+	Surface::Surface(SDL_Surface * refInstance, bool owner)
 	{
+		if (owner) componentInstance = std::shared_ptr<SDL_Surface>{ refInstance, &SDL_FreeSurface };
+		else componentInstance = std::shared_ptr<SDL_Surface>{ refInstance, [](SDL_Surface* i) { return; } };
 	}
 
 	Surface::Surface(uint32_t flags, const Point & size, int depth, uint32_t rMask, uint32_t gMask, uint32_t bMask, uint32_t aMask) :
-		SDLComponentBase(SDL_CreateRGBSurface(flags, size.x, size.y, depth, rMask, gMask, bMask, aMask), &defDeleter)
+		componentInstance(std::shared_ptr<SDL_Surface>{ SDL_CreateRGBSurface(flags, size.x, size.y, depth, rMask, gMask, bMask, aMask), &SDL_FreeSurface })
 	{
 	}
-
-	/*Surface::Surface(uint32_t flags, const Point & size, int depth, uint32_t format) :
-		SDLComponentBase(SDL_CreateRGBSurfaceWithFormat(flags, size.x, size.y, depth, format), &defDeleter)
-	{
-	}*/
 
 	Surface::Surface(void * pixels, const Point & size, int depth, int pitch, uint32_t rMask, uint32_t gMask, uint32_t bMask, uint32_t aMask):
-		SDLComponentBase(SDL_CreateRGBSurfaceFrom(pixels, size.x, size.y, depth, pitch, rMask, gMask, bMask, aMask), &defDeleter)
+		componentInstance(std::shared_ptr<SDL_Surface>{ SDL_CreateRGBSurfaceFrom(pixels, size.x, size.y, depth, pitch, rMask, gMask, bMask, aMask), &SDL_FreeSurface })
 	{
 	}
-
-	/*Surface::Surface(void * pixels, const Point & size, int depth, int pitch, uint32_t format):
-		SDLComponentBase(SDL_CreateRGBSurfaceWithFormatFrom(pixels, size.x, size.y, depth, pitch, format), &defDeleter)
-	{
-	}*/
 
 	bool Surface::lock()
 	{
@@ -48,22 +39,22 @@ namespace vas::sdl
 
 	void Surface::loadBMPRw(sdl::rwops::RWops * src, bool freeSrc)
 	{
-		this->componentInstance = createRawComponent<SDL_Surface>(SDL_LoadBMP_RW(src, (freeSrc ? 1 : 0)), &defDeleter);
+		this->componentInstance = std::shared_ptr<SDL_Surface>{ SDL_LoadBMP_RW(src, (freeSrc ? 1 : 0)), &SDL_FreeSurface };
 	}
 
 	void Surface::loadImage(const std::string & file)
 	{
-		this->componentInstance = createRawComponent<SDL_Surface>(IMG_Load(file.c_str()), &defDeleter);
+		this->componentInstance = std::shared_ptr<SDL_Surface>{ IMG_Load(file.c_str()), &SDL_FreeSurface };
 	}
 
 	void Surface::loadImageRaw(sdl::rwops::RWops * src, bool freeSrc)
 	{
-		this->componentInstance = createRawComponent<SDL_Surface>(IMG_Load_RW(src, (freeSrc ? 1 : 0)), &defDeleter);
+		this->componentInstance = std::shared_ptr<SDL_Surface>{ IMG_Load_RW(src, (freeSrc ? 1 : 0)), &SDL_FreeSurface };
 	}
 
 	void Surface::loadIMGTypedRW(sdl::rwops::RWops * src, const std::string & type, bool freeSrc)
 	{
-		this->componentInstance = createRawComponent<SDL_Surface>(IMG_LoadTyped_RW(src, (freeSrc ? 1 : 0), type.c_str()), &defDeleter);
+		this->componentInstance = std::shared_ptr<SDL_Surface>{ IMG_LoadTyped_RW(src, (freeSrc ? 1 : 0), type.c_str()), &SDL_FreeSurface };
 	}
 
 	bool Surface::saveBMP(const std::string& file)
@@ -101,40 +92,44 @@ namespace vas::sdl
 		SDL_UnlockSurface(&*this->componentInstance);
 	}
 
-	Surface::Surface(const Surface & other):
-		SDLComponentBase(other)
+	bool Surface::operator==(const Surface & rhs)
 	{
+		return componentInstance == rhs.componentInstance;
+	}
+	
+	bool Surface::operator!=(const Surface & rhs)
+	{
+		return !operator==(rhs);
+	}
+	
+	bool Surface::operator==(NullComponent_t)
+	{
+		return isNull();
+	}
+	
+	bool Surface::operator!=(NullComponent_t)
+	{
+		return !operator==(nullcomponent);
 	}
 
-	Surface::Surface(Surface && other):
-		SDLComponentBase(std::move(other.componentInstance))
+	Surface & Surface::operator=(NullComponent_t)
 	{
-	}
-
-	Surface::~Surface()
-	{
-	}
-
-	Surface Surface::operator=(const Surface & rhs)
-	{
-		this->componentInstance = rhs.componentInstance;
+		destroy();
 		return *this;
 	}
 
-	Surface Surface::operator=(Surface && other)
+	Surface::operator SDL_Surface*()
 	{
-		this->componentInstance = std::move(other.componentInstance);
-		return *this;
+		return componentInstance.get();
 	}
 
-	Surface & Surface::operator=(std::nullptr_t)
+	void Surface::destroy()
 	{
-		this->componentInstance = nullptr;
-		return *this;
+		componentInstance = nullptr;
 	}
 
-	void Surface::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Surface)
+	bool Surface::isNull()
 	{
-		SDL_FreeSurface(instance);
+		return componentInstance == nullptr;
 	}
 }

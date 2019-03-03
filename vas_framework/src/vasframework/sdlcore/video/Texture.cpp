@@ -11,32 +11,19 @@ namespace vas::sdl
 	{
 	}
 	Texture::Texture(Renderer & renderer, uint32_t format, int access, const Point & size):
-		SDLComponentBase(SDL_CreateTexture(static_cast<SDL_Renderer*>(renderer), format, access, size.x, size.y), &defDeleter)
+		componentInstance(std::shared_ptr<SDL_Texture>{ SDL_CreateTexture(static_cast<SDL_Renderer*>(renderer), format, access, size.x, size.y), &SDL_DestroyTexture })
 	{
 	}
 
 	Texture::Texture(Renderer & renderer, Surface surface):
-		SDLComponentBase(SDL_CreateTextureFromSurface(static_cast<SDL_Renderer*>(renderer), static_cast<SDL_Surface*>(surface)), &defDeleter)
+		componentInstance(std::shared_ptr<SDL_Texture>{ SDL_CreateTextureFromSurface(static_cast<SDL_Renderer*>(renderer), static_cast<SDL_Surface*>(surface)), &SDL_DestroyTexture })
 	{
 	}
 
-	Texture::Texture(const Texture & other):
-		SDLComponentBase(other)
+	Texture::Texture(SDL_Texture * other, bool owner)
 	{
-	}
-
-	Texture::Texture(Texture && other):
-		SDLComponentBase(std::move(other))
-	{
-	}
-
-	Texture::Texture(SDL_Texture * other, SDLComponentBase::DeleterType deleter):
-		SDLComponentBase(other, deleter)
-	{
-	}
-
-	Texture::~Texture()
-	{
+		if (owner) componentInstance = std::shared_ptr<SDL_Texture>{ other, &SDL_DestroyTexture };
+		else componentInstance = std::shared_ptr<SDL_Texture>{ other, [](SDL_Texture* i) { return; } };
 	}
 
 	bool Texture::getAlphaMod(uint8_t * alpha)
@@ -56,17 +43,17 @@ namespace vas::sdl
 
 	void Texture::loadImage(Renderer & renderer, const std::string & file)
 	{
-		this->componentInstance = createRawComponent<SDL_Texture>(IMG_LoadTexture(static_cast<SDL_Renderer*>(renderer), file.c_str()), &defDeleter);
+		this->componentInstance = std::shared_ptr<SDL_Texture>{ IMG_LoadTexture(static_cast<SDL_Renderer*>(renderer), file.c_str()), &SDL_DestroyTexture };
 	}
 
 	void Texture::loadImageRaw(Renderer & renderer, rwops::RWops * src, bool freeSrc)
 	{
-		this->componentInstance = createRawComponent<SDL_Texture>(IMG_LoadTexture_RW(static_cast<SDL_Renderer*>(renderer), src, freeSrc ? 1 : 0), &defDeleter);
+		this->componentInstance = std::shared_ptr<SDL_Texture>{ IMG_LoadTexture_RW(static_cast<SDL_Renderer*>(renderer), src, freeSrc ? 1 : 0), &SDL_DestroyTexture };
 	}
 
 	void Texture::loadImageTypedRaw(Renderer & renderer, rwops::RWops * src, const std::string & type, bool freeSrc)
 	{
-		this->componentInstance = createRawComponent<SDL_Texture>(IMG_LoadTextureTyped_RW(static_cast<SDL_Renderer*>(renderer), src, freeSrc ? 1 : 0, type.c_str()), &defDeleter);
+		this->componentInstance = std::shared_ptr<SDL_Texture>{ IMG_LoadTextureTyped_RW(static_cast<SDL_Renderer*>(renderer), src, freeSrc ? 1 : 0, type.c_str()), &SDL_DestroyTexture };
 	}
 
 	bool Texture::lockTexture(const Rect & rect, void ** pixels, int * pitch)
@@ -116,27 +103,45 @@ namespace vas::sdl
 	{
 		return SDL_QueryTexture(&*this->componentInstance, format, access, w, h) == 0 ? true : false;
 	}
-
-	Texture & Texture::operator=(const Texture & other)
+	
+	void Texture::destroy()
 	{
-		this->componentInstance = other.componentInstance;
-		return *this;
+		componentInstance = nullptr;
 	}
 
-	Texture& Texture::operator=(Texture && other)
+	bool Texture::isNull()
 	{
-		this->componentInstance = std::move(other.componentInstance);
-		return *this;
+		return componentInstance == nullptr;
 	}
 
-	Texture & Texture::operator=(std::nullptr_t)
+	Texture::operator SDL_Texture*()
 	{
-		this->componentInstance = nullptr;
-		return *this;
+		return componentInstance.get();
 	}
-
-	void Texture::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Texture)
+	
+	bool Texture::operator==(const Texture & rhs)
 	{
-		SDL_DestroyTexture(instance);
+		return componentInstance == rhs.componentInstance;
+	}
+	
+	bool Texture::operator!=(const Texture & rhs)
+	{
+		return !operator==(rhs);
+	}
+	
+	bool Texture::operator==(NullComponent_t)
+	{
+		return isNull();
+	}
+	
+	bool Texture::operator!=(NullComponent_t)
+	{
+		return !operator==(nullcomponent);
+	}
+	
+	Texture & Texture::operator=(NullComponent_t)
+	{
+		destroy();
+		return *this;
 	}
 }

@@ -17,12 +17,15 @@ namespace vas::sdl
 		  @{
 	*/
 	/** @brief A collection of pixels used in software blitting. */
-	class VAS_DECLSPEC Surface : public SDLComponentBase<SDL_Surface, Surface>
+	class VAS_DECLSPEC Surface
 	{ /** @} */
 	public:
 		Surface(); /**< Create empty surface. */
-		/** Refrence to a SDL_Surface. */
-		explicit Surface(SDL_Surface* refInstance, SDLComponentBase::DeleterType deleter = &Surface::notDeleteDeleter);
+		/** Refrence to a SDL_Surface.
+			  @param refInstance Instance to raw component.
+			  @param owner Determine if object own the instance. Handle memory management if true.
+		*/
+		explicit Surface(SDL_Surface* refInstance, bool owner = false);
 		/** Create new surface with raw rgba mask. */
 		Surface(uint32_t flags, const Point& size, int depth, uint32_t rMask, uint32_t gMask, uint32_t bMask, uint32_t aMask);
 		//Surface(uint32_t flags, const Point& size, int depth, uint32_t format);
@@ -55,14 +58,20 @@ namespace vas::sdl
 
 		void unlock(); /**< unlock surface. */
 
-		Surface(const Surface& other);
-		Surface(Surface&& other);
-		~Surface();
+		/** @name Overloaded operators
+			  @{
+		*/
+		bool operator==(const Surface& rhs); /**< Compare if two instances are equal. */
+		bool operator!=(const Surface& rhs); /**< Compare if two instances are not equal. */
+		bool operator==(NullComponent_t); /**< Compare if this instance is equal to nullcomponent. */
+		bool operator!=(NullComponent_t); /**< Compare if this instance is not nullcomponent. */
 
-		Surface operator=(const Surface& rhs);
-		Surface operator=(Surface&& other);
-		Surface& operator=(std::nullptr_t);
+		Surface& operator=(NullComponent_t); /**< Destroy this instance by assigning it to nullcomponent. */
+		explicit operator SDL_Surface*(); /**< Cast instance back to SDL_Surface* */
+		/** @} */
+		void destroy(); /**< Destroy instance. */
+		bool isNull(); /**< Check if null. */
 
-		static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Surface);
+		std::shared_ptr<SDL_Surface> componentInstance;
 	};
 }

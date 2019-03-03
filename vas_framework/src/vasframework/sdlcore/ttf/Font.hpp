@@ -23,15 +23,15 @@ namespace vas::sdl
 			  @{
 		*/
 		/** @brief The internal structure containing font information. */
-		class VAS_DECLSPEC Font : public SDLComponentBase<TTF_Font, Font>
+		class VAS_DECLSPEC Font
 		{ /** @} */
 		public:
 			Font(); /**< Create empty font. */
-			Font(const Font& rhs);
-			Font(Font&& rhs);
-			/** Reference from TTF_Font. */
-			explicit Font(TTF_Font* instance, SDLComponentBase::DeleterType deleter = &notDeleteDeleter);
-			~Font();
+			/** Reference from TTF_Font.
+				  @param instance Instance of raw component.
+				  @param owner Determine if the instance has the ownership of @p instance.
+			*/
+			explicit Font(TTF_Font* instance, bool owner = false);
 
 			/** Load font from file.
 				  @param file File name of file to load.
@@ -126,11 +126,21 @@ namespace vas::sdl
 			*/
 			Surface renderGlyphBlended(uint16_t ch, const Colour& foreground);
 
-			Font& operator=(const Font& rhs);
-			Font& operator=(Font&& rhs);
-			Font& operator=(std::nullptr_t);
+			void destroy(); /**< Destroy instance. */
+			bool isNull(); /**< Determine if this instance is nullcomponent. */
+			/** @name Overloaded operators
+				  @{
+			*/
+			explicit operator TTF_Font*(); /**< Cast to raw instance. */
+			Font& operator=(NullComponent_t); /**< Destroy instance by assigning it to nullcomponent. */
 
-			static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(TTF_Font);
+			bool operator==(const Font& rhs); /**< Compare if two instance are equal. */
+			bool operator!=(const Font& rhs); /**< Compare if two instance are not equal. */
+			bool operator==(NullComponent_t); /**< Compare if equal to nullcomponent. */
+			bool operator!=(NullComponent_t); /**< Compare if not equal to nullcomponent. */
+			/** @} */
+		private:
+			std::shared_ptr<TTF_Font> componentInstance;
 		};
 	}
 }

@@ -8,7 +8,7 @@
 #include <boost/container/vector.hpp>
 #include <functional>
 #include <memory>
-#include <optional>
+#include <boost/optional.hpp>
 #include <string>
 #include "../DrawAble.hpp"
 #include "../../VASConfig.hpp"
@@ -129,7 +129,7 @@ namespace vas
 		/** Get the index of the object with an instance of it.
 			  @param instance Instance of object to search.
 		*/
-		std::optional<size_t> indexOf(DrawAble* instance);
+		boost::optional<size_t> indexOf(DrawAble* instance);
 
 		static void setAutoGC(bool value);
 		static void setMinLayerCount(size_t value);

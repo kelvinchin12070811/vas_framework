@@ -178,14 +178,14 @@ namespace vas
 		else return *result;
 	}
 
-	std::optional<size_t> Layer::indexOf(DrawAble * instance)
+	boost::optional<size_t> Layer::indexOf(DrawAble * instance)
 	{
 		auto result = std::find_if(layerData.begin(), layerData.end(), [&](decltype(layerData)::reference itr) {
 			return itr.instance.get() == instance;
 		});
-		if (result == layerData.end()) return std::nullopt;
+		if (result == layerData.end()) return {};
 		
-		return { std::distance(layerData.begin(), result) };
+		return std::distance(layerData.begin(), result);
 	}
 
 	void Layer::setAutoGC(bool value)

@@ -25,33 +25,20 @@ namespace vas::sdl
 			load(file);
 		}
 
-		Chunk::Chunk(const Chunk & rhs) :
-			SDLComponentBase(rhs.componentInstance), channel(rhs.channel)
+		Chunk::Chunk(Mix_Chunk * instance, bool owner)
 		{
-		}
-
-		Chunk::Chunk(Chunk && rhs) :
-			SDLComponentBase(std::move(rhs.componentInstance)), channel(rhs.channel)
-		{
-		}
-
-		Chunk::Chunk(Mix_Chunk * instance, SDLComponentBase::DeleterType deleter) :
-			SDLComponentBase(instance, deleter)
-		{
-		}
-
-		Chunk::~Chunk()
-		{
+			if (owner) componentInstance = std::shared_ptr<Mix_Chunk>{ instance, &Mix_FreeChunk };
+			else componentInstance = std::shared_ptr<Mix_Chunk>{ instance, [](Mix_Chunk* i) { return; } };
 		}
 
 		void Chunk::load(const std::string & file)
 		{
-			this->componentInstance = createRawComponent<Mix_Chunk>(Mix_LoadWAV(file.c_str()), &defDeleter);
+			this->componentInstance = std::shared_ptr<Mix_Chunk>{ Mix_LoadWAV(file.c_str()), &Mix_FreeChunk };
 		}
 
 		void Chunk::loadRaw(rwops::RWops * src, bool freeSrc)
 		{
-			this->componentInstance = createRawComponent<Mix_Chunk>(Mix_LoadWAV_RW(src, freeSrc ? 1 : 0), &defDeleter);
+			this->componentInstance = std::shared_ptr<Mix_Chunk>{ Mix_LoadWAV_RW(src, freeSrc ? 1 : 0), &Mix_FreeChunk };
 		}
 
 		void Chunk::setChannel(int channel)
@@ -123,17 +110,27 @@ namespace vas::sdl
 
 		void Chunk::quickLoadWAV(uint8_t * mem)
 		{
-			this->componentInstance = createRawComponent<Mix_Chunk>(Mix_QuickLoad_WAV(mem), &defDeleter);
+			this->componentInstance = std::shared_ptr<Mix_Chunk>{ Mix_QuickLoad_WAV(mem), &Mix_FreeChunk };
 		}
 
 		void Chunk::quickLoadRaw(uint8_t * mem, uint32_t length)
 		{
-			this->componentInstance = createRawComponent<Mix_Chunk>(Mix_QuickLoad_RAW(mem, length), &defDeleter);
+			this->componentInstance = std::shared_ptr<Mix_Chunk>{ Mix_QuickLoad_RAW(mem, length), &Mix_FreeChunk };
 		}
 
 		int Chunk::volume(int volumeLevel)
 		{
 			return Mix_VolumeChunk(&*this->componentInstance, volumeLevel);
+		}
+
+		void Chunk::destroy()
+		{
+			componentInstance = nullptr;
+		}
+
+		bool Chunk::isNull()
+		{
+			return componentInstance == nullptr;
 		}
 
 		void Chunk::fadeOut(int channel, int duration)
@@ -186,30 +183,35 @@ namespace vas::sdl
 			return static_cast<Chunk>(Mix_GetChunk(channel));
 		}
 
-		Chunk & Chunk::operator=(const Chunk & rhs)
+		Chunk::operator Mix_Chunk*()
 		{
-			this->componentInstance = rhs.componentInstance;
-			this->channel = rhs.channel;
+			return componentInstance.get();
+		}
+		
+		Chunk & Chunk::operator=(NullComponent_t)
+		{
+			componentInstance = nullptr;
 			return *this;
 		}
-
-		Chunk & Chunk::operator=(Chunk && rhs)
+		
+		bool Chunk::operator==(const Chunk & rhs)
 		{
-			this->componentInstance = std::move(rhs.componentInstance);
-			this->channel = rhs.channel;
-			return *this;
+			return componentInstance == rhs.componentInstance;
 		}
-
-		Chunk & Chunk::operator=(std::nullptr_t)
+		
+		bool Chunk::operator!=(const Chunk & rhs)
 		{
-			this->componentInstance = nullptr;
-			this->channel = -1;
-			return *this;
+			return !operator==(rhs);
 		}
-
-		void Chunk::VAS_PROTOTYPE_DEFINE_DEF_DELETER(Mix_Chunk)
+		
+		bool Chunk::operator==(NullComponent_t)
 		{
-			Mix_FreeChunk(instance);
+			return isNull();
+		}
+		
+		bool Chunk::operator!=(NullComponent_t)
+		{
+			return !operator==(nullcomponent);
 		}
 	}
 }

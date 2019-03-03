@@ -67,11 +67,11 @@ namespace vas
 	void Base::startGameLoop()
 	{
 		using namespace std::chrono_literals;
-		if (!window)
+		if (window == sdl::nullcomponent)
 			throw std::runtime_error{ "Unable to start game loop scene window instance is nullptr" };
 		window.show();
 
-		if (!renderer)
+		if (renderer == sdl::nullcomponent)
 			throw std::runtime_error{ "Unable to start game loop scene renderer instance is nullptr" };
 		{
 			auto canvasSize = renderer.getLogicalSize();
@@ -221,12 +221,12 @@ namespace vas
 		args = std::move(arg1);
 	}
 
-	std::optional<std::reference_wrapper<const std::vector<std::string>>> Base::getArgs()
+	boost::optional<std::reference_wrapper<const std::vector<std::string>>> Base::getArgs()
 	{
 #ifdef VAS_USE_OOENTRY
-		return { args };
+		return args;
 #else
-		return std::nullopt;
+		return boost::none;
 #endif
 	}
 

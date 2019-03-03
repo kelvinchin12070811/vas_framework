@@ -20,16 +20,17 @@ namespace vas::sdl
 			  @{
 		*/
 		/** @brief The internal format for a music chunk. */
-		class VAS_DECLSPEC Music : public SDLComponentBase<Mix_Music, Music>
+		class VAS_DECLSPEC Music
 		{ /** @} */
 		public:
 			Music(); /**< Create empty Music. */
 			Music(const std::string& file); /**< Load Music from file. */
-			Music(const Music& other);
-			Music(Music&& other);
 
-			explicit Music(Mix_Music* other); /**< Reference to a Mix_Music. */
-			~Music();
+			/** Reference to a Mix_Music.
+				  @param other Instance of raw component.
+				  @param owner Determine if this instance is an owner of @p other.
+			*/
+			explicit Music(Mix_Music* other, bool owner = false);
 
 			MusicType getMusicType(); /**< Get the music format of the music. */
 
@@ -65,11 +66,22 @@ namespace vas::sdl
 			*/
 			static int volume(int volume);
 
-			Music& operator=(const Music& rhs);
-			Music& operator=(Music&& rhs);
-			Music& operator=(std::nullptr_t);
+			void destroy(); /**< Destroy instance. */
+			bool isNull(); /**< Determine if instance is nullcomponent. */
 
-			static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(Mix_Music);
+			/** @name Overloaded operators
+				  @{
+			*/
+			operator Mix_Music*(); /**< Cast to raw component. */
+			Music& operator=(NullComponent_t); /**< Destroy instance by assigning it to nullcomponent. */
+
+			bool operator==(const Music& rhs); /**< Compare if two instances are equal. */
+			bool operator==(NullComponent_t); /**< Determine if instance is nullcomponent. */
+			bool operator!=(const Music& rhs); /**< Compare if two instances are not equal. */
+			bool operator!=(NullComponent_t); /**< Determine if instance is not nullcomponent. */
+			/** @} */
+		private:
+			std::shared_ptr<Mix_Music> componentInstance;
 		};
 	}
 }

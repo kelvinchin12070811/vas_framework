@@ -18,18 +18,18 @@ namespace vas::sdl
 		  @{
 	*/
 	/** @brief An efficient driver-specific representation of pixel data. */
-	class VAS_DECLSPEC Texture : public SDLComponentBase<SDL_Texture, Texture>
+	class VAS_DECLSPEC Texture
 	{ /** @} */
 	public:
 		Texture(); /**< Create empty instance of texutre. */
 		/**< Create new instance of texture. */
 		Texture(Renderer& renderer, uint32_t format, int access, const Point& size);
 		Texture(Renderer& renderer, Surface surface); /**< Create texture from surface. */
-		Texture(const Texture& other);
-		Texture(Texture&& other);
-		/** Reference to a SDL_Texture. */
-		explicit Texture(SDL_Texture* other, SDLComponentBase::DeleterType deleter = &Texture::notDeleteDeleter);
-		~Texture();
+		/** Reference to a SDL_Texture.
+			  @param other Raw instance of texture component.
+			  @param owner Determine if instance is an owner of @p other.
+		*/
+		explicit Texture(SDL_Texture* other, bool owner = false);
 
 		bool getAlphaMod(uint8_t* alpha); /**< Get alpha mod fo texture, or the opacity. @return true if success. */
 		bool getBlendMod(BlendMode* mode); /**< Get blend mode of the texture. @return true if success. */
@@ -72,11 +72,20 @@ namespace vas::sdl
 			  @return ture if success.
 		*/
 		bool queryTexture(uint32_t* format, int* access, int* w, int* h);
+		void destroy(); /**< Destroy instance. */
+		bool isNull(); /**< Check if this instance is null. */
+		/** @name Overloaded operators
+			  @{
+		*/
+		explicit operator SDL_Texture*(); /**< Get raw component. */
+		bool operator==(const Texture& rhs); /**< Determine if two instance are equal. */
+		bool operator!=(const Texture& rhs); /**< Determine if two instance are not equal. */
+		bool operator==(NullComponent_t); /**< Determine if this instance is null. */
+		bool operator!=(NullComponent_t); /**< Determine if this instance is not null. */
 
-		Texture& operator=(const Texture& other);
-		Texture& operator=(Texture&& other);
-		Texture& operator=(std::nullptr_t);
-
-		static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Texture);
+		Texture& operator=(NullComponent_t); /** Destroy instance by assigning it to nullcomponent. */
+		/** @} */
+	private:
+		std::shared_ptr<SDL_Texture> componentInstance;
 	};
 }

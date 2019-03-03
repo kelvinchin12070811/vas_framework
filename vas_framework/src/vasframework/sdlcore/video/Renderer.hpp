@@ -24,7 +24,7 @@ namespace vas::sdl
 		  @{
 	*/
 	/** @brief The brush that draw every things to the Window. */
-	class VAS_DECLSPEC Renderer : public SDLComponentBase<SDL_Renderer, Renderer>
+	class VAS_DECLSPEC Renderer
 	{ /** @} */
 	public:
 		static const int defIndex; /**<default index of renderer driver. */
@@ -58,14 +58,16 @@ namespace vas::sdl
 			  @param flags initialization flags of renderer, vas::sdl::Renderer::RendererFlags.
 		*/
 		Renderer(Window& window, int index, uint32_t flags);
-		/** Reference constructor of Renderer. */
-		Renderer(SDL_Surface* surface, SDLComponentBase::DeleterType deleter = &Renderer::notDeleteDeleter);
+		/** Create software renderer with raw component. */
+		Renderer(SDL_Surface* surface);
+		/** Create software renderer. */
 		Renderer(Surface& surface);
-		explicit Renderer(SDL_Renderer* renderer);
 
-		Renderer(const Renderer& other);
-		Renderer(Renderer&& other);
-		~Renderer();
+		/** Reference constructor of Renderer.
+			  @param renderer Raw component of renderer.
+			  @param owner Determine if instance has ownership of @p renderer.
+		*/
+		explicit Renderer(SDL_Renderer* renderer, bool owner = false);
 
 		/** Clear the renderer.
 			  @return true if success.
@@ -163,14 +165,24 @@ namespace vas::sdl
 
 		RendererInfo getRendererInfo(); /**< Get the renderer info by returning a RendererInfo. */
 
-		/*explicit operator const SDL_Renderer*() const;
-		explicit operator SDL_Renderer*();*/
-		Renderer& operator=(const Renderer& other);
-		Renderer& operator=(Renderer&& other);
-		Renderer& operator=(std::nullptr_t);
+		void destroy(); /**< Destroy instance. */
+		bool isNull(); /**< Determine is this instance is nullcomponent. */
+
+		/** @name Overloaded operators
+			  @{
+		*/
+		explicit operator SDL_Renderer*(); /**< Cast to raw component. */
+		Renderer& operator=(NullComponent_t); /**< Destroy instance by assigning it to nullcomponent. */
+
+		bool operator==(const Renderer& rhs); /**< Compare two instance if them equal. */
+		bool operator==(NullComponent_t); /**< Determine if this instance is nullcomponent. */
+		bool operator!=(const Renderer& rhs); /**< Compare two instance if them not equal. */
+		bool operator!=(NullComponent_t); /**< Determine if this instance is not nullcomponent. */
+		/** @} */
 
 		static SDL_Renderer* getRendererFromWindow(SDL_Window* window); /**< Get the renderer associated with a SDL_Window. */
 		static SDL_Renderer* getRendererFromWindow(Window& window); /**< Get the renderer associated with a sdl::Window. */
-		static void VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Renderer);
+	private:
+		std::shared_ptr<SDL_Renderer> componentInstance;
 	};
 }

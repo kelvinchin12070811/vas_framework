@@ -34,7 +34,7 @@ namespace vas::sdl
 	}
 
 	Window::Window(const std::string & title, const Point & position, const Point & size, uint32_t flags) :
-		SDLComponentBase(SDL_CreateWindow(title.c_str(), position.x, position.y, size.x, size.y, flags), &defDeleter)
+		componentInstance(std::shared_ptr<SDL_Window>{ SDL_CreateWindow(title.c_str(), position.x, position.y, size.x, size.y, flags), &SDL_DestroyWindow })
 	{
 	}
 
@@ -43,27 +43,14 @@ namespace vas::sdl
 	{
 	}
 
-	Window::Window(SDL_Window * refInstance, SDLComponentBase::DeleterType deleter):
-		SDLComponentBase(refInstance, deleter)
+	Window::Window(SDL_Window * refInstance, bool owner)
 	{
+		if (owner) componentInstance = std::shared_ptr<SDL_Window>{ refInstance, &SDL_DestroyWindow };
+		else componentInstance = std::shared_ptr<SDL_Window>{ refInstance, [](SDL_Window* i) { return; } };
 	}
 
 	Window::Window(const void * data):
-		SDLComponentBase(SDL_CreateWindowFrom(data), &defDeleter)
-	{
-	}
-
-	Window::Window(const Window & other):
-		SDLComponentBase(other)
-	{
-	}
-
-	Window::Window(Window && other):
-		SDLComponentBase(std::move(other))
-	{
-	}
-
-	Window::~Window()
+		componentInstance(std::shared_ptr<SDL_Window>{ SDL_CreateWindowFrom(data), &SDL_DestroyWindow })
 	{
 	}
 
@@ -207,7 +194,7 @@ namespace vas::sdl
 
 	void Window::setIcon(Surface & icon)
 	{
-		SDL_SetWindowIcon(&*this->componentInstance, static_cast<SDL_Surface*>(icon));
+		SDL_SetWindowIcon(componentInstance.get(), static_cast<SDL_Surface*>(icon));
 	}
 
 	bool Window::setInputFocus()
@@ -284,22 +271,45 @@ namespace vas::sdl
 		return SDL_UpdateWindowSurfaceRects(&*this->componentInstance, rects.data(), static_cast<int>(rects.size())) == 0 ? true : false;
 	}
 
-	Window& Window::operator=(const Window & other)
+	bool Window::isNull()
 	{
-		this->componentInstance = other.componentInstance;
+		return componentInstance == nullptr;
+	}
+
+	bool Window::operator==(const Window & other)
+	{
+		return other.componentInstance == this->componentInstance;
+	}
+
+	bool Window::operator!=(const Window & other)
+	{
+		return !operator==(other);
+	}
+
+	bool Window::operator==(NullComponent_t)
+	{
+		return isNull();
+	}
+
+	bool Window::operator!=(NullComponent_t)
+	{
+		return !operator==(nullcomponent);
+	}
+
+	Window & Window::operator=(NullComponent_t)
+	{
+		destroy();
 		return *this;
 	}
 
-	Window& Window::operator=(Window && other)
+	Window::operator SDL_Window*()
 	{
-		this->componentInstance = std::move(other.componentInstance);
-		return *this;
+		return componentInstance.get();
 	}
 
-	Window & Window::operator=(std::nullptr_t)
+	void Window::destroy()
 	{
 		this->componentInstance = nullptr;
-		return *this;
 	}
 
 	SDL_Window * Window::getGrabbedWindow()
@@ -315,10 +325,5 @@ namespace vas::sdl
 	bool Window::setWindowModalFor(SDL_Window * modalWindow, SDL_Window * parentWindow)
 	{
 		return SDL_SetWindowModalFor(modalWindow, parentWindow) == 0 ? true : false;
-	}
-
-	void Window::VAS_PROTOTYPE_DEFINE_DEF_DELETER(SDL_Window)
-	{
-		SDL_DestroyWindow(instance);
 	}
 }

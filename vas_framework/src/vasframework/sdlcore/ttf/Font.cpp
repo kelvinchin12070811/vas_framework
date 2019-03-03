@@ -14,43 +14,30 @@ namespace vas::sdl
 		{
 		}
 
-		Font::Font(const Font & rhs) :
-			SDLComponentBase(rhs.componentInstance)
+		Font::Font(TTF_Font * instance, bool owner)
 		{
-		}
-
-		Font::Font(Font && rhs) :
-			SDLComponentBase(std::move(rhs.componentInstance))
-		{
-		}
-
-		Font::Font(TTF_Font * instance, SDLComponentBase::DeleterType deleter) :
-			SDLComponentBase(instance, deleter)
-		{
-		}
-
-		Font::~Font()
-		{
+			if (owner) componentInstance = std::shared_ptr<TTF_Font>{ instance, &TTF_CloseFont };
+			else componentInstance = std::shared_ptr<TTF_Font>{ instance, [](TTF_Font* i) { return; } };
 		}
 
 		void Font::openFont(const std::string & file, int fontSize)
 		{
-			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFont(file.c_str(), fontSize), &Font::defDeleter);
+			this->componentInstance = std::shared_ptr<TTF_Font>{ TTF_OpenFont(file.c_str(), fontSize), &TTF_CloseFont };
 		}
 
 		void Font::openFont(const std::string & file, int fontSize, long index)
 		{
-			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFontIndex(file.c_str(), fontSize, index), &Font::defDeleter);
+			this->componentInstance = std::shared_ptr<TTF_Font>{ TTF_OpenFontIndex(file.c_str(), fontSize, index), &TTF_CloseFont };
 		}
 
 		void Font::openFontRaw(rwops::RWops * src, int fontSize, bool freeSrc)
 		{
-			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFontRW(src, freeSrc ? 1 : 0, fontSize), &Font::defDeleter);
+			this->componentInstance = std::shared_ptr<TTF_Font>{ TTF_OpenFontRW(src, freeSrc ? 1 : 0, fontSize), &TTF_CloseFont };
 		}
 
 		void Font::openFontRaw(rwops::RWops * src, int fontSize, long index, bool freeSrc)
 		{
-			this->componentInstance = sdl::createRawComponent<TTF_Font>(TTF_OpenFontIndexRW(src, freeSrc ? 1 : 0, fontSize, index), &Font::defDeleter);
+			this->componentInstance = std::shared_ptr<TTF_Font>{ TTF_OpenFontIndexRW(src, freeSrc ? 1 : 0, fontSize, index), &TTF_CloseFont };
 		}
 
 		FontStyle::FlagType Font::getFontStyle()
@@ -166,112 +153,130 @@ namespace vas::sdl
 
 		Surface Font::renderTextSolid(const std::string & text, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderText_Solid(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderText_Solid(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground)), true };
 		}
 
 		Surface Font::renderTextShaded(const std::string & text, const Colour & foreground, const Colour & background)
 		{
-			return createComponent<Surface>(TTF_RenderText_Shaded(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)));
+			return Surface{ TTF_RenderText_Shaded(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)), true };
 		}
 
 		Surface Font::renderTextBlended(const std::string & text, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderText_Blended(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderText_Blended(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground)), true };
 		}
 
 		Surface Font::renderTextBlended(const std::string & text, const Colour & foreground, uint32_t warpLength)
 		{
-			return createComponent<Surface>(TTF_RenderText_Blended_Wrapped(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground), warpLength));
+			return Surface{ TTF_RenderText_Blended_Wrapped(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground), warpLength), true };
 		}
 
 		Surface Font::renderUTF8Solid(const std::string & text, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderUTF8_Solid(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderUTF8_Solid(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground)), true };
 		}
 
 		Surface Font::renderUTF8Shaded(const std::string & text, const Colour & foreground, const Colour & background)
 		{
-			return createComponent<Surface>(TTF_RenderUTF8_Shaded(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)));
+			return Surface{ TTF_RenderUTF8_Shaded(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)), true };
 		}
 
 		Surface Font::renderUTF8Blended(const std::string & text, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderUTF8_Blended(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderUTF8_Blended(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground)), true };
 		}
 
 		Surface Font::renderUTF8Blended(const std::string & text, const Colour & foreground, uint32_t warpLength)
 		{
-			return createComponent<Surface>(TTF_RenderUTF8_Blended_Wrapped(&*this->componentInstance, text.c_str(),
-				static_cast<SDL_Colour>(foreground), warpLength));
+			return Surface{ TTF_RenderUTF8_Blended_Wrapped(&*this->componentInstance, text.c_str(),
+				static_cast<SDL_Colour>(foreground), warpLength), true };
 		}
 
 		Surface Font::renderUnicodeSolid(const std::wstring & text, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderUNICODE_Solid(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
-				static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderUNICODE_Solid(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
+				static_cast<SDL_Colour>(foreground)), true };
 		}
 
 		Surface Font::renderUnicodeShaded(const std::wstring & text, const Colour & foreground, const Colour & background)
 		{
-			return createComponent<Surface>(TTF_RenderUNICODE_Shaded(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
-				static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)));
+			return Surface{ TTF_RenderUNICODE_Shaded(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
+				static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)), true };
 		}
 
 		Surface Font::renderUnicodeBlended(const std::wstring & text, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderUNICODE_Blended(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
-				static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderUNICODE_Blended(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
+				static_cast<SDL_Colour>(foreground)), true };
 		}
 
 		Surface Font::renderUnicodeBlended(const std::wstring & text, const Colour & foreground, uint32_t warpLength)
 		{
-			return createComponent<Surface>(TTF_RenderUNICODE_Blended_Wrapped(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
-				static_cast<SDL_Colour>(foreground), warpLength));
+			return Surface{ TTF_RenderUNICODE_Blended_Wrapped(&*this->componentInstance, reinterpret_cast<const uint16_t*>(text.c_str()),
+				static_cast<SDL_Colour>(foreground), warpLength), true };
 		}
 
 		Surface Font::renderGlyphSolid(uint16_t ch, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderGlyph_Solid(&*this->componentInstance, ch, static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderGlyph_Solid(&*this->componentInstance, ch, static_cast<SDL_Colour>(foreground)), true };
 		}
 
 		Surface Font::renderGlyphShaded(uint16_t ch, const Colour & foreground, const Colour & background)
 		{
-			return createComponent<Surface>(TTF_RenderGlyph_Shaded(&*this->componentInstance, ch, static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)));
+			return Surface{ TTF_RenderGlyph_Shaded(&*this->componentInstance, ch, static_cast<SDL_Colour>(foreground), static_cast<SDL_Colour>(background)), true };
 		}
 
 		Surface Font::renderGlyphBlended(uint16_t ch, const Colour & foreground)
 		{
-			return createComponent<Surface>(TTF_RenderGlyph_Blended(&*this->componentInstance, ch, static_cast<SDL_Colour>(foreground)));
+			return Surface{ TTF_RenderGlyph_Blended(&*this->componentInstance, ch, static_cast<SDL_Colour>(foreground)), true };
 		}
-
-		Font & Font::operator=(const Font & rhs)
+		
+		void Font::destroy()
 		{
-			this->componentInstance = rhs.componentInstance;
+			componentInstance = nullptr;
+		}
+		
+		bool Font::isNull()
+		{
+			return componentInstance == nullptr;
+		}
+		
+		Font::operator TTF_Font*()
+		{
+			return componentInstance.get();
+		}
+		
+		Font & Font::operator=(NullComponent_t)
+		{
+			destroy();
 			return *this;
 		}
-
-		Font & Font::operator=(Font && rhs)
+		
+		bool Font::operator==(const Font & rhs)
 		{
-			this->componentInstance = std::move(rhs.componentInstance);
-			return *this;
+			return componentInstance == rhs.componentInstance;
 		}
-
-		Font & Font::operator=(std::nullptr_t)
+		
+		bool Font::operator!=(const Font & rhs)
 		{
-			this->componentInstance = nullptr;
-			return *this;
+			return !operator==(rhs);
 		}
-
-		void Font::VAS_PROTOTYPE_DEFINE_DEF_DELETER(TTF_Font)
+		
+		bool Font::operator==(NullComponent_t)
 		{
-			TTF_CloseFont(instance);
+			return isNull();
+		}
+		
+		bool Font::operator!=(NullComponent_t)
+		{
+			return !operator==(nullcomponent);
 		}
 	}
 }
