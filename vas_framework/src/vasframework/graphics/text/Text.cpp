@@ -49,8 +49,8 @@ namespace vas
 
 	void Text::reRenderEverything()
 	{
-		font.openFont(fontPath, fontSize);
-		reRender();
+		inited = false;
+		initText();
 	}
 
 	sdl::ttf::Font Text::getFont() const
