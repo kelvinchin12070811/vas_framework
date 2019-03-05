@@ -21,7 +21,7 @@ namespace vas
 
 		  Defined in: vasframework/graphics/animation/state/StateConditionalTransition.hpp
 	*/
-	template <typename T, typename Predicate = std::equal_to>
+	template <typename T, typename Predicate = std::equal_to<T>>
 	bool defValidator(const std::any& value, const T& compare)
 	{
 		if (!value.has_value())

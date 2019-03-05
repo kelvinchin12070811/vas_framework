@@ -59,9 +59,9 @@ namespace vas
 		return transitionsList.at(name);
 	}
 
-	boost::optional<std::map<std::string, State>::const_iterator> StateAnimator::currentAnimation() const
+	std::optional<std::map<std::string, State>::const_iterator> StateAnimator::currentAnimation() const
 	{
-		if (curAnim == state.end()) return boost::none;
+		if (curAnim == state.end()) return std::nullopt;
 		return curAnim;
 	}
 }

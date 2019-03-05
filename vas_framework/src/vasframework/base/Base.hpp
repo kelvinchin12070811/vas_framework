@@ -5,9 +5,8 @@
 //======================================================================
 #pragma once
 #include <array>
-//#include <boost/optional.hpp>
 #include <boost/signals2.hpp>
-#include <boost/optional.hpp>
+#include <optional>
 #include "../VASConfig.hpp"
 #include "../util/TextTools.hpp"
 #include "../sdlcore/SDLCore.hpp"
@@ -82,10 +81,10 @@ namespace vas
 		void fun20181130T171403(std::vector<std::string> arg1);
 
 		/** Get the command line arguments that passed by the operating system.
-			  @retval boost::optional Constant reference to the command line argument. Empty ```boost::optional```
+			  @retval std::optional Constant reference to the command line argument. Empty ```std::optional```
 			  if #VAS_SDL_ENTRY is defined.
 		*/
-		boost::optional<std::reference_wrapper<const std::vector<std::string>>> getArgs();
+		std::optional<std::reference_wrapper<const std::vector<std::string>>> getArgs();
 
 		/** Get currnet frame index.
 			  @return current frame index number which less than or equal to fps.

@@ -178,7 +178,7 @@ namespace vas
 		else return *result;
 	}
 
-	boost::optional<size_t> Layer::indexOf(DrawAble * instance)
+	std::optional<size_t> Layer::indexOf(DrawAble * instance)
 	{
 		auto result = std::find_if(layerData.begin(), layerData.end(), [&](decltype(layerData)::reference itr) {
 			return itr.instance.get() == instance;

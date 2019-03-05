@@ -221,12 +221,12 @@ namespace vas
 		args = std::move(arg1);
 	}
 
-	boost::optional<std::reference_wrapper<const std::vector<std::string>>> Base::getArgs()
+	std::optional<std::reference_wrapper<const std::vector<std::string>>> Base::getArgs()
 	{
 #ifdef VAS_USE_OOENTRY
 		return args;
 #else
-		return boost::none;
+		return std::nullopt;
 #endif
 	}
 

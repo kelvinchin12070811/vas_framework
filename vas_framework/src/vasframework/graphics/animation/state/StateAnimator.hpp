@@ -4,7 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
-#include <boost/optional.hpp>
+#include <optional>
 #include <map>
 #include "State.hpp"
 #include "StateConditionalTransition.hpp"
@@ -42,9 +42,9 @@ namespace vas
 		const StateConditionalTransition& getTransition(const std::string& name) const;
 
 		/** Get current running animation.
-			  @retval boost::optional Iterator to current state or empty if failed.
+			  @retval std::optional Iterator to current state or empty if failed.
 		*/
-		boost::optional<std::map<std::string, State>::const_iterator> currentAnimation() const;
+		std::optional<std::map<std::string, State>::const_iterator> currentAnimation() const;
 	private:
 		std::map<std::string, std::any> cdVarList; // Conditional vars list.
 		std::map<std::string, State> state; // States

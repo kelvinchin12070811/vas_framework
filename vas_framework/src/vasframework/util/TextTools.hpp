@@ -84,7 +84,7 @@ namespace vas
 		ReturnType value;
 #ifdef VAS_WINDOWS_MODE
 		initTextTools();
-		wcin >> value;
+		std::wcin >> value;
 #else
 		cin >> value;
 #endif // VAS_WINDOWS_MODE

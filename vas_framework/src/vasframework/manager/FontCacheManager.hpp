@@ -1,6 +1,6 @@
 #pragma once
 #include <map>
-#include <boost/optional.hpp>
+#include <optional>
 #include <string>
 #include "../sdlcore/ttf/TTFCore.hpp"
 #include "../VASConfig.hpp"
@@ -44,7 +44,7 @@ namespace vas
 			  @param size Size of the font.
 			  @return std::nullopt if font not cached.
 		*/
-		boost::optional<sdl::ttf::Font> getFont(const std::string& id, uint32_t size);
+		std::optional<sdl::ttf::Font> getFont(const std::string& id, uint32_t size);
 		/** Clear a specific font.
 			  @param id Id of the font.
 			  @param size size of the font.

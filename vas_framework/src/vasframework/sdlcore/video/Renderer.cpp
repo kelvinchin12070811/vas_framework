@@ -27,7 +27,7 @@ namespace vas::sdl
 	}
 
 	Renderer::Renderer(SDL_Surface * surface) :
-		componentInstance(SDL_CreateSoftwareRenderer(surface))
+		componentInstance(std::shared_ptr<SDL_Renderer>{ SDL_CreateSoftwareRenderer(surface), &SDL_DestroyRenderer })
 	{
 	}
 

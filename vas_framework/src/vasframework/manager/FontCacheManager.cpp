@@ -28,11 +28,10 @@ namespace vas
 		return fonts.insert({ { id, size }, std::move(font) }).second;
 	}
 
-	boost::optional<sdl::ttf::Font> FontCacheManager::getFont(const std::string & id, uint32_t size)
+	std::optional<sdl::ttf::Font> FontCacheManager::getFont(const std::string & id, uint32_t size)
 	{
 		auto result = fonts.find({ id, size });
-		if (result == fonts.end()) return boost::none;
-		
+		if (result == fonts.end()) return std::nullopt;
 		return result->second;
 	}
 
