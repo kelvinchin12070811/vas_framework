@@ -6,16 +6,6 @@
 #pragma once
 #include "../VASConfig.hpp"
 
-/** @addtogroup math
-	  @{
-*/
-#define ANGLE_FROM_FIRST_QUATER(x) (vas::Angle(x)) /**< Create Angle from first quater. */
-#define ANGLE_FROM_SECOND_QUATER(x) (vas::Angle(x + 90.0)) /**< Create Angle from second quater. */
-#define ANGLE_FROM_THIRD_QUATER(x) (vas::Angle(x + 180.0)) /**< Create Angle from third quater. */
-#define ANGLE_FROM_FOURTH_QUATER(x) (vas::Angle(x + 270.0)) /**< Create Angle from fourth quater. */
-
-/** @} */
-
 //TODO: Fix more calculation error in Angle
 namespace vas
 {
@@ -27,15 +17,8 @@ namespace vas
 		  The Angle class store the angle of a line from top with clockwise rotation. The quater of it shown like bellow.
 
 			           Fourth quater |    First quater
-			        ------------------|-------------------
+			       ------------------|-------------------
 			            Third quater  |  Second quater
-
-		  The creation of Angle can also done by using these macros:
-
-		   - #ANGLE_FROM_FIRST_QUATER
-		   - #ANGLE_FROM_SECOND_QUATER
-		   - #ANGLE_FROM_THIRD_QUATER
-		   - #ANGLE_FROM_FOURTH_QUATER
 	*/
 	class VAS_DECLSPEC Angle
 	{ /** @} */

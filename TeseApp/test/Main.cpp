@@ -13,7 +13,7 @@ int Main::main(const std::vector<std::string>& args)
 			auto textOverlay = std::make_shared<vas::StyledText>("VAS Framework v" + getEngineVersion(), "assets/fonts/caladea-regular.ttf", vas::zerovector, 24);
 			textOverlay->setStaticOnCamera(true);
 			textOverlay->setColour(vas::sdl::ColorPresets::white);
-			textOverlay->setBackgroundOffset(vas::Vector2{ 3.0f, ANGLE_FROM_SECOND_QUATER(45.0) });
+			textOverlay->setBackgroundOffset(vas::Vector2{ 3.0f, vas::Angle{ 45.0 + 90.0 } });
 			vas::ScreenManager::getInstance().screenAboveOverlays.insert({ textOverlay });
 			vas::SceneManager::getInstance().call("scene::TileMap");
 			vas::Base::getInstance().getRenderer().setLogicalSize(vas::sdl::Point{ 640, 480 });
