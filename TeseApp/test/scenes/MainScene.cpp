@@ -35,7 +35,7 @@ namespace scene
 		vas::Property test2{ "test2", 0xCC50 };
 		vas::Property test3(test2);
 		bool comResult{ test3.notEqual<int>(test2) };
-		vas::CommonTools::getInstance().messenger(boost::format{ "compare result: %s"s } % (comResult ? "true"s : "false"s));
+		vas::Log() << boost::format{ "compare result: %s"s } % (comResult ? "true"s : "false"s);
 		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
 
 		animation.insertAnimations({
@@ -108,13 +108,11 @@ namespace scene
 		}
 		animation.tick();
 		scene::AbstractFrameCountingScene::tick();
-		rootLayer.tick();
 	}
 
 	void MainScene::draw()
 	{
 		scene::AbstractFrameCountingScene::draw();
-		rootLayer.draw();
 		testSheet->drawTile(13, tilePos);
 	}
 
@@ -122,18 +120,21 @@ namespace scene
 	{
 		using namespace vas;
 		using namespace std::chrono_literals;
-		/*vas::Base::getInstance().EventBeginProcessed.connect(
-			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
-		);*/
 
-		conmng.emplace_back(vas::Base::getInstance().EventBeginProcessed.connect([this](auto _1) { this->eventSlot(_1); }));
-		conmng.emplace_back(sdl::mixer::Signals::ChannelFinished.connect([this](auto _1) { this->meFinishedPlaying(_1); }));
-		conmng.emplace_back(vas::ScreenManager::getInstance().FadeEnd.connect([this](auto _1) { this->on_fadeCompleate(_1); }));
-		conmng.emplace_back(vas::InputManager::getInstance().KeyPressed.connect([this](auto _1) {this->on_keyPressed(_1); }));
+		{
+			auto signals = {
+				vas::Base::getInstance().EventBeginProcessed.connect([this](auto _1) { this->eventSlot(_1); }),
+				sdl::mixer::Signals::ChannelFinished.connect([this](auto _1) { this->meFinishedPlaying(_1); }),
+				vas::ScreenManager::getInstance().FadeEnd.connect([this](auto _1) { this->on_fadeCompleate(_1); }),
+				vas::InputManager::getInstance().KeyPressed.connect([this](auto _1) {this->on_keyPressed(_1); })
+			};
+			conmng = decltype(conmng){ std::make_move_iterator(signals.begin()), std::make_move_iterator(signals.end()) };
+		}
 
-		testSprite = rootLayer.emplaceInsert<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector).second();
-		testSprite2 = rootLayer.emplaceInsert<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector).second();
-		textTest = rootLayer.emplaceInsert<vas::StyledText>("This is a test to font rendering function", "assets/fonts/caladea-regular.ttf", vas::zerovector, 24, sdl::ColourPresets::white).second();
+		testSprite = this->layer.emplaceInsert<vas::Sprite>("assets/textures/639111.jpg", vas::zerovector).second();
+		testSprite2 = this->layer.emplaceInsert<vas::Sprite>("assets/textures/grass_side.jpg", vas::zerovector).second();
+		textTest = this->layer.emplaceInsert<vas::StyledText>("This is a test to font rendering function",
+			"assets/fonts/caladea-regular.ttf", vas::zerovector, 24, sdl::ColourPresets::white).second();
 		
 		textTest->setStaticOnCamera(true);
 		textTest->setBackgroundOffset(vas::Vector2{ 3.0f, vas::Angle{ 45.0 + 90.0 } });
@@ -145,10 +146,6 @@ namespace scene
 
 	void MainScene::beforeTerminate()
 	{
-		/*using namespace vas::sdl;
-		vas::Base::getInstance().EventBeginProcessed.disconnect(
-			boost::bind(&MainScene::eventSlot, this, boost::placeholders::_1)
-		);*/
 	}
 
 	void MainScene::eventSlot(vas::sdl::Event & ev)
@@ -166,7 +163,6 @@ namespace scene
 				break;
 		case Keycode::escape:
 				vas::CommonTools::getInstance().messenger("Debug, close event triggered by escape");
-				//ev.pushEvent(sdl::EventType::quit);
 				vas::Base::getInstance().getEvent().pushEvent(EventType::quit);
 				break;
 		case Keycode::m:

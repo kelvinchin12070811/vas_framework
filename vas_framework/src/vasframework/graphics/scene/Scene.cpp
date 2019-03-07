@@ -9,10 +9,12 @@ namespace vas
 {
 	void Scene::tick()
 	{
+		layer.tick();
 	}
 
 	void Scene::draw()
 	{
+		layer.draw();
 	}
 
 	void Scene::beforeTerminate()

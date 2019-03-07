@@ -4,6 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
+#include "../layer/Layers.hpp"
 #include "../../sreflex/ReflectAbleAutoRegistrar.hpp"
 #include "../../VASConfig.hpp"
 
@@ -39,5 +40,8 @@ namespace vas
 		/** Call to current scene when current scene is loaded */
 		virtual void afterSceneCall();
 		/** @} */
+
+	protected:
+		Layer layer; /**< master layer of DrawAble objects. */
 	};
 }

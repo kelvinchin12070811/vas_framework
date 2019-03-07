@@ -72,8 +72,7 @@ namespace vas
 		template <class GenericDrawAbleObj, class... Args>
 		std::pair<LayerData&, std::function<std::shared_ptr<GenericDrawAbleObj>()>> emplaceInsert(Args&&... args)
 		{
-			auto ptr = new GenericDrawAbleObj(std::forward<Args>(args)...);
-			auto& result = this->insert({ std::shared_ptr<DrawAble>(static_cast<DrawAble*>(ptr)) });
+			auto& result = this->insert({ std::make_shared<GenericDrawAbleObj>(std::forward<Args>(args)...) });
 			return { result, [&]() { return std::static_pointer_cast<GenericDrawAbleObj>(result.instance); } };
 		}
 		

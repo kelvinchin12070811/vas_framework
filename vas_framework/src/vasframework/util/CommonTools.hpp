@@ -57,7 +57,9 @@ namespace vas
 		};
 		static CommonTools& getInstance(); /**< Get the singletone instance of the CommonTools. */
 
-		bool hasConsole{ false };
+		bool hasConsole{ false }; /**< Determine if the application has console attatched to it or not. No console output
+								  will perform if false.
+								  @note This attribute will not toggle by it self, it must be toggle manually if console is allocated.*/
 
 		/** Output message to console, promp user if the condition is true.
 			  @param message Message to output.
@@ -96,9 +98,12 @@ namespace vas
 		);
 
 		void setConsolePrefix(const std::string& value);
-		std::string getConsolePrefix();
+		void setConsolePrefix(std::function<std::string()> value);
+		std::function<std::string()> getConsolePrefix();
 
 		std::function<void(const std::string&, CommonTools::MessageType, int)>& Loggingfunction();
+
+		void setConsoleOutputFormat(std::function<std::string(std::function<std::string()>&, const std::string&, const std::string&)> value);
 
 		void setMessTypeStr(std::array<std::string, 4> value);
 #ifdef VAS_WINDOWS_MODE
@@ -110,20 +115,31 @@ namespace vas
 		CommonTools();
 		~CommonTools();
 
-		/** [Read & Write] Prefix of the console output. Timestamp will be outputed if empty.
+		/** [Read & Write] Prefix of the console output. Timestamp will be outputed by default.
 
 			- __mutators__
 				-# void setConsolePrefix(const std::string& value)
+				-# void setConsolePrefix(std::function<std::string()> value)
 			- __accessors__
-				-# std::string getConsolePrefix()
+				-# std::function<std::string()> getConsolePrefix()
 		*/
-		std::string consolePrefix = "";
+		std::function<std::string()> consolePrefix;
 		/** [Read & Write] Logger function of messenger. use to handle additional task.
 			
 			- __mutaors & accessors__
 				-# std::function<void(const std::string&, CommonTools::MessageType, int)>& Loggingfunction()
 		*/
 		std::function<void(const std::string&, CommonTools::MessageType, int)> loggingFunction = nullptr;
+		/** [Write Only] Controll the format of the console output.
+			  The args are passed as following:
+			  -# console prefix
+			  -# message type
+			  -# message text
+
+			  - __mutators__
+				-# void setConsoleOutputFormat(std::function<std::string(std::function<std::string()>&, const std::string&, const std::string&)> value)
+		*/
+		std::function<std::string(std::function<std::string()>&, const std::string&, const std::string&)> outputFormat;
 		/** [Write Only] Stringnified message type name.
 			  
 			  - __mutators__

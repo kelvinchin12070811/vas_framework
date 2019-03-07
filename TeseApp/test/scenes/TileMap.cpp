@@ -59,13 +59,13 @@ namespace scene
 
 		tilesets.tick();
 		AbstractFrameCountingScene::tick();
-		rootLayer.tick();
+		this->layer.tick();
 	}
 
 	void TileMap::draw()
 	{
 		AbstractFrameCountingScene::draw();
-		rootLayer.draw();
+		this->layer.draw();
 	}
 
 	void TileMap::afterSceneCall()
@@ -76,7 +76,9 @@ namespace scene
 		vas::Cout() << "Test raw output with endl" << std::endl;
 		vas::Cout() << "Another raw output with unicode word 宮本桜" << std::endl;
 
-		signalsPool.emplace_back(InputManager::getInstance().MouseButtonPressed.connect([this](auto _1, auto _2) { this->on_mouseClicked(_1, _2); }));
+		signalsPool.emplace_back(InputManager::getInstance().MouseButtonPressed.connect([this](auto _1, auto _2) {
+			this->on_mouseClicked(_1, _2);
+		}));
 
 		map.load("assets/maps/animated map.tmx");
 
@@ -100,7 +102,7 @@ namespace scene
 			if (itr->getName() == "$!collisions") continue;
 			if (auto layerData = dynamic_cast<vas::TileLayer*>(itr.get()); layerData != nullptr)
 			{
-				rootLayer.emplaceInsert<vas::MapRenderer>(layerData,
+				this->layer.emplaceInsert<vas::MapRenderer>(layerData,
 					sdl::Point{ static_cast<int>(map.getMapProperties().mapWidth), static_cast<int>(map.getMapProperties().mapHeight) },
 					sdl::Point{ static_cast<int>(map.getMapProperties().tileWidth), static_cast<int>(map.getMapProperties().tileHeight) },
 					tilesets);

@@ -3,7 +3,6 @@
 #include <vasframework/base/Base.hpp>
 #include <vasframework/graphics/Camera.hpp>
 #include <vasframework/graphics/text/StyledText.hpp>
-#include <vasframework/graphics/layer/Layers.hpp>
 #include <vasframework/tiledmap/TMXParser.hpp>
 #include <vasframework/tiledmap/MapRenderer.hpp>
 #include <vasframework/manager/InputManager.hpp>
@@ -31,7 +30,6 @@ namespace scene
 		vas::TMXParser map;
 		vas::TilesetsBundle tilesets;
 		vas::ResourceLoader loader;
-		vas::Layer rootLayer;
 
 		std::vector<boost::signals2::scoped_connection> signalsPool;
 	private:

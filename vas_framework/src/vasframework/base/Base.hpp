@@ -228,7 +228,8 @@ int SDL_main(int argc, char** argv); //Redefined SDL_main
 AllocConsole();\
 freopen("CONIN$", "r+t", stdin);\
 freopen("CONIN$", "w+t", stdout);\
-freopen("CONIN$", "w+t", stderr)
+freopen("CONIN$", "w+t", stderr);\
+vas::CommonTools::getInstance().hasConsole = true
 
 /** @} */
 #else

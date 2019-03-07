@@ -4,6 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #include "CommonTools.hpp"
+#include "../base/Base.hpp"
 #include "../math/Clock.hpp"
 
 namespace vas
@@ -34,16 +35,13 @@ namespace vas
 			break;
 		}
 
-		if (this->consolePrefix.empty())
-			TextTools::printfln(boost::format("%s [%s]: %s") % Clock::getCurrentISO8601Time(Clock::Timezone::local) % (*messInfo) % message);
-		else
-			TextTools::printfln(boost::format("%s [%s]: %s") % this->consolePrefix % messInfo % message);
-
+		if (hasConsole) TextTools::println(outputFormat(consolePrefix, *messInfo, message));
 		if (messType != CommonTools::MessageType::log && messType != CommonTools::MessageType::info)
 		{
 #ifdef VAS_WINDOWS_MODE
 			MessageBeep(static_cast<UINT>(messType));
-			MessageBox(windowInstance, TextTools::stows(message).c_str(), TextTools::stows(consolePrefix).c_str(), static_cast<UINT>(messType));
+			MessageBox(windowInstance, TextTools::stows(message).c_str(),
+				TextTools::stows(Base::getInstance().getWindow().getTitle()).c_str(), static_cast<UINT>(messType));
 #else
 			SDL_MessageBoxFlags flags;
 			if (messType == CommonTools::MessageType::error)
@@ -51,7 +49,8 @@ namespace vas
 			else if (messType == CommonTools::MessageType::warning)
 				flags = SDL_MessageBoxFlags::SDL_MESSAGEBOX_INFORMATION;
 
-			SDL_ShowSimpleMessageBox(flags, this->consolePrefix.c_str(), message.c_str(), static_cast<SDL_Window*>(windowInstance));
+			SDL_ShowSimpleMessageBox(flags, Base::getInstance().getWindow().getTitle().c_str(), message.c_str(),
+				static_cast<SDL_Window*>(windowInstance));
 #endif // VAS_WINDOWS_MODE
 		}
 		return rtnValue;
@@ -69,10 +68,15 @@ namespace vas
 
 	void CommonTools::setConsolePrefix(const std::string & value)
 	{
-		this->consolePrefix = value;
+		setConsolePrefix([=]() { return value; });
 	}
 
-	std::string CommonTools::getConsolePrefix()
+	void CommonTools::setConsolePrefix(std::function<std::string()> value)
+	{
+		consolePrefix = std::move(value);
+	}
+
+	std::function<std::string()> CommonTools::getConsolePrefix()
 	{
 		return consolePrefix;
 	}
@@ -82,6 +86,11 @@ namespace vas
 		return loggingFunction;
 	}
 
+	void CommonTools::setConsoleOutputFormat(std::function<std::string(std::function<std::string()>&, const std::string&, const std::string&)> value)
+	{
+		outputFormat = std::move(value);
+	}
+
 	void CommonTools::setMessTypeStr(std::array<std::string, 4> value)
 	{
 		messTypeStr = std::move(value);
@@ -89,6 +98,8 @@ namespace vas
 
 	CommonTools::CommonTools()
 	{
+		consolePrefix = []() { return Clock::getCurrentISO8601Time(); };
+		outputFormat = [](auto& _1, auto& _2, auto& _3) { return _1() + "[" + _2 + "]: " + _3; };
 	}
 
 	CommonTools::~CommonTools()
