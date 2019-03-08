@@ -83,12 +83,14 @@ namespace vas
 		size_t capacity();
 
 		void forceGC(); /**< Force SceneManager to release unused memory. */
+		void shrinkToFit(); /**< Shrink callstack size to fit current objects count. */
 	private:
 		SceneManager();
 		~SceneManager();
 
 		std::vector<std::shared_ptr<Scene>> callStack;
 	private:
-		static const size_t MinStackCount{ 10 };
+		static const size_t MinStackCount{ 10 }; /**< Minimum stack count. Keep at least this amount of buffer in stack. */
+		static const bool autoGC{ false }; /**< Determine if auto reduce memory usage. */
 	};
 }

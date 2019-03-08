@@ -11,8 +11,13 @@
 
 namespace vas
 {
-	bool Layer::autoGC{ true };
+	bool Layer::autoGC{ false };
 	size_t Layer::minLayerCount{ 10 };
+
+	Layer::Layer()
+	{
+		layerData.reserve(minLayerCount);
+	}
 
 	Layer::Layer(const Layer & rhs):
 		layerData(rhs.layerData)
@@ -133,6 +138,11 @@ namespace vas
 			for (size_t i{ 0 }; i < padding; i++)
 				layerData.pop_back();
 		}
+	}
+
+	void Layer::shrinkToFit()
+	{
+		layerData.shrink_to_fit();
 	}
 
 	std::vector<Layer::LayerData>::iterator Layer::begin()

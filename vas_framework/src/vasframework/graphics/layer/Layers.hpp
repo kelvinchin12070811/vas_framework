@@ -53,7 +53,7 @@ namespace vas
 			std::shared_ptr<DrawAble> instance; /**< Shared instance of the object. */
 		};
 	public:
-		Layer() = default;
+		Layer();
 		Layer(const Layer& rhs);
 		Layer(Layer&& rhs) noexcept;
 		~Layer() = default;
@@ -104,7 +104,8 @@ namespace vas
 		*/
 		bool isEmpty();
 
-		void forceGC();
+		void forceGC(); /**< Force reduce layer size to prefered buffer size. */
+		void shrinkToFit(); /**< Shrink layer size to fit with the objects stored. */
 
 		/** @name Iterators
 			  @{

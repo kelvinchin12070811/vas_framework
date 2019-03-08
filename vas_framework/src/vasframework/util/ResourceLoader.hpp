@@ -4,7 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
-#include <set>
+#include <vector>
 #include "ResourceMetatype.hpp"
 
 namespace vas
@@ -30,6 +30,9 @@ namespace vas
 		ResourceLoader& operator=(const ResourceLoader&) = delete;
 		ResourceLoader& operator=(ResourceLoader&&) = delete;
 
+		/** Unload a single resource or all resources
+			  @param resourceId ID of resource to unload, unload all if empty.
+		*/
 		void unload(const std::string& resourceId = "");
 
 		/** Load a single resource.
@@ -44,7 +47,7 @@ namespace vas
 		void setFreeResources(bool value);
 		bool isFreeResources() const;
 	private:
-		std::set<std::unique_ptr<resource_type::ResourceMetatype>> resourcesList;
+		std::vector<std::unique_ptr<resource_type::ResourceMetatype>> resourcesList;
 		/** [Read & Write] Determine if unload all resource during destructing the object.
 
 			 - __mutators__

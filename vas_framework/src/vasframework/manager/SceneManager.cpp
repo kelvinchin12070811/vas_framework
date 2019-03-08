@@ -11,6 +11,7 @@
 namespace vas
 {
 	const size_t SceneManager::MinStackCount;
+	const bool SceneManager::autoGC;
 
 	SceneManager & SceneManager::getInstance()
 	{
@@ -82,6 +83,7 @@ namespace vas
 		callStack.pop_back();
 		if (!callStack.empty()) callStack.back()->afterTerminate();
 
+		if (!autoGC) return; //return if no auto gc behaviour.
 		if (auto capacity = callStack.capacity(); capacity > SceneManager::MinStackCount && capacity > callStack.size() * 3)
 			forceGC();
 	}
@@ -145,6 +147,11 @@ namespace vas
 					callStack.pop_back();
 			}
 		}
+	}
+
+	void SceneManager::shrinkToFit()
+	{
+		callStack.shrink_to_fit();
 	}
 
 	SceneManager::SceneManager()

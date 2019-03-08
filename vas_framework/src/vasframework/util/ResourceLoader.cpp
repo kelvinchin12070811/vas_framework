@@ -47,7 +47,7 @@ namespace vas
 	void ResourceLoader::load(std::unique_ptr<ResourceMetatype> meta)
 	{
 		meta->load();
-		resourcesList.insert(std::move(meta));
+		resourcesList.push_back(std::move(meta));
 	}
 
 	void ResourceLoader::load(std::initializer_list<std::unique_ptr<ResourceMetatype>> meta)
@@ -55,7 +55,7 @@ namespace vas
 		for (auto& itr : meta)
 		{
 			itr->load();
-			resourcesList.insert(std::move(const_cast<std::unique_ptr<ResourceMetatype>&>(itr)));
+			resourcesList.push_back(std::move(const_cast<std::unique_ptr<ResourceMetatype>&>(itr)));
 		}
 	}
 
