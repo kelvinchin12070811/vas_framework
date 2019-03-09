@@ -296,7 +296,11 @@ namespace vas
 #ifdef VAS_USE_OOENTRY
 int(*vas::ClassLoader::gt5d_acfg)(const std::vector<std::string>&);
 
+#ifdef VAS_SDL_MAIN_DEFINED
 int SDL_main(int argc, char ** argv)
+#else
+int main(int argc, char** argv)
+#endif // VAS_SDL_MAIN_DEFINED
 {
 	BOOST_ASSERT_MSG(vas::ClassLoader::gt5d_acfg != nullptr, "Unable to locate launcher class, launcher class not defined.");
 

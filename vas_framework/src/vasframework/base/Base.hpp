@@ -21,6 +21,7 @@
 
 #if defined(main) && !defined(VAS_SDL_ENTRY)
 #undef main
+#define VAS_SDL_MAIN_DEFINED
 #endif
 
 namespace vas
