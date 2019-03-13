@@ -3,15 +3,15 @@
 #ifdef VAS_HAS_B2D
 namespace vas::physics
 {
-	CollideAble::CollideAble(b2extentions::b2WorldEx & world, const b2BodyDef * bodyDef, const b2FixtureDef * fixtureDef)
+	CollideAble::CollideAble(b2extentions::b2WorldEx & world, const b2BodyDef * bodyDef, const b2FixtureDef * fixtureDef):
+		world(&world), body(this->world->CreateBody(bodyDef))
 	{
-		body = world.CreateBody(bodyDef);
 		body->CreateFixture(fixtureDef);
 	}
 
-	CollideAble::CollideAble(b2extentions::b2WorldEx & world, const b2BodyDef * bodyDef, const b2Shape * shape, float density)
+	CollideAble::CollideAble(b2extentions::b2WorldEx & world, const b2BodyDef * bodyDef, const b2Shape * shape, float density):
+		world(&world), body(this->world->CreateBody(bodyDef))
 	{
-		body = world.CreateBody(bodyDef);
 		body->CreateFixture(shape, density);
 	}
 
@@ -40,6 +40,11 @@ namespace vas::physics
 	const b2extentions::b2Pointer<b2Body> & CollideAble::getBody() const
 	{
 		return body;
+	}
+	
+	b2extentions::b2WorldEx * CollideAble::getWorld()
+	{
+		return world;
 	}
 }
 #endif // VAS_HAS_B2D

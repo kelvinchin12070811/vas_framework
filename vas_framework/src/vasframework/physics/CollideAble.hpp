@@ -41,7 +41,13 @@ namespace vas::physics
 		virtual ~CollideAble() = 0;
 
 		const b2extentions::b2Pointer<b2Body>& getBody() const;
+		b2extentions::b2WorldEx* getWorld();
 	protected:
+		/** [Read Only] Word of the object relie on.
+				- __accessors__
+					-# b2extentions::b2WorldEx* getWorld()
+		*/
+		b2extentions::b2WorldEx* world;
 		/** [Read Only] Body of the object.
 				- __accessors__
 					-# const b2extentions::b2Pointer<b2Body>& getBody() const
