@@ -26,6 +26,10 @@
 #define VAS_USE_TTF
 #endif
 
+#if __has_include(<Box2D/Box2D.h>) || defined(DOXYGEN)
+#define VAS_HAS_B2D
+#endif
+
 #endif // !VAS_GLOB_CNFIG
 
 #ifndef VAS_SDL_ENTRY

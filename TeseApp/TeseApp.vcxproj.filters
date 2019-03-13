@@ -30,6 +30,9 @@
     <ClCompile Include="test\scenes\NBTTreeTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test\scenes\PhysicsTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test\scenes\AbstractFrameCountingScene.hpp">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test\scenes\EmptyScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\scenes\PhysicsTest.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

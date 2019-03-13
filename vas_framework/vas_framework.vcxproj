@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\physics\b2extentions\util\AdaptedContactListener.hpp" />
+    <ClInclude Include="src\vasframework\physics\b2extentions\b2Extention.hpp" />
+    <ClInclude Include="src\vasframework\physics\CollideAble.hpp" />
+    <ClInclude Include="src\vasframework\physics\PhysicsUtil.hpp" />
+    <ClInclude Include="src\vasframework\physics\b2extentions\util\AdaptedDestructionListener.hpp" />
+    <ClInclude Include="src\vasframework\physics\b2extentions\b2Pointer.hpp" />
+    <ClInclude Include="src\vasframework\physics\b2extentions\b2WorldEx.hpp" />
     <ClInclude Include="src\vasframework\graphics\scene\SceneRefWrap.hpp" />
     <ClInclude Include="src\vasframework\manager\FontCacheManager.hpp" />
     <ClInclude Include="src\vasframework\util\ResourceMetatype.hpp" />
@@ -123,8 +130,13 @@
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\physics\b2extentions\util\AdaptedContactListener.cpp" />
+    <ClCompile Include="src\vasframework\physics\b2extentions\util\AdaptedDestructionListener.cpp" />
+    <ClCompile Include="src\vasframework\physics\b2extentions\b2WorldEx.cpp" />
     <ClCompile Include="src\vasframework\graphics\scene\SceneRefWrap.cpp" />
     <ClCompile Include="src\vasframework\manager\FontCacheManager.cpp" />
+    <ClCompile Include="src\vasframework\physics\CollideAble.cpp" />
+    <ClCompile Include="src\vasframework\physics\PhysicsUtil.cpp" />
     <ClCompile Include="src\vasframework\util\ResourceLoader.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonDeserializer.cpp" />
     <ClCompile Include="src\vasframework\container\nbt\JsonSerializer.cpp" />
@@ -252,8 +264,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\pugixml-1.9\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -262,8 +274,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\pugixml-1.9\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

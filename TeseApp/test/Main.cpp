@@ -17,7 +17,7 @@ int Main::main(const std::vector<std::string>& args)
 				textOverlay->setColour(vas::sdl::ColorPresets::white);
 				textOverlay->setBackgroundOffset(vas::Vector2{ 3.0f, vas::Angle{ 45.0 + 90.0 } });
 				vas::ScreenManager::getInstance().screenAboveOverlays.insert({ textOverlay });
-				vas::SceneManager::getInstance().call("scene::TileMap");
+				vas::SceneManager::getInstance().call("scene::PhysicsTest");
 				vas::Base::getInstance().getRenderer().setLogicalSize(vas::sdl::Point{ 640, 480 });
 			});
 	}

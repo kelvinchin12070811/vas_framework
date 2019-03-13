@@ -5,19 +5,19 @@ The vas_framework riquired some external libraries to complie bellow are the com
 @note The term "Global inclue path" is refer to the compiler's global include path which are able to locate with
 "#include <>".
 
-## Required library
+## Required Library
 These is the libraries that core component of vas_framework required:
 <table>
 	<tr>
 		<th>Library</th>
 		<th>Required version</th>
-		<th>Search location</th>
+		<th>Requied files</th>
 		<th>Additional requirement</th>
 	</tr>
 	<tr>
 		<td>[Boost C++ library](http://www.boost.org)</td>
 		<td>1.67.0 +</td>
-		<td>Global include path to "root" folder.</td>
+		<td>"boost" folder under the root dir, config as gloal include path.</td>
 		<td>Compiled are not needed.</td>
 	</tr>
 	<tr>
@@ -34,14 +34,14 @@ These is the libraries that core component of vas_framework required:
 	</tr>
 </table>
 
-## Optional library
+## Optional Library
 These libraries are optional and the library will disable the components that required them.
 <table>
 	<tr>
 		<th>Library</th>
 		<th>Required version</th>
 		<th>Required by component</th>
-		<th>Search location</th>
+		<th>Required files</th>
 		<th>Additinoal requirement</th>
 	</tr>
 	<tr>
@@ -82,5 +82,20 @@ These libraries are optional and the library will disable the components that re
 		<td>Global include path to "include" folder.</td>
 		<td>none</td>
 	</tr>
+	<tr>
+		<td>[Box2D](http://www.box2d.org)</td>
+		<td>2.3.1+</td>
+		<td>Box2D folder under root/Box2D, as global path.</td>
+		<td>none</td>
+	</tr>
 </table>
+
+## Other Bundled Libraries
+
+ - [ReneNyffenegger's base64](https://github.com/ReneNyffenegger/cpp-base64)
+
+ ## About Third-parties Notices
+ 
+ All of the licenses used by Virtual Assistance Framework are placed at the "3rd_party_notices.zip" file under the
+ project root directory.
 */
