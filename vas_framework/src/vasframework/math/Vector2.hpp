@@ -106,4 +106,8 @@ namespace vas
 		  Zero vector of a vector, with a value of (0, 0) which pointing from the origin.
 	*/
 	const Vector2 zerovector{};
+	/** @memberof Vector2
+		  Vector that hold epsilon of float for both x and y axises.
+	*/
+	const Vector2 epsilonvector{ std::numeric_limits<float>::epsilon(), std::numeric_limits<float>::epsilon() };
 }

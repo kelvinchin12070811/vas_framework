@@ -130,27 +130,39 @@ namespace vas
 
 	bool Vector2::operator!=(const Vector2 & rhs) const
 	{
-		return (x != rhs.x) || (y != rhs.y);
+		return !operator==(rhs);
 	}
 
 	bool Vector2::operator<(const Vector2 & rhs) const
 	{
-		return (this->x < rhs.x) && (this->y < rhs.y);
+		if (this->x < rhs.x)
+			return true;
+		else if (std::abs(this->x - rhs.x) < std::numeric_limits<float>::epsilon())
+			return this->y < rhs.y;
+
+		return false;
 	}
 
 	bool Vector2::operator<=(const Vector2 & rhs) const
 	{
-		return (this->x <= rhs.x) && (this->y <= rhs.y);
+		if ((*this - rhs).absolute() < epsilonvector) return true;
+		return operator<(rhs);
 	}
 
 	bool Vector2::operator>(const Vector2 & rhs) const
 	{
-		return (this->x > rhs.x) && (this->y > rhs.y);
+		if (this->x > rhs.x)
+			return true;
+		if (std::abs(this->x - rhs.x) < std::numeric_limits<float>::epsilon())
+			return this->y > rhs.y;
+
+		return false;
 	}
 
 	bool Vector2::operator>=(const Vector2 & rhs) const
 	{
-		return (this->x >= rhs.x) && (this->y >= rhs.y);
+		if ((*this - rhs).absolute() < epsilonvector) return true;
+		return operator>(rhs);
 	}
 
 	Vector2 Vector2::operator+(const Vector2 & rhs) const
