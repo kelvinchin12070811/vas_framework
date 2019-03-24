@@ -14,9 +14,10 @@ namespace vas::sdl
 {
 	namespace mixer
 	{
-		/** @addtogroup sdl_mixer
-			  @{
-		*/
+		/**
+		 * @ingroup sdl_mixer
+		 * @{
+		 */
 		/** @brief Initialization options for sdl_mixer. */
 		struct MixInitFlags
 		{

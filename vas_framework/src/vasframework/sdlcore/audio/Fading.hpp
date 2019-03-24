@@ -13,9 +13,10 @@ namespace vas::sdl
 {
 	namespace mixer
 	{
-		/** @addtogroup sdl_mixer
-			  @{
-		*/
+		/**
+		 * @ingroup sdl_mixer
+		 * @{
+		 */
 		/** Fading state of music stream. */
 		enum class Fading
 		{ /** @} */

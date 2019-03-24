@@ -10,7 +10,7 @@
 
 namespace vas
 {
-	/** @addtogroup tile_codec
+	/** @ingroup tile_codec
 		  @{
 	*/
 	/** @brief Rectangle object on map. */

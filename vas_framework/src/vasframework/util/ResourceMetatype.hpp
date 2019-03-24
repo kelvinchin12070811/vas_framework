@@ -11,17 +11,20 @@ namespace vas
 {
 	namespace resource_type
 	{
-		/** @addtogroup util
-			  @{
-		*/
+		/**
+		 * @ingroup util
+		 * @{
+		 */
 		/** @brief Metatype of generic resources  loader. */
 		class ResourceMetatype
 		{
 		public:
-			/** Create metadata of resource's identifier
-				  @param path Path to resource.
-				  @param id ID of the resource, path as id if empty.
-			*/
+			/**
+			 * Create metadata of resource's identifier
+			 * @param[in] path Path to resource.
+			 * @param[in] id ID of the resource, path as id if empty.
+			 * @param[in] customLoader custom loader for resource.
+			 */
 			ResourceMetatype(const std::string& path, const std::string& id, std::function<void(ResourceMetatype*)> customLoader);
 
 			virtual ~ResourceMetatype() = default;
@@ -38,10 +41,12 @@ namespace vas
 		class Music : public ResourceMetatype
 		{
 		public:
-			/** Create metadata of resource's identifier
-				  @param path Path to resource.
-				  @param id ID of the resource, path as id if empty.
-			*/
+			/**
+			 * Create metadata of resource's identifier
+			 * @param[in] path Path to resource.
+			 * @param[in] id ID of the resource, path as id if empty.
+			 * @param[in] customLoader custom loader for resource.
+			 */
 			Music(const std::string& path, const std::string& id = "", std::function<void(ResourceMetatype*)> customLoader = nullptr);
 			void load() override;
 			void unload() override;
@@ -51,10 +56,12 @@ namespace vas
 		class Chunk : public ResourceMetatype
 		{
 		public:
-			/** Create metadata of resource's identifier
-				  @param path Path to resource.
-				  @param id ID of the resource, path as id if empty.
-			*/
+			/**
+			 * Create metadata of resource's identifier
+			 * @param[in] path Path to resource.
+			 * @param[in] id ID of the resource, path as id if empty.
+			 * @param[in] customLoader custom loader for resource.
+			 */
 			Chunk(const std::string& path, const std::string& id = "", std::function<void(ResourceMetatype*)> customLoader = nullptr);
 			void load() override;
 			void unload() override;
@@ -64,10 +71,12 @@ namespace vas
 		class Texture : public ResourceMetatype
 		{
 		public:
-			/** Create metadata of resource's identifier
-				  @param path Path to resource.
-				  @param id ID of the resource, path as id if empty.
-			*/
+			/**
+			 * Create metadata of resource's identifier
+			 * @param[in] path Path to resource.
+			 * @param[in] id ID of the resource, path as id if empty.
+			 * @param[in] customLoader custom loader for resource.
+			 */
 			Texture(const std::string& path, const std::string& id = "", std::function<void(ResourceMetatype*)> customLoader = nullptr);
 			void load() override;
 			void unload() override;
@@ -78,11 +87,13 @@ namespace vas
 		class Fonts : public ResourceMetatype
 		{
 		public:
-			/** Create metadata of resource's identifier
-				  @param path Path to ttf font.
-				  @param size Size of the font.
-				  @param id ID of the font, path as id if empty.
-			*/
+			/**
+			 * Create metadata of resource's identifier
+			 * @param[in] path Path to ttf font.
+			 * @param[in] size Size of the font.
+			 * @param[in] id ID of the font, path as id if empty.
+			 * @param[in] customLoader custom loader for resource.
+			 */
 			Fonts(const std::string& path, uint32_t size, const std::string& id = "",
 				std::function<void(ResourceMetatype*)> customLoader = nullptr);
 			void load() override;

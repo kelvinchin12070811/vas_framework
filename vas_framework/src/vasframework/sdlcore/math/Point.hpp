@@ -9,9 +9,10 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** @brief The structure that defines a point. */
 	class VAS_DECLSPEC Point
 	{ /** @} */
@@ -36,9 +37,10 @@ namespace vas::sdl
 		explicit operator SDL_Point(); /**< Cast to SDL_Point. */
 		explicit operator const SDL_Point() const; /**< Cast to const SDL_Point. */
 
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		bool operator==(const Point& rhs) const; /**< Compare if two Point is equal. */
 		bool operator!=(const Point& rhs) const; /**< Compare if two Point is not equal. */
 

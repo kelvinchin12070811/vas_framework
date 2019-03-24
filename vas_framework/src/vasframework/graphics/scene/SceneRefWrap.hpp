@@ -9,22 +9,25 @@
 
 namespace vas
 {
-	/** @addtogroup graphics
-		  @{
-	*/
-	/** @brief The DrawAble object that reference to a scene.
-		  
-		  The Scene Reference Wraper is an object that will reference to a scene and tick and render it when the user tell
-		  it.
-	*/
+	/**
+	 * @ingroup graphics
+	 * @{
+	 */
+	/**
+	 * @brief The DrawAble object that reference to a scene.
+	 * 
+	 * The Scene Reference Wraper is an object that will reference to a scene and tick and render it when the user tell
+	 * it.
+	 */
 	class SceneRefWrap : public DrawAble
 	{ /** @} */
 	public:
-		/** Create new reference to a scene.
-			  @param scene Scene instance to reference.
-			  @param tickable Determine if the object will tick the scene.
-			  @param drawable Determine if the object will draw the scene.
-		*/
+		/**
+		 * Create new reference to a scene.
+		 * @param[in] scene Scene instance to reference.
+		 * @param[in] tickable Determine if the object will tick the scene.
+		 * @param[in] drawable Determine if the object will draw the scene.
+		 */
 		SceneRefWrap(std::shared_ptr<Scene> scene, bool tickable = false, bool drawable = true);
 
 		void tick() override;

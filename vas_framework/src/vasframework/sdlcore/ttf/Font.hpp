@@ -19,44 +19,50 @@ namespace vas::sdl
 {
 	namespace ttf
 	{
-		/** @addtogroup sdl_ttf
-			  @{
-		*/
+		/**
+		 * @ingroup sdl_ttf
+		 * @{
+		 */
 		/** @brief The internal structure containing font information. */
 		class VAS_DECLSPEC Font
 		{ /** @} */
 		public:
 			Font(); /**< Create empty font. */
-			/** Reference from TTF_Font.
-				  @param instance Instance of raw component.
-				  @param owner Determine if the instance has the ownership of @p instance.
-			*/
+			/**
+			 * Reference from TTF_Font.
+			 * @param[in] instance Instance of raw component.
+			 * @param[in] owner Determine if the instance has the ownership of @p instance.
+			 */
 			explicit Font(TTF_Font* instance, bool owner = false);
 
-			/** Load font from file.
-				  @param file File name of file to load.
-				  @param fontSize Size of the font.
-			*/
+			/**
+			 * Load font from file.
+			 * @param[in] file File name of file to load.
+			 * @param[in] fontSize Size of the font.
+			 */
 			void openFont(const std::string& file, int fontSize);
-			/** Load font from file.
-				  @param file File name of file to load.
-				  @param fontSize Size of the font.
-				  @param index Index of the font sheet.
-			*/
+			/**
+			 * Load font from file.
+			 * @param[in] file File name of file to load.
+			 * @param[in] fontSize Size of the font.
+			 * @param[in] index Index of the font sheet.
+			 */
 			void openFont(const std::string& file, int fontSize, long index);
 
-			/** Load font from memory.
-				  @param src Binary data of font to load.
-				  @param fontSize Size of the font.
-				  @param freeSrc Free the resource after done loading.
-			*/
+			/**
+			 * Load font from memory.
+			 * @param[in] src Binary data of font to load.
+			 * @param[in] fontSize Size of the font.
+			 * @param[in] freeSrc Free the resource after done loading.
+			 */
 			void openFontRaw(rwops::RWops* src, int fontSize, bool freeSrc = true);
-			/** Load font from memory.
-				  @param src Binary data of font to load.
-				  @param fontSize Size of the font.
-				  @param index Index of font sheet.
-				  @param freeSrc Free the resource after done loading.
-			*/
+			/**
+			 * Load font from memory.
+			 * @param[in] src Binary data of font to load.
+			 * @param[in] fontSize Size of the font.
+			 * @param[in] index Index of font sheet.
+			 * @param[in] freeSrc Free the resource after done loading.
+			 */
 			void openFontRaw(rwops::RWops* src, int fontSize, long index, bool freeSrc = true);
 
 			FontStyle::FlagType getFontStyle(); /**< Get font style. */
@@ -101,36 +107,40 @@ namespace vas::sdl
 			Surface renderUnicodeBlended(const std::wstring& text, const Colour& foreground); /**< Render blended UTF-16 text. */
 			Surface renderUnicodeBlended(const std::wstring& text, const Colour& foreground, uint32_t warpLength); /**< Render blended UTF-16 text with auto warp. */
 
-			/** Create an 8-bit palettized surface and render the given glyph at
-				  fast quality with the given font and color.  The 0 pixel is the
-				  colorkey, giving a transparent background, and the 1 pixel is set
-				  to the text color.  The glyph is rendered without any padding or
-				  centering in the X direction, and aligned normally in the Y direction.
-				  This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
-			*/
+			/**
+			 * Create an 8-bit palettized surface and render the given glyph at
+			 * fast quality with the given font and color.  The 0 pixel is the
+			 * colorkey, giving a transparent background, and the 1 pixel is set
+			 * to the text color.  The glyph is rendered without any padding or
+			 * centering in the X direction, and aligned normally in the Y direction.
+			 * This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
+			 */
 			Surface renderGlyphSolid(uint16_t ch, const Colour& foreground);
-			/** Create an 8-bit palettized surface and render the given glyph at
-				  fast quality with the given font and color.  The 0 pixel is the
-				  colorkey, giving a transparent background, and the 1 pixel is set
-				  to the text color.  The glyph is rendered without any padding or
-				  centering in the X direction, and aligned normally in the Y direction.
-				  This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
-			*/
+			/**
+			 * Create an 8-bit palettized surface and render the given glyph at
+			 * fast quality with the given font and color.  The 0 pixel is the
+			 * colorkey, giving a transparent background, and the 1 pixel is set
+			 * to the text color.  The glyph is rendered without any padding or
+			 * centering in the X direction, and aligned normally in the Y direction.
+			 * This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
+			 */
 			Surface renderGlyphShaded(uint16_t ch, const Colour& foreground, const Colour& background);
-			/** Create an 8-bit palettized surface and render the given glyph at
-				  fast quality with the given font and color.  The 0 pixel is the
-				  colorkey, giving a transparent background, and the 1 pixel is set
-				  to the text color.  The glyph is rendered without any padding or
-				  centering in the X direction, and aligned normally in the Y direction.
-				  This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
-			*/
+			/**
+			 * Create an 8-bit palettized surface and render the given glyph at
+			 * fast quality with the given font and color.  The 0 pixel is the
+			 * colorkey, giving a transparent background, and the 1 pixel is set
+			 * to the text color.  The glyph is rendered without any padding or
+			 * centering in the X direction, and aligned normally in the Y direction.
+			 * This function returns the new surface, or vas::sdl::nullcomponent if there was an error.
+			 */
 			Surface renderGlyphBlended(uint16_t ch, const Colour& foreground);
 
 			void destroy(); /**< Destroy instance. */
 			bool isNull(); /**< Determine if this instance is nullcomponent. */
-			/** @name Overloaded operators
-				  @{
-			*/
+			/**
+			 * @name Overloaded operators
+			 * @{
+			 */
 			explicit operator TTF_Font*(); /**< Cast to raw instance. */
 			Font& operator=(NullComponent_t); /**< Destroy instance by assigning it to nullcomponent. */
 

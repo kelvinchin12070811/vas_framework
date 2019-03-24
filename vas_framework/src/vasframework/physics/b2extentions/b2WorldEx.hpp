@@ -19,16 +19,18 @@ namespace vas::physics::b2extentions
 	class AdaptedDestructionListener;
 	class AdaptedContactListener;
 
-	/** @addtogroup physics
-		  @{
-	*/
-	/** @brief The physic world that simulate all the entire entities.
-		  
-		  b2WorldEx is an extention to Box2D's b2World and provide more function such as smart pointer support. The
-		  b2WorldEx also keep tracking all Box2D objects and notifiy if they are been destroyed.
-
-		  The b2WorldEx instance wrap all Box2D objects in smart pointer therefore it can be tracked easily.
-	*/
+	/**
+	 * @ingroup physics
+	 * @{
+	 */
+	/**
+	 * @brief The physic world that simulate all the entire entities.
+	 * 
+	 * b2WorldEx is an extention to Box2D's b2World and provide more function such as smart pointer support. The
+	 * b2WorldEx also keep tracking all Box2D objects and notifiy if they are been destroyed.
+	 * 
+	 * The b2WorldEx instance wrap all Box2D objects in smart pointer therefore it can be tracked easily.
+	 */
 	class b2WorldEx : public b2World
 	{ /** @} */
 	public:
@@ -41,11 +43,11 @@ namespace vas::physics::b2extentions
 		b2WorldEx& operator=(b2WorldEx&&) = default;
 
 		b2Pointer<b2Body> CreateBody(const b2BodyDef* def); /**< Create new b2Body.
-															@note All b2Body created by b2WorldEx has an empty std::any as it's user data.
-															Cast to  std::any when calling GetUserData function.
-
-															@warning Do not set custom user data via SetUserData function. It will override
-															default std::any data type. */
+														* @note All b2Body created by b2WorldEx has an empty std::any as it's user data.
+														* Cast to  std::any when calling GetUserData function.
+														*
+														* @warning Do not set custom user data via SetUserData function. It will override
+														* default std::any data type. */
 		void DestroyBody(b2Pointer<b2Body>& body); /**< Destroy a b2Body. */
 
 		b2Pointer<b2Joint> CreateJoint(const b2JointDef* def); /**< Create new b2Joint. */
@@ -58,10 +60,11 @@ namespace vas::physics::b2extentions
 		void MarkObjectDeath(void* object); /**< Mark a Box2D object as death, this function will be called automatically
 											if an object death. */
 
-		/** Make a smart pointer of Box2D object.
-			  @tparam B2Object Box2D object that relied on a b2World (b2Body, b2Joint, etc.)
-			  @param object Instance of Box2D object.
-		*/
+		/**
+		 * Make a smart pointer of Box2D object.
+		 * @tparam B2Object Box2D object that relied on a b2World (b2Body, b2Joint, etc.)
+		 * @param[in] object Instance of Box2D object.
+		 */
 		template <typename B2Object>
 		b2Pointer<B2Object> MakePointer(B2Object* object)
 		{

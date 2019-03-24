@@ -13,7 +13,7 @@
 
 namespace vas
 {
-	/** @addtogroup animate
+	/** @ingroup animate
 		  @{
 	*/
 	/** @brief Advance sequential frame animation.
@@ -25,18 +25,20 @@ namespace vas
 	public:
 		StripAnimation() = default; /**< Create animation. */
 
-		/** Insert frame to back.
-			  @param frame Index of frame on spritesheet.
-			  @param spritesheet Spritesheet that  contain the @p frame, nullptr to use previous spritesheet.
-			  @param stayTime Duration of the frame stayed, zero (Clock::DurationType()) to use previous stayTime.
-		*/
+		/**
+		 * Insert frame to back.
+		 * @param[in] frame Index of frame on spritesheet.
+		 * @param[in] spritesheet Spritesheet that  contain the @p frame, nullptr to use previous spritesheet.
+		 * @param[in] stayTime Duration of the frame stayed, zero (Clock::DurationType()) to use previous stayTime.
+		 */
 		void insertFrame(size_t frame, SpriteSheet* spritesheet = nullptr, Clock::DurationType stayTime = Clock::DurationType());
 
 		void tick() override;
 
-		/** Get current frame shown.
-			  @return Pair of index of frame on the returned SpriteSheet.
-		*/
+		/**
+		 * Get current frame shown.
+		 * @return Pair of index of frame on the returned SpriteSheet.
+		 */
 		std::pair<size_t, const SpriteSheet*> getCurrentFrame() const;
 	private:
 		iterator currentFrame;

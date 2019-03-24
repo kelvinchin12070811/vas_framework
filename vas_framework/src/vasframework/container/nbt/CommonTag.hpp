@@ -11,48 +11,52 @@
 #include "NBTCompoundTag.hpp"
 #include "../../math/Vector2.hpp"
 
-/** @addtogroup container
-	  @{
-*/
-/** @defgroup nbt_tag NBT Tag
-	  @brief The NBT Tag system implementation.
-
-	  The NBT(Named Binary Tag) structure is a serializeable tree like data structure with multiple data entrys. The tree
-	  own the tree or array (also called list) as the brach of the tree and data tags as leaves.
-
-	  The core components of NBT tags as bellow are able to included together by the header "vasframework/container/nbt/NBT.hpp"
-	  
-	  - NBTCompoundTag
-	  - ValueWrapperTag
-	  - ArrayTag
-	  - ByteTag
-	  - Int16Tag
-	  - Int32Tag
-	  - Uint32Tag
-	  - Int64Tag
-	  - Uint64Tag
-	  - FloatTag
-	  - DoubleTag
-	  - BooleanTag
-	  - StringTag
-	  - Vector2Tag
-	  - ObjectListTag
-	  - ITag interface
-*/
+/**
+ * @ingroup container
+ * @{
+ */
+/**
+ * @defgroup nbt_tag NBT Tag
+ * @brief The NBT Tag system implementation.
+ * 
+ * The NBT(Named Binary Tag) structure is a serializeable tree like data structure with multiple data entrys. The tree
+ * own the tree or array (also called list) as the brach of the tree and data tags as leaves.
+ * 
+ * The core components of NBT tags as bellow are able to included together by the header "vasframework/container/nbt/NBT.hpp"
+ * 
+ * - NBTCompoundTag
+ * - ValueWrapperTag
+ * - ArrayTag
+ * - ByteTag
+ * - Int16Tag
+ * - Int32Tag
+ * - Uint32Tag
+ * - Int64Tag
+ * - Uint64Tag
+ * - FloatTag
+ * - DoubleTag
+ * - BooleanTag
+ * - StringTag
+ * - Vector2Tag
+ * - ObjectListTag
+ * - ITag interface
+ */
 /** @} */
 namespace vas
 {
-	/** @addtogroup nbt_tag
-		  @{
-	*/
-	/** @brief A template class to define a custom data type to work with NBT.
-		  
-		  The ValueWrapperTag is a template class that help user to define their class to work with NBT Tag structure. The
-		  wrapper is designed to emulate normal data types function with operator overloading, it is safe to assign other
-		  value with same type to it.
-
-		  @tparam ValueType Data type to wrap.
-	*/
+	/**
+	 * @ingroup nbt_tag
+	 * @{
+	 */
+	/**
+	 * @brief A template class to define a custom data type to work with NBT.
+	 * 
+	 * The ValueWrapperTag is a template class that help user to define their class to work with NBT Tag structure. The
+	 * wrapper is designed to emulate normal data types function with operator overloading, it is safe to assign other
+	 * value with same type to it.
+	 * 
+	 * @tparam ValueType Data type to wrap.
+	 */
 	template <typename ValueType>
 	class ValueWrapperTag : public ITag
 	{ /** @} */
@@ -69,18 +73,20 @@ namespace vas
 		{
 		}
 
-		/** Create new instance of tag, use with list initialization.
-			  @retval std::unique_ptr<ValueWrapperTag> new instance of tag.
-		*/
+		/**
+		 * Create new instance of tag, use with list initialization.
+		 * @retval std::unique_ptr<ValueWrapperTag> new instance of tag.
+		 */
 		static std::unique_ptr<ValueWrapperTag> create()
 		{
 			return std::make_unique<ValueWrapperTag>();
 		}
 
-		/** Create new instance of tag with value, use with list initialization.
-			  @param value Value to initialize the tag.
-			  @retval std::unique_ptr<ValueWrapperTag> new instance of tag.
-		*/
+		/**
+		 * Create new instance of tag with value, use with list initialization.
+		 * @param[in] value Value to initialize the tag.
+		 * @retval std::unique_ptr<ValueWrapperTag> new instance of tag.
+		 */
 		static std::unique_ptr<ValueWrapperTag> create(ValueType value)
 		{
 			return std::make_unique<ValueWrapperTag>(std::move(value));
@@ -119,28 +125,32 @@ namespace vas
 		ValueType value{};
 	};
 
-	/** @addtogroup nbt_tag
-		  @{
-	*/
-	/** @brief An array or list of value.
-		  @tparam T Type to store in array, must be serializeable if the feature required.
-	*/
+	/**
+	 * @ingroup nbt_tag
+	 * @{
+	 */
+	/**
+	 * @brief An array or list of value.
+	 * @tparam T Type to store in array, must be serializeable if the feature required.
+	 */
 	template <class T>
 	class ArrayTag : public ITag, public std::vector<T>
 	{ /** @} */
 	public:
 		ArrayTag() = default;
-		/** Create array with specified size.
-			  @param size Size of the array.
-		*/
+		/**
+		 * Create array with specified size.
+		 * @param[in] size Size of the array.
+		 */
 		explicit ArrayTag(size_t size) : std::vector(size)
 		{
 		}
 
-		/** Create array with iterator.
-			  @param begin begin iterator hint.
-			  @param end end iterator hint.
-		*/
+		/**
+		 * Create array with iterator.
+		 * @param[in] begin begin iterator hint.
+		 * @param[in] end end iterator hint.
+		 */
 		template <class Iterator>
 		ArrayTag(Iterator begin, Iterator end)
 		{
@@ -168,17 +178,19 @@ namespace vas
 		{
 		}
 
-		/** Create new instance of tag, use with list initialization.
-			  @retval std::unique_ptr<ArrayTag> new instance of tag.
-		*/
+		/**
+		 * Create new instance of tag, use with list initialization.
+		 * @retval std::unique_ptr<ArrayTag> new instance of tag.
+		 */
 		static std::unique_ptr<ArrayTag> create()
 		{
 			return std::make_unique<ArrayTag>();
 		}
-		/** Create new instance of tag, use with list initialization.
-			  @param list value to initialize the tag.
-			  @retval std::unique_ptr<ArrayTag> new instance of tag.
-		*/
+		/**
+		 * Create new instance of tag, use with list initialization.
+		 * @param[in] list value to initialize the tag.
+		 * @retval std::unique_ptr<ArrayTag> new instance of tag.
+		 */
 		static std::unique_ptr<ArrayTag> create(std::initializer_list<T> list)
 		{
 			return std::make_unique<ArrayTag>(list);
@@ -257,12 +269,13 @@ namespace vas
 		serializer.arrayEnd();
 	}
 
-	/** @name Predefined tag
-		  
-		  The predefined tag that use with NBT structure. Include header "vasframework/container/nbt/CommonTag.hpp"
-		  to access them.
-		  @{
-	*/
+	/**
+	 * @name Predefined tag
+	 * 
+	 * The predefined tag that use with NBT structure. Include header "vasframework/container/nbt/CommonTag.hpp"
+	 * to access them.
+	 * @{
+	 */
 	using ByteTag = ValueWrapperTag<std::byte>; /**< Byte tag. */
 	using Int16Tag = ValueWrapperTag<std::int16_t>; /**< Signed 16 bit int tag. */
 	using Int32Tag = ValueWrapperTag<std::int32_t>; /**< Signed 32 bit int tag. */

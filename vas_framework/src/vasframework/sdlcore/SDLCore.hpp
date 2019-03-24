@@ -19,18 +19,20 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	VAS_DECLSPEC std::string getError(); /**< Get last error message of SDL. */
 
 	VAS_DECLSPEC void delay(uint32_t ms); /**< Delay execution in miliseconds. */
 	VAS_DECLSPEC uint32_t getTicks(); /**< Get current ticks in miliseconds. */
 
-	/** Init SDL library
-		  @param flags Initialization flags to tell sdl which subsystem to init.
-		  @return true if success.
-	*/
+	/**
+	 * Init SDL library
+	 * @param flags Initialization flags to tell sdl which subsystem to init.
+	 * @return true if success.
+	 */
 	VAS_DECLSPEC bool init(uint32_t flags = sdl::InitFlags::everything);
 
 	/**
@@ -65,10 +67,11 @@ namespace vas::sdl
 
 	namespace image
 	{
-		/** Init sdl_image library.
-			  @param flags image init flags.
-			  @return @p flags if success, 0 if fail.
-		*/
+		/**
+		 * Init sdl_image library.
+		 * @param flags image init flags.
+		 * @return @p flags if success, 0 if fail.
+		 */
 		VAS_DECLSPEC int init(int flags = ImageInitFlags::all_webp_not_included);
 		VAS_DECLSPEC void quit(); /**< Clear and quit the sdl_image library. */
 	}

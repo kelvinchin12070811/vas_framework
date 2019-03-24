@@ -21,33 +21,34 @@
 
 namespace vas
 {
-	/** @addtogroup util
-		  @{
-	*/
-	/** @brief Common tools that might help at input and output.
-
-		  The CommonTools contain tools for console input, output and also message boxes.
-
-		  ## Helper stream
-		  The helper stream is a class that designed to output the message more eiser. Most of them have std::cout like
-		  interface (using operator<< on a temporary instance). The helper stream will output them once it get destroyed.
-		
-		- vas::Log\n
-			Log the message. MessageType::log
-		- vas::Info\n
-			Info the user. MessageType::info
-		- vas::Warn\n
-			Warn the user. MessageType::warning
-		- vas::Err\n
-			Promp the user with error message. MessageType::error
-
-		@note The helper stream call messenger to output message therefore std::endl does not required.
-	*/
+	/**
+	 * @ingroup util
+	 * @{
+	 */
+	/**
+	 * @brief Common tools that might help at input and output.
+	 * 
+	 * The CommonTools contain tools for console input, output and also message boxes.
+	 * 
+	 * ## Helper stream
+	 * The helper stream is a class that designed to output the message more eiser. Most of them have std::cout like
+	 * interface (using operator<< on a temporary instance). The helper stream will output them once it get destroyed.
+	 * 
+	 * - vas::Log\n
+	 *		Log the message. MessageType::log
+	 * - vas::Info\n
+	 *		Info the user. MessageType::info
+	 * - vas::Warn\n
+	 *		Warn the user. MessageType::warning
+	 * - vas::Err\n
+	 *		Promp the user with error message. MessageType::error
+	 * 
+	 * @note The helper stream call messenger to output message therefore std::endl does not required.
+	 */
 	class VAS_DECLSPEC CommonTools
 	{ /** @} */
 	public:
-		/** Type of message, also determine it will promp with message box or not.
-		*/
+		/** Type of message, also determine it will promp with message box or not. */
 		enum class MessageType : long
 		{
 			log = -1, /**< Log, output the message only. Default type of output. (-1) */
@@ -58,39 +59,42 @@ namespace vas
 		static CommonTools& getInstance(); /**< Get the singletone instance of the CommonTools. */
 
 		bool hasConsole{ false }; /**< Determine if the application has console attatched to it or not. No console output
-								  will perform if false.
-								  @note This attribute will not toggle by it self, it must be toggle manually if console is allocated.*/
+								  * will perform if false.
+								  * @note This attribute will not toggle by it self, it must be toggle manually if console is allocated.*/
 
-		/** Output message to console, promp user if the condition is true.
-			  @param message Message to output.
-			  @param messType Type of the message to output.
-			  @param rtnValue Return value of the function.
-			  @return Value of @p rtnValue.
-		*/
+		/**
+		 * Output message to console, promp user if the condition is true.
+		 * @param[in] message Message to output.
+		 * @param[in] messType Type of the message to output.
+		 * @param[in] rtnValue Return value of the function.
+		 * @return Value of @p rtnValue.
+		 */
 		int messenger(
 			const std::string& message,
 			CommonTools::MessageType messType = CommonTools::MessageType::log,
 			int rtnValue = 0
 		);
 		
-		/** Output message to console, promp user if the condition is true.
-			  @param message Stream of message to output.
-			  @param messType Type of the message to output.
-			  @param rtnValue Return value of the function.
-			  @return Value of @p rtnValue.
-		*/
+		/**
+		 * Output message to console, promp user if the condition is true.
+		 * @param[in] message Stream of message to output.
+		 * @param[in] messType Type of the message to output.
+		 * @param[in] rtnValue Return value of the function.
+		 * @return Value of @p rtnValue.
+		 */
 		int messenger(
 			const std::ostream& message,
 			CommonTools::MessageType messType = CommonTools::MessageType::log,
 			int rtnValue = 0
 		);
 
-		/** Output message to console, promp user if the condition is true.
-			  @param message boost::format message to output.
-			  @param messType Type of the message to output.
-			  @param rtnValue Return value of the function.
-			  @return Value of @p rtnValue.
-		*/
+		/**
+		 * Output message to console, promp user if the condition is true.
+		 * @param[in] message boost::format message to output.
+		 * @param[in] messType Type of the message to output.
+		 * @param[in] rtnValue Return value of the function.
+		 * @return Value of @p rtnValue.
+		 */
 		int messenger(
 			const boost::format& message,
 			CommonTools::MessageType messType = CommonTools::MessageType::log,
@@ -115,54 +119,47 @@ namespace vas
 		CommonTools();
 		~CommonTools();
 
-		/** [Read & Write] Prefix of the console output. Timestamp will be outputed by default.
-
-			- __mutators__
-				-# void setConsolePrefix(const std::string& value)
-				-# void setConsolePrefix(std::function<std::string()> value)
-			- __accessors__
-				-# std::function<std::string()> getConsolePrefix()
-		*/
+		/**
+		 * Prefix of the console output. Timestamp will be outputed by default.
+		 * ####Mutators
+		 * -# void setConsolePrefix(const std::string& value)
+		 * -# void setConsolePrefix(std::function<std::string()> value)
+		 * 
+		 * ####Accessors
+		 * -# std::function<std::string()> getConsolePrefix()
+		 */
 		std::function<std::string()> consolePrefix;
-		/** [Read & Write] Logger function of messenger. use to handle additional task.
-			
-			- __mutaors & accessors__
-				-# std::function<void(const std::string&, CommonTools::MessageType, int)>& Loggingfunction()
-		*/
+		/**
+		 * Function object of logger function of messenger. use to handle additional task.
+		 * @param const std::string& message to log.
+		 * @param CommonTools::MessageType type of message.
+		 * @param int return value.
+		 * 
+		 * ####Accessors
+		 * -# std::function<void(const std::string&, CommonTools::MessageType, int)>& Loggingfunction()
+		 */
 		std::function<void(const std::string&, CommonTools::MessageType, int)> loggingFunction = nullptr;
-		/** [Write Only] Controll the format of the console output.
-			  The args are passed as following:
-			  -# console prefix
-			  -# message type
-			  -# message text
-
-			  - __mutators__
-				-# void setConsoleOutputFormat(std::function<std::string(std::function<std::string()>&, const std::string&, const std::string&)> value)
-		*/
+		/**
+		 * Function object that controll the format of the console output.
+		 * @param std::function<std::string()>& std::function that return console prefix.
+		 * @param const std::string& message type
+		 * @param const std::string& message text
+		 * @retval std::string composed message
+		 * 
+		 * ####Mutators
+		 * -# void setConsoleOutputFormat(std::function<std::string(std::function<std::string()>&, const std::string&, const std::string&)> value)
+		 */
 		std::function<std::string(std::function<std::string()>&, const std::string&, const std::string&)> outputFormat;
-		/** [Write Only] Stringnified message type name.
-			  
-			  - __mutators__
-				-# void setMessTypeStr(std::array<std::string, 4> value)
-		*/
+		/**
+		 * Stringnified message type name.
+		 * ####Mutators
+		 * -# void setMessTypeStr(std::array<std::string, 4> value)
+		 */
 		std::array<std::string, 4> messTypeStr{ "ERROR", "INFO", "LOG", "WARN" };
 	};
 
-	/* @addtogroup util
-		  @{
-	*/
-	/* @brief Output to console with stream and CommonTools::MessageType::log type.
-		  
-		  The Log class is a std::cout like stream that output message to consome via CommonTools::messenger() with
-		  CommonTools::MessageType::log type.
-
-		  example usage:
-			```cpp
-			vas::Log() << "message to output";	// std::endl not required, the line ended when the instance destroy.	  
-			```
-	*/
 	class Log
-	{ /* @} */
+	{
 	public:
 		Log() = default;
 		~Log()

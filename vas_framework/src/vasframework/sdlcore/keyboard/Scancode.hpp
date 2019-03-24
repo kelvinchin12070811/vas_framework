@@ -9,9 +9,10 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** @brief The SDL keyboard scancode representation. */
 	enum class Scancode
 	{
@@ -259,9 +260,10 @@ namespace vas::sdl
 		num_scancodes = 512
 	};
 
-	/** @name Scancode comparison operator.
-		  @{
-	*/
+	/**
+	 * @name Scancode comparison operator.
+	 * @{
+	 */
 	VAS_DECLSPEC bool operator==(SDL_Scancode lhs, Scancode rhs);
 	VAS_DECLSPEC bool operator==(Scancode lhs, SDL_Scancode rhs);
 	VAS_DECLSPEC bool operator!=(SDL_Scancode lhs, Scancode rhs);

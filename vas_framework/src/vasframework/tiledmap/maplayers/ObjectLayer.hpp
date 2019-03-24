@@ -11,7 +11,7 @@
 
 namespace vas
 {
-	/** @addtogroup tile_codec
+	/** @ingroup tile_codec
 		  @{
 	*/
 	/** @brief The layer of objects. */

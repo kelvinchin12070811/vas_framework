@@ -30,7 +30,7 @@ Ren?Nyffenegger rene.nyffenegger@adp-gmbh.ch
 #include <vector>
 #include "../../VASConfig.hpp"
 
-/** @addtogroup math
+/** @ingroup math
 	  @{
 */
 /** @defgroup base64_lib Base64 Codec
@@ -47,7 +47,7 @@ namespace vas // extra
 {
 	namespace base64 // extra
 	{
-		/** @addtogroup base64_lib
+		/** @ingroup base64_lib
 			  @{
 		*/
 		namespace raw // extra

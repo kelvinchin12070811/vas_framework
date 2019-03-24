@@ -40,7 +40,7 @@
 #define NOMINMAX
 #endif
 
-/** @addtogroup vas_framework
+/** @ingroup vas_framework
 	 @{
 */
 

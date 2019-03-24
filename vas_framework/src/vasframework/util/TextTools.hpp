@@ -35,32 +35,36 @@
 
 namespace vas
 {
-	/** @addtogroup txt_tool
-		  @{
-	*/
-	/** @brief The alternative console IO class.
-		  
-		  The static singletone class that provide basic tools for console IO.
-	*/
+	/**
+	 * @ingroup txt_tool
+	 * @{
+	 */
+	/**
+	 * @brief The alternative console IO class.
+	 * 
+	 * The static singletone class that provide basic tools for console IO.
+	 */
 	class VAS_DECLSPEC TextTools
 	{ /** @} */
 	public:
 #ifdef VAS_WINDOWS_MODE
-		/** @name Windows only members (only avaliable on Windows).*/
+		/** @name Windows only members (only avaliable on Windows). */
 		static bool inited; /**< Determine if the tools is pre initialized. */
 
 		static void initTextTools(); /**< Initialize the tools. */
-		/** Convert wide char (UTF-16 encoded) string to multibytes or UTF-8 char string.
-			  @param str Input string.
-			  @param unicode Convert to unicode or not.
-			  @retval std::string UTF-8 encoded string of @p str if @p unicode is true, multibytes char otherwise.
-		*/
+		/**
+		 * Convert wide char (UTF-16 encoded) string to multibytes or UTF-8 char string.
+		 * @param[in] str Input string.
+		 * @param[in] unicode Convert to unicode or not.
+		 * @retval std::string UTF-8 encoded string of @p str if @p unicode is true, multibytes char otherwise.
+		 */
 		static std::string wstos(const std::wstring&str, bool unicode = true);
-		/** Convert multibytes or UTF-8 string to UTF-16 string.
-			  @param str Input string.
-			  @param unicode Is the input string encoded in UTF-8 or multibytes.
-			  @retval std::wstring UTF-16 encoded string of @p str.
-		*/
+		/**
+		 * Convert multibytes or UTF-8 string to UTF-16 string.
+		 * @param[in] str Input string.
+		 * @param[in] unicode Is the input string encoded in UTF-8 or multibytes.
+		 * @retval std::wstring UTF-16 encoded string of @p str.
+		 */
 		static std::wstring stows(const std::string& str, bool unicode = true);
 		/** @} */
 #endif // VAS_WINDOWS_MODE

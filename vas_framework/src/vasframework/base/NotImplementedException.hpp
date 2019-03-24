@@ -9,11 +9,13 @@
 
 namespace vas
 {
-	/** @addtogroup vas_framework
-		  @{
-	*/
-	/** @brief The exception thrown when an not implemented function called.
-	*/
+	/**
+	 * @ingroup vas_framework
+	 * @{
+	 */
+	/**
+	 * @brief The exception thrown when an not implemented function called.
+	 */
 	class VAS_DECLSPEC NotImplementedException : public std::exception
 	{ /** @} */
 	public:

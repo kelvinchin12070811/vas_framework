@@ -10,9 +10,10 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** @brief A rectangle, with the origin at the upper left. */
 	class VAS_DECLSPEC Rect
 	{ /** @} */
@@ -26,42 +27,46 @@ namespace vas::sdl
 		int w{ 0 }; /**< width of rect. */
 		int h{ 0 }; /**< height of rect. */
 
-		/** Determine if twr Rect is intersected.
-			  @param other Rect to compare.
-			  @return true if both Rects are intersected.
-		*/
+		/**
+		 * Determine if twr Rect is intersected.
+		 * @param[in] other Rect to compare.
+		 * @return true if both Rects are intersected.
+		 */
 		bool intersectWith(const Rect& other) const;
-		/** Calculate the intersection between two rect.
-			  @param other Rect to compare.
-			  @retval vas::sdl::Rect Area intersected between two Rects.
-		*/
+		/**
+		 * Calculate the intersection between two rect.
+		 * @param[in] other Rect to compare.
+		 * @retval vas::sdl::Rect Area intersected between two Rects.
+		 */
 		Rect getIntersectionBetween(const Rect& other) const;
-		/** Calculate the union between two rect.
-			  @param other Rect to compare.
-			  @retval vas::sdl::Rect Area of union between two Rects.
-		*/
+		/**
+		 * Calculate the union between two rect.
+		 * @param[in] other Rect to compare.
+		 * @retval vas::sdl::Rect Area of union between two Rects.
+		 */
 		Rect getUinonBetween(const Rect& other) const;
-		/** Calculate a minimal rectangle enclosing a set of points.
-			  @param points Points to enclose.
-			  @param result Output of result.
-			  @return true if any points were within the clipping rect.
-		*/
+		/**
+		 * Calculate a minimal rectangle enclosing a set of points.
+		 * @param[in] points Points to enclose.
+		 * @param[in] result Output of result.
+		 * @return true if any points were within the clipping rect.
+		 */
 		bool enclosePoints(const std::vector<Point>& points, Rect* result) const;
-		/** Calculate the intersection of a rectangle and line segment.
-			  @param lineBegin Starting point of the line.
-			  @param lineEnd Ending of the line.
-			  @return true if there is an intersection, false otherwise.
-		*/
+		/**
+		 * Calculate the intersection of a rectangle and line segment.
+		 * @param[in] lineBegin Starting point of the line.
+		 * @param[in] lineEnd Ending of the line.
+		 * @return true if there is an intersection, false otherwise.
+		 */
 		bool intersectWithLine(Point& lineBegin, Point& lineEnd) const;
 
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		bool operator==(const Rect& rhs) const; /**< Compare two rect if is equal. */
 		bool operator!=(const Rect& rhs) const; /**< Compare two rect if is not equal. */
-		/** @} */
 		Rect& operator=(const SDL_Rect& rhs); /**< Assign with SDL_Rect. */
-		/** @name Overloaded operators*/
 		operator SDL_Rect(); /**< Cast to SDL_Rect. */
 		operator const SDL_Rect() const; /**< Cast to const SDL_Rect. */
 		/** @} */

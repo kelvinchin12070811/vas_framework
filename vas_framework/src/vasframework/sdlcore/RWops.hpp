@@ -12,9 +12,10 @@ namespace vas::sdl
 {
 	namespace rwops
 	{
-		/** @addtogroup sdl_basic
-			  @{
-		*/
+		/**
+		 * @ingroup sdl_basic
+		 * @{
+		 */
 		/** @brief RWops type. */
 		struct VAS_DECLSPEC Type
 		{

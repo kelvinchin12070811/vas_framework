@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\vasframework\graphics\imgui\BasicWindowPanel.hpp" />
+    <ClInclude Include="src\vasframework\graphics\imgui\BasicTexturedWindow.hpp" />
+    <ClInclude Include="src\vasframework\graphics\imgui\Window.hpp" />
+    <ClInclude Include="src\vasframework\graphics\imgui\WindowPanel.hpp" />
+    <ClInclude Include="src\vasframework\graphics\imgui\WindowStyle.hpp" />
     <ClInclude Include="src\vasframework\physics\b2extentions\util\AdaptedContactListener.hpp" />
     <ClInclude Include="src\vasframework\physics\b2extentions\b2Extention.hpp" />
     <ClInclude Include="src\vasframework\physics\CollideAble.hpp" />
@@ -130,6 +135,9 @@
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\vasframework\graphics\imgui\BasicWindowPanel.cpp" />
+    <ClCompile Include="src\vasframework\graphics\imgui\BasicTexturedWindow.cpp" />
+    <ClCompile Include="src\vasframework\graphics\imgui\Window.cpp" />
     <ClCompile Include="src\vasframework\physics\b2extentions\util\AdaptedContactListener.cpp" />
     <ClCompile Include="src\vasframework\physics\b2extentions\util\AdaptedDestructionListener.cpp" />
     <ClCompile Include="src\vasframework\physics\b2extentions\b2WorldEx.cpp" />

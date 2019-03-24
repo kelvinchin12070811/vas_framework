@@ -17,7 +17,7 @@ namespace vas
 	{
 		if (countingState)
 			stop();
-		timeOutSignal.disconnect_all_slots();
+		TimedOut.disconnect_all_slots();
 	}
 
 	bool Timer::setInterval(std::chrono::milliseconds interval)
@@ -59,7 +59,7 @@ namespace vas
 			using namespace std;
 			using namespace chrono;
 			std::this_thread::sleep_for(duration);
-			timeOutSignal();
+			TimedOut();
 		}
 	}
 }

@@ -68,11 +68,11 @@ namespace vas
 	{
 		using namespace std::chrono_literals;
 		if (window == sdl::nullcomponent)
-			throw std::runtime_error{ "Unable to start game loop scene window instance is nullptr" };
+			throw std::logic_error{ "Unable to start game loop scene window instance is nullptr" };
 		window.show();
 
 		if (renderer == sdl::nullcomponent)
-			throw std::runtime_error{ "Unable to start game loop scene renderer instance is nullptr" };
+			throw std::logic_error{ "Unable to start game loop scene renderer instance is nullptr" };
 		{
 			auto canvasSize = renderer.getLogicalSize();
 			if (canvasSize.x == 0 && canvasSize.y == 0)
@@ -268,15 +268,20 @@ namespace vas
 	void Base::tick()
 	{
 		InputManager::getInstance().tick();
+		
 		if (!SceneManager::getInstance().isEmpty())
 		{
-			if (ScreenManager::getInstance().WaitFadingCompleate) // If waiting ScreenManager to compleate fading
+			auto scene = SceneManager::getInstance().current();
+			if (!scene->isPaused()) //Tick only if scene is not paused for ticking.
 			{
-				if (ScreenManager::getInstance().getCurrentFadingState() == ScreenManager::FadingState::none)
-					SceneManager::getInstance().current()->tick();
+				if (ScreenManager::getInstance().WaitFadingCompleate) // If waiting ScreenManager to compleate fading
+				{
+					if (ScreenManager::getInstance().getCurrentFadingState() == ScreenManager::FadingState::none)
+						scene->tick();
+				}
+				else // if not wait for ScreenManager conpleate fading
+					scene->tick();
 			}
-			else // if not wait for ScreenManager conpleate fading
-				SceneManager::getInstance().current()->tick();
 		}
 		ScreenManager::getInstance().tick();
 	}

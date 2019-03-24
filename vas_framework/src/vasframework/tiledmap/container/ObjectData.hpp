@@ -13,7 +13,7 @@
 
 namespace vas
 {
-	/** @addtogroup tile_codec
+	/** @ingroup tile_codec
 		  @{
 	*/
 	/** @brief Object to draw on ObjectLayer.

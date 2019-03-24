@@ -11,17 +11,19 @@
 namespace vas
 {
 	class Angle;
-	/** @addtogroup math
-		  @{
-	*/
-	/** @brief A quantity that contain both magnitude and direction.
-		  
-		  Vector2 is a 2D quantity that recorded the magnitude and direction of an 2D elements. It also represent the position
-		  of the 2D elements if it is pointing from the origin(0, 0).
-
-		  Beware that the Vector2 use screen's pixel cartesian coordinate system instead of real world cartesian coordinate
-		  system, this mean that the origin of the Vector2 are at the top-left corner of the screen.
-	*/
+	/**
+	 * @ingroup math
+	 * @{
+	 */
+	/**
+	 * @brief A quantity that contain both magnitude and direction.
+	 * 
+	 * Vector2 is a 2D quantity that recorded the magnitude and direction of an 2D elements. It also represent the position
+	 * of the 2D elements if it is pointing from the origin(0, 0).
+	 * 
+	 * Beware that the Vector2 use screen's pixel cartesian coordinate system instead of real world cartesian coordinate
+	 * system, this mean that the origin of the Vector2 are at the top-left corner of the screen.
+	 */
 	class VAS_DECLSPEC Vector2
 	{ /** @} */
 	public:
@@ -34,15 +36,17 @@ namespace vas
 		~Vector2() {}
 
 		explicit Vector2(const sdl::Point& point); /**< Cast from sdl::Point. */
-		/** Create new instance of Vector2 from coordinate.
-			  @param x X coordinate of the vector.
-			  @param y Y coordinate of the vector.
-		*/
+		/**
+		 * Create new instance of Vector2 from coordinate.
+		 * @param[in] x X coordinate of the vector.
+		 * @param[in] y Y coordinate of the vector.
+		 */
 		Vector2(float x, float y);
-		/** Create new instance of Vector2 from magnitude and angle.
-			  @param magnitude Magnitude or distance of the vector.
-			  @param value Angle of the vector line.
-		*/
+		/**
+		 * Create new instance of Vector2 from magnitude and angle.
+		 * @param[in] magnitude Magnitude or distance of the vector.
+		 * @param[in] value Angle of the vector line.
+		 */
 		Vector2(float magnitude, const Angle& value);
 
 		/** Get the magnitude of vector from origin(0, 0). */
@@ -57,17 +61,19 @@ namespace vas
 		Vector2 normalize() const;
 		/** Get the vector with absolute value(no negative number) from this vector. */
 		Vector2 absolute() const;
-		/** Linear interpolation algorithm.
-			  @param from Starting point of lerp algorithm.
-			  @param to Ending point of lerp algorithm.
-			  @param speed speed of moving point, must in between 0 and 1 (outside this range will be clampped).
-			  @return Current position on @p speed.
-		*/
+		/**
+		 * Linear interpolation algorithm.
+		 * @param[in] from Starting point of lerp algorithm.
+		 * @param[in] to Ending point of lerp algorithm.
+		 * @param[in] speed speed of moving point, must in between 0 and 1 (outside this range will be clampped).
+		 * @return Current position on @p speed.
+		 */
 		static Vector2 lerp(const Vector2& from, const Vector2& to, float speed);
 
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		bool operator==(const Vector2& rhs) const; /**< Determine if both of the vectors with same value. */
 		bool operator!=(const Vector2& rhs) const; /**< Determine if both vectors does not with same value. */
 		bool operator<(const Vector2& rhs) const; /**< Determine if rhs is less than this. */
@@ -90,9 +96,10 @@ namespace vas
 		const Vector2& operator/=(float rhs); /**< Divide this vector with a factor. */
 		/** @} */
 
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		explicit operator sdl::Point() const; /**< Cast to sdl::Point. */
 		/** @} */
 	public:
@@ -102,12 +109,14 @@ namespace vas
 		uint8_t getQuaterId() const;
 	};
 
-	/** @memberof Vector2
-		  Zero vector of a vector, with a value of (0, 0) which pointing from the origin.
-	*/
+	/**
+	 * @memberof Vector2
+	 * Zero vector of a vector, with a value of (0, 0) which pointing from the origin.
+	 */
 	const Vector2 zerovector{};
-	/** @memberof Vector2
-		  Vector that hold epsilon of float for both x and y axises.
-	*/
+	/**
+	 * @memberof Vector2
+	 * Vector that hold epsilon of float for both x and y axises.
+	 */
 	const Vector2 epsilonvector{ std::numeric_limits<float>::epsilon(), std::numeric_limits<float>::epsilon() };
 }

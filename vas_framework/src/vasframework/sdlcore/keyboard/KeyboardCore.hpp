@@ -14,9 +14,10 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** @brief Mouse button id or index. */
 	enum class MouseButtonIndex : uint8_t
 	{
@@ -28,25 +29,25 @@ namespace vas::sdl
 	};
 	using MouseWheelDirection = SDL_MouseWheelDirection; /**< mouse wheel roll direction. */
 	/**
-	*  Get the window which currently has keyboard focus.
-	*/
+	 *  Get the window which currently has keyboard focus.
+	 */
 	VAS_DECLSPEC sdl::Window getKeyboardFocus();
 
 	/**
-	*  Get a snapshot of the current state of the keyboard.
-	*
-	*  @param numKey if non-NULL, receives the length of the returned array.
-	*
-	*  \return An array of key states. Indexes into this array are obtained by using vas::sdl::Scancode values.
-	*
-	*  \b Example:
-	*  \code
-	*  const Uint8 *state = SDL_GetKeyboardState(NULL);
-	*  if ( state[SDL_SCANCODE_RETURN] )   {
-	*      printf("<RETURN> is pressed.\n");
-	*  }
-	*  \endcode
-	*/
+	 *  Get a snapshot of the current state of the keyboard.
+	 *
+	 *  @param numKey if non-NULL, receives the length of the returned array.
+	 *
+	 *  @return An array of key states. Indexes into this array are obtained by using vas::sdl::Scancode values.
+	 *
+	 *  @b Example:
+	 *  @code
+	 *  const Uint8 *state = SDL_GetKeyboardState(NULL);
+	 *  if ( state[SDL_SCANCODE_RETURN] )   {
+	 *      printf("<RETURN> is pressed.\n");
+	 *  }
+	 *  @endcode
+	 */
 	VAS_DECLSPEC const uint8_t* getKeyboardState(int* numKey = nullptr);
 
 	/**

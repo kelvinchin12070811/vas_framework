@@ -12,7 +12,7 @@
 
 namespace vas
 {
-	/** @addtogroup tile_codec
+	/** @ingroup tile_codec
 		  @{
 	*/
 	/** @brief Tileset source information.

@@ -13,13 +13,15 @@
 
 namespace vas
 {
-	/** @addtogroup animate
-		  @{
-	*/
-	/** @brief Advance animation controller of the animations.
-		  
-		  The AnimationControllerEx is a sequential animation controller that have more feature than the simple AnimationController.
-	*/
+	/**
+	 * @ingroup animate
+	 * @{
+	 */
+	/**
+	 * @brief Advance animation controller of the animations.
+	 * 
+	 * The AnimationControllerEx is a sequential animation controller that have more feature than the simple AnimationController.
+	 */
 	class VAS_DECLSPEC AnimationControllerEx : public AutoControllable
 	{ /** @} */
 	public:
@@ -30,13 +32,15 @@ namespace vas
 		const AnimateAble* currentAnim() const; /**< Get the current animation. */
 		size_t currentAnimIndex() const; /**< Get current animation index. */
 
-		/** Inset animation to the animations list.
-			  @param animation Instance of animation.
-		*/
+		/**
+		 * Inset animation to the animations list.
+		 * @param[in] animation Instance of animation.
+		 */
 		void insertAnimation(std::unique_ptr<AnimateAble> animation);
-		/** Insert animations with initializer_list
-			  @param animations Instances of animations in initializer list.
-		*/
+		/**
+		 * Insert animations with initializer_list
+		 * @param[in] animations Instances of animations in initializer list.
+		 */
 		void insertAnimations(std::initializer_list<std::unique_ptr<AnimateAble>> animations);
 		/** Remove animation at the back. */
 		void removeAnimation();
@@ -56,23 +60,27 @@ namespace vas
 		void setLoopingAnim(bool value);
 
 	private:
-		/** [Read Only] Determine if the animations finished playing.\n
-				- __accessors__
-					-# bool isFinished() const
-		*/
+		/**
+		 * Determine if the animations finished playing.
+		 * ####Accessors
+		 * -# bool isFinished() const
+		 */
 		bool finished{ false };
-		/** [Read & Write] Determine if the animations will be looped.\n
-				- __mutators__
-					-# void setLoopingAnim(bool value)
-				- __accessors__
-					-# bool isLoopingAnim() const
-		*/
+		/**
+		 * Determine if the animations will be looped.
+		 * ####Mutators
+		 * -# void setLoopingAnim(bool value)
+		 *
+		 * ####Accessors
+		 * -# bool isLoopingAnim() const
+		 */
 		bool loopAnim{ false };
-		/** [Read & Write] Animations list\n
-				- __accessors__
-					-# const std::list<std::unique_ptr<AnimateAble>>& getAnimationList() const
-					-# std::list<std::unique_ptr<AnimateAble>>& getAnimationList()
-		*/
+		/**
+		 * Animations list
+		 * ####Accessors
+		 * -# const std::list<std::unique_ptr<AnimateAble>>& getAnimationList() const
+		 * -# std::list<std::unique_ptr<AnimateAble>>& getAnimationList()
+		 */
 		std::list<std::unique_ptr<AnimateAble>> animationList;
 		std::list<std::unique_ptr<AnimateAble>>::iterator curAnim{ animationList.begin() };
 	};

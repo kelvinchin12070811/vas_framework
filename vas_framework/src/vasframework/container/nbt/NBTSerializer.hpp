@@ -10,15 +10,17 @@
 
 namespace vas
 {
-	/** @addtogroup nbt_tag
-		  @{
-	*/
-	/** @brief The interface of all serializer and deserializer.
-		  
-		  The NBTSerializer is the object that all nbt tags take to serialize or deserialize their data. The serializer have
-		  several member functions to accept value from the nbt tree. Specialization on ValueWrapperTag::serialize
-		  needed for other type.
-	*/
+	/**
+	 * @ingroup nbt_tag
+	 * @{
+	 */
+	/**
+	 * @brief The interface of all serializer and deserializer.
+	 * 
+	 * The NBTSerializer is the object that all nbt tags take to serialize or deserialize their data. The serializer have
+	 * several member functions to accept value from the nbt tree. Specialization on ValueWrapperTag::serialize
+	 * needed for other type.
+	 */
 	class NBTSerializer
 	{ /** @} */
 	public:
@@ -30,19 +32,22 @@ namespace vas
 		NBTSerializer& operator=(const NBTSerializer&) = default;
 		NBTSerializer& operator=(NBTSerializer&&) noexcept = default;
 		virtual ~NBTSerializer() = 0;
-		/** Begin tree structure.
-			  @param name Name of the tree.
-		*/
+		/**
+		 * Begin tree structure.
+		 * @param[in] name Name of the tree.
+		 */
 		virtual void treeStart(const std::string& name) = 0;
 		virtual void treeEnd() = 0; /**< End of the tree. */
-		/** Begin of an array structure.
-			  @param name Name of the array.
-		*/
+		/**
+		 * Begin of an array structure.
+		 * @param[in] name Name of the array.
+		 */
 		virtual void arrayStart(const std::string& name) = 0;
 		virtual void arrayEnd() = 0; /**< End of an array structure. */
-		/** Resize the target array container if possible.
-			  @param setter Function pointer to resize the target array container, Won't do any thing if nullptr.
-		*/
+		/**
+		 * Resize the target array container if possible.
+		 * @param[in] setter Function pointer to resize the target array container, Won't do any thing if nullptr.
+		 */
 		virtual void arraySizeSetter(ArraySizeSetter setter) = 0;
 
 		virtual void accept(const std::string& name, std::byte& value) = 0; /**< Accept std::byte. */

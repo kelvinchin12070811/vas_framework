@@ -4,6 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #include "Scene.hpp"
+#include "../../manager/ScreenManager.hpp"
 
 namespace vas
 {
@@ -35,5 +36,36 @@ namespace vas
 	void Scene::afterSceneCall()
 	{
 		return;
+	}
+
+	void Scene::closeGuiPanel()
+	{
+		if (!guiPanel) return;
+		guiPanel = nullptr;
+	}
+
+	imgui::WindowPanel * Scene::getGuiPanel()
+	{
+		return guiPanel.get();
+	}
+
+	bool Scene::isGUIPanelOpened() const
+	{
+		return guiPanel != nullptr;
+	}
+
+	void Scene::pause()
+	{
+		paused = true;
+	}
+	
+	void Scene::resume()
+	{
+		paused = false;
+	}
+	
+	bool Scene::isPaused()
+	{
+		return paused;
 	}
 }

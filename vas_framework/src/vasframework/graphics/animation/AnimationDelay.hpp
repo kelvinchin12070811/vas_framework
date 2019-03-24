@@ -10,20 +10,23 @@
 
 namespace vas
 {
-	/** @addtogroup animate
-		  @{
-	*/
-	/** @brief Delay the execution of the AnimationControllerEx.
-		  
-		  The AnimationDelay is an animation that add a pause between the execution of animations in time.
-	*/
+	/**
+	 * @ingroup animate
+	 * @{
+	 */
+	/**
+	 * @brief Delay the execution of the AnimationControllerEx.
+	 * 
+	 * The AnimationDelay is an animation that add a pause between the execution of animations in time.
+	 */
 	class VAS_DECLSPEC AnimationDelay : public AnimateAble
 	{ /** @} */
 	public:
 		AnimationDelay() = default; /**< Create empty animation, no delay. */
-		/** Create an animation with delay of @p duration.
-			  @param duration Duration that the pause added.
-		*/
+		/**
+		 * Create an animation with delay of @p duration.
+		 * @param[in] duration Duration that the pause added.
+		 */
 		explicit AnimationDelay(std::chrono::nanoseconds duration);
 
 		void tick() override;
@@ -34,12 +37,14 @@ namespace vas
 	public: //accessors
 		std::chrono::nanoseconds getDuration() const;
 	private:
-		/** [Read & Write] Duration that pause added.\n
-				- __mutators__
-					-# void setDuration(std::chrono::nanoseconds value)
-				- __accessors__
-					-# std::chrono::nanoseconds getDuration() const
-		*/
+		/**
+		 * Duration that pause added.
+		 * ####Mutators
+		 * -# void setDuration(std::chrono::nanoseconds value)
+		 *
+		 * ####Accessors
+		 * -# std::chrono::nanoseconds getDuration() const
+		 */
 		std::chrono::nanoseconds duration;
 		std::chrono::steady_clock::time_point startTime;
 	};

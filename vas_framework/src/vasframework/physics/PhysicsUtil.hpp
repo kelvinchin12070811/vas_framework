@@ -13,15 +13,17 @@
 
 namespace vas::physics
 {
-	/** @addtogroup physics
-		  @{
-	*/
-	/** @brief Utility that help to work on axises scalling.
-		  This utility provided functions that cast pixel based axises to real axises(meter).
-
-		  @note The y axis will be flipped along the x axis (by multipling it to negative sign.
-		  @note The default scale of pixel based axises over real axises are 32:1 (32 pixel = 1 meter).
-	*/
+	/**
+	 * @ingroup physics
+	 * @{
+	 */
+	/**
+	 * @brief Utility that help to work on axises scalling.
+	 * This utility provided functions that cast pixel based axises to real axises(meter).
+	 * 
+	 * @note The y axis will be flipped along the x axis (by multipling it to negative sign.
+	 * @note The default scale of pixel based axises over real axises are 32:1 (32 pixel = 1 meter).
+	 */
 	class CoordinateTools
 	{ /** @} */
 	public:

@@ -11,9 +11,10 @@ namespace vas::sdl
 {
 	namespace image
 	{
-		/** @addtogroup sdl_basic
-			  @{
-		*/
+		/**
+		 * @ingroup sdl_basic
+		 * @{
+		 */
 		/** @brief Initialization flags of sdl_image. */
 		struct VAS_DECLSPEC ImageInitFlags
 		{

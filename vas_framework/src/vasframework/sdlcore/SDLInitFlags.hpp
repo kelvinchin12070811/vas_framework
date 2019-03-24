@@ -9,13 +9,15 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
-	/** @brief Initialization flags of sdl library.
-		  
-		  The InitFlags is the flags that tell sdl what sub component to init during the initialization of the library.
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
+	/**
+	 * @brief Initialization flags of sdl library.
+	 * 
+	 * The InitFlags is the flags that tell sdl what sub component to init during the initialization of the library.
+	 */
 	struct VAS_DECLSPEC InitFlags
 	{ /** @} */
 		static const uint32_t everything; /**< Init all subsystem. */

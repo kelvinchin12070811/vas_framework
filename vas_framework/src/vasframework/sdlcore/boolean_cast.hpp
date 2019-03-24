@@ -8,9 +8,10 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** Cast SDL_bool to bool. */
 	inline bool boolean_cast(SDL_bool value)
 	{

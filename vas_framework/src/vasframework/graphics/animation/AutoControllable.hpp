@@ -7,13 +7,15 @@
 
 namespace vas
 {
-	/** @addtogroup animate
-		  @{
-	*/
-	/** @brief Interface of all animation controller.
-		  
-		  The abstract interface of all animation controllers that will operate automatically.
-	*/
+	/**
+	 * @ingroup animate
+	 * @{
+	 */
+	/**
+	 * @brief Interface of all animation controller.
+	 * 
+	 * The abstract interface of all animation controllers that will operate automatically.
+	 */
 	class AutoControllable
 	{ /** @} */
 	public:

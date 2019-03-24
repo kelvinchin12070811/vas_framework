@@ -6,20 +6,17 @@
 #pragma once
 #include "../VASConfig.hpp"
 
-//TODO: Fix more calculation error in Angle
 namespace vas
 {
-	/** @addtogroup math
-		  @{
-	*/
-	/** @brief The Angle of lines.
-
-		  The Angle class store the angle of a line from top with clockwise rotation. The quater of it shown like bellow.
-
-			           Fourth quater |    First quater
-			       ------------------|-------------------
-			            Third quater  |  Second quater
-	*/
+	/**
+	 * @ingroup math
+	 * @{
+	 */
+	/**
+	 * @brief The Angle of lines.
+	 * 
+	 * The Angle class store the angle of a line from top with clockwise rotation.
+	 */
 	class VAS_DECLSPEC Angle
 	{ /** @} */
 	public:
@@ -31,10 +28,11 @@ namespace vas
 	public:
 		Angle() = default;
 		Angle(const Angle& rhs);
-		/** Construct new instance of Angle.
-			  @param rhs Value of the angle.
-			  @param type Type of the angle.
-		*/
+		/**
+		 * Construct new instance of Angle.
+		 * @param[in] rhs Value of the angle.
+		 * @param[in] type (Optional)Type of the angle.
+		 */
 		Angle(double rhs, AngleType type = Angle::AngleType::deg);
 
 		Angle toRadian() const; /**< Convert current Angle to radian. */
@@ -42,9 +40,10 @@ namespace vas
 
 		Angle::AngleType getAngleType() const; /**< Get current angle type. */
 
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		bool operator==(const Angle& rhs) const; /**< Compare if two Angle with same value. */
 		bool operator!=(const Angle& rhs) const; /**< Compare if two Angle does not with same value. */
 		const Angle& operator=(const Angle& rhs);

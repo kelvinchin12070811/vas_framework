@@ -10,7 +10,7 @@
 
 namespace vas
 {
-	/** @addtogroup container
+	/** @ingroup container
 		  @{
 	*/
 	/** @brief The property of an object.

@@ -9,19 +9,22 @@
 
 namespace vas
 {
-	/** @addtogroup util
-		  @{
-	*/
-	/** @brief Automatic resources management utility with RAII.
-		  
-		  The automatic resources management utility which will automatically release resource when out of scope.
-	*/
+	/**
+	 * @ingroup util
+	 * @{
+	 */
+	/**
+	 * @brief Automatic resources management utility with RAII.
+	 * 
+	 * The automatic resources management utility which will automatically release resource when out of scope.
+	 */
 	class ResourceLoader
 	{ /** @} */
 	public:
-		/** Construct new instance
-			  @param freeResources Free the resources when out of scope.
-		*/
+		/**
+		 * Construct new instance
+		 * @param[in] freeResources Free the resources when out of scope.
+		 */
 		ResourceLoader(bool freeResources = true);
 		ResourceLoader(const ResourceLoader&) = delete;
 		ResourceLoader(ResourceLoader&&) = delete;
@@ -30,31 +33,35 @@ namespace vas
 		ResourceLoader& operator=(const ResourceLoader&) = delete;
 		ResourceLoader& operator=(ResourceLoader&&) = delete;
 
-		/** Unload a single resource or all resources
-			  @param resourceId ID of resource to unload, unload all if empty.
-		*/
+		/**
+		 * Unload a single resource or all resources
+		 * @param[in] resourceId ID of resource to unload, unload all if empty.
+		 */
 		void unload(const std::string& resourceId = "");
 
-		/** Load a single resource.
-			  @param meta Meta data of resource.
-		*/
+		/**
+		 * Load a single resource.
+		 * @param[in] meta Meta data of resource.
+		 */
 		void load(std::unique_ptr<resource_type::ResourceMetatype> meta);
-		/** Load multiple resources with initializer list.
-			  @param meta List of meta data of resources.
-		*/
+		/**
+		 * Load multiple resources with initializer list.
+		 * @param[in] meta List of meta data of resources.
+		 */
 		void load(std::initializer_list<std::unique_ptr<resource_type::ResourceMetatype>> meta);
 
 		void setFreeResources(bool value);
 		bool isFreeResources() const;
 	private:
 		std::vector<std::unique_ptr<resource_type::ResourceMetatype>> resourcesList;
-		/** [Read & Write] Determine if unload all resource during destructing the object.
-
-			 - __mutators__
-				-# void setFreeResources(bool value)
-			 - __accessors__
-				-# bool isFreeResources() const
-		*/
+		/**
+		 * Determine if unload all resource during destructing the object.
+		 * ####Mutators
+		 * -# void setFreeResources(bool value)
+		 * 
+		 * ####Accessors
+		 * -# bool isFreeResources() const
+		 */
 		bool freeResources;
 	};
 }

@@ -16,9 +16,10 @@ namespace vas::sdl
 {
 	namespace mixer
 	{
-		/** @addtogroup sdl_mixer
-			  @{
-		*/
+		/**
+		 * @ingroup sdl_mixer
+		 * @{
+		 */
 		/** @brief The internal format for a music chunk. */
 		class VAS_DECLSPEC Music
 		{ /** @} */
@@ -26,10 +27,11 @@ namespace vas::sdl
 			Music(); /**< Create empty Music. */
 			Music(const std::string& file); /**< Load Music from file. */
 
-			/** Reference to a Mix_Music.
-				  @param other Instance of raw component.
-				  @param owner Determine if this instance is an owner of @p other.
-			*/
+			/**
+			 * Reference to a Mix_Music.
+			 * @param[in] other Instance of raw component.
+			 * @param[in] owner Determine if this instance is an owner of @p other.
+			 */
 			explicit Music(Mix_Music* other, bool owner = false);
 
 			MusicType getMusicType(); /**< Get the music format of the music. */
@@ -39,7 +41,8 @@ namespace vas::sdl
 			void loadRawTyped(sdl::rwops::RWops* src, MusicType type, bool freeSrc = true); /**< Load music from memory by type. */
 
 			void fadeIn(int duration, int loops = -1); /**< fade in music with milliseconds. loop if @p loops < 0. */
-			void fadeInAt(double position, int duration, int loops = -1); /**< Fade in music with miliseconds at position. loop if @p loops < 0 */
+			void fadeInAt(double position, int duration, int loops = -1); /**< Fade in music with miliseconds at position.
+																		  * loop if @p loops < 0 */
 			void play(int loops = -1); /**< play the music. loop if @p loops < 0. */
 
 			static void fadeOut(int duration); /**< Fade out in milliseconds. */
@@ -51,27 +54,30 @@ namespace vas::sdl
 			static bool isPaused(); /**< Check if music is paused. */
 			static void stop(); /**< Stop the music. */
 
-			/** Set the current position in the music stream.
-			This returns 0 if successful, or -1 if it failed or isn't implemented.
-			This function is only implemented for MOD music formats (set pattern
-			order number) and for OGG, FLAC, MP3_MAD, and MODPLUG music (set
-			position in seconds), at the moment.
-			*/
+			/**
+			 * Set the current position in the music stream.
+			 * This returns 0 if successful, or -1 if it failed or isn't implemented.
+			 * This function is only implemented for MOD music formats (set pattern
+			 * order number) and for OGG, FLAC, MP3_MAD, and MODPLUG music (set
+			 * position in seconds), at the moment.
+			 */
 			static bool setPosition(double position);
 
-			/** Set the volume in the range of 0-128 of a specific channel or chunk.
-			If the specified channel is -1, set volume for all channels.
-			Returns the original volume.
-			If the specified volume is -1, just return the current volume.
-			*/
+			/**
+			 * Set the volume in the range of 0-128 of a specific channel or chunk.
+			 * If the specified channel is -1, set volume for all channels.
+			 * Returns the original volume.
+			 * If the specified volume is -1, just return the current volume.
+			 */
 			static int volume(int volume);
 
 			void destroy(); /**< Destroy instance. */
 			bool isNull(); /**< Determine if instance is nullcomponent. */
 
-			/** @name Overloaded operators
-				  @{
-			*/
+			/**
+			 * @name Overloaded operators
+			 * @{
+			 */
 			operator Mix_Music*(); /**< Cast to raw component. */
 			Music& operator=(NullComponent_t); /**< Destroy instance by assigning it to nullcomponent. */
 

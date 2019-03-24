@@ -9,27 +9,31 @@
 
 namespace vas
 {
-	/** @addtogroup math
-		  @{
-	*/
-	/** @brief Counting to the limit.
-		  
-		  The Counter is an object that does the counting jobs. It will reset itself automaticaly once it reach the limit of the
-		  counter set by user. The defalut of the limit is the maximum of size_t data type.
-	*/
+	/**
+	 * @ingroup math
+	 * @{
+	 */
+	/**
+	 * @brief Counting to the limit.
+	 * 
+	 * The Counter is an object that does the counting jobs. It will reset itself automaticaly once it reach the limit of the
+	 * counter set by user. The defalut of the limit is the maximum of size_t data type.
+	 */
 	class VAS_DECLSPEC Counter
 	{ /** @} */
 	public:
 		/** Create Counter with default limit. */
 		Counter() = default;
-		/** Create Counter with user specified limit.
-			  @param autoResetLimit Ticks that when the counter reset it self.
-		*/
+		/**
+		 * Create Counter with user specified limit.
+		 * @param[in] autoResetLimit Ticks that when the counter reset it self.
+		 */
 		explicit Counter(size_t autoResetLimit);
 
-		/** Set the limit ticks of the counter.
-			  @param autoResetLimit new ticks limit.
-		*/
+		/**
+		 * Set the limit ticks of the counter.
+		 * @param[in] autoResetLimit new ticks limit.
+		 */
 		void setAutoResetLimit(size_t autoResetLimit);
 		/** Reset the counter to zero. */
 		void reset();

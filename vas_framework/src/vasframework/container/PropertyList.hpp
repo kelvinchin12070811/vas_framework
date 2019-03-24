@@ -9,7 +9,7 @@
 
 namespace vas
 {
-	/** @addtogroup container
+	/** @ingroup container
 		  @{
 	*/
 	/** @brief A list of properties.

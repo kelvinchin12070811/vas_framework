@@ -16,7 +16,7 @@
 
 namespace vas
 {
-	/** @addtogroup tile_codec
+	/** @ingroup tile_codec
 		  @{
 	*/
 	/** @brief Tiled TMX parser.

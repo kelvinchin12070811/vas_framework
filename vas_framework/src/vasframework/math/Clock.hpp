@@ -10,13 +10,15 @@
 
 namespace vas
 {
-	/** @addtogroup @math
-		  @{
-	*/
-	/** @brief The object that tell you what time is now.
-		  
-		  Clock is a utility that tell you current the time of the computer in ticks.
-	*/
+	/**
+	 * @ingroup math
+	 * @{
+	 */
+	/**
+	 * @brief The object that tell you what time is now.
+	 * 
+	 * Clock is a utility that tell you current the time of the computer in ticks.
+	 */
 	class VAS_DECLSPEC Clock
 	{ /** @} */
 	public:
@@ -28,53 +30,60 @@ namespace vas
 		};
 		Clock(); /**< Create and start counting time (first reset). */
 
-		/** Reset the clock and return the currnet elapsed time since last reset.
-			  @retval std::chrono::nanoseconds time elapsed in nanoseconds.
-		*/
+		/**
+		 * Reset the clock and return the currnet elapsed time since last reset.
+		 * @retval std::chrono::nanoseconds time elapsed in nanoseconds.
+		 */
 		std::chrono::nanoseconds reset();
 		/** Only reset the clock. */
 		void justReset();
 		/** Get the current time elapsed scine last reset. */
 		std::chrono::nanoseconds currentTick();
 
-		/** Get current system time in UNIX time format.
-			  @return Ticks in seconds since epoch (1 Jan 1970 00:00 a.m.)
-		*/
+		/**
+		 * Get current system time in UNIX time format.
+		 * @return Ticks in seconds since epoch (1 Jan 1970 00:00 a.m.)
+		 */
 		static time_t getCurrentUnixTime();
-		/** Get current system time in human readable calender format.
-			  @param zone Output time timezone.
-			  @return std::tm structure of current system time.
-		*/
+		/**
+		 * Get current system time in human readable calender format.
+		 * @param[in] zone Output time timezone.
+		 * @return std::tm structure of current system time.
+		 */
 		static std::tm getCurrentCalenderDateTime(Timezone zone = Timezone::utc);
-		/** Get current system time in ISO8601 format.
-			  @param zone Output time timezone.
-			  @param withSeperator Determine if outputed text with seperator.
-			  @return ISO8601 formated time.
-		*/
+		/**
+		 * Get current system time in ISO8601 format.
+		 * @param[in] zone Output time timezone.
+		 * @param[in] withSeperator Determine if outputed text with seperator.
+		 * @return ISO8601 formated time.
+		 */
 		static std::string getCurrentISO8601Time(Timezone zone = Timezone::utc, bool withSeperator = true);
 
-		/** Convert std::tm to time_t.
-			  @param tm Input time.
-			  @param srcZone Timezone of time inputed.
-			  @return @p tm in UNIX time format.
-		*/
+		/**
+		 * Convert std::tm to time_t.
+		 * @param[in] tm Input time.
+		 * @param[in] srcZone Timezone of time inputed.
+		 * @return @p tm in UNIX time format.
+		 */
 		static time_t tmToTime_t(const std::tm& tm, Timezone srcZone = Timezone::utc);
-		/** Convert time_t to std::tm.
-			  @param time Input time.
-			  @param desZone Output time timezone.
-			  @return std::tm of @p time.
-		*/
+		/**
+		 * Convert time_t to std::tm.
+		 * @param[in] time Input time.
+		 * @param[in] desZone Output time timezone.
+		 * @return std::tm of @p time.
+		 */
 		static std::tm time_tToTm(const time_t& time, Timezone desZone = Timezone::utc);
-		/** Convert std::tm to ISO8601 formated text.
-			  @param tm Input time.
-			  @param seperator Determine if outputed text with seperator.
-			  @param srcZone Timezone of time inputed.
-			  @return ISO8601 formated time of @p tm
-		*/
+		/**
+		 * Convert std::tm to ISO8601 formated text.
+		 * @param[in] tm Input time.
+		 * @param[in] seperator Determine if outputed text with seperator.
+		 * @param[in] srcZone Timezone of time inputed.
+		 * @return ISO8601 formated time of @p tm
+		 */
 		static std::string tmToISO8601(const std::tm& tm, bool seperator = true, Timezone srcZone = Timezone::utc);
 		/** Convert ISO8601 formated time to std::tm.
-			  @param iso8601Time Input time, ISO8601 formated.
-			  @param desZone Output time timezone.
+			  @param[in] iso8601Time Input time, ISO8601 formated.
+			  @param[in] desZone Output time timezone.
 		*/
 		static std::tm ISO8601ToTm(const std::string& iso8601Time, Timezone desZone = Timezone::utc);
 

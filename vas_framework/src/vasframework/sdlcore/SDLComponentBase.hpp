@@ -9,13 +9,15 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
-	/** @brief Empty component instance.
-		  
-		  Represent as an empty component instance. The operator used is vas::sdl::nullcomponent.
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
+	/**
+	 * @brief Empty component instance.
+	 * 
+	 * Represent as an empty component instance. The operator used is vas::sdl::nullcomponent.
+	 */
 	const class NullComponent_t
 	{
 	public:

@@ -13,13 +13,15 @@
 
 namespace vas
 {
-	/** @addtogroup nbt_tag
-		  @{
-	*/
-	/** @brief Json serialization engine for NBT Tags.
-
-		  The JsonSerializer serialize the NBT tags into json document. This class required rapidjson library.
-	*/
+	/**
+	 * @ingroup nbt_tag
+	 * @{
+	 */
+	/**
+	 * @brief Json serialization engine for NBT Tags.
+	 * 
+	 * The JsonSerializer serialize the NBT tags into json document. This class required rapidjson library.
+	 */
 	class JsonSerializer : public NBTSerializer
 	{ /** @} */
 	public:
@@ -48,11 +50,12 @@ namespace vas
 	private:
 		void append(const std::string& name, rapidjson::Value&& value);
 	private:
-		/** [Read & Write] JSON document of the serialized json.
-				- __accessors__
-					-# rapidjson::Document& getDocument()
-					-# const rapidjson::Document& getDocument() const
-		*/
+		/**
+		 * JSON document of the serialized json.
+		 * ####Accessors
+		 * -# rapidjson::Document& getDocument()
+		 * -# const rapidjson::Document& getDocument() const
+		 */
 		rapidjson::Document document;
 		std::stack<std::pair<std::string, rapidjson::Value>> stackTrace;
 	};

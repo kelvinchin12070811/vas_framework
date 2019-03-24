@@ -14,15 +14,17 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	using RendererInfo = SDL_RendererInfo; /**< Renderer Info struct. */
 	/** @} */
 	class Texture;
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** @brief The brush that draw every things to the Window. */
 	class VAS_DECLSPEC Renderer
 	{ /** @} */
@@ -44,94 +46,107 @@ namespace vas::sdl
 		{
 			static const uint32_t software;         /**< The renderer is a software fallback */
 			static const uint32_t accelerated;      /**< The renderer uses hardware
-															acceleration */
+															* acceleration */
 			static const uint32_t presentvsync;     /**< Present is synchronized
-															with the refresh rate */
+															* with the refresh rate */
 			static const uint32_t targettexture;     /**< The renderer supports
-															rendering to texture */
+															* rendering to texture */
 		};
 
 		Renderer(); /**< Create empty renderer instance. */
-		/** Create new renderer instance.
-			  @param window Window to render.
-			  @param index driver to use, -1 to use default driver.
-			  @param flags initialization flags of renderer, vas::sdl::Renderer::RendererFlags.
-		*/
+		/**
+		 * Create new renderer instance.
+		 * @param[in] window Window to render.
+		 * @param[in] index driver to use, -1 to use default driver.
+		 * @param[in] flags initialization flags of renderer, vas::sdl::Renderer::RendererFlags.
+		 */
 		Renderer(Window& window, int index, uint32_t flags);
 		/** Create software renderer with raw component. */
 		Renderer(SDL_Surface* surface);
 		/** Create software renderer. */
 		Renderer(Surface& surface);
 
-		/** Reference constructor of Renderer.
-			  @param renderer Raw component of renderer.
-			  @param owner Determine if instance has ownership of @p renderer.
-		*/
+		/**
+		 * Reference constructor of Renderer.
+		 * @param[in] renderer Raw component of renderer.
+		 * @param[in] owner Determine if instance has ownership of @p renderer.
+		 */
 		explicit Renderer(SDL_Renderer* renderer, bool owner = false);
 
-		/** Clear the renderer.
-			  @return true if success.
-		*/
+		/**
+		 * Clear the renderer.
+		 * @return true if success.
+		 */
 		bool clear();
-		/** Draw texture to the renderer.
-			  @param texture texture to render.
-			  @param srcRect Source rect. nullptr for the entire texture.
-			  @param destRect Destidation and size to render. nullptr to draw the entire screen.
-			  @return true if success.
-		*/
+		/**
+		 * Draw texture to the renderer.
+		 * @param[in] texture texture to render.
+		 * @param[in] srcRect Source rect. nullptr for the entire texture.
+		 * @param[in] destRect Destidation and size to render. nullptr to draw the entire screen.
+		 * @return true if success.
+		 */
 		bool copy(Texture& texture, const Rect* srcRect, const Rect* destRect);
-		/** Draw texture to the renderer.
-			  @param texture texture to render.
-			  @param srcRect Source rect. nullptr for the entire texture.
-			  @param destRect Destidation and size to render. nullptr to draw the entire screen.
-			  @param angle angle of the texture in degree.
-			  @param center center point of the texture, or origin.
-			  @param flip flip effect of the texture.
-			  @return true if success.
-		*/
+		/**
+		 * Draw texture to the renderer.
+		 * @param[in] texture texture to render.
+		 * @param[in] srcRect Source rect. nullptr for the entire texture.
+		 * @param[in] destRect Destidation and size to render. nullptr to draw the entire screen.
+		 * @param[in] angle angle of the texture in degree.
+		 * @param[in] center center point of the texture, or origin.
+		 * @param[in] flip flip effect of the texture.
+		 * @return true if success.
+		 */
 		bool copyEx(Texture& texture, const Rect* srcRect, const Rect* destRect, const double angle, const Point& center, Renderer::Flip flip = Renderer::Flip::none);
 		
-		/** Draw line on screen.
-			  @param beginPos starting point.
-			  @param endPos ending point.
-			  @return true if success.
-		*/
+		/**
+		 * Draw line on screen.
+		 * @param[in] beginPos starting point.
+		 * @param[in] endPos ending point.
+		 * @return true if success.
+		 */
 		bool drawLine(const Point& beginPos, const Point& endPos);
-		/** Draw multiple line.
-			  @param points an array of points in pair for each line.
-			  @return true if success.
-		*/
+		/**
+		 * Draw multiple line.
+		 * @param[in] points an array of points in pair for each line.
+		 * @return true if success.
+		 */
 		bool drawLines(std::vector<Point>& points);
-		/** Draw dot on screen.
-			  @param position position of the dot.
-			  @return true if success.
-		*/
+		/**
+		 * Draw dot on screen.
+		 * @param[in] position position of the dot.
+		 * @return true if success.
+		 */
 		bool drawPoint(const Point& position);
-		/** Draw multiple points.
-			  @param points an array of points' position.
-			  @return true if success.
-		*/
+		/**
+		 * Draw multiple points.
+		 * @param[in] points an array of points' position.
+		 * @return true if success.
+		 */
 		bool drawPoints(std::vector<Point>& points);
-		/** Draw rect on screen.
-			  @param rect rect to draw, draw the entire render target if nullptr.
-			  @return true if success.
-		*/
+		/**
+		 * Draw rect on screen.
+		 * @param[in] rect rect to draw, draw the entire render target if nullptr.
+		 * @return true if success.
+		 */
 		bool drawRect(const Rect* rect);
-		/** Draw multiple rects.
-			  @param rects array of rects to draw.
-			  @return true if success.
-		*/
+		/**
+		 * Draw multiple rects.
+		 * @param[in] rects array of rects to draw.
+		 * @return true if success.
+		 */
 		bool drawRects(std::vector<Rect>& rects);
 
-		/** Fill rect on screen.
-			  @param rect rect to fill, fill the entire render target if nullptr.
-			  @return true if success.
-		*/
+		/**
+		 * Fill rect on screen.
+		 * @param[in] rect rect to fill, fill the entire render target if nullptr.
+		 * @return true if success.
+		 */
 		bool fillRect(const Rect* rect);
-		/** Fill multiple rects.
-			  @param rects array of rects to fil.
-			  @return true if success.
-		*/
+		/**
+		 * Fill multiple rects.
+		 * @param[in] rects array of rects to fil.
+		 * @return true if success.
+		 */
 		bool fillRects(std::vector<Rect>& rects);
 
 		Rect getClipRect(); /**< Get clip rect for the current target. */
@@ -168,9 +183,10 @@ namespace vas::sdl
 		void destroy(); /**< Destroy instance. */
 		bool isNull(); /**< Determine is this instance is nullcomponent. */
 
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		explicit operator SDL_Renderer*(); /**< Cast to raw component. */
 		Renderer& operator=(NullComponent_t); /**< Destroy instance by assigning it to nullcomponent. */
 

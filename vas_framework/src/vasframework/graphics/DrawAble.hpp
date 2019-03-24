@@ -9,11 +9,13 @@
 
 namespace vas
 {
-	/** @addtogroup graphics
-		  @{
-	*/
-	/** @brief The interface of all DrawAble object.
-	*/
+	/**
+	 * @ingroup graphics
+	 * @{
+	 */
+	/**
+	 * @brief The interface of all DrawAble object.
+	 */
 	class DrawAble
 	{/** @} */
 	public:
@@ -21,10 +23,11 @@ namespace vas
 
 		/** Tick this DrawAble object. */
 		virtual void tick() = 0;
-		/** Draw this DrawAble object.
-			  @param renderer Renderer use to draw this object, default renderer is used if nullptr.
-			  @param camera Camera use to draw this object, default camera is used if nullptr.
-		*/
+		/**
+		 * Draw this DrawAble object.
+		 * @param[in] renderer Renderer use to draw this object, default renderer is used if nullptr.
+		 * @param[in] camera Camera use to draw this object, default camera is used if nullptr.
+		 */
 		virtual void draw(sdl::Renderer* renderer = nullptr, Camera* camera = nullptr) = 0;
 	};
 

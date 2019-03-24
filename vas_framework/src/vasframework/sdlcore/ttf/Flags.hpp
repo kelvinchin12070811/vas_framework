@@ -13,9 +13,10 @@ namespace vas::sdl
 {
 	namespace ttf
 	{
-		/** @addtogroup sdl_ttf
-			  @{
-		*/
+		/**
+		 * @ingroup sdl_ttf
+		 * @{
+		 */
 		/** @brief Font style of rendered text. */
 		struct FontStyle
 		{

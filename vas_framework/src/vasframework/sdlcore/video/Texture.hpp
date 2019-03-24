@@ -14,9 +14,10 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** @brief An efficient driver-specific representation of pixel data. */
 	class VAS_DECLSPEC Texture
 	{ /** @} */
@@ -25,10 +26,11 @@ namespace vas::sdl
 		/**< Create new instance of texture. */
 		Texture(Renderer& renderer, uint32_t format, int access, const Point& size);
 		Texture(Renderer& renderer, Surface surface); /**< Create texture from surface. */
-		/** Reference to a SDL_Texture.
-			  @param other Raw instance of texture component.
-			  @param owner Determine if instance is an owner of @p other.
-		*/
+		/**
+		 * Reference to a SDL_Texture.
+		 * @param[in] other Raw instance of texture component.
+		 * @param[in] owner Determine if instance is an owner of @p other.
+		 */
 		explicit Texture(SDL_Texture* other, bool owner = false);
 
 		bool getAlphaMod(uint8_t* alpha); /**< Get alpha mod fo texture, or the opacity. @return true if success. */
@@ -38,14 +40,15 @@ namespace vas::sdl
 		void loadImage(Renderer& renderer, const std::string& file); /**< Load from image file directy. */
 		void loadImageRaw(Renderer& renderer, rwops::RWops* src, bool freeSrc = true); /**< Load image from memory directly. */
 
-		/** Load an image from an SDL data source.
-		The 'type' may be one of: "BMP", "GIF", "PNG", etc.
-
-		If the image format supports a transparent pixel, SDL will set the
-		colorkey for the surface.  You can enable RLE acceleration on the
-		surface afterwards by calling:
-		SDL_SetColorKey(image, SDL_RLEACCEL, image->format->colorkey);
-		*/
+		/**
+		 * Load an image from an SDL data source.
+		 * The 'type' may be one of: "BMP", "GIF", "PNG", etc.
+		 * 
+		 * If the image format supports a transparent pixel, SDL will set the
+		 * colorkey for the surface.  You can enable RLE acceleration on the
+		 * surface afterwards by calling:
+		 * SDL_SetColorKey(image, SDL_RLEACCEL, image->format->colorkey);
+		 */
 		void loadImageTypedRaw(Renderer& renderer, rwops::RWops* src, const std::string& type, bool freeSrc = true);
 		bool lockTexture(const Rect& rect, void** pixels, int* pitch); /**< Lock the texture. @return true if success. */
 
@@ -54,29 +57,34 @@ namespace vas::sdl
 		bool setColorMod(uint8_t red, uint8_t green, uint8_t bule); /**< Set texture colour mod. */
 
 		void unlockTexture(); /**< Unlock texture. */
-		/** Update the texture.
-			  @return true if success.
-			  @note This is a fairly slow function
-		*/
+		/**
+		 * Update the texture.
+		 * @return true if success.
+		 * @note This is a fairly slow function
+		 */
 		bool updateTexture(const Rect& rect, const void* pixels, int pitch);
-		/** Update texture YUV data.
-			  @return true if success.
-		*/
+		/**
+		 * Update texture YUV data.
+		 * @return true if success.
+		 */
 		bool updateYUVTexture(const Rect& rect, const Uint8* Yplane, int Ypitch, const Uint8* Uplane, int Upitch, const Uint8* Vplane, int Vpitch);
 
-		/** Get the size of the texture.
-			  @return true if success.
-		*/
+		/**
+		 * Get the size of the texture.
+		 * @return true if success.
+		 */
 		bool queryTexture(int* w, int* h);
-		/** Query texture.
-			  @return ture if success.
-		*/
+		/**
+		 * Query texture.
+		 * @return ture if success.
+		 */
 		bool queryTexture(uint32_t* format, int* access, int* w, int* h);
 		void destroy(); /**< Destroy instance. */
 		bool isNull(); /**< Check if this instance is null. */
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		explicit operator SDL_Texture*(); /**< Get raw component. */
 		bool operator==(const Texture& rhs); /**< Determine if two instance are equal. */
 		bool operator!=(const Texture& rhs); /**< Determine if two instance are not equal. */

@@ -12,28 +12,32 @@
 
 namespace vas::physics
 {
-	/** @addtogroup physics
-		  @{
-	*/
-	/** @brief All entities or objects that collide able with each other.
-		  The CollideAble is an interface of all objects that will be collide with each other and fire event to the corresponding
-		  objects.
-	*/
+	/**
+	 * @ingroup physics
+	 * @{
+	 */
+	/**
+	 * @brief All entities or objects that collide able with each other.
+	 * The CollideAble is an interface of all objects that will be collide with each other and fire event to the corresponding
+	 * objects.
+	 */
 	class CollideAble
 	{ /** @} */
 	public:
-		/** Initialize CollideAble and create body of object.
-			  @param world World relied.
-			  @param bodyDef Box2D body definitions.
-			  @param fixtureDef Box2D fixtrue definitions.
-		*/
+		/**
+		 * Initialize CollideAble and create body of object.
+		 * @param[in] world World relied.
+		 * @param[in] bodyDef Box2D body definitions.
+		 * @param[in] fixtureDef Box2D fixtrue definitions.
+		 */
 		CollideAble(b2extentions::b2WorldEx& world, const b2BodyDef* bodyDef, const b2FixtureDef* fixtureDef);
-		/** Initialize CollideAble and create body of object.
-			  @param world World relied.
-			  @param bodyDef Box2D body definitions.
-			  @param shape Shape of Box2D object.
-			  @param density Density of Box2D object.
-		*/
+		/**
+		 * Initialize CollideAble and create body of object.
+		 * @param[in] world World relied.
+		 * @param[in] bodyDef Box2D body definitions.
+		 * @param[in] shape Shape of Box2D object.
+		 * @param[in] density Density of Box2D object.
+		 */
 		CollideAble(b2extentions::b2WorldEx& world, const b2BodyDef* bodyDef, const b2Shape* shape, float density);
 		/** Called when two objects start to contact. */
 		virtual void beginContact(b2Contact* contact);
@@ -48,15 +52,17 @@ namespace vas::physics
 		const b2extentions::b2Pointer<b2Body>& getBody() const;
 		b2extentions::b2WorldEx* getWorld();
 	protected:
-		/** [Read Only] Word of the object relie on.
-				- __accessors__
-					-# b2extentions::b2WorldEx* getWorld()
-		*/
+		/**
+		 * Word of the object relie on.
+		 * ####Accessors
+		 * -# b2extentions::b2WorldEx* getWorld()
+		 */
 		b2extentions::b2WorldEx* world;
-		/** [Read Only] Body of the object.
-				- __accessors__
-					-# const b2extentions::b2Pointer<b2Body>& getBody() const
-		*/
+		/**
+		 * Body of the object.
+		 * ####Accessors
+		 * -# const b2extentions::b2Pointer<b2Body>& getBody() const
+		 */
 		b2extentions::b2Pointer<b2Body> body;
 	};
 }

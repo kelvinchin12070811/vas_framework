@@ -9,13 +9,15 @@
 
 namespace vas
 {
-	/** @addtogroup graphics
-		  @{
-	*/
-	/** @brief Scene call failed.
-		  
-		  This exception throw by vas::SceneManager if a Scene call is failed.
-	*/
+	/**
+	 * @ingroup graphics
+	 * @{
+	 */
+	/**
+	 * @brief Scene call failed.
+	 *
+	 * This exception throw by vas::SceneManager if a Scene call is failed.
+	 */
 	class SceneCallFailed : std::exception
 	{ /** @} */
 	public:

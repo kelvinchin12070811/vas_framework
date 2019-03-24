@@ -11,12 +11,14 @@
 
 namespace vas::physics::b2extentions
 {
-	/** @addtogroup physics
-		  @{
-	*/
-	/** @brief Smart pointer that try to track Box2D objects.
-		  The b2Pointer is a smart pointer that designed to track object created by b2WorldEx.
-	*/
+	/**
+	 * @ingroup physics
+	 * @{
+	 */
+	/**
+	 * @brief Smart pointer that try to track Box2D objects.
+	 * The b2Pointer is a smart pointer that designed to track object created by b2WorldEx.
+	 */
 	template <typename B2Object>
 	class b2Pointer
 	{ /** @} */
@@ -55,9 +57,10 @@ namespace vas::physics::b2extentions
 			return objects.find(reinterpret_cast<void*>(object)) == objects.end();
 		}
 
-		/** @name Overloaded operators
-			  @{
-		*/
+		/**
+		 * @name Overloaded operators
+		 * @{
+		 */
 		/** Access Box2D object via '->'. */
 		const B2Object* operator->() const
 		{

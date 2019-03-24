@@ -5,6 +5,7 @@
 //======================================================================
 #include <boost/algorithm/clamp.hpp>
 #include "ScreenManager.hpp"
+#include "SceneManager.hpp"
 #include "../base/Base.hpp"
 
 namespace vas
@@ -26,6 +27,12 @@ namespace vas
 					itr.instance->tick();
 			}
 
+		if (auto scene = SceneManager::getInstance().current(); scene != nullptr)
+		{
+			if (auto gui = scene->getGuiPanel(); gui != nullptr)
+				gui->tick();
+		}
+
 		if (!screenAboveOverlays.isEmpty())
 			for (auto& itr : screenAboveOverlays)
 			{
@@ -40,11 +47,17 @@ namespace vas
 			for (auto& itr : screenOverlays)
 			{
 				if (itr.instance != nullptr)
-					itr.instance->tick();
+					itr.instance->draw();
 			}
 
 		if (masterOverlayColour.alpha != 0 && screenMasterOverlay != sdl::nullcomponent)
 			masterRenderer.copy(screenMasterOverlay, nullptr, nullptr);
+
+		if (auto scene = SceneManager::getInstance().current(); scene != nullptr)
+		{
+			if (auto gui = scene->getGuiPanel(); gui != nullptr)
+				gui->draw(&masterRenderer);
+		}
 
 		if (!screenAboveOverlays.isEmpty())
 			for (auto& itr : screenAboveOverlays)

@@ -9,9 +9,10 @@
 
 namespace vas::sdl
 {
-	/** @addtogroup sdl_basic
-		  @{
-	*/
+	/**
+	 * @ingroup sdl_basic
+	 * @{
+	 */
 	/** @brief The container of RGBA colour. */
 	class VAS_DECLSPEC Colour
 	{

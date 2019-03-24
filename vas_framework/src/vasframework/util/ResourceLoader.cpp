@@ -50,7 +50,7 @@ namespace vas
 		resourcesList.push_back(std::move(meta));
 	}
 
-	void ResourceLoader::load(std::initializer_list<std::unique_ptr<ResourceMetatype>> meta)
+	void ResourceLoader::load(std::initializer_list<std::unique_ptr<resource_type::ResourceMetatype>> meta)
 	{
 		for (auto& itr : meta)
 		{

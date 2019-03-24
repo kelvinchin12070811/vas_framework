@@ -9,9 +9,10 @@
 
 namespace vas
 {
-	/** @addtogroup animate
-		  @{
-	*/
+	/**
+	 * @ingroup animate
+	 * @{
+	 */
 	/** @brief A structure that contain the animation of the state */
 	struct State
 	{ /** @} */
