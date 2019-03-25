@@ -6,8 +6,15 @@
 #include "../../sdlcore/Math.hpp"
 #include "../scene/Scene.hpp"
 
-/** @defgroup imgui Basic IMGUI Library */
-
+/**
+ * @ingroup graphics
+ * @{
+ */
+/**
+ * @defgroup imgui Basic IMGUI Library
+ * @brief The basic implementation of IMGUI.
+ */
+/** @} */
 namespace vas::imgui
 {
 	/**

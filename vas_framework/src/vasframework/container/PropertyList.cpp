@@ -74,6 +74,8 @@ namespace vas
 
 	const Property & PropertyList::operator[](size_t index) const
 	{
+		if (index >= this->size())
+			throw std::out_of_range{ "The index requied is not in the valid range." };
 		return super::operator[](index);
 	}
 }
