@@ -11,8 +11,8 @@
  * @{
  */
 /**
- * Dll export symbol used in the class. If `#VAS_GEN_DLL` is defined, it will have a value of `__declspec(__dllexport)` which
- * is Microsoft specific dll export symbol.
+ * Dll export symbol used in the class. If `#VAS_GEN_DLL` is defined, it will have a value of
+ * `__declspec(__dllexport)` which is Microsoft specific dll export symbol.
  * 
  * Defined in: vasframework/VASConfig.hpp
  */

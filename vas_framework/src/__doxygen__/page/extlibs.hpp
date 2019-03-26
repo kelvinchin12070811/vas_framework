@@ -3,8 +3,8 @@
  * 	  
  * The vas_framework riquired some external libraries to complie bellow are the compleate list of them.
  * 
- * @note The term "Global inclue path" is refer to the compiler's global include path which are able to locate with
- * "#include <>".
+ * @note The term "Global inclue path" is refer to the compiler's global include path which are able to
+ * locate with "#include <>".
  * 
  * ## Required Library
  * These is the libraries that core component of vas_framework required:
@@ -51,8 +51,8 @@
  * 		<td>Tiled TMX parser</td>
  * 		<td>Global include path to "src" folder.</td>
  * 		<td>
- * 			The library must be in eighter header only mode or compiled into static library. Include it under project source
- * 			directory will not work.
+ * 			The library must be in eighter header only mode or compiled into static library. Include it under
+ *			project source directory will not work.
  * 		</td>
  * 	</tr>
  * 	<tr>
@@ -98,6 +98,6 @@
  * 
  *  ## About Third-parties Notices
  *  
- *  All of the licenses used by Virtual Assistance Framework are placed at the "3rd_party_notices.zip" file under the
- *  project root directory.
+ *  All of the licenses used by Virtual Assistance Framework are placed at the "3rd_party_notices.zip" file
+ *	under the project root directory.
  */

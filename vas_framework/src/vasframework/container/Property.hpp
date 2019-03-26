@@ -1,8 +1,8 @@
-//======================================================================
+//===========================================================================================================
 //This Source Code Form is subject to the terms of the Mozilla Public
 //License, v. 2.0. If a copy of the MPL was not distributed with this
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
-//======================================================================
+//===========================================================================================================
 #pragma once
 #include <boost/any.hpp>
 #include "../sreflex/Util.hpp"
@@ -17,8 +17,8 @@ namespace vas
 	/**
 	 * @brief The property of an object.
 	 * 
-	 * The property can store any type of data. The Property class is the property of the object instances, it does related to
-	 * the class.
+	 * The property can store any type of data. The Property class is the property of the object instances,
+	 * it does related to the class.
 	 */
 	class VAS_DECLSPEC Property
 	{ /** @} */

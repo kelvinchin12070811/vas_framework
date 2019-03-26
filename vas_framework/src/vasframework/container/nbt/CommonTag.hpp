@@ -1,8 +1,8 @@
-//======================================================================
+//===========================================================================================================
 //This Source Code Form is subject to the terms of the Mozilla Public
 //License, v. 2.0. If a copy of the MPL was not distributed with this
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
-//======================================================================
+//===========================================================================================================
 #pragma once
 #include <algorithm>
 #include <boost/lexical_cast.hpp>
@@ -19,10 +19,11 @@
  * @defgroup nbt_tag NBT Tag
  * @brief The NBT Tag system implementation.
  * 
- * The NBT(Named Binary Tag) structure is a serializeable tree like data structure with multiple data entrys. The tree
- * own the tree or array (also called list) as the brach of the tree and data tags as leaves.
+ * The NBT(Named Binary Tag) structure is a serializeable tree like data structure with multiple data entrys.
+ * The tree own the tree or array (also called list) as the brach of the tree and data tags as leaves.
  * 
- * The core components of NBT tags as bellow are able to included together by the header "vasframework/container/nbt/NBT.hpp"
+ * The core components of NBT tags as bellow are able to included together by the header
+ * "vasframework/container/nbt/NBT.hpp"
  * 
  * - NBTCompoundTag
  * - ValueWrapperTag
@@ -51,9 +52,9 @@ namespace vas
 	/**
 	 * @brief A template class to define a custom data type to work with NBT.
 	 * 
-	 * The ValueWrapperTag is a template class that help user to define their class to work with NBT Tag structure. The
-	 * wrapper is designed to emulate normal data types function with operator overloading, it is safe to assign other
-	 * value with same type to it.
+	 * The ValueWrapperTag is a template class that help user to define their class to work with NBT Tag
+	 * structure. The wrapper is designed to emulate normal data types function with operator overloading, it
+	 * is safe to assign other value with same type to it.
 	 * 
 	 * @tparam ValueType Data type to wrap.
 	 */

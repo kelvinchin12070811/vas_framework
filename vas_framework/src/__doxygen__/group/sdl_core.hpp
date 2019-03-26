@@ -2,11 +2,12 @@
  * @defgroup sdl_core SDL Core Wrapper Library
  * @brief The SDL2 wrapper use by vas_framework.
  * 
- * The SDL Core Wrapper Library is a wrapper library on SDL2 and some of its sub library. All of the related classes and
- * functions of a module can included by only one header which specified in each page of the modules.
+ * The SDL Core Wrapper Library is a wrapper library on SDL2 and some of its sub library. All of the related
+ * classes and functions of a module can included by only one header which specified in each page of the
+ * modules.
  * 
- * This documentation will only provide basic briefy of all SDL functions, for more information about the functions, please
- * refer to the official SDL documentation.
+ * This documentation will only provide basic briefy of all SDL functions, for more information about the
+ * functions, please refer to the official SDL documentation.
  * 
  * @{
  */

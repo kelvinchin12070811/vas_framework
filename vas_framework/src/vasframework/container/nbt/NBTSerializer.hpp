@@ -1,8 +1,8 @@
-//======================================================================
+//===========================================================================================================
 //This Source Code Form is subject to the terms of the Mozilla Public
 //License, v. 2.0. If a copy of the MPL was not distributed with this
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
-//======================================================================
+//===========================================================================================================
 #pragma once
 #include <boost/assert.hpp>
 #include <functional>
@@ -17,7 +17,8 @@ namespace vas
 	/**
 	 * @brief The interface of all serializer and deserializer.
 	 * 
-	 * The NBTSerializer is the object that all nbt tags take to serialize or deserialize their data. The serializer have
+	 * The NBTSerializer is the object that all nbt tags take to serialize or deserialize their data. The
+	 * serializer have
 	 * several member functions to accept value from the nbt tree. Specialization on ValueWrapperTag::serialize
 	 * needed for other type.
 	 */
@@ -46,7 +47,8 @@ namespace vas
 		virtual void arrayEnd() = 0; /**< End of an array structure. */
 		/**
 		 * Resize the target array container if possible.
-		 * @param[in] setter Function pointer to resize the target array container, Won't do any thing if nullptr.
+		 * @param[in] setter Function pointer to resize the target array container, Won't do any thing if
+		 * nullptr.
 		 */
 		virtual void arraySizeSetter(ArraySizeSetter setter) = 0;
 
