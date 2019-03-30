@@ -53,14 +53,6 @@
     <ClInclude Include="src\vasframework\container\nbt\ITag.hpp" />
     <ClInclude Include="src\vasframework\container\nbt\NBTCompoundTag.hpp" />
     <ClInclude Include="src\vasframework\graphics\Camera.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\MapRenderer.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\objclass\AllShape.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\objclass\Ellipse.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\objclass\IShape.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\objclass\Polyline.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\objclass\Rectangle.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\ObjectData.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\maplayers\ObjectLayer.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\AnimationController.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\AnimationStrip.hpp" />
     <ClInclude Include="src\vasframework\container\BytesArray.hpp" />
@@ -74,9 +66,6 @@
     <ClInclude Include="src\vasframework\graphics\sprites\Sprite.hpp" />
     <ClInclude Include="src\vasframework\math\base64\base64.hpp" />
     <ClInclude Include="src\vasframework\sreflex\Util.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\MapProperties.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\Tileset.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\maplayers\AbstractMapLayer.hpp" />
     <ClInclude Include="src\vasframework\manager\InputManager.hpp" />
     <ClInclude Include="src\vasframework\math\Clock.hpp" />
     <ClInclude Include="src\vasframework\container\Property.hpp" />
@@ -127,9 +116,6 @@
     <ClInclude Include="src\vasframework\math\Vector2.hpp" />
     <ClInclude Include="src\vasframework\graphics\text\Text.hpp" />
     <ClInclude Include="src\vasframework\graphics\text\StyledText.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\TMXParser.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\maplayers\TileLayer.hpp" />
-    <ClInclude Include="src\vasframework\tiledmap\container\TilesetsBundle.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\StripAnimation.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\state\StateAnimator.hpp" />
     <ClInclude Include="src\vasframework\graphics\animation\state\StateConditionalTransition.hpp" />
@@ -156,11 +142,6 @@
     <ClCompile Include="src\vasframework\container\nbt\NBTCompoundTag.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\AttrKeyframeAnimation.cpp" />
     <ClCompile Include="src\vasframework\graphics\Camera.cpp" />
-    <ClCompile Include="src\vasframework\tiledmap\MapRenderer.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MaxSpeed</Optimization>
-      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</BasicRuntimeChecks>
-    </ClCompile>
-    <ClCompile Include="src\vasframework\tiledmap\maplayers\ObjectLayer.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\AnimationController.cpp" />
     <ClCompile Include="src\vasframework\container\PropertyList.cpp" />
     <ClCompile Include="src\vasframework\manager\ScreenManager.cpp" />
@@ -171,7 +152,6 @@
     <ClCompile Include="src\vasframework\graphics\sprites\Sprite.cpp" />
     <ClCompile Include="src\vasframework\math\base64\base64.cpp" />
     <ClCompile Include="src\vasframework\sreflex\Util.cpp" />
-    <ClCompile Include="src\vasframework\tiledmap\maplayers\AbstractMapLayer.cpp" />
     <ClCompile Include="src\vasframework\manager\InputManager.cpp" />
     <ClCompile Include="src\vasframework\math\Clock.cpp" />
     <ClCompile Include="src\vasframework\container\Property.cpp" />
@@ -210,11 +190,6 @@
     <ClCompile Include="src\vasframework\math\Vector2.cpp" />
     <ClCompile Include="src\vasframework\graphics\text\Text.cpp" />
     <ClCompile Include="src\vasframework\graphics\text\StyledText.cpp" />
-    <ClCompile Include="src\vasframework\tiledmap\TMXParser.cpp" />
-    <ClCompile Include="src\vasframework\tiledmap\maplayers\TileLayer.cpp" />
-    <ClCompile Include="src\vasframework\tiledmap\container\TilesetsBundle.cpp">
-      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
-    </ClCompile>
     <ClCompile Include="src\vasframework\graphics\animation\StripAnimation.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\state\StateAnimator.cpp" />
     <ClCompile Include="src\vasframework\graphics\animation\state\StateConditionalTransition.cpp" />
@@ -272,8 +247,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -282,8 +257,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

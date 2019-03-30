@@ -5,8 +5,6 @@
 #include <vasframework/util/CommonTools.hpp>
 #include <vasframework/graphics/text/StyledText.hpp>
 #include <vasframework/sreflex/Util.hpp>
-#include "scenes/MainScene.hpp"
-#include "scenes/TileMap.hpp"
 
 class Main
 {

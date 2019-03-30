@@ -21,9 +21,6 @@
     <ClCompile Include="test\scenes\MainScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test\scenes\TileMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test\scenes\MainScene.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test\scenes\TileMap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test\Main.hpp">

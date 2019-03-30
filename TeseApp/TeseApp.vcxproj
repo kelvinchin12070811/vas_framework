@@ -73,16 +73,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\vas_framework\src;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\vas_framework\src;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\vas_framework\src;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\zlib128-dll\include;$(SDK_HOME)\pugixml-1.9\src;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(SDK_HOME)\zlib128-dll\lib;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\vas_framework\src;$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\include;$(SDK_HOME)\boost_1_67_0;$(SDK_HOME)\rapidjson\include;$(SDK_HOME)\Box2D-2.3.1\Box2D;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SDK_HOME)\SDL SDK\common\sdl 2.0.7\lib\x86;$(SDK_HOME)\boost_1_67_0\lib32-msvc-14.1;$(SDK_HOME)\Box2D-2.3.1\Box2D\Build\vs2013\bin\x32\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -101,7 +101,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;zdll.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -135,7 +135,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;zdll.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -161,7 +161,6 @@
     <ClCompile Include="test\Main.cpp" />
     <ClCompile Include="test\scenes\AbstractFrameCountingScene.cpp" />
     <ClCompile Include="test\scenes\MainScene.cpp" />
-    <ClCompile Include="test\scenes\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test\scenes\PhysicsTest.hpp" />
@@ -170,7 +169,6 @@
     <ClInclude Include="test\Main.hpp" />
     <ClInclude Include="test\scenes\AbstractFrameCountingScene.hpp" />
     <ClInclude Include="test\scenes\MainScene.hpp" />
-    <ClInclude Include="test\scenes\TileMap.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vas_framework\vas_framework.vcxproj">

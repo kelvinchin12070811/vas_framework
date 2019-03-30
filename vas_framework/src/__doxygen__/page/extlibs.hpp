@@ -46,16 +46,6 @@
  * 		<th>Additinoal requirement</th>
  * 	</tr>
  * 	<tr>
- * 		<td>[pugixml](http://pugixml.org/)</td>
- * 		<td>1.9 +</td>
- * 		<td>Tiled TMX parser</td>
- * 		<td>Global include path to "src" folder.</td>
- * 		<td>
- * 			The library must be in eighter header only mode or compiled into static library. Include it under
- *			project source directory will not work.
- * 		</td>
- * 	</tr>
- * 	<tr>
  * 		<td>[rapidjson](http://www.rapidjson.org)</td>
  * 		<td>1.1.0 +</td>
  * 		<td>NBT tags Json serializer & desirializer</td>
@@ -73,13 +63,6 @@
  * 		<td>[SDL_TTF](http://www.libsdl.org/projects/sdl_ttf)</td>
  * 		<td>2.0.14 +</td>
  * 		<td>Text rendereing component</td>
- * 		<td>Global include path to "include" folder.</td>
- * 		<td>none</td>
- * 	</tr>
- * 	<tr>
- * 		<td>[zlib](http://www.gzip.org/zlib/)</td>
- * 		<td>1.2.8 +</td>
- * 		<td>Tiled TMX parser</td>
  * 		<td>Global include path to "include" folder.</td>
  * 		<td>none</td>
  * 	</tr>
