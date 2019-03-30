@@ -1,7 +1,12 @@
+//===========================================================================================================
+//This Source Code Form is subject to the terms of the Mozilla Public
+//License, v. 2.0. If a copy of the MPL was not distributed with this
+//file, You can obtain one at https://mozilla.org/MPL/2.0/.
+//===========================================================================================================
 #pragma once
 #include <vector>
 #include "WindowPanel.hpp"
-#include "Window.hpp"
+#include "WindowBase.hpp"
 
 namespace vas::imgui
 {
@@ -24,10 +29,10 @@ namespace vas::imgui
 		void tick() override;
 		void draw(sdl::Renderer* renderer = nullptr) override;
 
-		void addWindow(imgui::Window* instance) override;
-		void removeWindow(imgui::Window* instance) override;
+		void addWindow(imgui::WindowBase* instance) override;
+		void removeWindow(imgui::WindowBase* instance) override;
 
-		const std::vector<imgui::Window*>& getWindowDeck() const;
+		const std::vector<imgui::WindowBase*>& getWindowDeck() const;
 	private:
 		/**
 		 * An array of vas::imgui::Window stroed.
@@ -35,6 +40,6 @@ namespace vas::imgui
 		 * ####Accessors
 		 * -# const std::vector<imgui::Window*>& getWindowDeck() const
 		 */
-		std::vector<imgui::Window*> windowDeck;
+		std::vector<imgui::WindowBase*> windowDeck;
 	};
 }

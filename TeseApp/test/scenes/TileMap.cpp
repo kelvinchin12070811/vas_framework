@@ -108,6 +108,8 @@ namespace scene
 					tilesets);
 			}
 		}
+		testWindow = std::make_unique<vas::imgui::WindowBase>(sdl::Rect{ 0, 0, 64, 64 },
+			std::make_unique<vas::imgui::BasicTexturedWindow>("assets/textures/Window skin/frame.png", sdl::Point{ 0, 0 }));
 	}
 
 	void TileMap::beforeTerminate()

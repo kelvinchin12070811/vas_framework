@@ -1,3 +1,8 @@
+//===========================================================================================================
+//This Source Code Form is subject to the terms of the Mozilla Public
+//License, v. 2.0. If a copy of the MPL was not distributed with this
+//file, You can obtain one at https://mozilla.org/MPL/2.0/.
+//===========================================================================================================
 #include "BasicWindowPanel.hpp"
 
 namespace vas::imgui
@@ -18,18 +23,18 @@ namespace vas::imgui
 			if (itr != nullptr) itr->draw(renderer, nullptr);
 	}
 
-	void BasicWindowPanel::addWindow(imgui::Window * instance)
+	void BasicWindowPanel::addWindow(imgui::WindowBase * instance)
 	{
 		windowDeck.push_back(instance);
 	}
 
-	void BasicWindowPanel::removeWindow(imgui::Window * instance)
+	void BasicWindowPanel::removeWindow(imgui::WindowBase * instance)
 	{
 		auto itr = std::find(windowDeck.begin(), windowDeck.end(), instance);
 		windowDeck.erase(itr);
 	}
 	
-	const std::vector<imgui::Window*>& BasicWindowPanel::getWindowDeck() const
+	const std::vector<imgui::WindowBase*>& BasicWindowPanel::getWindowDeck() const
 	{
 		return windowDeck;
 	}

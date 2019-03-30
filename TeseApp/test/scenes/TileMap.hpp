@@ -8,6 +8,8 @@
 #include <vasframework/manager/InputManager.hpp>
 #include <vasframework/sdlcore/Math.hpp>
 #include <vasframework/util/ResourceLoader.hpp>
+#include <vasframework/graphics/imgui/BasicTexturedWindow.hpp>
+#include <vasframework/graphics/imgui/WindowBase.hpp>
 
 namespace scene
 {
@@ -30,6 +32,8 @@ namespace scene
 		vas::TMXParser map;
 		vas::TilesetsBundle tilesets;
 		vas::ResourceLoader loader;
+
+		std::unique_ptr<vas::imgui::WindowBase> testWindow;
 
 		std::vector<boost::signals2::scoped_connection> signalsPool;
 	private:

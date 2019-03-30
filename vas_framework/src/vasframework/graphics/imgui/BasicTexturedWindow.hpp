@@ -1,3 +1,8 @@
+//===========================================================================================================
+//This Source Code Form is subject to the terms of the Mozilla Public
+//License, v. 2.0. If a copy of the MPL was not distributed with this
+//file, You can obtain one at https://mozilla.org/MPL/2.0/.
+//===========================================================================================================
 #pragma once
 #include <string>
 #include "WindowStyle.hpp"
@@ -11,10 +16,10 @@ namespace vas::imgui
 	 */
 
 	/**
-	  * @brief Simple texturlized window style
+	 * @brief Simple texturlized window style
 	 * 	  
-	 * BasicTexturedWindow is one of the WindowStyle that draw a single texture of background as window. All of
-	 * window border and panel are determined by the texture.
+	 * BasicTexturedWindow is one of the WindowStyle that draw a single texture of background as window. All
+	 * of window border and panel are determined by the texture.
 	 */
 	class BasicTexturedWindow : public WindowStyle
 	{ /** @} */
@@ -28,6 +33,7 @@ namespace vas::imgui
 		BasicTexturedWindow(const std::string& spriteId, sdl::Point offset);
 		void tick() override;
 		void draw(sdl::Renderer* renderer, Camera* camera) override;
+		void applyStyle(WindowBase* win) override;
 	private:
 		std::unique_ptr<Sprite> background;
 		sdl::Point offset;

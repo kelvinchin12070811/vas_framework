@@ -1,6 +1,11 @@
+//===========================================================================================================
+//This Source Code Form is subject to the terms of the Mozilla Public
+//License, v. 2.0. If a copy of the MPL was not distributed with this
+//file, You can obtain one at https://mozilla.org/MPL/2.0/.
+//===========================================================================================================
 #pragma once
 #include "../../sdlcore/video/Renderer.hpp"
-#include "Window.hpp"
+#include "WindowBase.hpp"
 
 namespace vas::imgui
 {
@@ -16,11 +21,11 @@ namespace vas::imgui
 	class WindowPanel
 	{ /** @} */
 	public:
-		virtual ~WindowPanel() = 0;
+		virtual ~WindowPanel() = 0 {}
 		virtual void tick() = 0; /**< Tick all windows. */
 		virtual void draw(sdl::Renderer* renderer) = 0; /**< Draw all windows. */
 
-		virtual void addWindow(imgui::Window* window) = 0; /**< Add window to panel. */
-		virtual void removeWindow(imgui::Window* window) = 0; /**< Remove window from panel. */
+		virtual void addWindow(imgui::WindowBase* window) = 0; /**< Add window to panel. */
+		virtual void removeWindow(imgui::WindowBase* window) = 0; /**< Remove window from panel. */
 	};
 }
