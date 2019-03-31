@@ -19,7 +19,7 @@ namespace vas
 	 * The Scene Reference Wraper is an object that will reference to a scene and tick and render it when the user tell
 	 * it.
 	 */
-	class SceneRefWrap : public DrawAble
+	class VAS_DECLSPEC SceneRefWrap : public DrawAble
 	{ /** @} */
 	public:
 		/**

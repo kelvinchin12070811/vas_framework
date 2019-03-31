@@ -11,6 +11,7 @@
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/document.h>
 #include "NBTSerializer.hpp"
+#include "../../VASConfig.hpp"
 
 namespace vas
 {
@@ -23,7 +24,7 @@ namespace vas
 	 * 
 	 * The deserializer that deserialize JSON to the NBT tree, only avaliable if rapidjson library found.
 	 */
-	class JsonDeserializer : public NBTSerializer
+	class VAS_DECLSPEC JsonDeserializer : public NBTSerializer
 	{ /** @} */
 	public:
 		JsonDeserializer() = default;

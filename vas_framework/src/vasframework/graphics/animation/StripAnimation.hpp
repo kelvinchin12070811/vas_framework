@@ -10,7 +10,7 @@
 #include "AnimateAble.hpp"
 #include "../sprites/SpriteSheet.hpp"
 #include "../../math/Clock.hpp"
-
+#include "../../VASConfig.hpp"
 namespace vas
 {
 	/** @ingroup animate
@@ -20,7 +20,7 @@ namespace vas
 		  
 		  The StripAnimation is a frame based animation. StripAnimation also work with mulitple spritesheets.
 	*/
-	class StripAnimation : public AnimateAble, public std::list<std::tuple<size_t, SpriteSheet*, Clock::DurationType>>
+	class VAS_DECLSPEC StripAnimation : public AnimateAble, public std::list<std::tuple<size_t, SpriteSheet*, Clock::DurationType>>
 	{ /** @} */
 	public:
 		StripAnimation() = default; /**< Create animation. */

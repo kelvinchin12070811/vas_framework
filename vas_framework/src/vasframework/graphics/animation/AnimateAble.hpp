@@ -4,6 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
+#include "../../VASConfig.hpp"
 
 namespace vas
 {
@@ -16,7 +17,7 @@ namespace vas
 	 * 
 	 * The parent of all animations that use with this library.
 	 */
-	class AnimateAble
+	class VAS_DECLSPEC AnimateAble
 	{ /** @} */
 	public:
 		virtual void tick() = 0 {} /**< Tick or update the animation. */

@@ -36,7 +36,7 @@ namespace vas::imgui
 	 * WindowBase is an non-copyable and non-movealbe objcet that drawn on top of all content of screen but
 	 * bellow above screen overlay layer.
 	 */
-	class WindowBase
+	class VAS_DECLSPEC WindowBase
 	{ /** @} */
 	public:
 		/**

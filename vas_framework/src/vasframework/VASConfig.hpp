@@ -4,6 +4,10 @@
 #pragma once
 #include <string>
 
+#ifdef VAS_GEN_DLL
+#include <boost/config.hpp>
+#endif
+
 /*Configuration of framework*/
 
 #ifndef VAS_GLOB_CONFIG
@@ -56,7 +60,18 @@ inline std::string getEngineVersion()
 
 //Generate library for dll
 #ifdef VAS_GEN_DLL
-#define VAS_DECLSPEC __declspec(dllexport)
+#ifndef VAS_NO_WARNING
+#error You enabled an experimential feature, it might not stable for development. Use VAS_NO_WARNING to supress this warning.
+#endif
+#if !defined(BOOST_HAS_DECLSPEC) && !defined(VAS_NO_WARNING)
+#error This compiler does not support __declspec symbol and it might cause unexpected error. Use VAS_NO_WARNING to supress this warning.
+#endif
+
+#ifndef VAS_IMPORT
+#define VAS_DECLSPEC BOOST_SYMBOL_EXPORT
+#else
+#define VAS_DECLSPEC BOOST_SYMBOL_IMPORT
+#endif
 #else
 #define VAS_DECLSPEC
 #endif //VAS_GEN_DLL

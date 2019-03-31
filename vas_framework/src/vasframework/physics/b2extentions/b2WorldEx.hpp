@@ -31,7 +31,7 @@ namespace vas::physics::b2extentions
 	 * 
 	 * The b2WorldEx instance wrap all Box2D objects in smart pointer therefore it can be tracked easily.
 	 */
-	class b2WorldEx : public b2World
+	class VAS_DECLSPEC b2WorldEx : public b2World
 	{ /** @} */
 	public:
 		b2WorldEx(const b2Vec2& gravity); /**< Create world with gravity. */

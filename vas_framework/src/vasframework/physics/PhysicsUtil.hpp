@@ -24,7 +24,7 @@ namespace vas::physics
 	 * @note The y axis will be flipped along the x axis (by multipling it to negative sign.
 	 * @note The default scale of pixel based axises over real axises are 32:1 (32 pixel = 1 meter).
 	 */
-	class CoordinateTools
+	class VAS_DECLSPEC CoordinateTools
 	{ /** @} */
 	public:
 		/** Set axises scale factor. */

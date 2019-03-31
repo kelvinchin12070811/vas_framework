@@ -22,7 +22,7 @@ namespace vas
 	 * 
 	 * FontCacheManager is a manager that cache the used font and try to reduce memory allocation.
 	 */
-	class FontCacheManager
+	class VAS_DECLSPEC FontCacheManager
 	{ /** @} */
 	public:
 		static FontCacheManager& getInstance(); /**< Get singletone instance of FontCacheManager. */

@@ -3,7 +3,7 @@
 #ifdef VAS_HAS_B2D
 namespace vas::physics::b2extentions
 {
-	class AdaptedContactListener : public b2ContactListener
+	class VAS_DECLSPEC AdaptedContactListener : public b2ContactListener
 	{
 	public:
 		void BeginContact(b2Contact* contact) override;

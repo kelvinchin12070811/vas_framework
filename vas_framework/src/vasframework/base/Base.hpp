@@ -216,7 +216,7 @@ namespace vas
 	 * 
 	 * The ClassLoader is the utility that load and execute the main member function of the launcher class.
 	 */
-	class ClassLoader
+	class VAS_DECLSPEC ClassLoader
 	{ /** @} */
 	public:
 		/**
@@ -237,7 +237,7 @@ namespace vas
 }
 
 #ifdef VAS_USE_OOENTRY
-int SDL_main(int argc, char** argv); //Redefined SDL_main
+int VAS_DECLSPEC SDL_main(int argc, char** argv); //Redefined SDL_main
 #endif
 
 #if defined(VAS_WINDOWS_MODE) || defined(DOXYGEN)

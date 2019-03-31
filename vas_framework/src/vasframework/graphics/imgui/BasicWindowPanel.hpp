@@ -7,6 +7,7 @@
 #include <vector>
 #include "WindowPanel.hpp"
 #include "WindowBase.hpp"
+#include "../../VASConfig.hpp"
 
 namespace vas::imgui
 {
@@ -18,7 +19,7 @@ namespace vas::imgui
 	/**
 	 * @brief Basic implementation of WindowPanel.
 	 */
-	class BasicWindowPanel : public WindowPanel
+	class VAS_DECLSPEC BasicWindowPanel : public WindowPanel
 	{ /**@} */
 	public:
 		/**

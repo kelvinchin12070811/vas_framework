@@ -21,7 +21,7 @@ namespace vas::physics
 	 * The CollideAble is an interface of all objects that will be collide with each other and fire event to the corresponding
 	 * objects.
 	 */
-	class CollideAble
+	class VAS_DECLSPEC CollideAble
 	{ /** @} */
 	public:
 		/**

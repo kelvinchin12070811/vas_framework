@@ -10,6 +10,7 @@
 #include <sstream>
 #include <stack>
 #include "NBTSerializer.hpp"
+#include "../../VASConfig.hpp"
 
 namespace vas
 {
@@ -22,7 +23,7 @@ namespace vas
 	 * 
 	 * The JsonSerializer serialize the NBT tags into json document. This class required rapidjson library.
 	 */
-	class JsonSerializer : public NBTSerializer
+	class VAS_DECLSPEC JsonSerializer : public NBTSerializer
 	{ /** @} */
 	public:
 		JsonSerializer();

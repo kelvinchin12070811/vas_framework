@@ -6,6 +6,7 @@
 #pragma once
 #include <string>
 #include <functional>
+#include "../VASConfig.hpp"
 
 namespace vas
 {
@@ -16,7 +17,7 @@ namespace vas
 		 * @{
 		 */
 		/** @brief Metatype of generic resources  loader. */
-		class ResourceMetatype
+		class VAS_DECLSPEC ResourceMetatype
 		{
 		public:
 			/**
@@ -38,7 +39,7 @@ namespace vas
 		};
 
 		/**@brief Metadata of vas::sdl::mixer::Music type of resources. */
-		class Music : public ResourceMetatype
+		class VAS_DECLSPEC Music : public ResourceMetatype
 		{
 		public:
 			/**
@@ -53,7 +54,7 @@ namespace vas
 		};
 
 		/** @brief Metadata of vas::sdl::mixer::Chunk type of resources. */
-		class Chunk : public ResourceMetatype
+		class VAS_DECLSPEC Chunk : public ResourceMetatype
 		{
 		public:
 			/**
@@ -68,7 +69,7 @@ namespace vas
 		};
 
 		/** @brief Metadata of vas::sdl::Texture type of resources. */
-		class Texture : public ResourceMetatype
+		class VAS_DECLSPEC Texture : public ResourceMetatype
 		{
 		public:
 			/**
@@ -84,7 +85,7 @@ namespace vas
 		/** @} */
 
 		/** @brief Metadata of vas::sdl::ttf::Font type of resources. */
-		class Fonts : public ResourceMetatype
+		class VAS_DECLSPEC Fonts : public ResourceMetatype
 		{
 		public:
 			/**

@@ -6,6 +6,7 @@
 #pragma once
 #include <vector>
 #include "ResourceMetatype.hpp"
+#include "../VASConfig.hpp"
 
 namespace vas
 {
@@ -18,7 +19,7 @@ namespace vas
 	 * 
 	 * The automatic resources management utility which will automatically release resource when out of scope.
 	 */
-	class ResourceLoader
+	class VAS_DECLSPEC ResourceLoader
 	{ /** @} */
 	public:
 		/**

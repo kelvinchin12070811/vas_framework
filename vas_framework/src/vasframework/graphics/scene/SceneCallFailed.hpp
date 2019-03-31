@@ -6,6 +6,7 @@
 #pragma once
 #include <exception>
 #include <string>
+#include "../../VASConfig.hpp"
 
 namespace vas
 {
@@ -18,7 +19,7 @@ namespace vas
 	 *
 	 * This exception throw by vas::SceneManager if a Scene call is failed.
 	 */
-	class SceneCallFailed : std::exception
+	class VAS_DECLSPEC SceneCallFailed : std::exception
 	{ /** @} */
 	public:
 		SceneCallFailed() = default;

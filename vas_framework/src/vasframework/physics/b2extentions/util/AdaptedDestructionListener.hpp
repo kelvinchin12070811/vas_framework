@@ -11,7 +11,7 @@
 
 namespace vas::physics::b2extentions
 {
-	class AdaptedDestructionListener : public b2DestructionListener
+	class VAS_DECLSPEC AdaptedDestructionListener : public b2DestructionListener
 	{
 	public:
 		void SayGoodbye(b2Joint* joint) override;

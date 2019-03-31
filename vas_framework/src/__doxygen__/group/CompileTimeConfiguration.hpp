@@ -29,6 +29,8 @@
  * specific dll export syntax (`__declspec(__dllexport)`).
  * 
  * Default is undefined.
+ * @warning This is an experimential feature which might cause unexpected error. If precompile is must, use
+ * static library instead.
  */
 #define VAS_GEN_DLL
 

@@ -21,7 +21,7 @@ namespace vas::imgui
 	 * BasicTexturedWindow is one of the WindowStyle that draw a single texture of background as window. All
 	 * of window border and panel are determined by the texture.
 	 */
-	class BasicTexturedWindow : public WindowStyle
+	class VAS_DECLSPEC BasicTexturedWindow : public WindowStyle
 	{ /** @} */
 	public:
 		/**

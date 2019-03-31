@@ -158,7 +158,7 @@ namespace vas
 		std::array<std::string, 4> messTypeStr{ "ERROR", "INFO", "LOG", "WARN" };
 	};
 
-	class Log
+	class VAS_DECLSPEC Log
 	{
 	public:
 		Log() = default;
@@ -179,7 +179,7 @@ namespace vas
 		std::stringstream ss;
 	};
 
-	class Info
+	class VAS_DECLSPEC Info
 	{
 	public:
 		Info() = default;
@@ -198,7 +198,7 @@ namespace vas
 		std::stringstream ss;
 	};
 
-	class Warn
+	class VAS_DECLSPEC Warn
 	{
 	public:
 		Warn() = default;
@@ -217,7 +217,7 @@ namespace vas
 		std::stringstream ss;
 	};
 
-	class Err
+	class VAS_DECLSPEC Err
 	{
 	public:
 		Err() = default;
