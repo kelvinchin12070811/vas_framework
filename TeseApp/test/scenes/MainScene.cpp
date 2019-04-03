@@ -11,18 +11,6 @@
 
 using namespace std::string_literals;
 
-OpacityWrap::OpacityWrap(std::function<void(vas::sdl::Colour)> mutator, std::function<vas::sdl::Colour()> getter):
-	AttrWrap(mutator), getter(getter)
-{
-}
-
-void OpacityWrap::operator()(double value)
-{
-	auto cur = getter();
-	cur.alpha = static_cast<uint8_t>(value);
-	this->mutator(std::move(cur));
-}
-
 namespace scene
 {
 	vas::sreflex::ReflectAbleAutoRegistrar<MainScene> MainScene::_registrar{};
@@ -39,14 +27,16 @@ namespace scene
 		vas::CommonTools::getInstance().messenger("test1: " + *test1.get<std::string>());
 
 		animation.insertAnimations({
-			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap{
+			make_unique<vas::AttrKeyframeAnimation>(vas::AttrWrap<vas::sdl::Colour>{
 				[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
-				[&]() { return testSprite2->getOverlay(); }
+				[&]() { return testSprite2->getOverlay(); },
+				vas::AttrWrap<vas::sdl::Colour>::ColourChannel::alpha
 				}, 0, 255.0, 1s),
 			make_unique<vas::AnimationDelay>(5s),
-			make_unique<vas::AttrKeyframeAnimation>(OpacityWrap{
+			make_unique<vas::AttrKeyframeAnimation>(vas::AttrWrap<vas::sdl::Colour>{
 				[&](vas::sdl::Colour value) { testSprite2->setOverlay(value); },
-				[&]() { return testSprite2->getOverlay(); }
+				[&]() { return testSprite2->getOverlay(); },
+				vas::AttrWrap<vas::sdl::Colour>::ColourChannel::alpha
 			}, 255.0, 0.0, 1s),
 			make_unique<vas::AnimationDelay>(5s)
 		});

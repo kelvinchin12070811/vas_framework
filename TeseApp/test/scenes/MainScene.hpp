@@ -11,14 +11,6 @@
 #include <vasframework/graphics/animation/AttrKeyframeAnimation.hpp>
 #include "AbstractFrameCountingScene.hpp"
 
-struct OpacityWrap : public vas::AttrWrap<vas::sdl::Colour>
-{
-	OpacityWrap(std::function<void(vas::sdl::Colour)> mutator, std::function<vas::sdl::Colour()> getter);
-	void operator()(double value);
-private:
-	std::function<vas::sdl::Colour()> getter;
-};
-
 namespace scene
 {
 	class MainScene : public AbstractFrameCountingScene
