@@ -7,7 +7,7 @@
 #include "../../VASConfig.hpp"
 
 #ifdef VAS_USE_TTF
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 namespace vas::sdl
 {

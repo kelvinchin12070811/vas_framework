@@ -4,7 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "../VASConfig.hpp"
 #include "boolean_cast.hpp"
 
@@ -82,7 +82,7 @@ namespace vas::sdl
 
 		inline RWops* fromFP(void* fp, bool autoClose)
 		{
-			return SDL_RWFromFP(fp, boolean_cast(autoClose));
+			return SDL_RWFromFP(reinterpret_cast<FILE *>(fp), boolean_cast(autoClose));
 		}
 
 		inline RWops* fromMemory(void* data, int size)

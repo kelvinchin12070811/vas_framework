@@ -4,6 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #include <algorithm>
+#include <iterator>
 #include "Renderer.hpp"
 #include "../boolean_cast.hpp"
 #include "Texture.hpp"

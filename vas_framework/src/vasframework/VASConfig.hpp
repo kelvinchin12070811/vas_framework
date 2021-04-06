@@ -17,16 +17,20 @@
 //#define VAS_SDL_ENTRY
 #define VAS_AUTO_FRAME_PATCH
 
+#if __has_include(<Windows.h>)
+#define WIN32
+#endif
+
 //Auto config options
 #ifdef WIN32
 #define VAS_WINDOWS_MODE
 #endif
 
-#if __has_include(<sdl_mixer.h>) || defined(DOXYGEN)
+#if __has_include(<SDL2/SDL_mixer.h>) || defined(DOXYGEN)
 #define VAS_USE_MIXER
 #endif
 
-#if __has_include(<sdl_ttf.h>) || defined(DOXYGEN)
+#if __has_include(<SDL2/SDL_ttf.h>) || defined(DOXYGEN)
 #define VAS_USE_TTF
 #endif
 

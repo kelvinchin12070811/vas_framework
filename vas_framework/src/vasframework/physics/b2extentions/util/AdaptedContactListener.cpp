@@ -8,8 +8,8 @@ void vas::physics::b2extentions::AdaptedContactListener::BeginContact(b2Contact 
 {
 	if (customListener) customListener->BeginContact(contact);
 	std::array<std::any*, 2> obj = {
-		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData()),
-		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData())
+		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer),
+		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer)
 	};
 
 	for (auto itr : obj)
@@ -25,8 +25,8 @@ void vas::physics::b2extentions::AdaptedContactListener::EndContact(b2Contact * 
 {
 	if (customListener) customListener->EndContact(contact);
 	std::array<std::any*, 2> obj = {
-		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData()),
-		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData())
+		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer),
+		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer)
 	};
 
 	for (auto itr : obj)
@@ -42,8 +42,8 @@ void vas::physics::b2extentions::AdaptedContactListener::PreSolve(b2Contact * co
 {
 	if (customListener) customListener->PreSolve(contact, oldManifold);
 	std::array<std::any*, 2> obj = {
-		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData()),
-		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData())
+		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer),
+		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer)
 	};
 
 	for (auto itr : obj)
@@ -59,8 +59,8 @@ void vas::physics::b2extentions::AdaptedContactListener::PostSolve(b2Contact * c
 {
 	if (customListener) customListener->PostSolve(contact, impulse);
 	std::array<std::any*, 2> obj = {
-		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData()),
-		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData())
+		reinterpret_cast<std::any*>(contact->GetFixtureA()->GetBody()->GetUserData().pointer),
+		reinterpret_cast<std::any*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer)
 	};
 
 	for (auto itr : obj)

@@ -8,7 +8,7 @@
 
 #ifdef VAS_USE_MIXER
 #include <boost/signals2.hpp>
-#include <SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 #include "Flags.hpp"
 #include "Music.hpp"
 #include "Chunk.hpp"

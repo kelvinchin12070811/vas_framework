@@ -4,8 +4,8 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "../../VASConfig.hpp"
 #include "../SDLComponentBase.hpp"
 #include "../Math.hpp"

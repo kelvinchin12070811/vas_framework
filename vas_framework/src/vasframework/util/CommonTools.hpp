@@ -4,6 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
+#include <array>
 #include <string>
 #include <functional>
 #include <boost/format.hpp>
@@ -14,7 +15,7 @@
 #ifdef VAS_WINDOWS_MODE
 #include <Windows.h>
 #else
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #endif // VAS_WINDOWS_MODE
 
 //#define vasout vassstream

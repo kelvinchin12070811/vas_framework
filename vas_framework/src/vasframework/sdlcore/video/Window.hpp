@@ -5,7 +5,7 @@
 //======================================================================
 #pragma once
 #include <vector>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "../../VASConfig.hpp"
 #include "../SDLComponentBase.hpp"
 #include "Surface.hpp"

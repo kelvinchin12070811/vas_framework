@@ -4,7 +4,7 @@
 //file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //======================================================================
 #pragma once
-#include <SDL_keycode.h>
+#include <SDL2/SDL_keycode.h>
 #include "../../VASConfig.hpp"
 
 namespace vas::sdl

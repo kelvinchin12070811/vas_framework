@@ -247,10 +247,10 @@ int VAS_DECLSPEC SDL_main(int argc, char** argv); //Redefined SDL_main
  * Defined in: vasframework/base/Base.hpp
  */
 #define VAS_ALLOCATE_CONSOLE \
-AllocConsole();\
-freopen("CONIN$", "r+t", stdin);\
-freopen("CONIN$", "w+t", stdout);\
-freopen("CONIN$", "w+t", stderr);\
+static_cast<void>(AllocConsole());\
+static_cast<void>(freopen("CONIN$", "r+t", stdin));\
+static_cast<void>(freopen("CONIN$", "w+t", stdout));\
+static_cast<void>(freopen("CONIN$", "w+t", stderr));\
 vas::CommonTools::getInstance().hasConsole = true
 
 /** @} */

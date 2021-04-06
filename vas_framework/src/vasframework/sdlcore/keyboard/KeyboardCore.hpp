@@ -5,7 +5,7 @@
 //======================================================================
 #pragma once
 #include <string>
-#include <SDL_keyboard.h>
+#include <SDL2/SDL_keyboard.h>
 #include "../../VASConfig.hpp"
 #include "Keycode.hpp"
 #include "Scancode.hpp"

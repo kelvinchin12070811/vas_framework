@@ -144,7 +144,8 @@ namespace vas
 	{
 		if (stackTrace.empty())
 		{
-			document.AddMember({ name.c_str(), name.length(), document.GetAllocator() },
+			document.AddMember({ name.c_str(), static_cast<rapidjson::SizeType>(name.length()),
+								 document.GetAllocator() },
 				std::move(value), document.GetAllocator());
 		}
 		else
@@ -156,7 +157,8 @@ namespace vas
 			}
 			else
 			{
-				stackTrace.top().second.AddMember({ name.c_str(), name.length(), document.GetAllocator() },
+				stackTrace.top().second.AddMember({ name.c_str(), static_cast<rapidjson::SizeType>(name.length()),
+													document.GetAllocator() },
 					std::move(value), document.GetAllocator());
 			}
 		}

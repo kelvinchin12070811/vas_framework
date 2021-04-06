@@ -15,7 +15,7 @@ namespace scene
 		bodyDef.position = CoordinateTools::pxToReal(vas::Vector2{ 320.0f, 470.0f });
 		bodyDef.type = b2BodyType::b2_staticBody;
 		ground = world->CreateBody(&bodyDef);
-		std::any* test = reinterpret_cast<std::any*>(ground->GetUserData());
+		std::any* test = reinterpret_cast<std::any*>(ground->GetUserData().pointer);
 		vas::Cout() << "test has value?: " << std::boolalpha << test->has_value() << std::endl;
 		vas::Cout() << "test type: " << test->type().name() << std::endl;
 		

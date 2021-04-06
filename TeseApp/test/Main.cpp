@@ -6,7 +6,7 @@ const bool Main::__launch{ vas::ClassLoader::load<Main>() };
 int Main::main(const std::vector<std::string>& args)
 {
 	VAS_ALLOCATE_CONSOLE;
-	vas::CommonTools::getInstance().setConsolePrefix("宮本サクラ");
+	vas::CommonTools::getInstance().setConsolePrefix(u8"宮本サクラ");
 	try
 	{
 		vas::Base::getInstance().initAndStartAll("VAS Framework Tester", { 640, 480 }, vas::sdl::Window::Flags::resizable,

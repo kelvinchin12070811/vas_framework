@@ -33,7 +33,7 @@ namespace vas::physics::b2extentions
 	{
 		auto ptr = MakePointer(b2World::CreateBody(def));
 		auto data = userDataEx.insert({ ptr.getObject(), std::any{} });
-		ptr->SetUserData(&data.first->second);
+		ptr->GetUserData().pointer = reinterpret_cast<uintptr_t>(&data.first->second);
 		return ptr;
 	}
 
